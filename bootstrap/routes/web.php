@@ -1,23 +1,8 @@
 <?php
 
 use App\Http\Controllers\ServiceRequestController;
-<<<<<<< HEAD
-use Illuminate\Support\Facades\Route;
-
-
-Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])
-    ->name('service-requests.create');
-
-Route::post('/service-requests', [ServiceRequestController::class, 'store'])
-    ->name('service-requests.store');
-
-=======
 use App\Http\Controllers\Admin\ServiceAccountController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
 
 Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])
     ->name('service-requests.create');
@@ -41,4 +26,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::patch('/accounts/{account}/toggle-status', [ServiceAccountController::class, 'toggleStatus'])
         ->name('accounts.toggle-status');
 });
->>>>>>> ca29ac7 (Initial Commit)

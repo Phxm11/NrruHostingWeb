@@ -1,44 +1,27 @@
 <?php
 
-use App\Http\Controllers\ServiceRequestController;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Route;
-
-
-Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])
-    ->name('service-requests.create');
-
-Route::post('/service-requests', [ServiceRequestController::class, 'store'])
-    ->name('service-requests.store');
-
-=======
 use App\Http\Controllers\Admin\ServiceAccountController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
-
-Route::get('/service-requests/create', [ServiceRequestController::class, 'create'])
-    ->name('service-requests.create');
-Route::post('/service-requests', [ServiceRequestController::class, 'store'])
-    ->name('service-requests.store');
-
+// ===== เพิ่มบล็อกนี้ต่อท้ายไฟล์ routes/web.php เดิม =====
 Route::prefix('admin')->name('admin.')->group(function () {
 
+    // รายการคำขอใช้บริการทั้งหมด (หน้าแรกฝั่งเจ้าหน้าที่)
     Route::get('/requests', [ServiceAccountController::class, 'requestsIndex'])
         ->name('requests.index');
 
+    // ฟอร์มสร้างบัญชี Username/Password ให้คำขอที่เลือก
     Route::get('/requests/{serviceRequest}/accounts/create', [ServiceAccountController::class, 'createAccount'])
         ->name('accounts.create');
 
     Route::post('/requests/{serviceRequest}/accounts', [ServiceAccountController::class, 'storeAccount'])
         ->name('accounts.store');
 
+    // รายการบัญชีทั้งหมดที่สร้างไปแล้ว
     Route::get('/accounts', [ServiceAccountController::class, 'accountsIndex'])
         ->name('accounts.index');
 
+    // เปิด/ปิดใช้งานบัญชี
     Route::patch('/accounts/{account}/toggle-status', [ServiceAccountController::class, 'toggleStatus'])
         ->name('accounts.toggle-status');
 });
->>>>>>> ca29ac7 (Initial Commit)

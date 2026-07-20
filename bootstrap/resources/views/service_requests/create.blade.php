@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>แบบฟอร์มขอใช้บริการระบบ Data Center และ Web Hosting</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
@@ -238,254 +237,10 @@
         }
         .site-footer a { color: #fff; }
         .footer-accent { height: 4px; background: linear-gradient(90deg, var(--sun) 0%, var(--leaf) 100%); }
-=======
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --ink: #16281a;
-            --ink-soft: #4d6151;
-            --bg: #f6faee;
-            --card: #ffffff;
-            --border: #e0e9cf;
-
-            --forest-900: #0e3b1e;
-            --forest-700: #16632c;
-            --leaf-500: #2f9e44;
-            --leaf-400: #63c153;
-            --lime-300: #b6e35a;
-            --gold-400: #f2c94c;
-            --gold-500: #e8ac1e;
-
-            --grad-brand: linear-gradient(120deg, var(--forest-700) 0%, var(--leaf-500) 55%, var(--lime-300) 100%);
-            --grad-gold: linear-gradient(120deg, var(--leaf-400), var(--gold-400));
-            --ring: 0 0 0 4px rgba(47,158,68,.16);
-            --shadow-card: 0 2px 10px rgba(20,50,20,.05), 0 1px 2px rgba(20,50,20,.06);
-            --shadow-card-hover: 0 14px 30px -12px rgba(20,70,30,.22);
-        }
-
-        * { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background:
-                radial-gradient(900px 420px at 100% -10%, rgba(182,227,90,.35), transparent 60%),
-                var(--bg);
-            color: var(--ink);
-        }
-
-        h1, .section-title, .sub-title, .brand-mark { font-family: 'Kanit', 'Sarabun', sans-serif; }
-
-        /* ---------- Header ---------- */
-        .page-header {
-            position: relative;
-            overflow: hidden;
-            background: var(--grad-brand);
-            color: #fff;
-            padding: 34px 0 30px;
-            isolation: isolate;
-        }
-        .page-header::before,
-        .page-header::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(2px);
-            opacity: .35;
-            z-index: -1;
-        }
-        .page-header::before {
-            width: 260px; height: 260px;
-            background: var(--gold-400);
-            top: -140px; right: -60px;
-            animation: float-a 9s ease-in-out infinite;
-        }
-        .page-header::after {
-            width: 180px; height: 180px;
-            background: var(--lime-300);
-            bottom: -110px; left: 6%;
-            animation: float-b 11s ease-in-out infinite;
-        }
-        @keyframes float-a { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(18px) } }
-        @keyframes float-b { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-14px) } }
-
-        .brand-mark {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 12.5px; font-weight: 600; letter-spacing: .06em;
-            text-transform: uppercase; color: #eafbdc; opacity: .9;
-            margin-bottom: 6px;
-        }
-        .brand-mark .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 0 4px rgba(242,201,76,.25); }
-        .page-header h1 { font-size: 22px; font-weight: 700; margin: 0; }
-        .page-header p { font-size: 14px; margin: 5px 0 0; opacity: .88; }
-
-        /* ---------- Progress stepper ---------- */
-        .step-nav {
-            position: sticky; top: 0; z-index: 30;
-            background: rgba(246,250,238,.9);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border);
-        }
-        .step-track {
-            display: flex; align-items: center; max-width: 900px; margin: 0 auto;
-            padding: 10px 12px; gap: 4px; overflow-x: auto;
-        }
-        .step-item {
-            display: flex; align-items: center; gap: 8px;
-            padding: 6px 10px; border-radius: 999px;
-            font-size: 12.5px; font-weight: 600; color: var(--ink-soft);
-            white-space: nowrap; cursor: pointer; transition: all .25s ease;
-        }
-        .step-item .num {
-            width: 20px; height: 20px; border-radius: 50%;
-            display: inline-flex; align-items: center; justify-content: center;
-            font-size: 11px; background: #e9f2da; color: var(--forest-700);
-            transition: all .25s ease;
-        }
-        .step-item.active { color: var(--forest-900); background: #eaf7d8; }
-        .step-item.active .num { background: var(--grad-brand); color: #fff; box-shadow: var(--ring); }
-        .step-sep { width: 14px; height: 2px; background: var(--border); border-radius: 2px; flex-shrink: 0; }
-
-        /* ---------- Cards ---------- */
-        .form-card {
-            position: relative;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 30px 32px;
-            margin-bottom: 22px;
-            box-shadow: var(--shadow-card);
-            transition: box-shadow .3s ease, transform .3s ease;
-            opacity: 0; transform: translateY(16px);
-        }
-        .form-card.in-view { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
-        .form-card:hover { box-shadow: var(--shadow-card-hover); }
-
-        .section-title {
-            display: flex; align-items: center; gap: 12px;
-            font-size: 17px; font-weight: 600; color: var(--forest-900);
-            padding-bottom: 14px; margin-bottom: 22px;
-            border-bottom: 1px solid var(--border);
-        }
-        .section-title .badge-num {
-            flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
-            background: var(--grad-brand); color: #fff;
-            display: inline-flex; align-items: center; justify-content: center;
-            font-size: 13px; font-weight: 700;
-            box-shadow: 0 4px 10px -3px rgba(22,99,44,.5);
-        }
-
-        .sub-title {
-            font-size: 14.5px; font-weight: 600; margin: 22px 0 12px;
-            color: var(--forest-700);
-            display: flex; align-items: center; gap: 8px;
-        }
-        .sub-title::before { content: ""; width: 4px; height: 14px; border-radius: 3px; background: var(--grad-gold); }
-
-        label.form-label { font-weight: 500; font-size: 13.5px; color: var(--ink); }
-        .required::after { content: " *"; color: var(--gold-500); font-weight: 700; }
-        .helper-text { font-size: 12.5px; color: var(--ink-soft); }
-
-        /* ---------- Inputs ---------- */
-        .form-control, .form-select {
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            padding: 9px 12px;
-            font-size: 14px;
-            transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease;
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: var(--leaf-500);
-            box-shadow: var(--ring);
-        }
-        .form-check-input { border: 1.5px solid #c9d9b4; }
-        .form-check-input:checked {
-            background-color: var(--leaf-500);
-            border-color: var(--leaf-500);
-        }
-        .form-check-input:focus { box-shadow: var(--ring); }
-        .form-check-input[type="checkbox"]:checked { background-color: var(--forest-700); border-color: var(--forest-700); }
-
-        /* ---------- Plan cards ---------- */
-        .plan-option {
-            position: relative;
-            border: 1.5px solid var(--border);
-            border-radius: 14px;
-            padding: 14px 16px;
-            cursor: pointer;
-            height: 100%;
-            background: #fcfef7;
-            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
-            overflow: hidden;
-        }
-        .plan-option::after {
-            content: "✓";
-            position: absolute; top: 10px; right: 10px;
-            width: 22px; height: 22px; border-radius: 50%;
-            background: var(--grad-brand); color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700;
-            opacity: 0; transform: scale(.5);
-            transition: all .25s cubic-bezier(.34,1.56,.64,1);
-        }
-        .plan-option:hover { border-color: var(--leaf-400); transform: translateY(-3px); box-shadow: 0 10px 22px -12px rgba(22,99,44,.35); }
-        .form-check-input:checked ~ .plan-option,
-        .plan-option.selected {
-            border-color: var(--leaf-500);
-            background: linear-gradient(180deg, #f1fadf, #fcfef7);
-            box-shadow: 0 10px 24px -12px rgba(22,99,44,.4);
-        }
-        .form-check-input:checked ~ .plan-option::after,
-        .plan-option.selected::after { opacity: 1; transform: scale(1); }
-
-        .dev-row {
-            border: 1.5px dashed #c9d9b4;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 12px;
-            background: #fbfef4;
-            transition: border-color .2s ease;
-        }
-        .dev-row:hover { border-color: var(--leaf-400); }
-
-        /* ---------- Buttons ---------- */
-        .btn-primary {
-            position: relative; overflow: hidden;
-            background: var(--grad-brand); border: none;
-            font-weight: 600; letter-spacing: .01em;
-            box-shadow: 0 10px 24px -8px rgba(22,99,44,.55);
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-        .btn-primary::before {
-            content: ""; position: absolute; inset: 0;
-            background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
-            transform: translateX(-120%);
-            transition: transform .6s ease;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -8px rgba(22,99,44,.65); }
-        .btn-primary:hover::before { transform: translateX(120%); }
-        .btn-primary:active { transform: translateY(0); }
-
-        .btn-outline-secondary, .btn-outline-danger {
-            border-radius: 8px;
-        }
-        .btn-outline-secondary:hover { background: #eaf7d8; border-color: var(--leaf-400); color: var(--forest-900); }
-
-        .submit-bar { position: sticky; bottom: 0; background: linear-gradient(180deg, transparent, var(--bg) 30%); padding: 20px 0; }
-
-        .alert-success { border-radius: 12px; border: none; background: #e4f7d3; color: var(--forest-900); }
-        .alert-danger { border-radius: 12px; border: none; }
-
-        @media (prefers-reduced-motion: reduce) {
-            .page-header::before, .page-header::after { animation: none; }
-            .form-card { opacity: 1; transform: none; }
-        }
->>>>>>> ca29ac7 (Initial Commit)
     </style>
 </head>
 <body>
 
-<<<<<<< HEAD
 <div class="topbar">
     <div class="container d-flex justify-content-between">
         <span><i class="bi bi-building"></i> มหาวิทยาลัยราชภัฏนครราชสีมา</span>
@@ -522,43 +277,11 @@
 
     @if (session('success'))
         <div class="alert alert-success"><i class="bi bi-check-circle-fill"></i> {{ session('success') }}</div>
-=======
-<div class="page-header">
-    <div class="container">
-        <span class="brand-mark"><span class="dot"></span> สำนักคอมพิวเตอร์ · ระบบให้บริการออนไลน์</span>
-        <h1>แบบฟอร์มขอใช้บริการระบบ Data Center และ Web Hosting</h1>
-        <p>มหาวิทยาลัยราชภัฏนครราชสีมา</p>
-    </div>
-</div>
-
-<nav class="step-nav">
-    <div class="step-track" id="stepTrack">
-        <a href="#sec1" class="step-item" data-target="sec1"><span class="num">1</span> ผู้ขอรับบริการ</a>
-        <span class="step-sep"></span>
-        <a href="#sec2" class="step-item" data-target="sec2"><span class="num">2</span> ความต้องการ</a>
-        <span class="step-sep"></span>
-        <a href="#sec3" class="step-item" data-target="sec3"><span class="num">3</span> โดเมน</a>
-        <span class="step-sep"></span>
-        <a href="#sec4" class="step-item" data-target="sec4"><span class="num">4</span> เอกสารแนบ</a>
-        <span class="step-sep"></span>
-        <a href="#sec5" class="step-item" data-target="sec5"><span class="num">5</span> ยืนยัน</a>
-    </div>
-</nav>
-
-<div class="container py-4" style="max-width: 900px;">
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
->>>>>>> ca29ac7 (Initial Commit)
     @endif
 
     @if ($errors->any())
         <div class="alert alert-danger">
-<<<<<<< HEAD
             <strong><i class="bi bi-exclamation-triangle-fill"></i> กรุณาตรวจสอบข้อมูล:</strong>
-=======
-            <strong>กรุณาตรวจสอบข้อมูล:</strong>
->>>>>>> ca29ac7 (Initial Commit)
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -571,11 +294,7 @@
         @csrf
 
         {{-- ส่วนที่ 1: ข้อมูลผู้ขอรับบริการ --}}
-<<<<<<< HEAD
         <div class="form-card">
-=======
-        <div class="form-card" id="sec1">
->>>>>>> ca29ac7 (Initial Commit)
             <div class="section-title"><span class="badge-num">1</span> ข้อมูลผู้ขอรับบริการและหน่วยงาน</div>
 
             <div class="row g-3">
@@ -661,19 +380,11 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
             <button type="button" class="btn btn-sm btn-accent-outline" id="addDeveloper"><i class="bi bi-plus-circle"></i> เพิ่มผู้รับผิดชอบ</button>
         </div>
 
         {{-- ส่วนที่ 2: ความต้องการพื้นฐาน --}}
         <div class="form-card">
-=======
-            <button type="button" class="btn btn-sm btn-outline-secondary" id="addDeveloper">+ เพิ่มผู้รับผิดชอบ</button>
-        </div>
-
-        {{-- ส่วนที่ 2: ความต้องการพื้นฐาน --}}
-        <div class="form-card" id="sec2">
->>>>>>> ca29ac7 (Initial Commit)
             <div class="section-title"><span class="badge-num">2</span> ข้อมูลความต้องการพื้นฐานสำหรับการพิจารณาการให้บริการ</div>
 
             <div class="sub-title">2.1 ประเภทของบริการ</div>
@@ -698,12 +409,8 @@
                                     @if($plan->cpu_vcpu) {{ $plan->cpu_vcpu }} vCPU / {{ $plan->ram_gb }} GB RAM /@endif
                                     {{ $plan->storage_gb }} GB Storage
                                 </div>
-<<<<<<< HEAD
                                 <div class="helper-text">{{ $plan->suitable_for }}</div>
                                 <span class="fee-tag">{{ number_format($plan->fee_per_year, 0) }} บาท/ปี</span>
-=======
-                                <div class="helper-text">{{ number_format($plan->fee_per_year, 0) }} บาท/ปี — {{ $plan->suitable_for }}</div>
->>>>>>> ca29ac7 (Initial Commit)
                             </div>
                         </label>
                     </div>
@@ -763,11 +470,7 @@
         </div>
 
         {{-- ส่วนที่ 3: โดเมน --}}
-<<<<<<< HEAD
         <div class="form-card">
-=======
-        <div class="form-card" id="sec3">
->>>>>>> ca29ac7 (Initial Commit)
             <div class="section-title"><span class="badge-num">3</span> ชื่อโดเมนและบริการที่ต้องการเปิดใช้งาน</div>
             <div class="row g-3">
                 <div class="col-md-6">
@@ -801,28 +504,16 @@
         </div>
 
         {{-- ส่วนที่ 4: เอกสารแนบและการรับรอง --}}
-<<<<<<< HEAD
         <div class="form-card">
             <div class="section-title"><span class="badge-num">4</span> เอกสารแนบและการรับรอง</div>
 
             <div class="mb-3">
                 <label class="form-label required"><i class="bi bi-file-earmark-arrow-up"></i> เอกสารรายละเอียดระบบ / โครงสร้างระบบ (บังคับแนบไฟล์)</label>
-=======
-        <div class="form-card" id="sec4">
-            <div class="section-title"><span class="badge-num">4</span> เอกสารแนบและการรับรอง</div>
-
-            <div class="mb-3">
-                <label class="form-label required">เอกสารรายละเอียดระบบ / โครงสร้างระบบ (บังคับแนบไฟล์)</label>
->>>>>>> ca29ac7 (Initial Commit)
                 <input type="file" name="system_detail_doc" class="form-control" accept=".pdf,.doc,.docx,.zip" required>
                 <div class="helper-text">รองรับไฟล์ PDF, Word หรือ ZIP ขนาดไม่เกิน 10 MB</div>
             </div>
             <div class="mb-3">
-<<<<<<< HEAD
                 <label class="form-label"><i class="bi bi-file-earmark-image"></i> หลักฐานการแสกนโค้ด (ถ้ามี แนบไฟล์แต่บังคับให้ส่งภายหลังก่อนขึ้นโฮสต์)</label>
-=======
-                <label class="form-label">หลักฐานการแสกนโค้ด (ถ้ามี แนบไฟล์แต่บังคับให้ส่งภายหลังก่อนขึ้นโฮสต์)</label>
->>>>>>> ca29ac7 (Initial Commit)
                 <input type="file" name="screenshot_evidence" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
             </div>
 
@@ -840,16 +531,10 @@
         </div>
 
         {{-- ส่วนที่ 5: ยอมรับข้อกำหนด --}}
-<<<<<<< HEAD
         <div class="form-card">
             <div class="section-title"><span class="badge-num">5</span> ข้อกำหนด นโยบาย และการยืนยัน</div>
             <div class="policy-box mb-3">
                 <i class="bi bi-shield-check"></i>
-=======
-        <div class="form-card" id="sec5">
-            <div class="section-title"><span class="badge-num">5</span> ข้อกำหนด นโยบาย และการยืนยัน</div>
-            <div class="helper-text mb-3">
->>>>>>> ca29ac7 (Initial Commit)
                 ผู้ขอใช้บริการต้องปฏิบัติตาม พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)
                 และระเบียบด้านเทคโนโลยีสารสนเทศของมหาวิทยาลัยอย่างเคร่งครัด รวมถึงมีหน้าที่สำรองข้อมูลและดูแลความปลอดภัยของระบบด้วยตนเอง
             </div>
@@ -867,19 +552,13 @@
             </div>
         </div>
 
-<<<<<<< HEAD
         <div class="submit-bar d-flex justify-content-between align-items-center flex-wrap gap-2">
             <span class="submit-note"><i class="bi bi-info-circle"></i> เมื่อกดส่งแล้ว ระบบจะแจ้งผลการพิจารณาไปยังอีเมลที่ระบุไว้</span>
             <button type="submit" class="btn btn-primary btn-lg px-4"><i class="bi bi-send-check"></i> ส่งแบบฟอร์ม</button>
-=======
-        <div class="submit-bar text-end">
-            <button type="submit" class="btn btn-primary btn-lg px-4">ส่งแบบฟอร์ม</button>
->>>>>>> ca29ac7 (Initial Commit)
         </div>
     </form>
 </div>
 
-<<<<<<< HEAD
 <footer class="site-footer">
     <div class="footer-accent"></div>
     <div class="container pt-3 d-flex flex-wrap justify-content-between gap-2">
@@ -888,8 +567,6 @@
     </div>
 </footer>
 
-=======
->>>>>>> ca29ac7 (Initial Commit)
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // เพิ่ม/ลบแถวผู้รับผิดชอบพัฒนาระบบ
@@ -948,35 +625,6 @@
             this.closest('label').querySelector('.plan-option').classList.add('selected');
         });
     });
-<<<<<<< HEAD
-=======
-
-    // เผยการ์ดแบบ fade-in เมื่อเลื่อนเข้ามาในจอ
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                cardObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.form-card').forEach(card => cardObserver.observe(card));
-
-    // สเต็ปนำทาง: ไฮไลต์หัวข้อที่กำลังดูอยู่ตามการเลื่อนหน้าจอ
-    const stepItems = document.querySelectorAll('.step-item');
-    const sections = document.querySelectorAll('.form-card[id]');
-    const stepObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const link = document.querySelector(`.step-item[data-target="${entry.target.id}"]`);
-            if (!link) return;
-            if (entry.isIntersecting) {
-                stepItems.forEach(i => i.classList.remove('active'));
-                link.classList.add('active');
-            }
-        });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    sections.forEach(sec => stepObserver.observe(sec));
->>>>>>> ca29ac7 (Initial Commit)
 </script>
 </body>
 </html>
