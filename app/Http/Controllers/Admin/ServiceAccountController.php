@@ -108,4 +108,54 @@ class ServiceAccountController extends Controller
 
         return back()->with('success', 'อัปเดตสถานะบัญชีเรียบร้อยแล้ว');
     }
+
+    /**
+     * ฟอร์มแก้ไขข้อมูลบัญชี
+     */
+    public function editAccount(ServiceAccount $account)
+    {
+        $account->load(['applicant', 'serviceRequest.domains']);
+
+        return view('admin.accounts.edit', compact('account'));
+    }
+
+    /**
+     * บันทึกการแก้ไขบัญชี
+     */
+    public function updateAccount(Request $request, ServiceAccount $account)
+    {
+        $data = $request->validate([
+            'username' => ['required', 'string', 'max:100', 'alpha_dash', Rule::unique('service_accounts', 'username')->ignore($account->account_id, 'account_id')],
+            'password' => ['nullable', 'string', 'min:8', 'max:100'],
+            'account_type' => ['required', 'in:ssh,database,control_panel,ftp'],
+            'status' => ['required', 'in:active,disabled,expired'],
+            'expire_date' => ['nullable', 'date'],
+        ]);
+
+        $account->username = $data['username'];
+        if (!empty($data['password'])) {
+            $account->password = $data['password']; // ผ่าน mutator -> hash อัตโนมัติ
+        }
+        $account->account_type = $data['account_type'];
+        $account->status = $data['status'];
+        $account->expire_date = $data['expire_date'] ?? null;
+        $account->save();
+
+        return redirect()
+            ->route('admin.accounts.index')
+            ->with('success', "แก้ไขบัญชี {$account->username} เรียบร้อยแล้ว");
+    }
+
+    /**
+     * ลบบัญชี
+     */
+    public function destroyAccount(ServiceAccount $account)
+    {
+        $username = $account->username;
+        $account->delete();
+
+        return redirect()
+            ->route('admin.accounts.index')
+            ->with('success', "ลบบัญชี {$username} เรียบร้อยแล้ว");
+    }
 }

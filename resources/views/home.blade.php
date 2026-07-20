@@ -47,7 +47,7 @@
         .btn-outline-brand { border: 1.5px solid var(--forest); color: var(--forest); border-radius: 9px; padding: 8px 18px; font-size: 14px; font-weight: 500; }
         .btn-outline-brand:hover { background: var(--forest); color: #fff; }
 
-        /* Hero */ 
+        /* Hero */
         .hero {
             background: linear-gradient(190deg, var(--forest) 0%, var(--forest-2) 65%, #3d5a34 100%);
             color: #eef2e6; padding: 78px 0 96px; position: relative; overflow: hidden;
