@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\ServiceAccountController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ServiceAccountController;
 
 // ===== เพิ่มบล็อกนี้ต่อท้ายไฟล์ routes/web.php เดิม =====
 Route::prefix('admin')->name('admin.')->group(function () {

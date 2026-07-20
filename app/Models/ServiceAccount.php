@@ -11,11 +11,7 @@ class ServiceAccount extends Model
     public $timestamps = false;
 
     protected $fillable = [
-<<<<<<< HEAD
-        'request_id', 'applicant_id', 'username', 'password_hash',
-=======
         'request_id', 'applicant_id', 'username', 'password',
->>>>>>> ca29ac7 (Initial Commit)
         'account_type', 'status', 'created_by', 'expire_date',
     ];
 

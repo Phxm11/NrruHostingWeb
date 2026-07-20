@@ -181,35 +181,35 @@
             outline: none; border-color: var(--acc-blue-fg);
         }
 
-        /* ---------- row actions: direct one-click icon buttons ----------
-           Replaces the old "..." dropdown menu (which needed 2 clicks:
-           open menu, then pick an action). Each action is now a single
-           visible button — one click does the job. A tooltip (title)
-           and small text label under each icon make the action obvious
-           without needing to open anything.
-        ---------------------------------------------------------------- */
-        .row-actions-quick {
-            display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+        /* ---------- row actions as a compact menu ---------- */
+        .row-actions { position: relative; display: inline-block; }
+        .row-actions__trigger {
+            width: 32px; height: 32px; border-radius: 8px; border: 1px solid #e6e6e6;
+            background: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
         }
-        .row-actions-quick form { margin: 0; }
-        .action-btn {
+        .row-actions__trigger:hover { background: #f5f5f5; }
+        .row-actions__menu {
+            display: none; position: absolute; right: 0; top: 38px; z-index: 20;
+            background: #fff; border: 1px solid #eaeaea; border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.08); min-width: 168px; overflow: hidden;
+        }
+        .row-actions.open .row-actions__menu { display: block; animation: popIn .15s ease; }
+        .row-actions__menu button, .row-actions__menu a {
+            display: flex; align-items: center; gap: 10px; width: 100%;
+            padding: 9px 14px; font-size: 13.5px; text-align: left; border: none;
+            background: none; color: #333; text-decoration: none; cursor: pointer;
+        }
+        .row-actions__menu button:hover, .row-actions__menu a:hover { background: #f6f6f6; }
+        .row-actions__menu form { margin: 0; }
+        .row-actions__menu .icon-badge {
+            width: 24px; height: 24px; border-radius: 7px; flex-shrink: 0;
             display: inline-flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; border-radius: 9px;
-            border: 1px solid #e6e6e6; background: #fff; cursor: pointer;
-            transition: background .15s, border-color .15s, transform .1s, color .15s;
-            color: #666;
         }
-        .action-btn:hover { transform: translateY(-1px); }
-        .action-btn:active { transform: scale(.94); }
-        .action-btn--edit:hover {
-            background: var(--acc-blue-bg); color: var(--acc-blue-fg); border-color: var(--acc-blue-bg);
-        }
-        .action-btn--toggle:hover {
-            background: #fdf1cf; color: var(--acc-gold); border-color: #fdf1cf;
-        }
-        .action-btn--delete:hover {
-            background: var(--acc-expired-bg); color: var(--acc-expired-fg); border-color: var(--acc-expired-bg);
-        }
+        .row-actions__menu .icon-badge--edit   { background: var(--acc-blue-bg);   color: var(--acc-blue-fg); }
+        .row-actions__menu .icon-badge--toggle { background: #fdf1cf;              color: var(--acc-gold); }
+        .row-actions__menu .icon-badge--delete { background: var(--acc-expired-bg); color: var(--acc-expired-fg); }
+        .row-actions__menu .danger { color: var(--acc-expired-fg); }
+        .row-actions__menu .divider { border-top: 1px solid #f0f0f0; margin: 4px 0; }
 
         /* ---------- empty state ---------- */
         .empty-state { text-align: center; padding: 56px 16px; color: #8a8a8a; }
@@ -235,7 +235,6 @@
                 text-transform: uppercase; letter-spacing: .03em; color: #999; margin-bottom: 2px;
             }
             .modern-table td.text-end { text-align: left !important; }
-            .row-actions-quick { justify-content: flex-start; }
         }
     </style>
 
@@ -325,7 +324,7 @@
                         <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4Z"/></svg>ประเภทบัญชี</span></th>
                         <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-5"/></svg>สถานะ</span></th>
                         <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>วันหมดอายุ</span></th>
-                        <th class="text-end">จัดการ</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -373,27 +372,39 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="text-end" data-label="จัดการ">
-                                {{-- One click per action — no dropdown to open first --}}
-                                <div class="row-actions-quick">
-                                    <a href="{{ route('admin.accounts.edit', $acc->account_id) }}"
-                                       class="action-btn action-btn--edit" title="แก้ไข">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-                                    </a>
-                                    <form action="{{ route('admin.accounts.toggle-status', $acc->account_id) }}" method="POST">
-                                        @csrf @method('PATCH')
-                                        <button type="submit" class="action-btn action-btn--toggle"
-                                                title="{{ $acc->status === 'active' ? 'ระงับการใช้งาน' : 'เปิดใช้งาน' }}">
-                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                                        </button>
-                                    </form>
-                                    <form action="{{ route('admin.accounts.destroy', $acc->account_id) }}" method="POST"
-                                          onsubmit="return confirm('ยืนยันลบบัญชี {{ $acc->username }}? การลบไม่สามารถย้อนกลับได้');">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="action-btn action-btn--delete" title="ลบบัญชี">
-                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                                        </button>
-                                    </form>
+                            <td class="text-end">
+                                <div class="row-actions">
+                                    <button type="button" class="row-actions__trigger" onclick="toggleRowMenu(this)" aria-haspopup="true" aria-expanded="false" aria-label="เมนูการทำงาน">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg>
+                                    </button>
+                                    <div class="row-actions__menu">
+                                        <a href="{{ route('admin.accounts.edit', $acc->account_id) }}">
+                                            <span class="icon-badge icon-badge--edit">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                                            </span>
+                                            แก้ไข
+                                        </a>
+                                        <form action="{{ route('admin.accounts.toggle-status', $acc->account_id) }}" method="POST">
+                                            @csrf @method('PATCH')
+                                            <button type="submit">
+                                                <span class="icon-badge icon-badge--toggle">
+                                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                                                </span>
+                                                {{ $acc->status === 'active' ? 'ระงับการใช้งาน' : 'เปิดใช้งาน' }}
+                                            </button>
+                                        </form>
+                                        <div class="divider"></div>
+                                        <form action="{{ route('admin.accounts.destroy', $acc->account_id) }}" method="POST"
+                                              onsubmit="return confirm('ยืนยันลบบัญชี {{ $acc->username }}? การลบไม่สามารถย้อนกลับได้');">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="danger">
+                                                <span class="icon-badge icon-badge--delete">
+                                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                                                </span>
+                                                ลบบัญชี
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -417,6 +428,23 @@
     </div>
 
     <script>
+        // Close any open row-action menu when clicking elsewhere
+        document.addEventListener('click', function (e) {
+            document.querySelectorAll('.row-actions.open').forEach(function (el) {
+                if (!el.contains(e.target)) el.classList.remove('open');
+            });
+        });
+
+        function toggleRowMenu(trigger) {
+            const wrapper = trigger.closest('.row-actions');
+            const isOpen = wrapper.classList.contains('open');
+            document.querySelectorAll('.row-actions.open').forEach(el => el.classList.remove('open'));
+            if (!isOpen) {
+                wrapper.classList.add('open');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        }
+
         function copyCredentials(btn) {
             const u = document.getElementById('cred-username').textContent.trim();
             const p = document.getElementById('cred-password').textContent.trim();
