@@ -8,9 +8,9 @@
 
     <style>
         :root {
-            --acc-blue-bg: #e6f0fb;   --acc-blue-fg: #2660b0;
-            --acc-violet-bg: #f0eaf9; --acc-violet-fg: #6c3fb0;
-            --acc-teal-bg: #e2f6f3;   --acc-teal-fg: #157a6e;
+            --acc-blue-bg: #e3efe7;   --acc-blue-fg: #2f6b4a;
+            --acc-violet-bg: #f4e8dd; --acc-violet-fg: #a1592f;
+            --acc-teal-bg: #eef1da;   --acc-teal-fg: #6a7a2c;
         }
         @keyframes popIn { from { opacity:0; transform: scale(.92); } to { opacity:1; transform: scale(1); } }
         @keyframes bob   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
@@ -77,7 +77,7 @@
             transition: box-shadow .15s, border-color .15s;
         }
         .form-control:focus, .form-select:focus {
-            box-shadow: 0 0 0 3px var(--acc-blue-bg); border-color: var(--acc-blue-fg);
+            box-shadow: 0 0 0 3px var(--moss-light); border-color: var(--moss);
         }
 
         /* password strength meter */

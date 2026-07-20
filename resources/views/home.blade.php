@@ -5,112 +5,207 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>บริการ Data Center และ Web Hosting — สำนักคอมพิวเตอร์ มหาวิทยาลัยราชภัฏนครราชสีมา</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f5f4e9;
+            --bg: #faf9f4;
             --surface: #ffffff;
-            --ink: #202a1e;
-            --ink-soft: #667061;
-            --forest: #24422b;
-            --forest-2: #33532f;
-            --moss: #6e8f4e;
-            --moss-light: #e7efd9;
+            --ink: #1f2b1c;
+            --ink-soft: #6b7565;
+            --forest: #21402a;
+            --forest-2: #2f5333;
+            --moss: #5f8b46;
+            --moss-light: #e9f1dd;
             --amber: #e0a526;
             --amber-deep: #b9840f;
-            --amber-light: #fbf0d2;
-            --line: #e6e2d2;
+            --amber-light: #fbf1d6;
+            --line: #e9e5d7;
+            --shadow-sm: 0 1px 2px rgba(33,64,42,.05);
+            --shadow-md: 0 10px 30px -12px rgba(33,64,42,.18);
+            --shadow-lg: 0 24px 60px -20px rgba(33,64,42,.28);
+            --radius: 20px;
         }
+
         * { box-sizing: border-box; }
-        body { font-family: 'Sarabun', sans-serif; background: var(--bg); color: var(--ink); margin: 0; }
-        h1, h2, h3, .display-font { font-family: 'Kanit', sans-serif; }
+
+        html { scroll-behavior: smooth; }
+
+        body { font-family: 'Sarabun', sans-serif; background: var(--bg); color: var(--ink); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        h1, h2, h3, .display-font { font-family: 'Kanit', sans-serif; letter-spacing: -.01em; }
+
         a { text-decoration: none; }
 
-        /* Navbar */
-        .navbar-custom {
-            background: rgba(245,244,233,.92); backdrop-filter: blur(6px);
-            border-bottom: 1px solid var(--line);
-            position: sticky; top: 0; z-index: 50;
-            padding: 14px 0;
+        /* Scroll progress bar */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: linear-gradient(90deg, var(--moss), var(--amber));
+            z-index: 100; transition: width .1s ease-out;
         }
+
+        /* Reveal on scroll */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+        .reveal.in { opacity: 1; transform: none; }
+
+        /* ---------- Navbar ---------- */
+        .navbar-custom {
+            background: rgba(250,249,244,.82); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            position: sticky; top: 0; z-index: 60; transition: box-shadow .2s ease;
+        }
+        .navbar-custom.scrolled { box-shadow: var(--shadow-sm); }
         .brand-mark {
-            width: 36px; height: 36px; border-radius: 10px;
+            width: 38px; height: 38px; border-radius: 11px;
             background: linear-gradient(135deg, var(--amber), #f0c25c);
             display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(224,165,38,.35);
         }
-        .brand-name { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 15px; color: var(--forest); }
+        .brand-name { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 15px; color: var(--forest); line-height: 1.2; }
         .brand-name small { display: block; font-weight: 400; font-size: 11px; color: var(--ink-soft); }
-        .nav-link-custom { color: var(--ink); font-size: 14.5px; font-weight: 500; margin: 0 14px; }
-        .nav-link-custom:hover { color: var(--forest); }
-        .btn-amber { background: linear-gradient(135deg, var(--amber), var(--amber-deep)); border: none; color: #2c1e05; font-weight: 600; border-radius: 9px; padding: 9px 20px; font-size: 14.5px; }
-        .btn-amber:hover { filter: brightness(1.05); color: #2c1e05; }
-        .btn-outline-brand { border: 1.5px solid var(--forest); color: var(--forest); border-radius: 9px; padding: 8px 18px; font-size: 14px; font-weight: 500; }
-        .btn-outline-brand:hover { background: var(--forest); color: #fff; }
+        .nav-link-custom { color: var(--ink); font-size: 14.5px; font-weight: 500; margin: 0 4px; padding: 8px 12px; border-radius: 10px; transition: background .15s ease, color .15s ease; }
+        .nav-link-custom:hover { background: var(--moss-light); color: var(--forest); }
+        .btn-amber { background: linear-gradient(135deg, var(--amber), var(--amber-deep)); border: none; color: #2c1e05; font-weight: 600; border-radius: 12px; padding: 10px 22px; font-size: 14.5px; box-shadow: 0 6px 16px -6px rgba(185,132,15,.6); transition: transform .15s ease, filter .15s ease; }
+        .btn-amber:hover { filter: brightness(1.04); color: #2c1e05; transform: translateY(-1px); }
+        .btn-outline-brand { border: 1.5px solid rgba(255,255,255,.5); color: #fff; border-radius: 12px; padding: 9px 20px; font-size: 14px; font-weight: 500; transition: background .15s ease; }
+        .btn-outline-brand:hover { background: rgba(255,255,255,.14); color: #fff; }
 
-        /* Hero */
+        .mobile-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 10px; padding: 7px 10px; cursor: pointer; }
+        .mobile-menu { display: none; flex-direction: column; gap: 4px; padding: 12px 16px 16px; border-top: 1px solid var(--line); }
+        .mobile-menu.open { display: flex; }
+
+        /* ---------- Hero ---------- */
         .hero {
-            background: linear-gradient(190deg, var(--forest) 0%, var(--forest-2) 65%, #3d5a34 100%);
-            color: #eef2e6; padding: 78px 0 96px; position: relative; overflow: hidden;
+            position: relative; overflow: hidden;
+            background: radial-gradient(120% 120% at 80% -10%, var(--forest-2) 0%, var(--forest) 55%, #1a3320 100%);
+            color: #eef2e6; padding: 92px 0 120px;
+        }
+        .hero::before {
+            content: ''; position: absolute; width: 540px; height: 540px;
+            background: radial-gradient(circle, rgba(224,165,38,.30) 0%, rgba(224,165,38,0) 68%);
+            top: -180px; right: -120px; pointer-events: none;
         }
         .hero::after {
             content: ''; position: absolute; width: 420px; height: 420px;
-            background: radial-gradient(circle, rgba(224,165,38,.28) 0%, rgba(224,165,38,0) 70%);
-            top: -120px; right: -100px; pointer-events: none;
+            background: radial-gradient(circle, rgba(95,139,70,.32) 0%, rgba(95,139,70,0) 70%);
+            bottom: -200px; left: -120px; pointer-events: none;
         }
-        .hero-eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #f0c25c; font-weight: 600; margin-bottom: 14px; }
-        .hero h1 { font-size: 40px; font-weight: 700; line-height: 1.25; margin-bottom: 18px; }
-        .hero p.lead { font-size: 16.5px; color: #d8e0d0; max-width: 560px; margin-bottom: 30px; }
+        .hero-grid {
+            position: absolute; inset: 0; opacity: .07; pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
+            background-size: 46px 46px; mask-image: radial-gradient(80% 60% at 70% 20%, #000, transparent);
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase;
+            color: #f0c25c; font-weight: 600; background: rgba(240,194,92,.12);
+            padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(240,194,92,.25); margin-bottom: 22px;
+        }
+        .hero h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; line-height: 1.22; margin-bottom: 20px; }
+        .hero h1 .accent { color: var(--amber); }
+        .hero p.lead { font-size: 17px; color: #d8e0d0; max-width: 560px; margin-bottom: 32px; }
+        .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
 
-        /* Sections */
-        section { padding: 72px 0; }
-        .section-eyebrow { font-size: 13px; color: var(--moss); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
-        .section-title { font-size: 27px; font-weight: 700; margin-bottom: 14px; }
-        .section-desc { color: var(--ink-soft); font-size: 15px; max-width: 620px; }
+        .hero-stats { display: flex; gap: 34px; margin-top: 46px; flex-wrap: wrap; }
+        .hero-stats .hs { position: relative; z-index: 1; }
+        .hero-stats .hs b { font-family: 'Kanit', sans-serif; font-size: 26px; font-weight: 700; display: block; }
+        .hero-stats .hs span { font-size: 13px; color: #aebda0; }
+
+        /* ---------- Sections ---------- */
+        section { padding: 84px 0; }
+        .section-eyebrow { font-size: 13px; color: var(--moss); font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+        .section-title { font-size: clamp(24px, 3.5vw, 31px); font-weight: 700; margin-bottom: 14px; }
+        .section-desc { color: var(--ink-soft); font-size: 15.5px; max-width: 620px; }
 
         .plan-card {
-            background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
-            padding: 26px 24px; height: 100%; transition: transform .15s ease, box-shadow .15s ease;
+            position: relative; background: var(--surface); border: 1px solid var(--line);
+            border-radius: var(--radius); padding: 28px 26px; height: 100%;
+            box-shadow: var(--shadow-sm); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
         }
-        .plan-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(36,66,43,.1); }
-        .plan-card .plan-badge {
-            display: inline-block; font-size: 11.5px; font-weight: 600; padding: 4px 10px;
-            border-radius: 20px; background: var(--moss-light); color: var(--forest); margin-bottom: 12px;
+        .plan-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #d9d3bf; }
+        .plan-card.featured { border-color: var(--amber); box-shadow: var(--shadow-md); }
+        .plan-card.featured::before {
+            content: 'แนะนำ'; position: absolute; top: -11px; left: 26px;
+            background: linear-gradient(135deg, var(--amber), var(--amber-deep)); color: #2c1e05;
+            font-size: 11.5px; font-weight: 700; padding: 4px 12px; border-radius: 999px;
         }
-        .plan-card .plan-price { font-family: 'Kanit', sans-serif; font-size: 26px; font-weight: 700; color: var(--forest); }
-        .plan-card .plan-price span { font-size: 13px; font-weight: 400; color: var(--ink-soft); }
-        .plan-card ul { list-style: none; padding: 0; margin: 16px 0 0; font-size: 14px; }
-        .plan-card ul li { padding: 5px 0; display: flex; align-items: center; gap: 8px; color: var(--ink); }
+        .plan-badge {
+            display: inline-block; font-size: 11.5px; font-weight: 600; padding: 5px 12px;
+            border-radius: 999px; background: var(--moss-light); color: var(--forest); margin-bottom: 14px;
+        }
+        .plan-price { font-family: 'Kanit', sans-serif; font-size: 28px; font-weight: 700; color: var(--forest); line-height: 1; }
+        .plan-price span { font-size: 13px; font-weight: 400; color: var(--ink-soft); }
+        .plan-divider { height: 1px; background: var(--line); margin: 18px 0; }
+        .plan-card ul { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+        .plan-card ul li { padding: 6px 0; display: flex; align-items: center; gap: 9px; color: var(--ink); }
         .plan-card ul li svg { flex-shrink: 0; color: var(--moss); }
+        .plan-suitable { margin-top: 16px; font-size: 13px; color: var(--ink-soft); background: var(--bg); border-radius: 12px; padding: 10px 14px; }
 
-        .step-item { display: flex; gap: 16px; margin-bottom: 26px; }
-        .step-num {
-            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Kanit', sans-serif; font-weight: 700; font-size: 16px; color: #fff;
+        .group-label { display: flex; align-items: center; gap: 10px; margin: 4px 0 22px; }
+        .group-label .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--moss); }
+        .group-label h3 { font-size: 18px; font-weight: 600; margin: 0; }
+
+        /* Steps timeline */
+        .steps-wrap { display: grid; gap: 0; }
+        .step-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+        .step-item:last-child { padding-bottom: 0; }
+        .step-item::before {
+            content: ''; position: absolute; left: 23px; top: 46px; bottom: 0; width: 2px;
+            background: linear-gradient(var(--line), transparent);
         }
-        .step-item:nth-child(odd) .step-num { background: var(--forest); }
-        .step-item:nth-child(even) .step-num { background: var(--amber-deep); }
-        .step-title { font-weight: 600; margin-bottom: 3px; }
-        .step-desc { color: var(--ink-soft); font-size: 14px; }
+        .step-item:last-child::before { display: none; }
+        .step-num {
+            width: 46px; height: 46px; border-radius: 14px; flex-shrink: 0; position: relative; z-index: 1;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Kanit', sans-serif; font-weight: 700; font-size: 18px; color: #fff;
+            background: linear-gradient(135deg, var(--forest), var(--forest-2)); box-shadow: var(--shadow-sm);
+        }
+        .step-item:nth-child(even) .step-num { background: linear-gradient(135deg, var(--amber), var(--amber-deep)); color: #2c1e05; }
+        .step-body { padding-top: 4px; }
+        .step-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+        .step-desc { color: var(--ink-soft); font-size: 14.5px; }
 
-        .policy-list { list-style: none; padding: 0; margin: 0; }
-        .policy-list li { display: flex; gap: 10px; padding: 9px 0; font-size: 14.5px; border-bottom: 1px dashed var(--line); }
-        .policy-list li:last-child { border-bottom: none; }
-        .policy-list svg { flex-shrink: 0; color: var(--moss); margin-top: 2px; }
+        .panel-soft { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 32px; box-shadow: var(--shadow-sm); }
+
+        .policy-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+        .policy-list li {
+            display: flex; gap: 14px; font-size: 14.5px; color: var(--ink);
+            background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px;
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .policy-list li:hover { transform: translateX(3px); box-shadow: var(--shadow-sm); }
+        .policy-list .check {
+            flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            background: var(--moss-light); color: var(--forest); margin-top: 1px;
+        }
 
         .cta-band {
+            position: relative; overflow: hidden;
             background: linear-gradient(120deg, var(--moss-light), var(--amber-light));
-            border-radius: 20px; padding: 44px 40px; text-align: center;
+            border: 1px solid #ecdfb8; border-radius: 26px; padding: 52px 44px; text-align: center;
+        }
+        .cta-band::after {
+            content: ''; position: absolute; width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(224,165,38,.35), transparent 70%); bottom: -120px; right: -60px; pointer-events: none;
         }
 
-        footer { background: var(--forest); color: #cfd8c6; padding: 36px 0; font-size: 13.5px; }
+        footer { background: var(--forest); color: #cfd8c6; padding: 44px 0 30px; font-size: 13.5px; }
         footer a { color: #eef2e6; }
         footer a:hover { color: var(--amber); }
+        footer .f-brand { font-family: 'Kanit', sans-serif; color: #fff; font-size: 15px; font-weight: 600; }
+
+        @media (max-width: 767px) {
+            .nav-desktop { display: none; }
+            .mobile-toggle { display: inline-flex; }
+            .hero { padding: 64px 0 84px; }
+            section { padding: 60px 0; }
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar-custom">
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="navbar-custom" id="navbar">
     <div class="container d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="d-flex align-items-center gap-2">
             <div class="brand-mark">
@@ -124,63 +219,88 @@
                 <small>มหาวิทยาลัยราชภัฏนครราชสีมา</small>
             </div>
         </a>
-        <div class="d-none d-md-flex align-items-center">
+        <div class="nav-desktop d-none d-md-flex align-items-center">
             <a href="#services" class="nav-link-custom">บริการ</a>
             <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
             <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
             <a href="{{ route('admin.requests.index') }}" class="nav-link-custom">สำหรับเจ้าหน้าที่</a>
         </div>
-        <a href="{{ route('service-requests.create') }}" class="btn-amber">ยื่นคำขอใช้บริการ</a>
+        <div class="d-flex align-items-center gap-2">
+            <a href="{{ route('service-requests.create') }}" class="btn-amber d-none d-sm-inline-block">ยื่นคำขอใช้บริการ</a>
+            <button class="mobile-toggle d-md-none" id="mobileToggle" aria-label="เมนู">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#21402a" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-menu container" id="mobileMenu">
+        <a href="#services" class="nav-link-custom">บริการ</a>
+        <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
+        <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
+        <a href="{{ route('admin.requests.index') }}" class="nav-link-custom">สำหรับเจ้าหน้าที่</a>
+        <a href="{{ route('service-requests.create') }}" class="btn-amber mt-1 text-center">ยื่นคำขอใช้บริการ</a>
     </div>
 </nav>
 
 <header class="hero">
+    <div class="hero-grid"></div>
     <div class="container">
-        <div class="hero-eyebrow">Data Center &amp; Web Hosting Service</div>
-        <h1>บริการเครื่องแม่ข่ายเสมือน<br>และ Web Hosting เพื่อบุคลากร มรภ.นครราชสีมา</h1>
+        <div class="hero-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            Data Center &amp; Web Hosting Service
+        </div>
+        <h1>บริการเครื่องแม่ข่ายเสมือน<br>และ <span class="accent">Web Hosting</span> เพื่อบุคลากร มรภ.นครราชสีมา</h1>
         <p class="lead">ยื่นคำขอใช้บริการออนไลน์ได้ทันที ระบบตรวจสอบและออกบัญชีผู้ใช้ให้อัตโนมัติ รองรับทั้งงานเรียนการสอน งานวิจัย บริการวิชาการ และการบริหารจัดการภายในหน่วยงาน</p>
-        <div class="d-flex gap-3 flex-wrap">
+        <div class="hero-cta">
             <a href="{{ route('service-requests.create') }}" class="btn-amber">เริ่มยื่นคำขอใช้บริการ</a>
-            <a href="#services" class="btn-outline-brand" style="border-color:#cfd8c6;color:#eef2e6;">ดูแพ็กเกจบริการ</a>
+            <a href="#services" class="btn-outline-brand">ดูแพ็กเกจบริการ</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hs"><b>24/7</b><span>ดูแลโดยสำนักคอมพิวเตอร์</span></div>
+            <div class="hs"><b>&lt; 10 นาที</b><span>เวลากรอกแบบฟอร์ม</span></div>
+            <div class="hs"><b>อัตโนมัติ</b><span>ออกบัญชีผู้ใช้</span></div>
         </div>
     </div>
 </header>
 
 <section id="services">
     <div class="container">
-        <div class="section-eyebrow">แพ็กเกจบริการ</div>
-        <h2 class="section-title">เลือกบริการที่เหมาะกับระบบของคุณ</h2>
-        <p class="section-desc mb-5">ราคาต่อปี ครอบคลุมพื้นที่จัดเก็บข้อมูลและทรัพยากรพื้นฐาน สามารถระบุความต้องการเพิ่มเติมในแบบฟอร์มได้</p>
+        <div class="reveal">
+            <div class="section-eyebrow">แพ็กเกจบริการ</div>
+            <h2 class="section-title">เลือกบริการที่เหมาะกับระบบของคุณ</h2>
+            <p class="section-desc mb-5">ราคาต่อปี ครอบคลุมพื้นที่จัดเก็บข้อมูลและทรัพยากรพื้นฐาน สามารถระบุความต้องการเพิ่มเติมในแบบฟอร์มได้</p>
+        </div>
 
-        <h3 class="h5 mb-3" style="font-family:'Kanit',sans-serif;">เครื่องแม่ข่ายเสมือน (Virtual Server)</h3>
+        <div class="group-label reveal"><span class="dot"></span><h3>เครื่องแม่ข่ายเสมือน (Virtual Server)</h3></div>
         <div class="row g-4 mb-5">
             @foreach ($virtualServerPlans as $plan)
-                <div class="col-md-4">
-                    <div class="plan-card">
+                <div class="col-md-4 reveal">
+                    <div class="plan-card {{ $loop->iteration === 2 ? 'featured' : '' }}">
                         <span class="plan-badge">{{ $plan->size_label }}</span>
                         <div class="plan-price">{{ number_format($plan->fee_per_year, 0) }} <span>บาท/ปี</span></div>
+                        <div class="plan-divider"></div>
                         <ul>
-                            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> {{ $plan->cpu_vcpu }} vCPU</li>
-                            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> RAM {{ $plan->ram_gb }} GB</li>
-                            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> Storage {{ $plan->storage_gb }} GB</li>
+                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> {{ $plan->cpu_vcpu }} vCPU</li>
+                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> RAM {{ $plan->ram_gb }} GB</li>
+                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Storage {{ $plan->storage_gb }} GB</li>
                         </ul>
-                        <div class="mt-3" style="font-size:13px;color:var(--ink-soft);">เหมาะสำหรับ {{ $plan->suitable_for }}</div>
+                        <div class="plan-suitable">เหมาะสำหรับ {{ $plan->suitable_for }}</div>
                     </div>
                 </div>
             @endforeach
         </div>
 
-        <h3 class="h5 mb-3" style="font-family:'Kanit',sans-serif;">Web Hosting</h3>
+        <div class="group-label reveal"><span class="dot"></span><h3>Web Hosting</h3></div>
         <div class="row g-4">
             @foreach ($webHostingPlans as $plan)
-                <div class="col-md-4">
-                    <div class="plan-card">
+                <div class="col-md-4 reveal">
+                    <div class="plan-card {{ $loop->iteration === 2 ? 'featured' : '' }}">
                         <span class="plan-badge">{{ $plan->size_label }}</span>
                         <div class="plan-price">{{ number_format($plan->fee_per_year, 0) }} <span>บาท/ปี</span></div>
+                        <div class="plan-divider"></div>
                         <ul>
-                            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> Storage {{ $plan->storage_gb }} GB</li>
+                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Storage {{ $plan->storage_gb }} GB</li>
                         </ul>
-                        <div class="mt-3" style="font-size:13px;color:var(--ink-soft);">เหมาะสำหรับ {{ $plan->suitable_for }}</div>
+                        <div class="plan-suitable">เหมาะสำหรับ {{ $plan->suitable_for }}</div>
                     </div>
                 </div>
             @endforeach
@@ -191,38 +311,40 @@
 <section id="steps" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
     <div class="container">
         <div class="row align-items-center g-5">
-            <div class="col-lg-5">
+            <div class="col-lg-5 reveal">
                 <div class="section-eyebrow">ขั้นตอนการขอใช้บริการ</div>
                 <h2 class="section-title">ใช้เวลาไม่นาน เริ่มได้ทันที</h2>
                 <p class="section-desc">กรอกแบบฟอร์มออนไลน์ครั้งเดียว แนบเอกสารที่เกี่ยวข้อง แล้วรอการพิจารณาจากสำนักคอมพิวเตอร์</p>
             </div>
-            <div class="col-lg-7">
-                <div class="step-item">
-                    <div class="step-num">1</div>
-                    <div>
-                        <div class="step-title">กรอกแบบฟอร์มขอใช้บริการ</div>
-                        <div class="step-desc">ระบุข้อมูลผู้ขอใช้บริการ วัตถุประสงค์ และเลือกแพ็กเกจทรัพยากรที่ต้องการ</div>
+            <div class="col-lg-7 reveal">
+                <div class="steps-wrap">
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <div class="step-title">กรอกแบบฟอร์มขอใช้บริการ</div>
+                            <div class="step-desc">ระบุข้อมูลผู้ขอใช้บริการ วัตถุประสงค์ และเลือกแพ็กเกจทรัพยากรที่ต้องการ</div>
+                        </div>
                     </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">2</div>
-                    <div>
-                        <div class="step-title">แนบเอกสารประกอบ</div>
-                        <div class="step-desc">แนบรายละเอียดระบบ/โครงสร้างระบบ และลายเซ็นยอมรับข้อกำหนด</div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <div class="step-title">แนบเอกสารประกอบ</div>
+                            <div class="step-desc">แนบรายละเอียดระบบ/โครงสร้างระบบ และลายเซ็นยอมรับข้อกำหนด</div>
+                        </div>
                     </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">3</div>
-                    <div>
-                        <div class="step-title">รอการพิจารณาอนุมัติ</div>
-                        <div class="step-desc">เจ้าหน้าที่สำนักคอมพิวเตอร์ตรวจสอบข้อมูลและอนุมัติคำขอ</div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <div class="step-title">รอการพิจารณาอนุมัติ</div>
+                            <div class="step-desc">เจ้าหน้าที่สำนักคอมพิวเตอร์ตรวจสอบข้อมูลและอนุมัติคำขอ</div>
+                        </div>
                     </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">4</div>
-                    <div>
-                        <div class="step-title">รับ Username / Password</div>
-                        <div class="step-desc">ระบบออกบัญชีผู้ใช้บริการให้ พร้อมใช้งานตามระยะเวลาโครงการที่ระบุ</div>
+                    <div class="step-item">
+                        <div class="step-num">4</div>
+                        <div class="step-body">
+                            <div class="step-title">รับ Username / Password</div>
+                            <div class="step-desc">ระบบออกบัญชีผู้ใช้บริการให้ พร้อมใช้งานตามระยะเวลาโครงการที่ระบุ</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,27 +355,27 @@
 <section id="policy">
     <div class="container">
         <div class="row g-5 align-items-start">
-            <div class="col-lg-5">
+            <div class="col-lg-5 reveal">
                 <div class="section-eyebrow">ข้อกำหนดและนโยบาย</div>
                 <h2 class="section-title">สิ่งที่ผู้ขอใช้บริการต้องทราบ</h2>
                 <p class="section-desc">ผู้ขอใช้บริการต้องปฏิบัติตามกฎหมายและระเบียบของมหาวิทยาลัยอย่างเคร่งครัด</p>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7 reveal">
                 <ul class="policy-list">
-                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> ปฏิบัติตาม พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ และ พ.ร.บ. การรักษาความมั่นคงปลอดภัยไซเบอร์</li>
-                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> ปฏิบัติตามนโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA) ของมหาวิทยาลัย</li>
-                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> ผู้ใช้บริการมีหน้าที่สำรองข้อมูล (Backup) และดูแลความปลอดภัยระบบของตนเองอย่างสม่ำเสมอ</li>
-                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> ระยะเวลาการใช้งานไม่เกิน 1 ปีต่อครั้ง สามารถยื่นขอต่ออายุได้ก่อนวันหมดอายุ</li>
-                    <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> สำนักคอมพิวเตอร์มีสิทธิ์ระงับหรือยกเลิกบริการทันทีหากพบการใช้งานที่กระทบต่อระบบส่วนรวม</li>
+                    <li><span class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></span> ปฏิบัติตาม พ.ร.บ. ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ และ พ.ร.บ. การรักษาความมั่นคงปลอดภัยไซเบอร์</li>
+                    <li><span class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></span> ปฏิบัติตามนโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA) ของมหาวิทยาลัย</li>
+                    <li><span class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></span> ผู้ใช้บริการมีหน้าที่สำรองข้อมูล (Backup) และดูแลความปลอดภัยระบบของตนเองอย่างสม่ำเสมอ</li>
+                    <li><span class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></span> ระยะเวลาการใช้งานไม่เกิน 1 ปีต่อครั้ง สามารถยื่นขอต่ออายุได้ก่อนวันหมดอายุ</li>
+                    <li><span class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></span> สำนักคอมพิวเตอร์มีสิทธิ์ระงับหรือยกเลิกบริการทันทีหากพบการใช้งานที่กระทบต่อระบบส่วนรวม</li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<section>
+<section style="padding-top:0;">
     <div class="container">
-        <div class="cta-band">
+        <div class="cta-band reveal">
             <h2 class="section-title mb-2">พร้อมเริ่มใช้งานแล้วใช่ไหม?</h2>
             <p class="section-desc mx-auto mb-4">ยื่นคำขอใช้บริการออนไลน์วันนี้ ใช้เวลากรอกฟอร์มไม่ถึง 10 นาที</p>
             <a href="{{ route('service-requests.create') }}" class="btn-amber">ยื่นคำขอใช้บริการตอนนี้</a>
@@ -264,7 +386,7 @@
 <footer>
     <div class="container d-flex flex-wrap justify-content-between gap-3">
         <div>
-            <strong style="color:#fff;">สำนักคอมพิวเตอร์ มหาวิทยาลัยราชภัฏนครราชสีมา</strong><br>
+            <div class="f-brand mb-1">สำนักคอมพิวเตอร์ มหาวิทยาลัยราชภัฏนครราชสีมา</div>
             340 ถ.สุรนารายณ์ ต.ในเมือง อ.เมือง จ.นครราชสีมา 30000
         </div>
         <div>
@@ -273,6 +395,35 @@
         </div>
     </div>
 </footer>
+
+<script>
+    // Scroll progress bar
+    const progress = document.getElementById('scrollProgress');
+    const navbar = document.getElementById('navbar');
+    function onScroll() {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+        progress.style.width = scrolled + '%';
+        navbar.classList.toggle('scrolled', h.scrollTop > 8);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu toggle
+    const toggle = document.getElementById('mobileToggle');
+    const menu = document.getElementById('mobileMenu');
+    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = (Math.min(i, 6) * 40) + 'ms';
+        io.observe(el);
+    });
+</script>
 
 </body>
 </html>

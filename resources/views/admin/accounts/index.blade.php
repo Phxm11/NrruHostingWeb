@@ -15,16 +15,17 @@
     ============================================================ --}}
     <style>
         :root {
-            --acc-active-bg: #e7f4ea;
-            --acc-active-fg: #1f7a3d;
-            --acc-disabled-bg: #f1f1f1;
-            --acc-disabled-fg: #6b6b6b;
+            --acc-active-bg: var(--moss-light, #e9f1dd);
+            --acc-active-fg: var(--forest, #21402a);
+            --acc-disabled-bg: #eeeadc;
+            --acc-disabled-fg: var(--ink-soft, #6b7565);
             --acc-expired-bg: var(--rust-light, #f7e2da);
-            --acc-expired-fg: var(--rust, #b5502e);
+            --acc-expired-fg: var(--rust, #b1492e);
             --acc-gold: #8a6408;
-            --acc-blue-bg: #e6f0fb;   --acc-blue-fg: #2660b0;
-            --acc-violet-bg: #f0eaf9; --acc-violet-fg: #6c3fb0;
-            --acc-teal-bg: #e2f6f3;   --acc-teal-fg: #157a6e;
+            /* brand-aligned accent trio (sage / clay / olive) */
+            --acc-blue-bg: #e3efe7;   --acc-blue-fg: #2f6b4a;
+            --acc-violet-bg: #f4e8dd; --acc-violet-fg: #a1592f;
+            --acc-teal-bg: #eef1da;   --acc-teal-fg: #6a7a2c;
         }
 
         @keyframes rowIn {
@@ -133,10 +134,10 @@
         .type-tag-4 { background: var(--acc-expired-bg);color: var(--acc-expired-fg); }
         .type-tag-5 { background: #fdf1cf;              color: var(--acc-gold); }
 
-        /* ---------- gradient avatars ---------- */
-        .avatar-a { background: linear-gradient(135deg, #6c9ff0, #3f6fd6); color: #fff; }
-        .avatar-b { background: linear-gradient(135deg, #b98ae0, #8a4fc9); color: #fff; }
-        .avatar-c { background: linear-gradient(135deg, #f0a96c, var(--acc-gold, #c9853f)); color: #fff; }
+        /* ---------- gradient avatars (brand tones) ---------- */
+        .avatar-a { background: linear-gradient(135deg, var(--forest, #21402a), var(--forest-2, #2f5333)); color: #fff; }
+        .avatar-b { background: linear-gradient(135deg, var(--moss, #5f8b46), #82a862); color: #fff; }
+        .avatar-c { background: linear-gradient(135deg, var(--amber-deep, #b9840f), var(--amber, #e0a526)); color: #fff; }
 
         /* ---------- table polish ---------- */
         .modern-table thead th {

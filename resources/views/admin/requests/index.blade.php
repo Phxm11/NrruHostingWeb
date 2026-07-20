@@ -12,7 +12,7 @@
         @keyframes popIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
 
         /* ---------- distinct color per stat card ---------- */
-        .stat-card--total  .stat-icon { background: linear-gradient(135deg, #e6f0fb, #d3e4fa); color: #2660b0; }
+        .stat-card--total  .stat-icon { background: linear-gradient(135deg, #e3efe7, #d3e6d8); color: var(--forest); }
         .stat-card--pending .stat-icon { background: linear-gradient(135deg, var(--amber-light), #f6dfa0); color: #8a6408; }
         .stat-card--pending .stat-number { color: #8a6408; }
         .stat-card--approved .stat-icon { background: linear-gradient(135deg, var(--moss-light), #cfe3b7); color: var(--forest); }
@@ -27,8 +27,8 @@
             opacity: .45; pointer-events: none; transition: opacity .15s, color .15s;
         }
         .requests-toolbar .search-field input { padding-left: 36px; }
-        .requests-toolbar .search-field:focus-within svg { opacity: 1; color: #2660b0; }
-        .requests-toolbar .search-field:focus-within { box-shadow: 0 0 0 3px #e6f0fb; border-radius: 9px; }
+        .requests-toolbar .search-field:focus-within svg { opacity: 1; color: var(--moss); }
+        .requests-toolbar .search-field:focus-within { box-shadow: 0 0 0 3px var(--moss-light); border-radius: 9px; }
         .requests-toolbar select { min-width: 160px; }
         .requests-toolbar button[type="submit"] { display: inline-flex; align-items: center; gap: 6px; }
         .requests-toolbar .filter-clear { font-size: 13px; color: #888; }
@@ -57,11 +57,29 @@
 
         .btn-brand.btn-sm { display: inline-flex; align-items: center; gap: 6px; }
 
+        /* danger / delete button */
+        .btn-outline-danger-soft {
+            display: inline-flex; align-items: center; gap: 6px;
+            border: 1px solid var(--rust-light); background: #fff; color: var(--rust);
+            border-radius: 9px; font-size: 13.5px; padding: 8px 14px;
+            transition: background .15s ease, border-color .15s ease, color .15s ease;
+        }
+        .btn-outline-danger-soft:hover { background: var(--rust-light); border-color: var(--rust); color: var(--rust); }
+
+        /* approve button */
+        .btn-approve {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: linear-gradient(135deg, var(--moss), #4f7a3a);
+            border: none; color: #fff; border-radius: 9px; font-size: 13.5px; font-weight: 600;
+            padding: 8px 14px; transition: filter .15s ease, transform .15s ease, box-shadow .15s ease;
+        }
+        .btn-approve:hover { filter: brightness(1.06); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
         /* ---------- empty state ---------- */
         .empty-state { text-align: center; padding: 56px 16px; color: var(--ink-soft); }
         .empty-state .empty-icon-wrap {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 64px; height: 64px; border-radius: 50%; background: #e6f0fb; color: #2660b0;
+            width: 64px; height: 64px; border-radius: 50%; background: var(--moss-light); color: var(--forest);
             margin-bottom: 14px; animation: bob 2.4s ease-in-out infinite;
         }
         .empty-state p { margin: 0; font-size: 14px; }
@@ -201,10 +219,32 @@
                                 </span>
                             </td>
                             <td class="text-end">
-                                <a href="{{ route('admin.accounts.create', $req->request_id) }}" class="btn btn-brand btn-sm">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
-                                    สร้างบัญชี
-                                </a>
+                                <div class="d-flex gap-2 justify-content-end flex-wrap">
+                                    @if ($req->status !== 'approved')
+                                        <form action="{{ route('admin.requests.approve', $req->request_id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-approve btn-sm" title="อนุมัติคำขอ">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>
+                                                อนุมัติ
+                                            </button>
+                                        </form>
+                                    @endif
+                                    <a href="{{ route('admin.accounts.create', $req->request_id) }}" class="btn btn-brand btn-sm">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                                        สร้างบัญชี
+                                    </a>
+                                    <form action="{{ route('admin.requests.destroy', $req->request_id) }}" method="POST"
+                                          data-confirm="ยืนยันลบคำขอ {{ $req->form_no }}?{{ $req->service_accounts_count > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $req->service_accounts_count . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้"
+                                          onsubmit="return confirm(this.dataset.confirm)">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger-soft btn-sm" title="ลบคำขอ">
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                                            ลบ
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

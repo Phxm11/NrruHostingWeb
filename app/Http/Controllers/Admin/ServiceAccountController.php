@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -35,6 +36,41 @@ class ServiceAccountController extends Controller
         $serviceRequests = $query->paginate(15)->withQueryString();
 
         return view('admin.requests.index', compact('serviceRequests'));
+    }
+
+    /**
+     * ลบคำขอใช้บริการ (ลบทิ้งทั้งคำขอ รวมถึงบัญชี/โดเมน/เอกสารที่ผูกไว้ เนื่องจากมี cascadeOnDelete)
+     */
+    public function destroyRequest(ServiceRequest $serviceRequest)
+    {
+        $formNo = $serviceRequest->form_no;
+
+        // ลบไฟล์แนบและลายเซ็นออกจาก disk ป้องกันไฟล์ค้าง
+        foreach ($serviceRequest->attachments as $attachment) {
+            if ($attachment->file_path) {
+                Storage::disk('public')->delete($attachment->file_path);
+            }
+        }
+        if ($serviceRequest->policyAcceptance && $serviceRequest->policyAcceptance->signature_image_path) {
+            Storage::disk('public')->delete($serviceRequest->policyAcceptance->signature_image_path);
+        }
+
+        $serviceRequest->delete();
+
+        return redirect()
+            ->route('admin.requests.index')
+            ->with('success', "ลบคำขอ {$formNo} เรียบร้อยแล้ว");
+    }
+
+    /**
+     * อนุมัติคำขอใช้บริการ (เปลี่ยนสถานะเป็น approved)
+     */
+    public function approveRequest(ServiceRequest $serviceRequest)
+    {
+        $serviceRequest->status = 'approved';
+        $serviceRequest->save();
+
+        return back()->with('success', "อนุมัติคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
     }
 
     /**
