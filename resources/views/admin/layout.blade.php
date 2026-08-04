@@ -8,25 +8,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #faf9f4;
+            --bg: #f5f4ec;
             --surface: #ffffff;
-            --ink: #1f2b1c;
-            --ink-soft: #6b7565;
-            --forest: #21402a;
-            --forest-2: #2f5333;
-            --moss: #5f8b46;
-            --moss-light: #e9f1dd;
-            --amber: #e0a526;
-            --amber-deep: #b9840f;
-            --amber-light: #fbf1d6;
-            --rust: #b1492e;
-            --rust-light: #f7e2da;
-            --line: #e9e5d7;
-            --radius-lg: 20px;
-            --radius-md: 14px;
-            --shadow-sm: 0 1px 2px rgba(33,64,42,.05);
-            --shadow-md: 0 10px 30px -12px rgba(33,64,42,.18);
-            --shadow-lg: 0 24px 60px -20px rgba(33,64,42,.28);
+            --surface-2: #fbfaf3;
+            --ink: #15231a;
+            --ink-soft: #5c6659;
+            --forest: #1a3323;
+            --forest-2: #244430;
+            --moss: #6c9752;
+            --moss-light: #e8f0dc;
+            --amber: #d79a2c;
+            --amber-deep: #a6740e;
+            --amber-light: #faf0d3;
+            --rust: #ae4830;
+            --rust-light: #f6e1d8;
+            --line: #e5e1d1;
+            --radius-xs: 10px;
+            --radius-sm: 14px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-sm: 0 1px 2px rgba(21,35,26,.05);
+            --shadow-md: 0 12px 28px -14px rgba(21,35,26,.22);
+            --shadow-lg: 0 28px 64px -24px rgba(21,35,26,.32);
         }
 
         * { box-sizing: border-box; }
@@ -37,6 +40,14 @@
         @keyframes badgePing {
             0%   { box-shadow: 0 0 0 0 rgba(111,209,138,.5); }
             100% { box-shadow: 0 0 0 7px rgba(111,209,138,0); }
+        }
+
+        /* Signature texture — topographic contour rings, echoing the
+           reserve-map motif used across the whole site (sidebar, heroes). */
+        .contour-field {
+            background-image:
+                repeating-radial-gradient(circle at 82% 8%, rgba(255,255,255,.09) 0px, rgba(255,255,255,.09) 1px, transparent 1px, transparent 16px),
+                repeating-radial-gradient(circle at 6% 96%, rgba(224,165,38,.14) 0px, rgba(224,165,38,.14) 1px, transparent 1px, transparent 13px);
         }
 
         body {
@@ -67,11 +78,13 @@
         .app-shell { display: flex; min-height: 100vh; }
 
         .sidebar {
-            width: 256px;
+            width: 264px;
             flex-shrink: 0;
-            background: radial-gradient(140% 120% at 20% 0%, var(--forest-2) 0%, var(--forest) 58%, #17301e 100%);
+            background:
+                repeating-radial-gradient(circle at 78% 6%, rgba(255,255,255,.07) 0px, rgba(255,255,255,.07) 1px, transparent 1px, transparent 17px),
+                radial-gradient(140% 120% at 20% 0%, var(--forest-2) 0%, var(--forest) 58%, #142a1a 100%);
             color: #eef2e6;
-            padding: 24px 16px;
+            padding: 26px 17px;
             position: sticky;
             top: 0;
             height: 100vh;
@@ -83,7 +96,7 @@
             content: '';
             position: absolute;
             width: 240px; height: 240px;
-            background: radial-gradient(circle, rgba(224,165,38,.32) 0%, rgba(224,165,38,0) 70%);
+            background: radial-gradient(circle, rgba(224,165,38,.28) 0%, rgba(224,165,38,0) 70%);
             bottom: -70px; right: -80px;
             pointer-events: none;
             animation: glowPulse 6s ease-in-out infinite;
@@ -92,7 +105,7 @@
             content: '';
             position: absolute;
             width: 160px; height: 160px;
-            background: radial-gradient(circle, rgba(95,139,70,.4) 0%, rgba(95,139,70,0) 70%);
+            background: radial-gradient(circle, rgba(108,151,82,.4) 0%, rgba(108,151,82,0) 70%);
             top: -50px; left: -60px;
             pointer-events: none;
         }
@@ -101,7 +114,7 @@
             margin-bottom: 26px; position: relative; z-index: 1;
         }
         .brand-mark {
-            width: 40px; height: 40px; border-radius: 12px;
+            width: 40px; height: 40px; border-radius: var(--radius-xs);
             background: linear-gradient(135deg, var(--amber), #f0c25c);
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
@@ -118,7 +131,7 @@
         }
         .nav-item {
             display: flex; align-items: center; gap: 11px;
-            padding: 11px 13px; border-radius: 12px; margin-bottom: 4px;
+            padding: 11px 13px; border-radius: var(--radius-xs); margin-bottom: 4px;
             color: #dde5d5; font-size: 14px; font-weight: 500;
             transition: background .15s ease, transform .15s ease, color .15s ease;
             position: relative;
@@ -163,7 +176,7 @@
         .logout-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 6px;
             background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
-            color: #eef2e6; border-radius: 10px; padding: 8px 11px; font-size: 12.5px; font-weight: 500;
+            color: #eef2e6; border-radius: var(--radius-xs); padding: 8px 11px; font-size: 12.5px; font-weight: 500;
             cursor: pointer; transition: background .15s ease, transform .15s ease; flex-shrink: 0;
         }
         .logout-btn:hover { background: rgba(255,255,255,.16); color: #fff; }
@@ -212,7 +225,7 @@
         }
         .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
         .stat-icon {
-            width: 44px; height: 44px; border-radius: 12px;
+            width: 44px; height: 44px; border-radius: var(--radius-xs);
             display: flex; align-items: center; justify-content: center;
             background: linear-gradient(135deg, var(--moss-light), var(--amber-light));
             color: var(--forest); flex-shrink: 0;
@@ -258,7 +271,7 @@
 
         .btn-brand {
             background: linear-gradient(135deg, var(--forest), var(--forest-2)); border: none; color: #fff;
-            font-weight: 500; border-radius: 11px; padding: 9px 17px; font-size: 14px;
+            font-weight: 500; border-radius: var(--radius-sm); padding: 9px 17px; font-size: 14px;
             transition: filter .15s ease, transform .15s ease, box-shadow .15s ease;
         }
         .btn-brand:hover { filter: brightness(1.12); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
@@ -266,7 +279,7 @@
         .btn-amber {
             background: linear-gradient(135deg, var(--amber), var(--amber-deep));
             border: none; color: #2c1e05; font-weight: 600;
-            border-radius: 11px; padding: 10px 22px; font-size: 14.5px;
+            border-radius: var(--radius-sm); padding: 10px 22px; font-size: 14.5px;
             box-shadow: 0 6px 16px -6px rgba(185,132,15,.6);
             transition: filter .15s ease, transform .15s ease;
         }
@@ -275,13 +288,13 @@
 
         .btn-outline-soft {
             border: 1px solid var(--line); background: #fff; color: var(--ink);
-            border-radius: 11px; font-size: 14px; padding: 8px 15px;
+            border-radius: var(--radius-sm); font-size: 14px; padding: 8px 15px;
             transition: background .15s ease, border-color .15s ease;
         }
         .btn-outline-soft:hover { background: var(--moss-light); border-color: var(--moss); }
 
         .form-control, .form-select {
-            border: 1px solid var(--line); border-radius: 11px; font-size: 14px;
+            border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 14px;
             padding: 9px 13px;
             transition: box-shadow .15s ease, border-color .15s ease;
         }
@@ -326,7 +339,7 @@
                 position: sticky; top: 0; z-index: 40;
             }
             .mobile-topbar .menu-btn {
-                background: none; border: 1px solid var(--line); border-radius: 10px; padding: 7px 9px; cursor: pointer;
+                background: none; border: 1px solid var(--line); border-radius: var(--radius-xs); padding: 7px 9px; cursor: pointer;
             }
             .mobile-topbar .m-brand { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14px; color: var(--forest); }
             .topbar { padding: 16px 18px; }

@@ -49,7 +49,7 @@
             align-items: center; justify-content: center; flex-shrink: 0;
         }
         .field-label--username .field-icon { background: var(--acc-blue-bg);   color: var(--acc-blue-fg); }
-        .field-label--password .field-icon { background: var(--amber-light, #fbf1d6); color: var(--amber-deep, #b9840f); }
+        .field-label--password .field-icon { background: var(--amber-light, #faf0d3); color: var(--amber-deep, #a6740e); }
         .field-label--type     .field-icon { background: var(--acc-violet-bg); color: var(--acc-violet-fg); }
         .field-label--status   .field-icon { background: var(--acc-teal-bg);   color: var(--acc-teal-fg); }
         .field-label--expire   .field-icon { background: var(--acc-blue-bg);   color: var(--acc-blue-fg); }

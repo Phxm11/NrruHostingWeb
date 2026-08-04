@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>เข้าสู่ระบบ — สำนักคอมพิวเตอร์ มรภ.นครราชสีมา</title>
+    <title>ลืมรหัสผ่าน — สำนักคอมพิวเตอร์ มรภ.นครราชสีมา</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -20,6 +20,7 @@
             --amber-deep: #a6740e;
             --amber-light: #faf0d3;
             --rust: #ae4830;
+            --rust-light: #fbebe6;
             --line: #e5e1d1;
         }
         * { box-sizing: border-box; }
@@ -57,13 +58,10 @@
             box-shadow: 0 6px 16px -6px rgba(185,132,15,.6); transition: filter .15s ease, transform .15s ease;
         }
         .btn-amber:hover { filter: brightness(1.05); color: #2c1e05; transform: translateY(-1px); }
-        .form-check-input:checked { background-color: var(--forest); border-color: var(--forest); }
         .alert-danger-c { background: var(--rust-light); border: 1px solid #e6b6a4; color: var(--rust); border-radius: 12px; padding: 11px 14px; font-size: 13.5px; margin-bottom: 16px; }
         .alert-status-c { background: var(--moss-light); border: 1px solid #c9dcb4; color: var(--forest-2); border-radius: 12px; padding: 11px 14px; font-size: 13.5px; margin-bottom: 16px; }
         .back-link { display: block; text-align: center; margin-top: 18px; font-size: 13px; color: var(--ink-soft); text-decoration: none; }
         .back-link:hover { color: var(--forest); }
-        .forgot-link { display: block; text-align: right; font-size: 13px; color: var(--forest-2); text-decoration: none; margin: -8px 0 16px; }
-        .forgot-link:hover { color: var(--amber-deep); text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -74,8 +72,8 @@
                 <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
-        <h1>เข้าสู่ระบบเจ้าหน้าที่</h1>
-        <div class="sub">ระบบจัดการคำขอใช้บริการ Data Center และ Web Hosting</div>
+        <h1>ลืมรหัสผ่าน</h1>
+        <div class="sub">กรอกอีเมลที่ใช้ลงทะเบียน เราจะส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ให้</div>
 
         @if (session('status'))
             <div class="alert-status-c">{{ session('status') }}</div>
@@ -83,7 +81,7 @@
 
         @if ($errors->any())
             <div class="alert-danger-c">
-                <strong>ไม่สามารถเข้าสู่ระบบได้:</strong>
+                <strong>ไม่สามารถดำเนินการได้:</strong>
                 <ul class="mb-0 ps-3">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -92,7 +90,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <div class="mb-3">
@@ -100,22 +98,10 @@
                 <input id="email" type="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus placeholder="admin@nrru.ac.th">
             </div>
 
-            <div class="mb-2">
-                <label class="form-label" for="password">รหัสผ่าน</label>
-                <input id="password" type="password" name="password" class="form-control" required autocomplete="current-password">
-            </div>
-
-            <a href="{{ route('password.request') }}" class="forgot-link">ลืมรหัสผ่าน?</a>
-
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                <label class="form-check-label" for="remember" style="font-size:13.5px;">จดจำการเข้าสู่ระบบ</label>
-            </div>
-
-            <button type="submit" class="btn btn-amber">เข้าสู่ระบบ</button>
+            <button type="submit" class="btn btn-amber">ส่งลิงก์รีเซ็ตรหัสผ่าน</button>
         </form>
 
-        <a href="{{ url('/') }}" class="back-link">← กลับหน้าเว็บบริการ</a>
+        <a href="{{ route('login') }}" class="back-link">← กลับไปหน้าเข้าสู่ระบบ</a>
     </div>
 </body>
 </html>

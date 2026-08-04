@@ -8,22 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #faf9f4;
+            --bg: #f5f4ec;
             --surface: #ffffff;
-            --ink: #1f2b1c;
-            --ink-soft: #6b7565;
-            --forest: #21402a;
-            --forest-2: #2f5333;
-            --moss: #5f8b46;
-            --moss-light: #e9f1dd;
-            --amber: #e0a526;
-            --amber-deep: #b9840f;
-            --amber-light: #fbf1d6;
-            --line: #e9e5d7;
-            --shadow-sm: 0 1px 2px rgba(33,64,42,.05);
-            --shadow-md: 0 10px 30px -12px rgba(33,64,42,.18);
-            --shadow-lg: 0 24px 60px -20px rgba(33,64,42,.28);
-            --radius: 20px;
+            --ink: #15231a;
+            --ink-soft: #5c6659;
+            --forest: #1a3323;
+            --forest-2: #244430;
+            --moss: #6c9752;
+            --moss-light: #e8f0dc;
+            --amber: #d79a2c;
+            --amber-deep: #a6740e;
+            --amber-light: #faf0d3;
+            --line: #e5e1d1;
+            --shadow-sm: 0 1px 2px rgba(21,35,26,.05);
+            --shadow-md: 0 12px 28px -14px rgba(21,35,26,.22);
+            --shadow-lg: 0 28px 64px -24px rgba(21,35,26,.32);
+            --radius: 24px;
         }
 
         * { box-sizing: border-box; }
@@ -49,50 +49,95 @@
 
         /* ---------- Navbar ---------- */
         .navbar-custom {
-            background: rgba(250,249,244,.82); backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--line);
-            position: sticky; top: 0; z-index: 60; transition: box-shadow .2s ease;
+            position: sticky; top: 0; z-index: 60;
+            padding: 16px 20px 0; background: transparent;
+            transition: padding .25s ease;
         }
-        .navbar-custom.scrolled { box-shadow: var(--shadow-sm); }
+        .navbar-custom.scrolled { padding-top: 9px; }
+        .navbar-inner {
+            max-width: 1180px; margin: 0 auto;
+            background: rgba(255,255,255,.88); backdrop-filter: blur(14px);
+            border: 1px solid var(--line); border-radius: 999px;
+            padding: 8px 10px 8px 18px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .25s ease;
+        }
+        .navbar-custom.scrolled .navbar-inner { box-shadow: var(--shadow-md); }
+        .brand-badge { position: relative; width: 38px; height: 38px; flex-shrink: 0; }
+        .brand-badge::before {
+            content: ''; position: absolute; inset: -5px;
+            border: 1.5px dashed rgba(108,151,82,.5); border-radius: 14px; pointer-events: none;
+        }
         .brand-mark {
             width: 38px; height: 38px; border-radius: 11px;
             background: linear-gradient(135deg, var(--amber), #f0c25c);
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 12px rgba(224,165,38,.35);
         }
-        .brand-name { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 15px; color: var(--forest); line-height: 1.2; }
-        .brand-name small { display: block; font-weight: 400; font-size: 11px; color: var(--ink-soft); }
-        .nav-link-custom { color: var(--ink); font-size: 14.5px; font-weight: 500; margin: 0 4px; padding: 8px 12px; border-radius: 10px; transition: background .15s ease, color .15s ease; }
-        .nav-link-custom:hover { background: var(--moss-light); color: var(--forest); }
-        .btn-amber { background: linear-gradient(135deg, var(--amber), var(--amber-deep)); border: none; color: #2c1e05; font-weight: 600; border-radius: 12px; padding: 10px 22px; font-size: 14.5px; box-shadow: 0 6px 16px -6px rgba(185,132,15,.6); transition: transform .15s ease, filter .15s ease; }
+        .brand-name { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14.5px; color: var(--forest); line-height: 1.2; }
+        .brand-name small { display: block; font-weight: 400; font-size: 10.5px; color: var(--ink-soft); }
+
+        .nav-links-group {
+            display: flex; align-items: center; gap: 2px;
+            background: var(--moss-light); border-radius: 999px; padding: 4px;
+        }
+        .nav-link-custom {
+            color: var(--ink); font-size: 14px; font-weight: 500;
+            padding: 8px 15px; border-radius: 999px;
+            transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+        }
+        .nav-link-custom:hover { background: #fff; color: var(--forest); box-shadow: var(--shadow-sm); }
+        .nav-link-staff {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--ink-soft); font-size: 13.5px; font-weight: 500;
+            padding: 8px 6px; border-left: 1px solid var(--line); padding-left: 16px;
+            transition: color .15s ease;
+        }
+        .nav-link-staff:hover { color: var(--forest); }
+        .nav-link-staff svg { flex-shrink: 0; opacity: .8; }
+
+        .btn-amber { background: linear-gradient(135deg, var(--amber), var(--amber-deep)); border: none; color: #2c1e05; font-weight: 600; border-radius: 999px; padding: 10px 22px; font-size: 14px; box-shadow: 0 6px 16px -6px rgba(185,132,15,.6); transition: transform .15s ease, filter .15s ease; }
         .btn-amber:hover { filter: brightness(1.04); color: #2c1e05; transform: translateY(-1px); }
         .btn-outline-brand { border: 1.5px solid rgba(255,255,255,.5); color: #fff; border-radius: 12px; padding: 9px 20px; font-size: 14px; font-weight: 500; transition: background .15s ease; }
         .btn-outline-brand:hover { background: rgba(255,255,255,.14); color: #fff; }
 
-        .mobile-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 10px; padding: 7px 10px; cursor: pointer; }
-        .mobile-menu { display: none; flex-direction: column; gap: 4px; padding: 12px 16px 16px; border-top: 1px solid var(--line); }
+        .mobile-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; cursor: pointer; }
+        .mobile-menu {
+            display: none; flex-direction: column; gap: 3px;
+            max-width: 1180px; margin: 8px auto 0;
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 12px; box-shadow: var(--shadow-sm);
+        }
         .mobile-menu.open { display: flex; }
+        .mobile-menu .nav-link-custom { padding: 10px 14px; }
+        .mobile-menu .nav-link-staff { border-left: none; padding-left: 14px; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px; }
 
         /* ---------- Hero ---------- */
         .hero {
             position: relative; overflow: hidden;
-            background: radial-gradient(120% 120% at 80% -10%, var(--forest-2) 0%, var(--forest) 55%, #1a3320 100%);
+            background: radial-gradient(120% 120% at 80% -10%, var(--forest-2) 0%, var(--forest) 55%, #142a1a 100%);
             color: #eef2e6; padding: 92px 0 120px;
         }
         .hero::before {
             content: ''; position: absolute; width: 540px; height: 540px;
-            background: radial-gradient(circle, rgba(224,165,38,.30) 0%, rgba(224,165,38,0) 68%);
+            background: radial-gradient(circle, rgba(224,165,38,.28) 0%, rgba(224,165,38,0) 68%);
             top: -180px; right: -120px; pointer-events: none;
         }
         .hero::after {
             content: ''; position: absolute; width: 420px; height: 420px;
-            background: radial-gradient(circle, rgba(95,139,70,.32) 0%, rgba(95,139,70,0) 70%);
+            background: radial-gradient(circle, rgba(108,151,82,.30) 0%, rgba(108,151,82,0) 70%);
             bottom: -200px; left: -120px; pointer-events: none;
         }
+        /* Signature: topographic contour rings — a reserve-map motif that
+           carries through every screen (hero, sidebar, forms) instead of a
+           generic dot grid. */
         .hero-grid {
-            position: absolute; inset: 0; opacity: .07; pointer-events: none;
-            background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
-            background-size: 46px 46px; mask-image: radial-gradient(80% 60% at 70% 20%, #000, transparent);
+            position: absolute; inset: 0; opacity: .5; pointer-events: none;
+            background-image:
+                repeating-radial-gradient(circle at 82% 6%, rgba(255,255,255,.10) 0px, rgba(255,255,255,.10) 1px, transparent 1px, transparent 20px),
+                repeating-radial-gradient(circle at 8% 92%, rgba(224,165,38,.16) 0px, rgba(224,165,38,.16) 1px, transparent 1px, transparent 16px);
+            mask-image: radial-gradient(90% 70% at 70% 25%, #000, transparent);
         }
         .hero-eyebrow {
             display: inline-flex; align-items: center; gap: 8px;
@@ -206,38 +251,48 @@
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <nav class="navbar-custom" id="navbar">
-    <div class="container d-flex align-items-center justify-content-between">
+    <div class="navbar-inner">
         <a href="{{ url('/') }}" class="d-flex align-items-center gap-2">
-            <div class="brand-mark">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
-                    <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <div class="brand-badge">
+                <div class="brand-mark">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
+                        <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
             </div>
             <div class="brand-name">
                 สำนักคอมพิวเตอร์
                 <small>มหาวิทยาลัยราชภัฏนครราชสีมา</small>
             </div>
         </a>
-        <div class="nav-desktop d-none d-md-flex align-items-center">
-            <a href="#services" class="nav-link-custom">บริการ</a>
-            <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
-            <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
-            <a href="{{ route('admin.requests.index') }}" class="nav-link-custom">สำหรับเจ้าหน้าที่</a>
+        <div class="nav-desktop d-none d-md-flex align-items-center gap-2">
+            <div class="nav-links-group">
+                <a href="#services" class="nav-link-custom">บริการ</a>
+                <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
+                <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
+            </div>
+            <a href="{{ route('admin.requests.index') }}" class="nav-link-staff">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                สำหรับเจ้าหน้าที่
+            </a>
         </div>
         <div class="d-flex align-items-center gap-2">
             <a href="{{ route('service-requests.create') }}" class="btn-amber d-none d-sm-inline-block">ยื่นคำขอใช้บริการ</a>
             <button class="mobile-toggle d-md-none" id="mobileToggle" aria-label="เมนู">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#21402a" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3323" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
     </div>
-    <div class="mobile-menu container" id="mobileMenu">
+    <div class="mobile-menu" id="mobileMenu">
         <a href="#services" class="nav-link-custom">บริการ</a>
         <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
         <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
-        <a href="{{ route('admin.requests.index') }}" class="nav-link-custom">สำหรับเจ้าหน้าที่</a>
         <a href="{{ route('service-requests.create') }}" class="btn-amber mt-1 text-center">ยื่นคำขอใช้บริการ</a>
+        <a href="{{ route('admin.requests.index') }}" class="nav-link-custom nav-link-staff">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            สำหรับเจ้าหน้าที่
+        </a>
     </div>
 </nav>
 

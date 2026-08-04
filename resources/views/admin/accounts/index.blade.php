@@ -15,12 +15,12 @@
     ============================================================ --}}
     <style>
         :root {
-            --acc-active-bg: var(--moss-light, #e9f1dd);
-            --acc-active-fg: var(--forest, #21402a);
+            --acc-active-bg: var(--moss-light, #e8f0dc);
+            --acc-active-fg: var(--forest, #1a3323);
             --acc-disabled-bg: #eeeadc;
-            --acc-disabled-fg: var(--ink-soft, #6b7565);
-            --acc-expired-bg: var(--rust-light, #f7e2da);
-            --acc-expired-fg: var(--rust, #b1492e);
+            --acc-disabled-fg: var(--ink-soft, #5c6659);
+            --acc-expired-bg: var(--rust-light, #f6e1d8);
+            --acc-expired-fg: var(--rust, #ae4830);
             --acc-gold: #8a6408;
             /* brand-aligned accent trio (sage / clay / olive) */
             --acc-blue-bg: #e3efe7;   --acc-blue-fg: #2f6b4a;
@@ -135,9 +135,9 @@
         .type-tag-5 { background: #fdf1cf;              color: var(--acc-gold); }
 
         /* ---------- gradient avatars (brand tones) ---------- */
-        .avatar-a { background: linear-gradient(135deg, var(--forest, #21402a), var(--forest-2, #2f5333)); color: #fff; }
-        .avatar-b { background: linear-gradient(135deg, var(--moss, #5f8b46), #82a862); color: #fff; }
-        .avatar-c { background: linear-gradient(135deg, var(--amber-deep, #b9840f), var(--amber, #e0a526)); color: #fff; }
+        .avatar-a { background: linear-gradient(135deg, var(--forest, #1a3323), var(--forest-2, #244430)); color: #fff; }
+        .avatar-b { background: linear-gradient(135deg, var(--moss, #6c9752), #7ba15b); color: #fff; }
+        .avatar-c { background: linear-gradient(135deg, var(--amber-deep, #a6740e), var(--amber, #d79a2c)); color: #fff; }
 
         /* ---------- table polish ---------- */
         .modern-table thead th {

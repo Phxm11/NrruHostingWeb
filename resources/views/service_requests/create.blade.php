@@ -8,23 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #faf9f4;
+            --bg: #f5f4ec;
             --surface: #ffffff;
-            --ink: #1f2b1c;
-            --ink-soft: #6b7565;
-            --forest: #21402a;
-            --forest-2: #2f5333;
-            --moss: #5f8b46;
-            --moss-light: #e9f1dd;
-            --amber: #e0a526;
-            --amber-deep: #b9840f;
-            --amber-light: #fbf1d6;
-            --line: #e9e5d7;
-            --rust: #b1492e;
-            --rust-light: #f7e2da;
-            --radius: 18px;
-            --shadow-sm: 0 1px 2px rgba(33,64,42,.06);
-            --shadow-md: 0 14px 36px -16px rgba(33,64,42,.28);
+            --ink: #15231a;
+            --ink-soft: #5c6659;
+            --forest: #1a3323;
+            --forest-2: #244430;
+            --moss: #6c9752;
+            --moss-light: #e8f0dc;
+            --amber: #d79a2c;
+            --amber-deep: #a6740e;
+            --amber-light: #faf0d3;
+            --line: #e5e1d1;
+            --rust: #ae4830;
+            --rust-light: #f6e1d8;
+            --radius: 20px;
+            --shadow-sm: 0 1px 2px rgba(21,35,26,.06);
+            --shadow-md: 0 14px 36px -16px rgba(21,35,26,.28);
         }
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -34,12 +34,17 @@
         /* ---------- Header ---------- */
         .page-header {
             position: relative; overflow: hidden;
-            background: radial-gradient(120% 130% at 85% -20%, var(--forest-2) 0%, var(--forest) 60%, #1a3320 100%);
+            background: radial-gradient(120% 130% at 85% -20%, var(--forest-2) 0%, var(--forest) 60%, #142a1a 100%);
             color: #fff; padding: 40px 0;
         }
         .page-header::before {
             content: ''; position: absolute; width: 360px; height: 360px;
-            background: radial-gradient(circle, rgba(224,165,38,.30), transparent 70%); top: -120px; right: -80px; pointer-events: none;
+            background: radial-gradient(circle, rgba(224,165,38,.28), transparent 70%); top: -120px; right: -80px; pointer-events: none;
+        }
+        .page-header::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+            background-image: repeating-radial-gradient(circle at 88% 10%, rgba(255,255,255,.09) 0px, rgba(255,255,255,.09) 1px, transparent 1px, transparent 18px);
+            mask-image: radial-gradient(85% 100% at 80% 0%, #000, transparent);
         }
         .page-header h1 { font-size: clamp(20px, 3vw, 26px); font-weight: 700; margin: 0; }
         .page-header p { font-size: 14px; margin: 6px 0 0; color: #cbd6c1; }

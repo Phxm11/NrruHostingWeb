@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DcHostingSeeder::class);
         $this->call(AdminUserSeeder::class);
+        $this->call(RolePermissionSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
