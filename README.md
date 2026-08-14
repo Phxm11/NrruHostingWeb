@@ -1,66 +1,198 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NRRU Hosting Web
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ระบบยื่นคำขอใช้บริการ **Hosting / Virtual Server** ของมหาวิทยาลัย (NRRU) พัฒนาด้วย [Laravel](https://laravel.com) — ผู้ใช้งาน (บุคลากร/นักศึกษา) กรอกแบบฟอร์มขอใช้บริการผ่านหน้าเว็บสาธารณะ ส่วนเจ้าหน้าที่ (แอดมิน) เข้าสู่ระบบเพื่อตรวจสอบคำขอ อนุมัติ และสร้างบัญชีให้ผู้ขอใช้บริการ
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## สารบัญ
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [ภาพรวมระบบ](#ภาพรวมระบบ)
+- [ฟีเจอร์หลัก](#ฟีเจอร์หลัก)
+- [เทคโนโลยีที่ใช้](#เทคโนโลยีที่ใช้)
+- [โครงสร้างโปรเจกต์](#โครงสร้างโปรเจกต์)
+- [โครงสร้างฐานข้อมูล (ย่อ)](#โครงสร้างฐานข้อมูล-ย่อ)
+- [เริ่มต้นใช้งาน (Installation)](#เริ่มต้นใช้งาน-installation)
+- [การตั้งค่าไฟล์แนบ (Storage)](#การตั้งค่าไฟล์แนบ-storage)
+- [เส้นทาง (Routes) หลัก](#เส้นทาง-routes-หลัก)
+- [บทบาทผู้ใช้ (Roles & Permissions)](#บทบาทผู้ใช้-roles--permissions)
+- [การพัฒนาต่อ](#การพัฒนาต่อ)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ภาพรวมระบบ
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+ระบบแบ่งการทำงานออกเป็น 2 ฝั่ง:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **ฝั่งผู้ขอใช้บริการ (Public)** — ไม่ต้องล็อกอิน กรอกแบบฟอร์มขอใช้บริการออนไลน์ ระบุข้อมูลผู้ขอ, วัตถุประสงค์, ทรัพยากรที่ต้องการ (Virtual Server / Web Hosting), บริการที่ต้องการเปิดใช้งาน (SSH, HTTP/HTTPS, Database ฯลฯ), โดเมนที่ต้องการ, แนบเอกสาร/รูปภาพประกอบ, รับรองค่าใช้จ่าย และเซ็นยอมรับข้อกำหนด
+2. **ฝั่งเจ้าหน้าที่ (Admin)** — ต้องล็อกอิน ใช้ตรวจสอบรายการคำขอทั้งหมด ดูรายละเอียดคำขอแต่ละรายการแบบเต็ม (รวมรูปภาพ/เอกสารที่ผู้ใช้แนบมา), อนุมัติคำขอ, สร้าง/แก้ไข/ปิดการใช้งานบัญชีให้ผู้ขอใช้บริการ, และจัดการผู้ใช้งาน/บทบาท/สิทธิ์ของเจ้าหน้าที่เอง
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ฟีเจอร์หลัก
 
-## Laravel Sponsors
+### ฝั่งผู้ขอใช้บริการ
+- แบบฟอร์มขอใช้บริการแบบหลายส่วน (ข้อมูลผู้ขอ → ทรัพยากร/บริการ → โดเมน → เอกสารแนบ → ยอมรับข้อกำหนด)
+- แนบผู้พัฒนาระบบร่วมได้หลายคน
+- เลือกแพ็กเกจทรัพยากรสำเร็จรูป หรือระบุสเปกแบบกำหนดเอง (Custom)
+- แนบเอกสารประกอบ/ภาพหน้าจอ และลายเซ็นยืนยัน
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### ฝั่งเจ้าหน้าที่ (Admin)
+- แดชบอร์ดรายการคำขอ พร้อมค้นหา/กรองสถานะ
+- **หน้ารายละเอียดคำขอ** — แสดงข้อมูลที่ผู้ใช้กรอกมาทั้งหมดในหน้าเดียว (ผู้ขอใช้บริการ, ผู้พัฒนาระบบ, ทรัพยากรที่ขอ, บริการที่เปิดใช้, รายละเอียดทางเทคนิค, โดเมน, ประวัติการอนุมัติ, บัญชีที่สร้างให้แล้ว)
+- **แกลเลอรีรูปภาพที่ผู้ใช้อัปโหลด** พร้อม lightbox ดูภาพขนาดเต็ม และเอกสารอื่น ๆ ที่ดาวน์โหลดได้
+- อนุมัติคำขอ / ลบคำขอ
+- สร้างและจัดการบัญชี (Username/Password) ให้ผู้ขอใช้บริการ พร้อมเปิด/ปิดการใช้งานบัญชี
+- จัดการผู้ใช้งานเจ้าหน้าที่ บทบาท (Roles) และสิทธิ์ (Permissions) แบบ Role-based access control
 
-### Premium Partners
+## เทคโนโลยีที่ใช้
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+| ส่วนประกอบ        | เวอร์ชัน / รายละเอียด                     |
+|--------------------|--------------------------------------------|
+| PHP                | ^8.1                                        |
+| Laravel Framework  | ^10.10                                      |
+| Laravel Sanctum    | ^3.3 (session/token auth)                   |
+| Database           | MySQL (ปรับเป็น DB อื่นได้ผ่าน `.env`)      |
+| Frontend           | Blade Templates + Vite                      |
+| Testing            | PHPUnit                                     |
 
-## Contributing
+## โครงสร้างโปรเจกต์
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+จุดที่สำคัญสำหรับผู้ที่จะพัฒนาต่อ:
 
-## Code of Conduct
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── HomeController.php                 หน้าแรก
+│   │   ├── ServiceRequestController.php        รับ/บันทึกแบบฟอร์มคำขอ (ฝั่งผู้ใช้)
+│   │   ├── Auth/AuthController.php              ล็อกอิน/ลืมรหัสผ่าน/รีเซ็ตรหัสผ่าน
+│   │   └── Admin/
+│   │       ├── ServiceAccountController.php     รายการคำขอ, รายละเอียดคำขอ, อนุมัติ, จัดการบัญชี
+│   │       ├── UserController.php               จัดการผู้ใช้งานเจ้าหน้าที่
+│   │       ├── RoleController.php                จัดการบทบาท
+│   │       └── PermissionController.php          จัดการสิทธิ์
+│   ├── Middleware/
+│   │   ├── RoleMiddleware.php
+│   │   └── PermissionMiddleware.php
+│   └── Requests/
+│       └── StoreServiceRequestRequest.php        กฎ validate ของแบบฟอร์มคำขอ
+├── Models/                                       Eloquent models (ดูหัวข้อฐานข้อมูลด้านล่าง)
+resources/views/
+├── service_requests/create.blade.php             แบบฟอร์มขอใช้บริการ (public)
+├── admin/
+│   ├── layout.blade.php                          เลย์เอาต์หลักของฝั่งแอดมิน (ดีไซน์ระบบ/สี/คอมโพเนนต์ร่วม)
+│   ├── requests/
+│   │   ├── index.blade.php                       รายการคำขอทั้งหมด
+│   │   └── show.blade.php                        รายละเอียดคำขอรายตัว (รวมแกลเลอรีรูปภาพ)
+│   ├── accounts/                                  สร้าง/แก้ไขบัญชี
+│   ├── users/ roles/ permissions/                 จัดการผู้ใช้งาน/บทบาท/สิทธิ์
+routes/
+└── web.php                                        เส้นทางทั้งหมดของระบบ
+database/migrations/
+└── 2026_07_06_000001_create_dc_hosting_service_tables.php   ตารางหลักของระบบคำขอบริการ
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## โครงสร้างฐานข้อมูล (ย่อ)
 
-## Security Vulnerabilities
+ตารางหลักที่เกี่ยวกับคำขอใช้บริการ (สร้างใน migration เดียว) และความสัมพันธ์คร่าว ๆ:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+applicants            ข้อมูลผู้ขอใช้บริการ
+service_requests       คำขอ 1 ใบ (เลขที่คำขอ, สถานะ, วันที่ยื่น) — belongsTo applicant
+developers              ผู้พัฒนาระบบร่วม (hasMany ของ service_request)
+resource_plans          แพ็กเกจทรัพยากรสำเร็จรูป (Virtual Server / Web Hosting)
+request_resources       ทรัพยากรที่เลือกในคำขอ (อ้างอิง resource_plan หรือระบุ custom spec)
+request_enabled_services บริการที่ต้องการเปิดใช้ (SSH, HTTP/HTTPS, Database, อื่น ๆ)
+tech_details            รายละเอียดทางเทคนิค (ภาษา/เฟรมเวิร์ก, ฐานข้อมูล, พอร์ต ฯลฯ)
+department_codes        รหัสหน่วยงานสำหรับใช้ตั้งชื่อโดเมน
+domains                 โดเมนที่ขอเปิดใช้งาน
+attachments             ไฟล์/รูปภาพที่แนบมากับคำขอ
+fee_certifications      การรับรองค่าใช้จ่าย/ขอยกเว้นค่าธรรมเนียม
+policy_acceptances      การยอมรับข้อกำหนดและลายเซ็น
+approvals               ประวัติการอนุมัติ/ปฏิเสธคำขอ
+service_accounts        บัญชี (username/password) ที่เจ้าหน้าที่สร้างให้ผู้ขอใช้บริการ
+```
 
-## License
+ระบบสิทธิ์ผู้ใช้งานเจ้าหน้าที่ (เพิ่มภายหลัง): `roles`, `permissions`, `role_user`, `permission_role`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## เริ่มต้นใช้งาน (Installation)
+
+### สิ่งที่ต้องมีก่อน
+- PHP >= 8.1 พร้อม extension ที่ Laravel ต้องการ
+- Composer
+- Node.js + npm (สำหรับ build asset ด้วย Vite)
+- MySQL (หรือฐานข้อมูลอื่นที่รองรับ)
+
+### ขั้นตอน
+
+```bash
+# 1) ติดตั้ง dependency ฝั่ง PHP
+composer install
+
+# 2) ติดตั้ง dependency ฝั่ง frontend
+npm install
+
+# 3) คัดลอกไฟล์ environment แล้วสร้าง APP_KEY
+cp .env.example .env
+php artisan key:generate
+
+# 4) ตั้งค่าฐานข้อมูลใน .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD ฯลฯ)
+
+# 5) รัน migration เพื่อสร้างตาราง
+php artisan migrate
+
+# 6) เชื่อมโฟลเดอร์ storage ให้เข้าถึงไฟล์แนบ/รูปภาพผ่านเว็บได้ (สำคัญมาก ดูหัวข้อถัดไป)
+php artisan storage:link
+
+# 7) build asset (หรือใช้ npm run dev ระหว่างพัฒนา)
+npm run build
+
+# 8) รันเซิร์ฟเวอร์สำหรับพัฒนา
+php artisan serve
+```
+
+จากนั้นเข้าใช้งานได้ที่ `http://localhost:8000`
+
+- แบบฟอร์มขอใช้บริการ (public): `http://localhost:8000/service-requests/create`
+- เข้าสู่ระบบเจ้าหน้าที่: `http://localhost:8000/login`
+
+> หากยังไม่มีบัญชีเจ้าหน้าที่ ให้สร้างผ่าน `php artisan tinker` หรือเพิ่ม seeder สำหรับสร้างผู้ใช้ตั้งต้นและกำหนดบทบาทให้เรียบร้อยก่อนใช้งานหน้าแอดมิน
+
+## การตั้งค่าไฟล์แนบ (Storage)
+
+ไฟล์แนบและรูปภาพที่ผู้ใช้อัปโหลด (เอกสารประกอบ, ภาพหน้าจอ, ลายเซ็น) จะถูกเก็บไว้ที่ `storage/app/public` และเสิร์ฟผ่าน URL รูปแบบ `/storage/...` ดังนั้น**ต้องรันคำสั่งนี้เสมอหลังติดตั้งโปรเจกต์ใหม่หรือย้ายเซิร์ฟเวอร์**:
+
+```bash
+php artisan storage:link
+```
+
+หากไม่รันคำสั่งนี้ รูปภาพในหน้า "รายละเอียดคำขอ" ของแอดมินจะไม่แสดงผล (ลิงก์ไฟล์เสีย)
+
+## เส้นทาง (Routes) หลัก
+
+| Method | Path                                          | คำอธิบาย                                   |
+|--------|-----------------------------------------------|----------------------------------------------|
+| GET    | `/service-requests/create`                    | แบบฟอร์มขอใช้บริการ (public)                 |
+| POST   | `/service-requests`                           | บันทึกคำขอใช้บริการ                          |
+| GET    | `/login`                                      | หน้าเข้าสู่ระบบเจ้าหน้าที่                    |
+| GET    | `/admin/requests`                             | รายการคำขอทั้งหมด                            |
+| GET    | `/admin/requests/{serviceRequest}`            | **รายละเอียดคำขอรายตัว** (รวมรูปภาพที่แนบมา) |
+| PATCH  | `/admin/requests/{serviceRequest}/approve`    | อนุมัติคำขอ                                  |
+| DELETE | `/admin/requests/{serviceRequest}`            | ลบคำขอ                                       |
+| GET    | `/admin/requests/{serviceRequest}/accounts/create` | ฟอร์มสร้างบัญชีให้คำขอที่เลือก           |
+| GET    | `/admin/accounts`                             | รายการบัญชีทั้งหมด                           |
+| GET    | `/admin/users`, `/admin/roles`, `/admin/permissions` | จัดการผู้ใช้งาน/บทบาท/สิทธิ์ของเจ้าหน้าที่ |
+
+ดูรายการเส้นทางทั้งหมดแบบละเอียดได้ที่ `routes/web.php` หรือรันคำสั่ง:
+
+```bash
+php artisan route:list
+```
+
+## บทบาทผู้ใช้ (Roles & Permissions)
+
+ระบบรองรับการควบคุมสิทธิ์แบบ Role-based ผ่านตาราง `roles`, `permissions` และตารางเชื่อม `role_user`, `permission_role` โดยมี middleware `RoleMiddleware` และ `PermissionMiddleware` ไว้ตรวจสอบสิทธิ์การเข้าถึงเส้นทางของแอดมิน สามารถจัดการได้ที่เมนู "ผู้ใช้งาน / บทบาท / สิทธิ์" ในหน้าแอดมิน
+
+## การพัฒนาต่อ
+
+- ดีไซน์ของหน้าแอดมินทั้งหมดกำหนดไว้ที่ `resources/views/admin/layout.blade.php` (สี, ตัวแปร CSS, คอมโพเนนต์ปุ่ม/ป้ายสถานะ ฯลฯ) — หน้าใหม่ควรอ้างอิงคลาสจากไฟล์นี้เพื่อให้ดีไซน์สอดคล้องกัน
+- กฎ validate ของแบบฟอร์มคำขอบริการอยู่ที่ `app/Http/Requests/StoreServiceRequestRequest.php`
+- โครงสร้างความสัมพันธ์ระหว่างตารางทั้งหมดดูได้จาก Eloquent relationship ในโฟลเดอร์ `app/Models/`
