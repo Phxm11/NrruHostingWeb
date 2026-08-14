@@ -39,6 +39,30 @@ class ServiceAccountController extends Controller
     }
 
     /**
+     * ดูรายละเอียดคำขอ 1 รายการ — ข้อมูลทั้งหมดที่ผู้ใช้กรอกมาจากฟอร์ม
+     * (ผู้ขอใช้บริการ, ผู้พัฒนาระบบ, ทรัพยากรที่ขอ, บริการที่เปิดใช้, รายละเอียดทางเทคนิค,
+     *  โดเมน, เอกสารแนบ, การรับรองค่าใช้จ่าย, การยอมรับข้อกำหนด/ลายเซ็น, ประวัติการอนุมัติ, บัญชีที่สร้างให้แล้ว)
+     */
+    public function show(ServiceRequest $serviceRequest)
+    {
+        $serviceRequest->load([
+            'applicant',
+            'developers',
+            'requestResources.plan',
+            'enabledServices',
+            'techDetail',
+            'domains.departmentCode',
+            'attachments',
+            'feeCertification',
+            'policyAcceptance',
+            'approvals',
+            'serviceAccounts',
+        ]);
+
+        return view('admin.requests.show', compact('serviceRequest'));
+    }
+
+    /**
      * ลบคำขอใช้บริการ (ลบทิ้งทั้งคำขอ รวมถึงบัญชี/โดเมน/เอกสารที่ผูกไว้ เนื่องจากมี cascadeOnDelete)
      */
     public function destroyRequest(ServiceRequest $serviceRequest)

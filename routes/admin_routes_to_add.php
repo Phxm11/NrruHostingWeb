@@ -10,6 +10,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/requests', [ServiceAccountController::class, 'requestsIndex'])
         ->name('requests.index');
 
+    // ดูรายละเอียดคำขอ (ข้อมูลทั้งหมดที่ผู้ใช้กรอกจากฟอร์ม)
+    Route::get('/requests/{serviceRequest}', [ServiceAccountController::class, 'show'])
+        ->name('requests.show');
+
     // ฟอร์มสร้างบัญชี Username/Password ให้คำขอที่เลือก
     Route::get('/requests/{serviceRequest}/accounts/create', [ServiceAccountController::class, 'createAccount'])
         ->name('accounts.create');

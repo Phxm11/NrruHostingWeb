@@ -50,6 +50,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/requests', [ServiceAccountController::class, 'requestsIndex'])
         ->name('requests.index');
 
+    Route::get('/requests/{serviceRequest}', [ServiceAccountController::class, 'show'])
+        ->name('requests.show');
+
     Route::get('/requests/{serviceRequest}/accounts/create', [ServiceAccountController::class, 'createAccount'])
         ->name('accounts.create');
 

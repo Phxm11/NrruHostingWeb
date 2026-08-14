@@ -57,6 +57,22 @@
 
         .btn-brand.btn-sm { display: inline-flex; align-items: center; gap: 6px; }
 
+        /* view-details button */
+        .btn-view {
+            display: inline-flex; align-items: center; gap: 6px;
+            border: 1px solid var(--line); background: #fff; color: var(--forest);
+            border-radius: 9px; font-size: 13.5px; padding: 8px 14px; font-weight: 500;
+            transition: background .15s ease, border-color .15s ease, transform .15s ease;
+        }
+        .btn-view:hover { background: var(--moss-light); border-color: var(--moss); color: var(--forest); transform: translateY(-1px); }
+
+        /* row + applicant link polish for easier navigation */
+        table.modern-table tbody tr.request-row { cursor: pointer; }
+        .applicant-link { color: inherit; display: block; }
+        .applicant-link:hover .applicant-link__name { color: var(--forest); text-decoration: underline; }
+        code.form-no-link { transition: color .15s ease; }
+        a.form-no-link:hover code { color: var(--forest); text-decoration: underline; }
+
         /* danger / delete button */
         .btn-outline-danger-soft {
             display: inline-flex; align-items: center; gap: 6px;
@@ -169,16 +185,22 @@
                             $initial = mb_substr($req->applicant->full_name, 0, 1);
                             $domains = $req->domains->pluck('domain_name');
                         @endphp
-                        <tr style="animation-delay: {{ min($loop->index, 12) * 35 }}ms;">
-                            <td><code>{{ $req->form_no }}</code></td>
+                        <tr class="request-row" style="animation-delay: {{ min($loop->index, 12) * 35 }}ms;" data-href="{{ route('admin.requests.show', $req->request_id) }}">
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="avatar-circle {{ $avatarClass }}">{{ $initial }}</span>
-                                    <div>
-                                        {{ $req->applicant->full_name }}<br>
-                                        <span class="text-muted" style="font-size:12px;">{{ $req->applicant->staff_or_student_id }}</span>
+                                <a href="{{ route('admin.requests.show', $req->request_id) }}" class="form-no-link" title="ดูรายละเอียดคำขอ">
+                                    <code>{{ $req->form_no }}</code>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.requests.show', $req->request_id) }}" class="applicant-link" title="ดูรายละเอียดคำขอ">
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar-circle {{ $avatarClass }}">{{ $initial }}</span>
+                                        <div>
+                                            <span class="applicant-link__name">{{ $req->applicant->full_name }}</span><br>
+                                            <span class="text-muted" style="font-size:12px;">{{ $req->applicant->staff_or_student_id }}</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </td>
                             <td>{{ $req->applicant->unit_name }}</td>
                             <td>
@@ -220,6 +242,10 @@
                             </td>
                             <td class="text-end">
                                 <div class="d-flex gap-2 justify-content-end flex-wrap">
+                                    <a href="{{ route('admin.requests.show', $req->request_id) }}" class="btn-view" title="ดูรายละเอียดคำขอ">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        ดูรายละเอียด
+                                    </a>
                                     @if ($req->status !== 'approved')
                                         <form action="{{ route('admin.requests.approve', $req->request_id) }}" method="POST">
                                             @csrf
@@ -265,5 +291,17 @@
 
         <div class="mt-3">{{ $serviceRequests->appends(request()->query())->links() }}</div>
     </div>
+
+    <script>
+        // ทำให้คลิกที่แถวไหนก็ได้ (ยกเว้นปุ่ม/ลิงก์/ฟอร์มด้านใน) เพื่อเปิดหน้ารายละเอียดคำขอ — ใช้งานง่ายขึ้นบนมือถือและเดสก์ท็อป
+        document.querySelectorAll('tr.request-row[data-href]').forEach(function (row) {
+            row.addEventListener('click', function (e) {
+                if (e.target.closest('a, button, form, input, select, textarea')) {
+                    return;
+                }
+                window.location = row.dataset.href;
+            });
+        });
+    </script>
 
 @endsection
