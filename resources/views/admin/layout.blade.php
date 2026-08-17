@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'ระบบจัดการคำขอใช้บริการ')  — สำนักคอมพิวเตอร์</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f5f4ec;
+            --bg: #f4f3ea;
             --surface: #ffffff;
             --surface-2: #fbfaf3;
             --ink: #15231a;
@@ -22,14 +26,14 @@
             --amber-light: #faf0d3;
             --rust: #ae4830;
             --rust-light: #f6e1d8;
-            --line: #e5e1d1;
+            --line: #e8e4d5;
             --radius-xs: 10px;
             --radius-sm: 14px;
-            --radius-lg: 24px;
+            --radius-lg: 22px;
             --radius-md: 16px;
-            --shadow-sm: 0 1px 2px rgba(21,35,26,.05);
-            --shadow-md: 0 12px 28px -14px rgba(21,35,26,.22);
-            --shadow-lg: 0 28px 64px -24px rgba(21,35,26,.32);
+            --shadow-sm: 0 1px 2px rgba(21,35,26,.05), 0 1px 1px rgba(21,35,26,.03);
+            --shadow-md: 0 16px 32px -18px rgba(21,35,26,.28), 0 4px 10px -6px rgba(21,35,26,.1);
+            --shadow-lg: 0 32px 70px -28px rgba(21,35,26,.36);
         }
 
         * { box-sizing: border-box; }
@@ -126,29 +130,45 @@
         .brand-text { font-family: 'Kanit', sans-serif; font-size: 14.5px; font-weight: 600; line-height: 1.3; }
         .brand-text small { display: block; font-weight: 400; font-size: 11.5px; opacity: .7; }
 
-        .nav-group { position: relative; z-index: 1; margin-top: 6px; }
+        .nav-group {
+            position: relative; z-index: 1; margin-top: 6px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: var(--radius-md);
+            padding: 6px;
+        }
+        .nav-group + .nav-group { margin-top: 18px; }
         .nav-label {
-            font-size: 11px; text-transform: uppercase; letter-spacing: .07em;
-            opacity: .5; margin: 16px 12px 10px; display: flex; align-items: center; gap: 6px;
+            font-size: 10.5px; text-transform: uppercase; letter-spacing: .09em;
+            opacity: .48; margin: 8px 10px 8px; display: flex; align-items: center; gap: 6px;
+            font-weight: 600;
         }
         .nav-item {
             display: flex; align-items: center; gap: 11px;
-            padding: 11px 13px; border-radius: var(--radius-xs); margin-bottom: 4px;
+            padding: 10px 12px; border-radius: var(--radius-xs); margin-bottom: 2px;
             color: #dde5d5; font-size: 14px; font-weight: 500;
             transition: background .15s ease, transform .15s ease, color .15s ease;
             position: relative;
         }
         .nav-item:hover { background: rgba(255,255,255,.08); color: #fff; transform: translateX(2px); }
         .nav-item.active {
-            background: linear-gradient(90deg, rgba(224,165,38,.22), rgba(224,165,38,.06));
+            background: linear-gradient(90deg, rgba(224,165,38,.24), rgba(224,165,38,.05));
             color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(224,165,38,.18);
         }
         .nav-item.active::before {
-            content: ''; position: absolute; left: -16px; top: 50%; transform: translateY(-50%);
-            width: 4px; height: 22px; border-radius: 0 4px 4px 0; background: var(--amber);
+            content: ''; position: absolute; left: -13px; top: 50%; transform: translateY(-50%);
+            width: 3.5px; height: 20px; border-radius: 0 4px 4px 0; background: var(--amber);
+            box-shadow: 0 0 10px rgba(224,165,38,.6);
         }
-        .nav-item svg { flex-shrink: 0; opacity: .9; transition: transform .15s ease; }
-        .nav-item:hover svg { transform: scale(1.08); }
+        .nav-item .nav-icon {
+            width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,.06); transition: background .15s ease, transform .15s ease;
+        }
+        .nav-item.active .nav-icon { background: rgba(224,165,38,.22); }
+        .nav-item:hover .nav-icon { transform: scale(1.06); }
+        .nav-item svg { flex-shrink: 0; opacity: .92; }
         .nav-item .nav-badge {
             margin-left: auto; font-size: 10.5px; font-weight: 700;
             background: var(--amber); color: #2c1e05; border-radius: 999px;
@@ -186,62 +206,69 @@
         .main-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 
         .topbar {
-            background: rgba(255,255,255,.8);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.86);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--line);
-            padding: 18px 34px;
+            padding: 20px 36px;
             display: flex; align-items: center; justify-content: space-between;
             position: sticky; top: 0; z-index: 20;
         }
-        .topbar h1 { font-size: 21px; font-weight: 600; margin: 0; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+        .topbar::after {
+            content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+            background: linear-gradient(90deg, var(--moss) 0%, var(--amber) 50%, transparent 100%);
+            opacity: .35;
+        }
+        .topbar h1 { font-size: 22px; font-weight: 600; margin: 0; color: var(--ink); display: flex; align-items: center; gap: 8px; letter-spacing: -.015em; }
         .topbar .eyebrow {
-            font-size: 12px; color: var(--moss); font-weight: 600;
-            text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px;
+            font-size: 11.5px; color: var(--moss); font-weight: 700;
+            text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px;
             display: flex; align-items: center; gap: 5px;
         }
         .topbar .eyebrow svg { flex-shrink: 0; }
         .topbar-right { display: flex; align-items: center; gap: 14px; }
 
-        .content-area { padding: 28px 34px 44px; animation: fadeUp .4s ease; }
+        .content-area { padding: 30px 36px 46px; animation: fadeUp .4s ease; }
 
         /* ---------- Cards & tables ---------- */
         .panel {
             background: var(--surface);
             border-radius: var(--radius-lg);
-            padding: 24px 28px;
+            padding: 26px 30px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--line);
             transition: box-shadow .2s ease;
+            position: relative;
         }
 
-        .stat-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+        .stat-row { display: flex; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
         .stat-card {
             flex: 1; min-width: 170px;
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: 18px 20px;
+            padding: 19px 21px;
             display: flex; align-items: center; gap: 14px;
             box-shadow: var(--shadow-sm);
-            transition: transform .18s ease, box-shadow .18s ease;
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
         }
-        .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
         .stat-icon {
-            width: 44px; height: 44px; border-radius: var(--radius-xs);
+            width: 46px; height: 46px; border-radius: 13px;
             display: flex; align-items: center; justify-content: center;
             background: linear-gradient(135deg, var(--moss-light), var(--amber-light));
             color: var(--forest); flex-shrink: 0;
+            box-shadow: inset 0 0 0 1px rgba(21,35,26,.04);
         }
-        .stat-number { font-family: 'Kanit', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; }
+        .stat-number { font-family: 'Kanit', sans-serif; font-size: 23px; font-weight: 700; line-height: 1; }
         .stat-label { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
 
         table.modern-table { border-collapse: separate; border-spacing: 0; width: 100%; }
         table.modern-table th {
-            font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
-            color: var(--ink-soft); font-weight: 600; text-align: left;
-            padding: 12px 14px; border-bottom: 2px solid var(--line);
+            font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em;
+            color: var(--ink-soft); font-weight: 700; text-align: left;
+            padding: 13px 14px; border-bottom: 2px solid var(--line);
         }
-        table.modern-table td { padding: 15px 14px; font-size: 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+        table.modern-table td { padding: 16px 14px; font-size: 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
         table.modern-table tbody tr { transition: background .15s ease; }
         table.modern-table tbody tr:hover { background: var(--moss-light); }
         table.modern-table tbody tr:last-child td { border-bottom: none; }
@@ -259,8 +286,9 @@
 
         .pill {
             display: inline-flex; align-items: center; gap: 5px;
-            font-size: 12px; font-weight: 600;
+            font-size: 12px; font-weight: 700;
             padding: 5px 13px; border-radius: 999px; letter-spacing: .01em;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,.03);
         }
         .pill svg { width: 11px; height: 11px; flex-shrink: 0; }
         .pill-submitted { background: var(--amber-light); color: #8a6408; }
@@ -274,6 +302,7 @@
         .btn-brand {
             background: linear-gradient(135deg, var(--forest), var(--forest-2)); border: none; color: #fff;
             font-weight: 500; border-radius: var(--radius-sm); padding: 9px 17px; font-size: 14px;
+            box-shadow: 0 6px 16px -8px rgba(26,51,35,.55);
             transition: filter .15s ease, transform .15s ease, box-shadow .15s ease;
         }
         .btn-brand:hover { filter: brightness(1.12); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
@@ -282,18 +311,18 @@
             background: linear-gradient(135deg, var(--amber), var(--amber-deep));
             border: none; color: #2c1e05; font-weight: 600;
             border-radius: var(--radius-sm); padding: 10px 22px; font-size: 14.5px;
-            box-shadow: 0 6px 16px -6px rgba(185,132,15,.6);
-            transition: filter .15s ease, transform .15s ease;
+            box-shadow: 0 8px 20px -8px rgba(185,132,15,.65);
+            transition: filter .15s ease, transform .15s ease, box-shadow .15s ease;
         }
-        .btn-amber:hover { filter: brightness(1.05); color: #2c1e05; transform: translateY(-1px); }
+        .btn-amber:hover { filter: brightness(1.05); color: #2c1e05; transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(185,132,15,.7); }
         .btn-amber:active { transform: translateY(0); }
 
         .btn-outline-soft {
             border: 1px solid var(--line); background: #fff; color: var(--ink);
             border-radius: var(--radius-sm); font-size: 14px; padding: 8px 15px;
-            transition: background .15s ease, border-color .15s ease;
+            transition: background .15s ease, border-color .15s ease, transform .15s ease;
         }
-        .btn-outline-soft:hover { background: var(--moss-light); border-color: var(--moss); }
+        .btn-outline-soft:hover { background: var(--moss-light); border-color: var(--moss); transform: translateY(-1px); }
 
         .form-control, .form-select {
             border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 14px;
@@ -382,15 +411,19 @@
                 เมนูหลัก
             </div>
             <a href="{{ route('admin.requests.index') }}" class="nav-item {{ request()->routeIs('admin.requests.*') ? 'active' : '' }}">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2h6l1 3h4v17H4V5h4l1-3Z"/><path d="M9 12h6M9 16h6"/></svg>
+                <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2h6l1 3h4v17H4V5h4l1-3Z"/><path d="M9 12h6M9 16h6"/></svg></span>
                 รายการคำขอ
             </a>
             <a href="{{ route('admin.accounts.index') }}" class="nav-item {{ request()->routeIs('admin.accounts.*') ? 'active' : '' }}">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
                 บัญชีผู้ใช้บริการ
             </a>
+            <a href="{{ route('admin.domains.index') }}" class="nav-item {{ request()->routeIs('admin.domains.*') ? 'active' : '' }}">
+                <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></span>
+                โดเมนผู้ใช้บริการ
+            </a>
             <a href="{{ route('admin.users.index') }}" class="nav-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
                 จัดการผู้ใช้
             </a>
         </div>
@@ -401,11 +434,11 @@
                 ลิงก์ด่วน
             </div>
             <a href="{{ url('/') }}" class="nav-item" target="_blank">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z"/><path d="M12 6v10M9 9l3-3 3 3"/></svg>
+                <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z"/><path d="M12 6v10M9 9l3-3 3 3"/></svg></span>
                 หน้าเว็บบริการ
             </a>
             <a href="{{ route('service-requests.create') }}" class="nav-item" target="_blank">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2h6l1 3h4v17H4V5h4l1-3Z"/><path d="M12 11v6M9 14h6"/></svg>
+                <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2h6l1 3h4v17H4V5h4l1-3Z"/><path d="M12 11v6M9 14h6"/></svg></span>
                 แบบฟอร์มขอใช้บริการ
             </a>
         </div>

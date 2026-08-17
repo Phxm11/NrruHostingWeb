@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceAccountController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DomainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])
@@ -73,6 +74,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     Route::patch('/accounts/{account}/toggle-status', [ServiceAccountController::class, 'toggleStatus'])
         ->name('accounts.toggle-status');
+
+    /* ---------- โดเมนของผู้ใช้บริการ ---------- */
+    Route::get('/domains', [DomainController::class, 'index'])
+        ->name('domains.index');
+    Route::get('/domains/{domain}', [DomainController::class, 'show'])
+        ->name('domains.show');
 
     Route::delete('/requests/{serviceRequest}', [ServiceAccountController::class, 'destroyRequest'])
         ->name('requests.destroy');
