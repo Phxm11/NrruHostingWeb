@@ -160,11 +160,8 @@
 <div class="page-header">
     <div class="container">
         <div class="brand-row">
-            <div style="width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--amber),#f0c25c);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(224,165,38,.35);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
-                    <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <div style="width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.16);padding:5px;">
+                <img src="{{ asset('images/logo.png') }}" alt="โลโก้ระบบ" style="width:100%;height:100%;object-fit:contain;display:block;">
             </div>
             <div>
                 <h1>แบบฟอร์มขอใช้บริการระบบ Data Center และ Web Hosting</h1>

@@ -71,10 +71,12 @@
         }
         .brand-mark {
             width: 38px; height: 38px; border-radius: 11px;
-            background: linear-gradient(135deg, var(--amber), #f0c25c);
+            background: #fff;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px rgba(224,165,38,.35);
+            box-shadow: 0 4px 12px rgba(0,0,0,.14);
+            padding: 4px;
         }
+        .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
         .brand-name { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14.5px; color: var(--forest); line-height: 1.2; }
         .brand-name small { display: block; font-weight: 400; font-size: 10.5px; color: var(--ink-soft); }
 
@@ -255,10 +257,7 @@
         <a href="{{ url('/') }}" class="d-flex align-items-center gap-2">
             <div class="brand-badge">
                 <div class="brand-mark">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
-                        <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="{{ asset('images/logo.png') }}" alt="โลโก้ระบบ">
                 </div>
             </div>
             <div class="brand-name">

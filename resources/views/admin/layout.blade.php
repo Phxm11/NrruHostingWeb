@@ -115,12 +115,14 @@
         }
         .brand-mark {
             width: 40px; height: 40px; border-radius: var(--radius-xs);
-            background: linear-gradient(135deg, var(--amber), #f0c25c);
+            background: #fff;
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(224,165,38,.4);
+            box-shadow: 0 4px 12px rgba(0,0,0,.18);
             animation: softBob 4s ease-in-out infinite;
+            padding: 5px;
         }
+        .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
         .brand-text { font-family: 'Kanit', sans-serif; font-size: 14.5px; font-weight: 600; line-height: 1.3; }
         .brand-text small { display: block; font-weight: 400; font-size: 11.5px; opacity: .7; }
 
@@ -354,7 +356,10 @@
     <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#21402a" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
-    <span class="m-brand">ระบบจัดการคำขอใช้บริการ</span>
+    <span class="m-brand" style="display:inline-flex;align-items:center;gap:8px;">
+        <img src="{{ asset('images/logo.png') }}" alt="โลโก้ระบบ" style="width:22px;height:22px;object-fit:contain;">
+        ระบบจัดการคำขอใช้บริการ
+    </span>
 </div>
 
 <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
@@ -363,10 +368,7 @@
     <aside class="sidebar" id="sidebar">
         <div class="brand">
             <div class="brand-mark">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
-                    <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <img src="{{ asset('images/logo.png') }}" alt="โลโก้ระบบ">
             </div>
             <div class="brand-text">
                 ระบบจัดการคำขอใช้บริการ

@@ -38,11 +38,13 @@
         }
         @keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
         .brand-mark {
-            width: 48px; height: 48px; border-radius: 14px; margin: 0 auto 14px;
-            background: linear-gradient(135deg, var(--amber), #f0c25c);
+            width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 14px;
+            background: #fff;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 16px rgba(224,165,38,.4);
+            box-shadow: 0 6px 16px rgba(0,0,0,.16);
+            padding: 6px;
         }
+        .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
         h1 { font-family: 'Kanit', sans-serif; font-size: 21px; font-weight: 600; text-align: center; margin: 0 0 4px; color: var(--forest); }
         .sub { text-align: center; color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; }
         .form-label { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
@@ -69,10 +71,7 @@
 <body>
     <div class="login-card">
         <div class="brand-mark">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
-                <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="{{ asset('images/logo.png') }}" alt="โลโก้ระบบ">
         </div>
         <h1>เข้าสู่ระบบเจ้าหน้าที่</h1>
         <div class="sub">ระบบจัดการคำขอใช้บริการ Data Center และ Web Hosting</div>
