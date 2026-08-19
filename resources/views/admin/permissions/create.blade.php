@@ -12,19 +12,6 @@
                 <form action="{{ route('admin.permissions.store') }}" method="POST">
                     @csrf
 
-                    @if ($errors->any())
-                        <div class="banner-danger" style="display:flex;align-items:flex-start;gap:10px;">
-                            <span style="flex-shrink:0;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.6 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L14.7 3.6a2 2 0 0 0-3.4 0Z"/></svg>
-                            </span>
-                            <ul class="mb-0 ps-3">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <div class="mb-3">
                         <label class="form-label fw-medium">ชื่อสิทธิ์ (ระบบ)</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name') }}" required placeholder="เช่น users.create">

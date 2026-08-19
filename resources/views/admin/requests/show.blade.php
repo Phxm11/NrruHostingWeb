@@ -212,13 +212,6 @@
         }
     </style>
 
-    @if (session('success'))
-        <div class="banner-success" style="display:flex;align-items:center;gap:8px;animation:popIn .25s ease;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
-            {{ session('success') }}
-        </div>
-    @endif
-
     <a href="{{ route('admin.requests.index') }}" class="back-link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
         กลับไปยังรายการคำขอ
@@ -283,8 +276,7 @@
                         สร้างบัญชีให้ผู้ขอใช้บริการ
                     </a>
                     <form action="{{ route('admin.requests.destroy', $serviceRequest->request_id) }}" method="POST"
-                          data-confirm="ยืนยันลบคำขอ {{ $serviceRequest->form_no }}?{{ $serviceRequest->serviceAccounts->count() > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $serviceRequest->serviceAccounts->count() . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้"
-                          onsubmit="return confirm(this.dataset.confirm)">
+                          data-confirm="ยืนยันลบคำขอ {{ $serviceRequest->form_no }}?{{ $serviceRequest->serviceAccounts->count() > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $serviceRequest->serviceAccounts->count() . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-header-outline btn-sm">

@@ -45,42 +45,6 @@
             to   { opacity: 1; transform: scale(1); }
         }
 
-        /* ---------- credential banner ---------- */
-        .banner-credential {
-            align-items: flex-start; gap: 12px; position: relative; overflow: hidden;
-            animation: popIn .35s ease;
-        }
-        .banner-credential::before {
-            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background-image: linear-gradient(90deg, var(--acc-gold), #e8c565, var(--acc-gold));
-            background-size: 200% 100%; animation: shimmer 2.5s linear infinite;
-        }
-        .banner-credential__icon-wrap {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 36px; height: 36px; border-radius: 50%; background: #fdf1cf; flex-shrink: 0;
-            animation: bob 2.2s ease-in-out infinite;
-        }
-        .banner-credential__body { flex: 1; }
-        .banner-credential__body p { margin: 2px 0 10px; font-size: 13px; color: #6b5a2e; }
-        .credential-row {
-            display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-        }
-        .credential-chip {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: #fff; border: 1px solid #e6d9ad; border-radius: 8px;
-            padding: 5px 10px; font-size: 13px;
-        }
-        .credential-chip code { font-size: 13px; }
-        .btn-copy {
-            display: inline-flex; align-items: center; gap: 6px;
-            border: none; border-radius: 8px; padding: 6px 14px;
-            font-size: 13px; font-weight: 600; cursor: pointer;
-            background: var(--acc-gold); color: #fff; transition: opacity .15s, transform .15s, background .2s;
-        }
-        .btn-copy:hover { opacity: .85; }
-        .btn-copy:active { transform: scale(.96); }
-        .btn-copy.copied { background: var(--acc-active-fg); animation: popIn .25s ease; }
-
         /* ---------- toolbar ---------- */
         .accounts-toolbar {
             display: flex; flex-wrap: wrap; align-items: center;
@@ -231,33 +195,6 @@
         }
     </style>
 
-    {{-- ============================================================
-         One-time credential banner
-    ============================================================ --}}
-    @if (session('new_username'))
-        <div class="banner-credential">
-            <span class="banner-credential__icon-wrap">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8a6408" stroke-width="1.8">
-                    <path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4Z"/><path d="M9 12l2 2 4-4"/>
-                </svg>
-            </span>
-            <div class="banner-credential__body">
-                <strong>สร้างบัญชีสำเร็จ</strong>
-                <p>คัดลอกและส่งข้อมูลนี้ให้ผู้ใช้บริการทันที ระบบจะไม่แสดงรหัสผ่านนี้อีก</p>
-                <div class="credential-row">
-                    <span class="credential-chip">Username&nbsp;<code id="cred-username">{{ session('new_username') }}</code></span>
-                    <span class="credential-chip">Password&nbsp;<code id="cred-password">{{ session('new_password') }}</code></span>
-                    <button type="button" class="btn-copy" id="copy-cred-btn" onclick="copyCredentials(this)">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                        <span class="btn-copy__label">คัดลอกทั้งหมด</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    @elseif (session('success'))
-        <div class="banner-success">{{ session('success') }}</div>
-    @endif
-
     <div class="panel">
 
         {{-- ============================================================
@@ -379,7 +316,7 @@
                                         </button>
                                     </form>
                                     <form action="{{ route('admin.accounts.destroy', $acc->account_id) }}" method="POST"
-                                          onsubmit="return confirm('ยืนยันลบบัญชี {{ $acc->username }}? การลบไม่สามารถย้อนกลับได้');">
+                                          data-confirm="ยืนยันลบบัญชี {{ $acc->username }}? การลบไม่สามารถย้อนกลับได้">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="row-btn row-btn--delete" title="ลบบัญชี">
                                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
@@ -407,23 +344,5 @@
 
         <div class="mt-3">{{ $accounts->appends(request()->query())->links() }}</div>
     </div>
-
-    <script>
-        function copyCredentials(btn) {
-            const u = document.getElementById('cred-username').textContent.trim();
-            const p = document.getElementById('cred-password').textContent.trim();
-            const text = `Username: ${u}\nPassword: ${p}`;
-            const label = btn.querySelector('.btn-copy__label');
-            navigator.clipboard.writeText(text).then(function () {
-                const original = label.textContent;
-                label.textContent = 'คัดลอกแล้ว ✓';
-                btn.classList.add('copied');
-                setTimeout(function () {
-                    label.textContent = original;
-                    btn.classList.remove('copied');
-                }, 2000);
-            });
-        }
-    </script>
 
 @endsection

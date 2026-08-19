@@ -337,20 +337,6 @@
             background: var(--moss-light); border: 1px solid #c3d9ac; color: var(--forest);
             border-radius: var(--radius-md); padding: 14px 18px; font-size: 14px; margin-bottom: 20px;
         }
-        .banner-credential {
-            background: linear-gradient(120deg, var(--amber-light), #fff);
-            border: 1px solid #eecf88; border-radius: var(--radius-md);
-            padding: 16px 20px; font-size: 14px; margin-bottom: 20px;
-            display: flex; align-items: flex-start; gap: 14px;
-        }
-        .banner-credential code {
-            background: #fff; border: 1px solid #eecf88; padding: 2px 8px;
-            border-radius: 6px; font-weight: 700; color: #6b4c05;
-        }
-        .banner-danger {
-            background: var(--rust-light); border: 1px solid #e6b6a4; color: var(--rust);
-            border-radius: var(--radius-md); padding: 14px 18px; font-size: 14px; margin-bottom: 20px;
-        }
 
         /* ---------- Mobile ---------- */
         .mobile-topbar { display: none; }
@@ -481,6 +467,9 @@
         </div>
     </div>
 </div>
+
+@include('partials.alert-popup')
+@include('partials.confirm-modal')
 
 <script>
     (function () {

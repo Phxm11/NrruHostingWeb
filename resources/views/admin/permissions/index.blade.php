@@ -13,20 +13,6 @@
 
 @section('content')
 
-    @if (session('success'))
-        <div class="banner-success" style="display:flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="banner-danger" style="display:flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.6 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L14.7 3.6a2 2 0 0 0-3.4 0Z"/></svg>
-            {{ session('error') }}
-        </div>
-    @endif
-
     <div class="panel">
         @if ($groups->isNotEmpty())
             @foreach ($groups as $group)
@@ -56,7 +42,7 @@
                                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                                                 แก้ไข
                                             </a>
-                                            <form action="{{ route('admin.permissions.destroy', $perm->permission_id) }}" method="POST" onsubmit="return confirm('ต้องการลบสิทธิ์ {{ $perm->label }} หรือไม่?');">
+                                            <form action="{{ route('admin.permissions.destroy', $perm->permission_id) }}" method="POST" data-confirm="ต้องการลบสิทธิ์ {{ $perm->label }} หรือไม่?">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" class="btn btn-outline-danger-soft btn-sm" title="ลบสิทธิ์">
                                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>

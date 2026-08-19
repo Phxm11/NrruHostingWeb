@@ -80,20 +80,7 @@
         <h1>เข้าสู่ระบบเจ้าหน้าที่</h1>
         <div class="sub">ระบบจัดการคำขอใช้บริการ Data Center และ Web Hosting</div>
 
-        @if (session('status'))
-            <div class="alert-status-c">{{ session('status') }}</div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert-danger-c">
-                <strong>ไม่สามารถเข้าสู่ระบบได้:</strong>
-                <ul class="mb-0 ps-3">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('partials.alert-popup', ['errorTitle' => 'ไม่สามารถเข้าสู่ระบบได้'])
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

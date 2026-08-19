@@ -189,20 +189,7 @@
 
 <div class="container py-4" style="max-width: 1040px;">
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>กรุณาตรวจสอบข้อมูล:</strong>
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('partials.alert-popup', ['errorTitle' => 'กรุณาตรวจสอบข้อมูล'])
 
     <form action="{{ route('service-requests.store') }}" method="POST" enctype="multipart/form-data" id="serviceRequestForm">
         @csrf

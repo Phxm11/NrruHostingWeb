@@ -101,13 +101,6 @@
         .empty-state p { margin: 0; font-size: 14px; }
     </style>
 
-    @if (session('success'))
-        <div class="banner-success" style="display:flex;align-items:center;gap:8px;animation:popIn .25s ease;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="stat-row">
         <div class="stat-card stat-card--total">
             <div class="stat-icon">
@@ -261,8 +254,7 @@
                                         สร้างบัญชี
                                     </a>
                                     <form action="{{ route('admin.requests.destroy', $req->request_id) }}" method="POST"
-                                          data-confirm="ยืนยันลบคำขอ {{ $req->form_no }}?{{ $req->service_accounts_count > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $req->service_accounts_count . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้"
-                                          onsubmit="return confirm(this.dataset.confirm)">
+                                          data-confirm="ยืนยันลบคำขอ {{ $req->form_no }}?{{ $req->service_accounts_count > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $req->service_accounts_count . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline-danger-soft btn-sm" title="ลบคำขอ">

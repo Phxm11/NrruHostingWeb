@@ -80,16 +80,7 @@
         <h1>ตั้งรหัสผ่านใหม่</h1>
         <div class="sub">กรอกรหัสผ่านใหม่ของคุณ</div>
 
-        @if ($errors->any())
-            <div class="alert-danger-c">
-                <strong>ไม่สามารถดำเนินการได้:</strong>
-                <ul class="mb-0 ps-3">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('partials.alert-popup', ['errorTitle' => 'ไม่สามารถดำเนินการได้'])
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf

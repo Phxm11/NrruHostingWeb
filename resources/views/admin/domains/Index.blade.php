@@ -99,10 +99,6 @@
         }
     </style>
 
-    @if (session('success'))
-        <div class="banner-success">{{ session('success') }}</div>
-    @endif
-
     <div class="panel">
 
         <form method="GET" class="domains-toolbar">

@@ -94,31 +94,8 @@
         }
         #copyPwBtn.copied { color: var(--acc-teal-fg); }
 
-        /* danger banner */
-        .banner-danger {
-            display: flex; align-items: flex-start; gap: 10px; animation: popIn .25s ease;
-        }
-        .banner-danger .banner-icon {
-            width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
-            display: inline-flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,.6);
-        }
-
         .btn-amber { display: inline-flex; align-items: center; gap: 7px; }
     </style>
-
-    @if ($errors->any())
-        <div class="banner-danger">
-            <span class="banner-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.6 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L14.7 3.6a2 2 0 0 0-3.4 0Z"/></svg>
-            </span>
-            <ul class="mb-0 ps-3">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <div class="row justify-content-center">
         <div class="col-lg-8">

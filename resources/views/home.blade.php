@@ -306,7 +306,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             Data Center &amp; Web Hosting Service
         </div>
-        <h1>บริการเครื่องแม่ข่ายเสมือน<br>และ <span class="accent">Web Hosting</span> เพื่อบุคลากร มรภ.นครราชสีมา</h1>
+        <h1>ระบบจัดการคำขอใช้บริการ<br>และ <span class="accent">Web Hosting</span> เพื่อบุคลากร มรภ.นครราชสีมา</h1>
         <p class="lead">ยื่นคำขอใช้บริการออนไลน์ได้ทันที ระบบตรวจสอบและออกบัญชีผู้ใช้ให้อัตโนมัติ รองรับทั้งงานเรียนการสอน งานวิจัย บริการวิชาการ และการบริหารจัดการภายในหน่วยงาน</p>
         <div class="hero-cta">
             <a href="{{ route('service-requests.create') }}" class="btn-amber">เริ่มยื่นคำขอใช้บริการ</a>

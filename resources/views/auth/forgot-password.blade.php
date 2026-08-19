@@ -79,20 +79,7 @@
         <h1>ลืมรหัสผ่าน</h1>
         <div class="sub">กรอกอีเมลที่ใช้ลงทะเบียน เราจะส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ให้</div>
 
-        @if (session('status'))
-            <div class="alert-status-c">{{ session('status') }}</div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert-danger-c">
-                <strong>ไม่สามารถดำเนินการได้:</strong>
-                <ul class="mb-0 ps-3">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('partials.alert-popup', ['errorTitle' => 'ไม่สามารถดำเนินการได้'])
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
