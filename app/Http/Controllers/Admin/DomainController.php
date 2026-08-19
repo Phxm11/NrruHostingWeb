@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Domain;
+use App\Models\DepartmentCode;
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
@@ -43,6 +44,16 @@ class DomainController extends Controller
             }
         }
 
+        // เรียงลำดับ: ค่าเริ่มต้นคือโดเมนล่าสุดก่อน กดหัวตารางเพื่อสลับ asc/desc ได้
+        $sort = $request->input('sort', 'newest');
+        if ($sort === 'name_asc') {
+            $query->reorder('domain_name', 'asc');
+        } elseif ($sort === 'name_desc') {
+            $query->reorder('domain_name', 'desc');
+        } else {
+            $query->reorder('domain_id', 'desc');
+        }
+
         $domains = $query->paginate(15)->appends($request->query());
 
         return view('admin.domains.index', compact('domains'));
@@ -61,5 +72,53 @@ class DomainController extends Controller
         ]);
 
         return view('admin.domains.show', compact('domain'));
+    }
+
+    /**
+     * ฟอร์มแก้ไขข้อมูลโดเมน
+     */
+    public function edit(Domain $domain)
+    {
+        $domain->load(['departmentCode', 'serviceRequest.applicant']);
+        $departmentCodes = DepartmentCode::orderBy('department_name')->get();
+
+        return view('admin.domains.edit', compact('domain', 'departmentCodes'));
+    }
+
+    /**
+     * บันทึกการแก้ไขโดเมน
+     */
+    public function update(Request $request, Domain $domain)
+    {
+        $data = $request->validate([
+            'domain_name'      => ['required', 'string', 'max:255'],
+            'domain_format'    => ['nullable', 'string', 'max:255'],
+            'department_code'  => ['nullable', 'string', 'exists:department_codes,code'],
+            'department_other' => ['nullable', 'string', 'max:150'],
+        ]);
+
+        // ถ้าเลือกหน่วยงานจากรายการแล้ว ไม่ต้องเก็บชื่อหน่วยงานอิสระซ้ำ
+        if (! empty($data['department_code'])) {
+            $data['department_other'] = null;
+        }
+
+        $domain->update($data);
+
+        return redirect()
+            ->route('admin.domains.index')
+            ->with('success', "แก้ไขโดเมน {$domain->domain_name} เรียบร้อยแล้ว");
+    }
+
+    /**
+     * ลบโดเมน (ไม่กระทบคำขอ/บัญชีต้นทาง)
+     */
+    public function destroy(Domain $domain)
+    {
+        $domainName = $domain->domain_name;
+        $domain->delete();
+
+        return redirect()
+            ->route('admin.domains.index')
+            ->with('success', "ลบโดเมน {$domainName} เรียบร้อยแล้ว");
     }
 }

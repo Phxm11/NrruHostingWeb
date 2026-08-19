@@ -80,6 +80,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         ->name('domains.index');
     Route::get('/domains/{domain}', [DomainController::class, 'show'])
         ->name('domains.show');
+    Route::get('/domains/{domain}/edit', [DomainController::class, 'edit'])
+        ->name('domains.edit');
+    Route::put('/domains/{domain}', [DomainController::class, 'update'])
+        ->name('domains.update');
+    Route::delete('/domains/{domain}', [DomainController::class, 'destroy'])
+        ->name('domains.destroy');
 
     Route::delete('/requests/{serviceRequest}', [ServiceAccountController::class, 'destroyRequest'])
         ->name('requests.destroy');

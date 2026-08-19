@@ -271,7 +271,7 @@
         </a>
         <div class="nav-desktop d-none d-md-flex align-items-center gap-2">
             <div class="nav-links-group">
-                <a href="#services" class="nav-link-custom">บริการ</a>
+                {{-- <a href="#services" class="nav-link-custom">บริการ</a> --}}
                 <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
                 <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
             </div>
@@ -320,7 +320,7 @@
     </div>
 </header>
 
-<section id="services">
+{{-- <section id="services">
     <div class="container">
         <div class="reveal">
             <div class="section-eyebrow">แพ็กเกจบริการ</div>
@@ -364,7 +364,7 @@
             @endforeach
         </div>
     </div>
-</section>
+</section> --}}
 
 <section id="steps" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
     <div class="container">

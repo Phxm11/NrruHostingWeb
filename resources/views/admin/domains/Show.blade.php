@@ -5,10 +5,16 @@
 @section('page-title', 'รายละเอียดโดเมน')
 
 @section('topbar-action')
-    <a href="{{ route('admin.domains.index') }}" class="btn btn-outline-soft" style="display:inline-flex;align-items:center;gap:6px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        กลับไปรายการโดเมน
-    </a>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <a href="{{ route('admin.domains.index') }}" class="btn btn-outline-soft" style="display:inline-flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            กลับไปรายการโดเมน
+        </a>
+        <a href="{{ route('admin.domains.edit', $domain->domain_id) }}" class="btn btn-amber" style="display:inline-flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            แก้ไขโดเมน
+        </a>
+    </div>
 @endsection
 
 @section('content')
@@ -60,6 +66,16 @@
             border: 1px dashed var(--line); border-radius: var(--radius-md);
         }
         .empty-accounts p { margin: 8px 0 0; font-size: 14px; }
+
+        .copy-btn {
+            border: none; background: transparent; padding: 3px; cursor: pointer;
+            color: #aaa; display: inline-flex; align-items: center; vertical-align: -3px; margin-left: 4px;
+            border-radius: 5px; transition: color .15s ease, background .15s ease;
+        }
+        .copy-btn:hover { background: var(--moss-light); color: var(--forest); }
+        .copy-btn.copied { color: var(--forest); }
+        .info-item__value a { color: var(--forest); border-bottom: 1px dashed var(--line); }
+        .info-item__value a:hover { border-bottom-color: var(--forest); }
     </style>
 
     <div class="panel" style="margin-bottom:20px;">
@@ -68,7 +84,12 @@
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
             </span>
             <div>
-                <h2><code>{{ $domain->domain_name }}</code></h2>
+                <h2>
+                    <code>{{ $domain->domain_name }}</code>
+                    <button type="button" class="copy-btn js-copy" data-copy="{{ $domain->domain_name }}" title="คัดลอกชื่อโดเมน" aria-label="คัดลอกชื่อโดเมน">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                    </button>
+                </h2>
                 <div class="dm-sub">คำขอ {{ $domain->serviceRequest->form_no }} — ยื่นเมื่อ {{ \Carbon\Carbon::parse($domain->serviceRequest->request_date)->format('d/m/Y') }}</div>
             </div>
         </div>
@@ -117,11 +138,23 @@
             </div>
             <div class="info-item">
                 <div class="info-item__label">เบอร์โทรศัพท์</div>
-                <div class="info-item__value">{{ $domain->serviceRequest->applicant->phone ?: '-' }}</div>
+                <div class="info-item__value">
+                    @if ($domain->serviceRequest->applicant->phone)
+                        <a href="tel:{{ $domain->serviceRequest->applicant->phone }}">{{ $domain->serviceRequest->applicant->phone }}</a>
+                    @else
+                        -
+                    @endif
+                </div>
             </div>
             <div class="info-item">
                 <div class="info-item__label">อีเมล</div>
-                <div class="info-item__value">{{ $domain->serviceRequest->applicant->email ?: '-' }}</div>
+                <div class="info-item__value">
+                    @if ($domain->serviceRequest->applicant->email)
+                        <a href="mailto:{{ $domain->serviceRequest->applicant->email }}">{{ $domain->serviceRequest->applicant->email }}</a>
+                    @else
+                        -
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -137,7 +170,12 @@
                 <div class="account-card__main">
                     <span class="account-card__avatar">{{ mb_substr($acc->username, 0, 1) }}</span>
                     <div>
-                        <div class="account-card__username"><code>{{ $acc->username }}</code></div>
+                        <div class="account-card__username">
+                            <code>{{ $acc->username }}</code>
+                            <button type="button" class="copy-btn js-copy" data-copy="{{ $acc->username }}" title="คัดลอก username" aria-label="คัดลอก username">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                            </button>
+                        </div>
                         <div class="account-card__meta">
                             {{ $acc->account_type }}
                             @if ($acc->expire_date)
@@ -163,5 +201,29 @@
             </div>
         @endforelse
     </div>
+
+    <script>
+        (function () {
+            document.querySelectorAll('.js-copy').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var text = btn.getAttribute('data-copy');
+                    var showCopied = function () {
+                        var original = btn.innerHTML;
+                        btn.classList.add('copied');
+                        btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>';
+                        setTimeout(function () {
+                            btn.innerHTML = original;
+                            btn.classList.remove('copied');
+                        }, 1200);
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(showCopied);
+                    } else {
+                        showCopied();
+                    }
+                });
+            });
+        })();
+    </script>
 
 @endsection
