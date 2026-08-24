@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // สิทธิ์ย่อยแต่ละอย่างในระบบ (เช่น users.view, requests.approve) — group ใช้จัดหมวดตอนแสดงผลในหน้าแก้ไข role
         Schema::create('permissions', function (Blueprint $table) {
             $table->id('permission_id');
             $table->string('name', 100)->unique();

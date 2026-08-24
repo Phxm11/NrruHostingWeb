@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Approval;
 use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
@@ -48,13 +49,8 @@ class ServiceAccountController extends Controller
         $serviceRequest->load([
             'applicant',
             'developers',
-            'requestResources.plan',
-            'enabledServices',
-            'techDetail',
+            'plan',
             'domains.departmentCode',
-            'attachments',
-            'feeCertification',
-            'policyAcceptance',
             'approvals',
             'serviceAccounts',
         ]);
@@ -70,13 +66,10 @@ class ServiceAccountController extends Controller
         $formNo = $serviceRequest->form_no;
 
         // ลบไฟล์แนบและลายเซ็นออกจาก disk ป้องกันไฟล์ค้าง
-        foreach ($serviceRequest->attachments as $attachment) {
-            if ($attachment->file_path) {
-                Storage::disk('public')->delete($attachment->file_path);
+        foreach (['system_detail_doc_path', 'screenshot_evidence_path', 'signature_image_path'] as $column) {
+            if ($serviceRequest->{$column}) {
+                Storage::disk('public')->delete($serviceRequest->{$column});
             }
-        }
-        if ($serviceRequest->policyAcceptance && $serviceRequest->policyAcceptance->signature_image_path) {
-            Storage::disk('public')->delete($serviceRequest->policyAcceptance->signature_image_path);
         }
 
         $serviceRequest->delete();
@@ -88,13 +81,35 @@ class ServiceAccountController extends Controller
 
     /**
      * อนุมัติคำขอใช้บริการ (เปลี่ยนสถานะเป็น approved)
+     * แก้ไข: เดิมแค่เปลี่ยน status ตรงๆ ไม่เคยบันทึกลง approvals เลย ทำให้ประวัติการอนุมัติว่างเปล่าตลอด
+     * และไม่เคยออกเลขที่ใบเสร็จ (receipt_no/date/time) เลยสักครั้ง
      */
     public function approveRequest(ServiceRequest $serviceRequest)
     {
         $serviceRequest->status = 'approved';
+        $serviceRequest->receipt_no = $serviceRequest->receipt_no ?? $this->generateReceiptNo();
+        $serviceRequest->receipt_date = $serviceRequest->receipt_date ?? now()->toDateString();
+        $serviceRequest->receipt_time = $serviceRequest->receipt_time ?? now()->format('H:i:s');
         $serviceRequest->save();
 
+        // บันทึกประวัติการอนุมัติจริง แทนที่จะแค่เปลี่ยนสถานะเฉยๆ
+        Approval::create([
+            'request_id' => $serviceRequest->request_id,
+            'approver_level' => 'computer_center_director',
+            'approver_name' => auth()->user()->name,
+            'decision' => 'certify_info_only',
+            'decision_date' => now()->toDateString(),
+        ]);
+
         return back()->with('success', "อนุมัติคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
+    }
+
+    private function generateReceiptNo(): string
+    {
+        $year = now()->year + 543; // พ.ศ.
+        $runningNo = ServiceRequest::whereYear('receipt_date', now()->year)->count() + 1;
+
+        return sprintf('RC-%03d/%d', $runningNo, $year);
     }
 
     /**

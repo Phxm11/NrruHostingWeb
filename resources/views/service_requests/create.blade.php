@@ -189,9 +189,19 @@
 
 <div class="container py-4" style="max-width: 1040px;">
 
-    @include('partials.alert-popup', ['errorTitle' => 'กรุณาตรวจสอบข้อมูล'])
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>กรุณาตรวจสอบข้อมูล</strong>
+            <ul class="mb-0 mt-2">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="ปิด"></button>
+        </div>
+    @endif
 
-    <form action="{{ route('service-requests.store') }}" method="POST" enctype="multipart/form-data" id="serviceRequestForm">
+    <form action="{{ url('/service-requests') }}" method="POST" enctype="multipart/form-data" id="serviceRequestForm">
         @csrf
 
         <div class="form-layout">
@@ -496,6 +506,8 @@
         </div>
     </form>
 </div>
+
+@include('partials.alert-popup')
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>

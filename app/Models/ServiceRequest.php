@@ -21,6 +21,28 @@ class ServiceRequest extends Model
         'project_start_date',
         'project_end_date',
         'status',
+        'service_type',
+        'plan_id',
+        'custom_cpu_vcpu',
+        'custom_ram_gb',
+        'custom_storage_gb',
+        'custom_fee',
+        'enabled_services',
+        'enabled_services_other_detail',
+        'language_framework',
+        'database_used',
+        'port_service_needed',
+        'needs_external_connection',
+        'system_detail_doc_path',
+        'screenshot_evidence_path',
+        'agree_to_pay',
+        'request_fee_waiver',
+        'waiver_reason',
+        'accepted',
+        'signature_image_path',
+        'accepted_date',
+        'source',
+        'legacy_note',
     ];
 
     protected $casts = [
@@ -28,6 +50,12 @@ class ServiceRequest extends Model
         'receipt_date' => 'date',
         'project_start_date' => 'date',
         'project_end_date' => 'date',
+        'enabled_services' => 'array',
+        'needs_external_connection' => 'boolean',
+        'agree_to_pay' => 'boolean',
+        'request_fee_waiver' => 'boolean',
+        'accepted' => 'boolean',
+        'accepted_date' => 'date',
     ];
 
     public function applicant()
@@ -40,19 +68,10 @@ class ServiceRequest extends Model
         return $this->hasMany(Developer::class, 'request_id', 'request_id');
     }
 
-    public function requestResources()
+    // One request has one resource selection, so plan_id lives on this model.
+    public function plan()
     {
-        return $this->hasMany(RequestResource::class, 'request_id', 'request_id');
-    }
-
-    public function enabledServices()
-    {
-        return $this->hasMany(RequestEnabledService::class, 'request_id', 'request_id');
-    }
-
-    public function techDetail()
-    {
-        return $this->hasOne(TechDetail::class, 'request_id', 'request_id');
+        return $this->belongsTo(ResourcePlan::class, 'plan_id', 'plan_id');
     }
 
     public function domains()
@@ -60,20 +79,6 @@ class ServiceRequest extends Model
         return $this->hasMany(Domain::class, 'request_id', 'request_id');
     }
 
-    public function attachments()
-    {
-        return $this->hasMany(Attachment::class, 'request_id', 'request_id');
-    }
-
-    public function feeCertification()
-    {
-        return $this->hasOne(FeeCertification::class, 'request_id', 'request_id');
-    }
-
-    public function policyAcceptance()
-    {
-        return $this->hasOne(PolicyAcceptance::class, 'request_id', 'request_id');
-    }
 
     public function approvals()
     {

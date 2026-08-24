@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        // เก็บ API token (Laravel Sanctum) — ปัจจุบันไม่มีจุดไหนออก token ให้ใครเลย (ระบบ login ด้วย session ทั้งหมด) ตารางนี้จึงว่างเสมอ
+        Schema::dropIfExists('personal_access_tokens');
+    }
+
+    public function down(): void
+    {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
             $table->morphs('tokenable');
@@ -22,13 +23,5 @@ return new class extends Migration
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('personal_access_tokens');
     }
 };

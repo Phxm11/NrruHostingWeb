@@ -34,13 +34,18 @@
             'screenshot_evidence' => 'ภาพหน้าจอ / หลักฐานประกอบ',
         ];
         $imageExts = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-        $resource = $serviceRequest->requestResources->first();
+        // Compact schema: fixed request details are columns on service_requests.
+        $resource = $serviceRequest;
         $avatarClasses = ['avatar-a', 'avatar-b', 'avatar-c'];
         $avatarClass = $avatarClasses[ord(mb_substr($serviceRequest->applicant->full_name, 0, 1)) % 3];
-        $imageAttachments = $serviceRequest->attachments->filter(function ($f) use ($imageExts) {
+        $attachments = collect([
+            $serviceRequest->system_detail_doc_path ? (object) ['file_type' => 'system_detail_doc', 'file_path' => $serviceRequest->system_detail_doc_path] : null,
+            $serviceRequest->screenshot_evidence_path ? (object) ['file_type' => 'screenshot_evidence', 'file_path' => $serviceRequest->screenshot_evidence_path] : null,
+        ])->filter();
+        $imageAttachments = $attachments->filter(function ($f) use ($imageExts) {
             return in_array(strtolower(pathinfo($f->file_path, PATHINFO_EXTENSION)), $imageExts);
         });
-        $fileAttachments = $serviceRequest->attachments->diff($imageAttachments);
+        $fileAttachments = $attachments->diff($imageAttachments);
     @endphp
 
     <style>
@@ -407,7 +412,7 @@
                 <div class="info-grid mb-3">
                     <div class="info-item">
                         <div class="info-item__label">ประเภทบริการ</div>
-                        <div class="info-item__value">{{ $serviceTypeLabels[$resource?->plan?->service_type ?? ''] ?? ($resource ? '-' : 'ไม่ได้ระบุ') }}</div>
+                        <div class="info-item__value">{{ $serviceTypeLabels[$resource?->service_type ?? ''] ?? ($resource ? '-' : 'ไม่ได้ระบุ') }}</div>
                     </div>
                 </div>
 
@@ -441,14 +446,14 @@
                 @endif
 
                 <div class="sub-divider">บริการที่ต้องการเปิดใช้งาน</div>
-                @if ($serviceRequest->enabledServices->isNotEmpty())
+                @if (!empty($serviceRequest->enabled_services))
                     <div class="chip-list mb-3">
-                        @foreach ($serviceRequest->enabledServices as $svc)
+                        @foreach ($serviceRequest->enabled_services as $serviceName)
                             <span class="service-chip">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
-                                {{ $enabledServiceLabels[$svc->service_name] ?? $svc->service_name }}
-                                @if ($svc->service_name === 'other' && $svc->other_detail)
-                                    — {{ $svc->other_detail }}
+                                {{ $enabledServiceLabels[$serviceName] ?? $serviceName }}
+                                @if ($serviceName === 'other' && $serviceRequest->enabled_services_other_detail)
+                                    — {{ $serviceRequest->enabled_services_other_detail }}
                                 @endif
                             </span>
                         @endforeach
@@ -461,26 +466,26 @@
                 <div class="info-grid">
                     <div class="info-item">
                         <div class="info-item__label">ภาษา/เฟรมเวิร์กที่ใช้พัฒนา</div>
-                        <div class="info-item__value {{ $serviceRequest->techDetail?->language_framework ? '' : 'muted' }}">
-                            {{ $serviceRequest->techDetail?->language_framework ?: 'ไม่ได้ระบุ' }}
+                        <div class="info-item__value {{ $serviceRequest->language_framework ? '' : 'muted' }}">
+                            {{ $serviceRequest->language_framework ?: 'ไม่ได้ระบุ' }}
                         </div>
                     </div>
                     <div class="info-item">
                         <div class="info-item__label">ฐานข้อมูลที่ใช้</div>
-                        <div class="info-item__value {{ $serviceRequest->techDetail?->database_used ? '' : 'muted' }}">
-                            {{ $serviceRequest->techDetail?->database_used ?: 'ไม่ได้ระบุ' }}
+                        <div class="info-item__value {{ $serviceRequest->database_used ? '' : 'muted' }}">
+                            {{ $serviceRequest->database_used ?: 'ไม่ได้ระบุ' }}
                         </div>
                     </div>
                     <div class="info-item">
                         <div class="info-item__label">พอร์ต/บริการที่ต้องการ</div>
-                        <div class="info-item__value {{ $serviceRequest->techDetail?->port_service_needed ? '' : 'muted' }}">
-                            {{ $serviceRequest->techDetail?->port_service_needed ?: 'ไม่ได้ระบุ' }}
+                        <div class="info-item__value {{ $serviceRequest->port_service_needed ? '' : 'muted' }}">
+                            {{ $serviceRequest->port_service_needed ?: 'ไม่ได้ระบุ' }}
                         </div>
                     </div>
                     <div class="info-item">
                         <div class="info-item__label">ต้องการเชื่อมต่อจากภายนอก</div>
                         <div class="info-item__value">
-                            @if ($serviceRequest->techDetail?->needs_external_connection)
+                            @if ($serviceRequest->needs_external_connection)
                                 <span class="yn-badge yes">✓ ต้องการ</span>
                             @else
                                 <span class="yn-badge no">ไม่ต้องการ</span>
@@ -573,7 +578,7 @@
                     @endforeach
                 @endif
 
-                @if ($serviceRequest->attachments->isEmpty())
+                @if ($attachments->isEmpty())
                     <p class="empty-note">ไม่มีเอกสารแนบ</p>
                 @endif
 
@@ -582,7 +587,7 @@
                     <div class="info-item">
                         <div class="info-item__label">ยินยอมชำระค่าบริการ</div>
                         <div class="info-item__value">
-                            @if ($serviceRequest->feeCertification?->agree_to_pay)
+                            @if ($serviceRequest->agree_to_pay)
                                 <span class="yn-badge yes">✓ ยินยอม</span>
                             @else
                                 <span class="yn-badge no">ไม่ยินยอม</span>
@@ -592,17 +597,17 @@
                     <div class="info-item">
                         <div class="info-item__label">ขอรับการยกเว้นค่าธรรมเนียม</div>
                         <div class="info-item__value">
-                            @if ($serviceRequest->feeCertification?->request_fee_waiver)
+                            @if ($serviceRequest->request_fee_waiver)
                                 <span class="yn-badge yes">✓ ขอยกเว้น</span>
                             @else
                                 <span class="yn-badge no">ไม่ขอยกเว้น</span>
                             @endif
                         </div>
                     </div>
-                    @if ($serviceRequest->feeCertification?->waiver_reason)
+                    @if ($serviceRequest->waiver_reason)
                         <div class="info-item span-2">
                             <div class="info-item__label">เหตุผลที่ขอยกเว้นค่าธรรมเนียม</div>
-                            <div class="info-item__value">{{ $serviceRequest->feeCertification->waiver_reason }}</div>
+                            <div class="info-item__value">{{ $serviceRequest->waiver_reason }}</div>
                         </div>
                     @endif
                 </div>
@@ -620,7 +625,7 @@
                     <div class="info-item">
                         <div class="info-item__label">การยอมรับข้อกำหนดและนโยบาย</div>
                         <div class="info-item__value">
-                            @if ($serviceRequest->policyAcceptance?->accepted)
+                            @if ($serviceRequest->accepted)
                                 <span class="yn-badge yes">✓ ยอมรับแล้ว</span>
                             @else
                                 <span class="yn-badge no">ยังไม่ยอมรับ</span>
@@ -629,16 +634,16 @@
                     </div>
                     <div class="info-item">
                         <div class="info-item__label">วันที่ยอมรับ</div>
-                        <div class="info-item__value {{ $serviceRequest->policyAcceptance?->accepted_date ? '' : 'muted' }}">
-                            {{ $serviceRequest->policyAcceptance?->accepted_date ? \Carbon\Carbon::parse($serviceRequest->policyAcceptance->accepted_date)->format('d/m/Y') : 'ไม่ได้ระบุ' }}
+                        <div class="info-item__value {{ $serviceRequest->accepted_date ? '' : 'muted' }}">
+                            {{ $serviceRequest->accepted_date ? \Carbon\Carbon::parse($serviceRequest->accepted_date)->format('d/m/Y') : 'ไม่ได้ระบุ' }}
                         </div>
                     </div>
                 </div>
 
-                @if ($serviceRequest->policyAcceptance?->signature_image_path)
+                @if ($serviceRequest->signature_image_path)
                     <div class="sub-divider">ลายเซ็นผู้ขอใช้บริการ</div>
-                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('storage/' . $serviceRequest->policyAcceptance->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
-                        <img src="{{ asset('storage/' . $serviceRequest->policyAcceptance->signature_image_path) }}" alt="ลายเซ็นผู้ขอใช้บริการ" loading="lazy">
+                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('storage/' . $serviceRequest->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
+                        <img src="{{ asset('storage/' . $serviceRequest->signature_image_path) }}" alt="ลายเซ็นผู้ขอใช้บริการ" loading="lazy">
                     </div>
                 @else
                     <p class="empty-note">ไม่มีไฟล์ลายเซ็นแนบมา</p>
@@ -653,6 +658,18 @@
                     <span class="sec-num">6</span>
                     <h2>ประวัติการอนุมัติ</h2>
                 </div>
+                @if ($serviceRequest->receipt_no)
+                    <div class="info-item" style="margin-bottom:12px;">
+                        <div class="info-item__label">เลขที่ใบเสร็จ</div>
+                        <div class="info-item__value">
+                            {{ $serviceRequest->receipt_no }}
+                            @if ($serviceRequest->receipt_date)
+                                — {{ \Carbon\Carbon::parse($serviceRequest->receipt_date)->format('d/m/Y') }}
+                                {{ $serviceRequest->receipt_time ? \Carbon\Carbon::parse($serviceRequest->receipt_time)->format('H:i') : '' }}
+                            @endif
+                        </div>
+                    </div>
+                @endif
                 @forelse ($serviceRequest->approvals as $approval)
                     <div class="approval-row">
                         <span class="pill pill-{{ $approval->decision === 'approved' ? 'approved' : ($approval->decision === 'rejected' ? 'rejected' : 'submitted') }}">

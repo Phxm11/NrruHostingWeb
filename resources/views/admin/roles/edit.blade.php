@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="panel">
-                <form action="{{ route('admin.roles.update', $role->role_id) }}" method="POST">
+                <form action="{{ url('admin/roles/' . $role->role_id) }}" method="POST">
                     @csrf @method('PUT')
 
                     <div class="mb-3">
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('admin.roles.index') }}" class="btn btn-outline-soft">ย้อนกลับ</a>
+                        <a href="{{ url('admin/roles') }}" class="btn btn-outline-soft">ย้อนกลับ</a>
                         <button type="submit" class="btn btn-amber">บันทึกการแก้ไข</button>
                     </div>
                 </form>

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // โทเคนสำหรับลิงก์ 'ลืมรหัสผ่าน' ของ users (เจ้าหน้าที่) — สร้างตอนขอรีเซ็ต หมดอายุ/ถูกลบทิ้งหลังใช้
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');

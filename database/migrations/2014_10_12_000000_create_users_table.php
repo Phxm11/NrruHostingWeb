@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // บัญชีเจ้าหน้าที่ที่ล็อกอินเข้าระบบหลังบ้านได้ (คนละตารางกับ service_accounts ที่เป็นบัญชีของ 'ผู้ขอใช้บริการ')
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');

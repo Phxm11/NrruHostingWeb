@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // ตารางเชื่อม many-to-many: role 1 อันมีได้หลาย permission, permission 1 อันมอบให้ได้หลาย role
         Schema::create('permission_role', function (Blueprint $table) {
             $table->id('permission_role_id');
             $table->foreignId('permission_id')->constrained('permissions', 'permission_id')->cascadeOnDelete();

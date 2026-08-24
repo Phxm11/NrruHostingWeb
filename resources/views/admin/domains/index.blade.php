@@ -171,7 +171,13 @@
                                     <span class="dm-badge dm-badge--none">ยังไม่มีบัญชี</span>
                                 @endforelse
                             </td>
-                            <td data-label="คำขอ">{{ $domain->serviceRequest->form_no }}</td>
+                            <td data-label="คำขอ">
+                                @if ($domain->serviceRequest->source === 'legacy_import')
+                                    <span class="dm-badge dm-badge--disabled">นำเข้าจากระบบเดิม</span>
+                                @else
+                                    {{ $domain->serviceRequest->form_no }}
+                                @endif
+                            </td>
                             <td data-label="">
                                 <div class="dm-actions">
                                     <a href="{{ route('admin.domains.show', $domain->domain_id) }}" class="dm-btn">ดู</a>

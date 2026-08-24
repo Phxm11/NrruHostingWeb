@@ -14,8 +14,9 @@ class ResourcePlan extends Model
         'storage_gb', 'fee_per_year', 'suitable_for',
     ];
 
-    public function requestResources()
+    // Each request now stores its selected plan directly on service_requests.plan_id.
+    public function serviceRequests()
     {
-        return $this->hasMany(RequestResource::class, 'plan_id', 'plan_id');
+        return $this->hasMany(ServiceRequest::class, 'plan_id', 'plan_id');
     }
 }

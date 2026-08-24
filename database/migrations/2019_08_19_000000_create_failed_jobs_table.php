@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // ตาราง framework มาตรฐานของ Laravel เก็บ queue job ที่รันแล้ว error — ไม่มีการ dispatch job ในระบบนี้ ตารางนี้จึงว่างเสมอ
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();

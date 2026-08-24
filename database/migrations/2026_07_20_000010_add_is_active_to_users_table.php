@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            // ปิดสวิตช์บัญชีเจ้าหน้าที่โดยไม่ต้องลบ (เช่น ลาออก/พักงาน) — false แล้วล็อกอินไม่ได้
             $table->boolean('is_active')->default(true)->after('password');
         });
     }

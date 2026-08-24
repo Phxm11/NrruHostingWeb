@@ -275,13 +275,13 @@
                 <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
                 <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
             </div>
-            <a href="{{ route('admin.requests.index') }}" class="nav-link-staff">
+            <a href="{{ url('/admin/requests') }}" class="nav-link-staff">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
                 สำหรับเจ้าหน้าที่
             </a>
         </div>
         <div class="d-flex align-items-center gap-2">
-            <a href="{{ route('service-requests.create') }}" class="btn-amber d-none d-sm-inline-block">ยื่นคำขอใช้บริการ</a>
+            <a href="{{ url('/service-requests/create') }}" class="btn-amber d-none d-sm-inline-block">ยื่นคำขอใช้บริการ</a>
             <button class="mobile-toggle d-md-none" id="mobileToggle" aria-label="เมนู">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3323" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
@@ -291,8 +291,8 @@
         <a href="#services" class="nav-link-custom">บริการ</a>
         <a href="#steps" class="nav-link-custom">ขั้นตอนการขอใช้</a>
         <a href="#policy" class="nav-link-custom">ข้อกำหนด</a>
-        <a href="{{ route('service-requests.create') }}" class="btn-amber mt-1 text-center">ยื่นคำขอใช้บริการ</a>
-        <a href="{{ route('admin.requests.index') }}" class="nav-link-custom nav-link-staff">
+        <a href="{{ url('/service-requests/create') }}" class="btn-amber mt-1 text-center">ยื่นคำขอใช้บริการ</a>
+        <a href="{{ url('/admin/requests') }}" class="nav-link-custom nav-link-staff">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
             สำหรับเจ้าหน้าที่
         </a>
@@ -306,10 +306,10 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             Data Center &amp; Web Hosting Service
         </div>
-        <h1>ระบบจัดการคำขอใช้บริการ<br>และ <span class="accent">Web Hosting</span> เพื่อบุคลากร มรภ.นครราชสีมา</h1>
+        <h1>ระบบจัดการคำขอใช้บริการ<br><span class="accent">Web Hosting</span> เพื่อบุคลากร มรภ.นครราชสีมา</h1>
         <p class="lead">ยื่นคำขอใช้บริการออนไลน์ได้ทันที ระบบตรวจสอบและออกบัญชีผู้ใช้ให้อัตโนมัติ รองรับทั้งงานเรียนการสอน งานวิจัย บริการวิชาการ และการบริหารจัดการภายในหน่วยงาน</p>
         <div class="hero-cta">
-            <a href="{{ route('service-requests.create') }}" class="btn-amber">เริ่มยื่นคำขอใช้บริการ</a>
+            <a href="{{ url('/service-requests/create') }}" class="btn-amber">เริ่มยื่นคำขอใช้บริการ</a>
             <a href="#services" class="btn-outline-brand">ดูแพ็กเกจบริการ</a>
         </div>
         <div class="hero-stats">
@@ -436,7 +436,7 @@
         <div class="cta-band reveal">
             <h2 class="section-title mb-2">พร้อมเริ่มใช้งานแล้วใช่ไหม?</h2>
             <p class="section-desc mx-auto mb-4">ยื่นคำขอใช้บริการออนไลน์วันนี้ ใช้เวลากรอกฟอร์มไม่ถึง 10 นาที</p>
-            <a href="{{ route('service-requests.create') }}" class="btn-amber">ยื่นคำขอใช้บริการตอนนี้</a>
+            <a href="{{ url('/service-requests/create') }}" class="btn-amber">ยื่นคำขอใช้บริการตอนนี้</a>
         </div>
     </div>
 </section>
@@ -448,8 +448,8 @@
             340 ถ.สุรนารายณ์ ต.ในเมือง อ.เมือง จ.นครราชสีมา 30000
         </div>
         <div>
-            <a href="{{ route('service-requests.create') }}">ยื่นคำขอใช้บริการ</a> &nbsp;|&nbsp;
-            <a href="{{ route('admin.requests.index') }}">สำหรับเจ้าหน้าที่</a>
+            <a href="{{ url('/service-requests/create') }}">ยื่นคำขอใช้บริการ</a> &nbsp;|&nbsp;
+            <a href="{{ url('/admin/requests') }}">สำหรับเจ้าหน้าที่</a>
         </div>
     </div>
 </footer>

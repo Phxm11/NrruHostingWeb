@@ -6,11 +6,11 @@
 
 @section('topbar-action')
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <a href="{{ route('admin.domains.index') }}" class="btn btn-outline-soft" style="display:inline-flex;align-items:center;gap:6px;">
+        <a href="{{ url('/admin/domains') }}" class="btn btn-outline-soft" style="display:inline-flex;align-items:center;gap:6px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             กลับไปรายการโดเมน
         </a>
-        <a href="{{ route('admin.domains.edit', $domain->domain_id) }}" class="btn btn-amber" style="display:inline-flex;align-items:center;gap:6px;">
+        <a href="{{ url('/admin/domains/' . $domain->domain_id . '/edit') }}" class="btn btn-amber" style="display:inline-flex;align-items:center;gap:6px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
             แก้ไขโดเมน
         </a>
@@ -186,7 +186,7 @@
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span class="pill pill-{{ $acc->status }}">{{ $acc->status }}</span>
-                    <a href="{{ route('admin.accounts.edit', $acc->account_id) }}" class="btn btn-outline-soft" style="padding:6px 12px; font-size:13px;">
+                    <a href="{{ url('/admin/accounts/' . $acc->account_id . '/edit') }}" class="btn btn-outline-soft" style="padding:6px 12px; font-size:13px;">
                         จัดการบัญชี
                     </a>
                 </div>
@@ -195,7 +195,7 @@
             <div class="empty-accounts">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="opacity:.5;"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 <p>ยังไม่มีบัญชีที่ออกให้สำหรับโดเมนนี้</p>
-                <a href="{{ route('admin.requests.show', $domain->serviceRequest->request_id) }}" class="btn btn-brand" style="margin-top:12px; display:inline-block;">
+                <a href="{{ url('/admin/requests/show/' . $domain->serviceRequest->request_id) }}" class="btn btn-brand" style="margin-top:12px; display:inline-block;">
                     ไปที่คำขอเพื่อสร้างบัญชี
                 </a>
             </div>

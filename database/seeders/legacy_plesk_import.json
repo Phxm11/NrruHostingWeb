@@ -1,0 +1,3370 @@
+{
+ "applicants": [
+  {
+   "key": "นายทัศนชัย ภิญโญทรัพย์||thotsaphon.saiking@gmail.com",
+   "full_name": "นายทัศนชัย ภิญโญทรัพย์",
+   "email": "thotsaphon.saiking@gmail.com",
+   "unit_name": "คณะครุศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายทัศนชัย ภิญโญทรัพย์||eduapp@nrru.ac.th",
+   "full_name": "นายทัศนชัย ภิญโญทรัพย์",
+   "email": "eduapp@nrru.ac.th",
+   "unit_name": "คณะครุศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายธนบุตร ศรีเกื้อกลิ่น||human@nrru.ac.th",
+   "full_name": "นายธนบุตร ศรีเกื้อกลิ่น",
+   "email": "human@nrru.ac.th",
+   "unit_name": "คณะมนุษยศาสตร์และสังคมศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายธนบุตร ศรีเกื้อกลิ่น||anusarasutho1@gmail.com",
+   "full_name": "นายธนบุตร ศรีเกื้อกลิ่น",
+   "email": "anusarasutho1@gmail.com",
+   "unit_name": "คณะมนุษยศาสตร์และสังคมศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "ผศ.ดร.มานิตย์ อรรคชาติ||manit.a@nrru.ac.th",
+   "full_name": "ผศ.ดร.มานิตย์ อรรคชาติ",
+   "email": "manit.a@nrru.ac.th",
+   "unit_name": "คณะมนุษยศาสตร์และสังคมศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายณฐกร บุญประดิษฐ||ph@nrru.ac.th",
+   "full_name": "นายณฐกร บุญประดิษฐ",
+   "email": "ph@nrru.ac.th",
+   "unit_name": "คณะสาธารณสุขศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นางสาวธิดารัตย์ ณ จัตุรัส||ph@nrru.ac.th",
+   "full_name": "นางสาวธิดารัตย์ ณ จัตุรัส",
+   "email": "ph@nrru.ac.th",
+   "unit_name": "คณะสาธารณสุขศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายเรืองเดช กุลชูศักดิ์||fms@nrru.ac.th",
+   "full_name": "นายเรืองเดช กุลชูศักดิ์",
+   "email": "fms@nrru.ac.th",
+   "unit_name": "คณะวิทยาการจัดการ",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายสุวิจักษณ์ ปรึกกระโทก||suwichak.p@nrru.ac.th",
+   "full_name": "นายสุวิจักษณ์ ปรึกกระโทก",
+   "email": "suwichak.p@nrru.ac.th",
+   "unit_name": "คณะพยาบาลศาสตร์",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "อาจารย์สุระ วรรณแสง||sura.w@nrru.ac.th",
+   "full_name": "อาจารย์สุระ วรรณแสง",
+   "email": "sura.w@nrru.ac.th",
+   "unit_name": "คณะวิทยาศาสตร์และเทคโนโลยี",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นายศราวุธ พิสุตปัญญาทร||sarawut.p@nrru.ac.th",
+   "full_name": "นายศราวุธ พิสุตปัญญาทร",
+   "email": "sarawut.p@nrru.ac.th",
+   "unit_name": "คณะเทคโนโลยีอุตสาหกรรม",
+   "affiliation": "คณะ"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||nantanee.s@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "nantanee.s@nrru.ac.th",
+   "unit_name": "เว็บไซต์สำนักคอม",
+   "affiliation": "สำนักคอม"
+  },
+  {
+   "key": "devops||ntw3840@gmail.com",
+   "full_name": "devops",
+   "email": "ntw3840@gmail.com",
+   "unit_name": "สำนักคอม",
+   "affiliation": "สำนักคอม"
+  },
+  {
+   "key": "เกียงไกร จอมเกาะ||chaitawat.no@nrru.ac.th",
+   "full_name": "เกียงไกร จอมเกาะ",
+   "email": "chaitawat.no@nrru.ac.th",
+   "unit_name": "สำนักคอม",
+   "affiliation": "สำนักคอม"
+  },
+  {
+   "key": "เกียงไกร จอมเกาะ||chaitawat71530v2@gmail.com",
+   "full_name": "เกียงไกร จอมเกาะ",
+   "email": "chaitawat71530v2@gmail.com",
+   "unit_name": "สำนักคอม",
+   "affiliation": "สำนักคอม"
+  },
+  {
+   "key": "เกียงไกร จอมเกาะ||kriangkai.j@nrru.ac.th",
+   "full_name": "เกียงไกร จอมเกาะ",
+   "email": "kriangkai.j@nrru.ac.th",
+   "unit_name": "สำนักคอม",
+   "affiliation": "สำนักคอม"
+  },
+  {
+   "key": "นางวราภรณ์ ศรีโพธิ์วัง||audit.nrru.ac.th",
+   "full_name": "นางวราภรณ์ ศรีโพธิ์วัง",
+   "email": "audit.nrru.ac.th",
+   "unit_name": "ตรวจสอบภายใน",
+   "affiliation": "ตรวจสอบภายใน"
+  },
+  {
+   "key": "นางวราภรณ์ ศรีโพธิ์วัง||",
+   "full_name": "นางวราภรณ์ ศรีโพธิ์วัง",
+   "email": null,
+   "unit_name": "ตรวจสอบภายใน",
+   "affiliation": "ตรวจสอบภายใน"
+  },
+  {
+   "key": "นางแอนนา พรหมเมืองคุก||ppai@nrru.ac.th",
+   "full_name": "นางแอนนา พรหมเมืองคุก",
+   "email": "ppai@nrru.ac.th",
+   "unit_name": "ทรัพย์สินและรายได้",
+   "affiliation": "ทรัพย์สินและรายได้"
+  },
+  {
+   "key": "นางแอนนา พรหมเมืองคุก||",
+   "full_name": "นางแอนนา พรหมเมืองคุก",
+   "email": null,
+   "unit_name": "ทรัพย์สินและรายได้",
+   "affiliation": "ทรัพย์สินและรายได้"
+  },
+  {
+   "key": "นางสาวฐิติรัตน์ จริยธนาวัฒน์||bgm@nrru.ac.th",
+   "full_name": "นางสาวฐิติรัตน์ จริยธนาวัฒน์",
+   "email": "bgm@nrru.ac.th",
+   "unit_name": "กองอาคารสถานที่และบริการ",
+   "affiliation": "กองอาคาร"
+  },
+  {
+   "key": "นางสาวฐิติรัตน์ จริยธนาวัฒน์||abgm@nrru.ac.th",
+   "full_name": "นางสาวฐิติรัตน์ จริยธนาวัฒน์",
+   "email": "abgm@nrru.ac.th",
+   "unit_name": "กองอาคาร",
+   "affiliation": "กองอาคาร"
+  },
+  {
+   "key": "นางศรัญญา ชูสกุล||cc@nrru.ac.th",
+   "full_name": "นางศรัญญา ชูสกุล",
+   "email": "cc@nrru.ac.th",
+   "unit_name": "สำนักงานสภา",
+   "affiliation": "สำนักงานสภา"
+  },
+  {
+   "key": "นางสาวกัญญาวีร์ จิรทันตศิลป์||finance@nrru.ac.th",
+   "full_name": "นางสาวกัญญาวีร์ จิรทันตศิลป์",
+   "email": "finance@nrru.ac.th",
+   "unit_name": "กองคลัง",
+   "affiliation": "กองคลัง"
+  },
+  {
+   "key": "นางสาวทรัพย์มณี บุญญโก||dsp@nrru.ac.th",
+   "full_name": "นางสาวทรัพย์มณี บุญญโก",
+   "email": "dsp@nrru.ac.th",
+   "unit_name": "กองกิจการพิเศษ",
+   "affiliation": "กองกิจการพิเศษ"
+  },
+  {
+   "key": "นางสาวสุภาพร คำภา||qa@nrru.ac.th",
+   "full_name": "นางสาวสุภาพร คำภา",
+   "email": "qa@nrru.ac.th",
+   "unit_name": "กองประกันคุณภาพการศึกษา",
+   "affiliation": "กองประกัน"
+  },
+  {
+   "key": "นางสาวสุภาพร คำภา||",
+   "full_name": "นางสาวสุภาพร คำภา",
+   "email": null,
+   "unit_name": "กองประกัน",
+   "affiliation": "กองประกัน"
+  },
+  {
+   "key": "นายมานัต รัตนเนนย||manat.rattananen@hotmail.com",
+   "full_name": "นายมานัต รัตนเนนย",
+   "email": "manat.rattananen@hotmail.com",
+   "unit_name": "กบค",
+   "affiliation": "กบค"
+  },
+  {
+   "key": "นายวิศวมาศ ภักดีกุล||rdi@nrru.ac.th",
+   "full_name": "นายวิศวมาศ ภักดีกุล",
+   "email": "rdi@nrru.ac.th",
+   "unit_name": "สถาบันวิจัยและพัฒนา",
+   "affiliation": "สถาบันวิจัยและพัฒนา"
+  },
+  {
+   "key": "นายวิศวมาศ ภักดีกุล||wijaikorat@nrru.ac.th",
+   "full_name": "นายวิศวมาศ ภักดีกุล",
+   "email": "wijaikorat@nrru.ac.th",
+   "unit_name": "สถาบันวิจัยและพัฒนา",
+   "affiliation": "สถาบันวิจัยและพัฒนา"
+  },
+  {
+   "key": "นางสาวอรวรรณ ชอบสระน้อย||sec@nrru.ac.th",
+   "full_name": "นางสาวอรวรรณ ชอบสระน้อย",
+   "email": "sec@nrru.ac.th",
+   "unit_name": "ศูนย์การศึกษาพิเศษ",
+   "affiliation": "การศึกาพิเศษ"
+  },
+  {
+   "key": "น.ส.ภาณิชา อ่อนท้าว||sec@nrru.ac.th",
+   "full_name": "น.ส.ภาณิชา อ่อนท้าว",
+   "email": "sec@nrru.ac.th",
+   "unit_name": "งานเลขานุการ",
+   "affiliation": "การศึกาพิเศษ"
+  },
+  {
+   "key": "นางสาวศุภัคชญา เชื่อมชิต||tlo@nrru.ac.th",
+   "full_name": "นางสาวศุภัคชญา เชื่อมชิต",
+   "email": "tlo@nrru.ac.th",
+   "unit_name": "ubi",
+   "affiliation": "ubi"
+  },
+  {
+   "key": "นางสาวทรัพย์มณี บุญญโก||ubi@nrru.ac.th",
+   "full_name": "นางสาวทรัพย์มณี บุญญโก",
+   "email": "ubi@nrru.ac.th",
+   "unit_name": "ศูนย์บ่มเพาะวิสาหกิจ",
+   "affiliation": "ทรัพย์สินทางปัญญา"
+  },
+  {
+   "key": "นางสาวทรัพย์มณี บุญญโก||ubitlo@nrru.ac.th",
+   "full_name": "นางสาวทรัพย์มณี บุญญโก",
+   "email": "ubitlo@nrru.ac.th",
+   "unit_name": "ubi+ทรัพย์สินทางปัญญา",
+   "affiliation": "ศูนย์บ่มเพาะวิสาหกิจและงานทรัพย์สินทางปัญญา"
+  },
+  {
+   "key": "นางสาวศุภาวีร์ แก้วกูร||li@nrru.ac.th",
+   "full_name": "นางสาวศุภาวีร์ แก้วกูร",
+   "email": "li@nrru.ac.th",
+   "unit_name": "สถาบันภาษา",
+   "affiliation": "สถาบันภาษา"
+  },
+  {
+   "key": "นางสาวศุภาวีร์ แก้วกูร||ita@nrru.ac.th",
+   "full_name": "นางสาวศุภาวีร์ แก้วกูร",
+   "email": "ita@nrru.ac.th",
+   "unit_name": "สถาบันภาษา",
+   "affiliation": "สถาบันภาษา"
+  },
+  {
+   "key": "นางสาวณัฏฐิกา แจ่มสว่าง||work@nrru.ac.th",
+   "full_name": "นางสาวณัฏฐิกา แจ่มสว่าง",
+   "email": "work@nrru.ac.th",
+   "unit_name": "กองพัฒ",
+   "affiliation": "กองพัฒ"
+  },
+  {
+   "key": "นางสาวณัฏฐิกา แจ่มสว่าง||std@nrru.ac.th",
+   "full_name": "นางสาวณัฏฐิกา แจ่มสว่าง",
+   "email": "std@nrru.ac.th",
+   "unit_name": "กองพัฒนานักศึกษา",
+   "affiliation": "กองพัฒ"
+  },
+  {
+   "key": "น.ส.ธมนวรรณพร ค้าคุ้ม||rspg@nrru.ac.th",
+   "full_name": "น.ส.ธมนวรรณพร ค้าคุ้ม",
+   "email": "rspg@nrru.ac.th",
+   "unit_name": "โครงการอนุรักษ์พันธุกรรมพืช",
+   "affiliation": "ภายใต้คณะวิทย์"
+  },
+  {
+   "key": "นายธีระวัฒน์ เรืองมะเริง||",
+   "full_name": "นายธีระวัฒน์ เรืองมะเริง",
+   "email": null,
+   "unit_name": "-",
+   "affiliation": "-"
+  },
+  {
+   "key": "นายธีระวัฒน์ เรืองมะเริง||clinique@nrru.ac.th",
+   "full_name": "นายธีระวัฒน์ เรืองมะเริง",
+   "email": "clinique@nrru.ac.th",
+   "unit_name": "คลีนิคเทคโนโลยี",
+   "affiliation": "คลีนิคเทคโนโลยี"
+  },
+  {
+   "key": "นายจตุรงค์ เชือนไธสง||clinique@nrru.ac.th",
+   "full_name": "นายจตุรงค์ เชือนไธสง",
+   "email": "clinique@nrru.ac.th",
+   "unit_name": "ศูนย์วิทยาศาสตร์",
+   "affiliation": "ศูนย์วิทย์"
+  },
+  {
+   "key": "นายจตุรงค์ เชือนไธสง||chaturong.c@nrru.ac.th",
+   "full_name": "นายจตุรงค์ เชือนไธสง",
+   "email": "chaturong.c@nrru.ac.th",
+   "unit_name": "ศูนย์วิทย์",
+   "affiliation": "ศูนย์วิทย์"
+  },
+  {
+   "key": "nrru-sci||sawitree.p@nrru.ac.th",
+   "full_name": "nrru-sci",
+   "email": "sawitree.p@nrru.ac.th",
+   "unit_name": "-",
+   "affiliation": "-"
+  },
+  {
+   "key": "อาจารย์สุระ วรรณแสง||sawitree.p@nrru.ac.th",
+   "full_name": "อาจารย์สุระ วรรณแสง",
+   "email": "sawitree.p@nrru.ac.th",
+   "unit_name": "-",
+   "affiliation": "-"
+  },
+  {
+   "key": "นางสาวนันทิชาพร คิดเห็น||saving@nrru.ac.th",
+   "full_name": "นางสาวนันทิชาพร คิดเห็น",
+   "email": "saving@nrru.ac.th",
+   "unit_name": "สวัสดิการออมทรัพย์",
+   "affiliation": "งานสวัสดิการออมทรัพย์"
+  },
+  {
+   "key": "นายชัยวัฒน์ธนา รัตนศิริกรณ์||jejogream@hotmail.com",
+   "full_name": "นายชัยวัฒน์ธนา รัตนศิริกรณ์",
+   "email": "jejogream@hotmail.com",
+   "unit_name": "สำนักงานอธิการบดี",
+   "affiliation": "สำนักงานอธิการบดี"
+  },
+  {
+   "key": "นายจักรพงศ์ สุคนธพงศ์||jakkrapong.s@nrru.ac.th",
+   "full_name": "นายจักรพงศ์ สุคนธพงศ์",
+   "email": "jakkrapong.s@nrru.ac.th",
+   "unit_name": "กองวิเทศน์",
+   "affiliation": "กองวิเทศน์"
+  },
+  {
+   "key": "satit_nrru||kittichai.m@nrru.ac.th",
+   "full_name": "satit_nrru",
+   "email": "kittichai.m@nrru.ac.th",
+   "unit_name": "-",
+   "affiliation": "-"
+  },
+  {
+   "key": "นางสาวนภาพร  ช้างสาร||lifelong@nrru.ac.th",
+   "full_name": "นางสาวนภาพร  ช้างสาร",
+   "email": "lifelong@nrru.ac.th",
+   "unit_name": "สำนักการเรียนรู้ตลอดชีวิต",
+   "affiliation": "-"
+  },
+  {
+   "key": "sci-it||informatics@nrru.ac.th",
+   "full_name": "sci-it",
+   "email": "informatics@nrru.ac.th",
+   "unit_name": "ภายใต้คณะวิทย์",
+   "affiliation": "ภายใต้คณะวิทย์"
+  },
+  {
+   "key": "inv-sci||thamonwannapohn.k@nrru.ac.th",
+   "full_name": "inv-sci",
+   "email": "thamonwannapohn.k@nrru.ac.th",
+   "unit_name": "ภายใต้คณะวิทย์",
+   "affiliation": "ภายใต้คณะวิทย์"
+  },
+  {
+   "key": "nrru-li||i@nrru.ac.th",
+   "full_name": "nrru-li",
+   "email": "i@nrru.ac.th",
+   "unit_name": "-",
+   "affiliation": "-"
+  },
+  {
+   "key": "นางสาวกัญญาวีร์ จิรทันตศิลป์||",
+   "full_name": "นางสาวกัญญาวีร์ จิรทันตศิลป์",
+   "email": null,
+   "unit_name": "กองคลัง",
+   "affiliation": "กองคลัง"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||thitikan.i@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "thitikan.i@nrru.ac.th",
+   "unit_name": "คนข้างใจ",
+   "affiliation": "ครุ"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||dtd@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "dtd@nrru.ac.th",
+   "unit_name": "ครุ",
+   "affiliation": "ครุ"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||kam@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "kam@nrru.ac.th",
+   "unit_name": "คณะกรรมการอุททธรณ์และร้องทุกข์",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||laws@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "laws@nrru.ac.th",
+   "unit_name": "คลินิกกฎหมายและศูนย์ไกล่เกลี่ย",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "ปนัดดา คำจะโปะ||youth@nrru.ac.th",
+   "full_name": "ปนัดดา คำจะโปะ",
+   "email": "youth@nrru.ac.th",
+   "unit_name": "ศูนย์ศึกษาและพัฒนาโคราช",
+   "affiliation": "วิจัยและพัฒนา"
+  },
+  {
+   "key": "นายสุภพ โก่งกระโทก||sdg@nrru.ac.th",
+   "full_name": "นายสุภพ โก่งกระโทก",
+   "email": "sdg@nrru.ac.th",
+   "unit_name": "SDG",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||talk@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "talk@nrru.ac.th",
+   "unit_name": "ร้องเรียนจากภายนอก",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||president@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "president@nrru.ac.th",
+   "unit_name": "ร้องเรียนอธิการ",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||tender@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "tender@nrru.ac.th",
+   "unit_name": "ประกาศจัดซื้อจัดจ้าง",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "อ.ฐิติวัสส์||ia@nrru.ac.th",
+   "full_name": "อ.ฐิติวัสส์",
+   "email": "ia@nrru.ac.th",
+   "unit_name": "สาขาวิชาอุตสาหกรรมศิลป์",
+   "affiliation": "เทคโนอุต"
+  },
+  {
+   "key": "ผศ.ดร.รุ่งโรจน์||rungrote.p@nrru.ac.th",
+   "full_name": "ผศ.ดร.รุ่งโรจน์",
+   "email": "rungrote.p@nrru.ac.th",
+   "unit_name": "สาขาเทคโนโลยีและสื่อสารการศึกษา",
+   "affiliation": "ครุ"
+  },
+  {
+   "key": "lmsnrru||admin@nrru.ac.th",
+   "full_name": "lmsnrru",
+   "email": "admin@nrru.ac.th",
+   "unit_name": "lms",
+   "affiliation": "สำนักวิทยา"
+  },
+  {
+   "key": "มิลินธร||milintorn.p@nrru.ac.th",
+   "full_name": "มิลินธร",
+   "email": "milintorn.p@nrru.ac.th",
+   "unit_name": "ระบบลาไปต่างประเทศ",
+   "affiliation": "กบค"
+  },
+  {
+   "key": "อ.เอกชัย ปานมาก||akekachai.p@nrru.ac.th",
+   "full_name": "อ.เอกชัย ปานมาก",
+   "email": "akekachai.p@nrru.ac.th",
+   "unit_name": "การจัดการ",
+   "affiliation": "การจัดการ"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||nrru100@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "nrru100@nrru.ac.th",
+   "unit_name": "เว็บไซต์ 100 ปี NRRU",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "ดร.ฉัฐระพี โพธิ์ปิติกุล||chutrapee.p@nrru.ac.th",
+   "full_name": "ดร.ฉัฐระพี โพธิ์ปิติกุล",
+   "email": "chutrapee.p@nrru.ac.th",
+   "unit_name": "-",
+   "affiliation": "-"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||psf@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "psf@nrru.ac.th",
+   "unit_name": "พัฒนาอาจารย์สู่มาตรฐานอาจารย์มืออาชีพ",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "นายอติชาต วิชิตะกุล||saraban@nrru.ac.th",
+   "full_name": "นายอติชาต วิชิตะกุล",
+   "email": "saraban@nrru.ac.th",
+   "unit_name": "งานบริหารทั่วไป",
+   "affiliation": "กองกลาง สำนักงานอธิการบดี"
+  },
+  {
+   "key": "ชัยวัฒน์ธนา รัตนศิริกรณ์||chaiwatthana.r@nrru.ac.th",
+   "full_name": "ชัยวัฒน์ธนา รัตนศิริกรณ์",
+   "email": "chaiwatthana.r@nrru.ac.th",
+   "unit_name": "สภาคณาจารย์และข้าราชการ",
+   "affiliation": "สำนักงานอธิการบดี"
+  },
+  {
+   "key": "ปนัดดา คำจะโปะ||kanokporn.c@nrru.ac.th",
+   "full_name": "ปนัดดา คำจะโปะ",
+   "email": "kanokporn.c@nrru.ac.th",
+   "unit_name": "ศูนย์ศึกษาและพัฒนาโคราช",
+   "affiliation": "วิจัยและพัฒนา"
+  },
+  {
+   "key": "นายคณพศ พงศ์วรรัศม์||sunthon.c@nrru.ac.th",
+   "full_name": "นายคณพศ พงศ์วรรัศม์",
+   "email": "sunthon.c@nrru.ac.th",
+   "unit_name": "กองกลาง",
+   "affiliation": "สำนักงานอธิการบดี"
+  },
+  {
+   "key": "นายวีรพล ปุ๋ยกระโทก||ita@nrru.ac.th",
+   "full_name": "นายวีรพล ปุ๋ยกระโทก",
+   "email": "ita@nrru.ac.th",
+   "unit_name": "ประเมินความโปร่งใส",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "สุวิจักษณ์ ปรึกกระโทก||saengwan.tung@gmail.com",
+   "full_name": "สุวิจักษณ์ ปรึกกระโทก",
+   "email": "saengwan.tung@gmail.com",
+   "unit_name": "คณะพยาบาล",
+   "affiliation": "คณะพยาบาล"
+  },
+  {
+   "key": "นายคณพศ พงศ์วรรัศม์||pr@nrru.ac.th",
+   "full_name": "นายคณพศ พงศ์วรรัศม์",
+   "email": "pr@nrru.ac.th",
+   "unit_name": "งานประชาสัมพันธ์",
+   "affiliation": "กองกลาง สำนักงานอธิการบดี"
+  },
+  {
+   "key": "สถิต จำเริญ||bennett114@gmail.com",
+   "full_name": "สถิต จำเริญ",
+   "email": "bennett114@gmail.com",
+   "unit_name": "ศูนย์นวัตกรรมทางสังคม",
+   "affiliation": "คณะมนุษย์"
+  },
+  {
+   "key": "sub_nrru68,Kmnrru||saimarn.s@nrru.ac.th",
+   "full_name": "sub_nrru68,Kmnrru",
+   "email": "saimarn.s@nrru.ac.th",
+   "unit_name": "KM",
+   "affiliation": "กองประกัน"
+  },
+  {
+   "key": "ผศ.ดร.กนกมน รุจิรกุล||chutrapee.p@nrru.ac.th",
+   "full_name": "ผศ.ดร.กนกมน รุจิรกุล",
+   "email": "chutrapee.p@nrru.ac.th",
+   "unit_name": "ระบบบริการ",
+   "affiliation": "การจัดการ"
+  },
+  {
+   "key": "nrru-secre||secretarial@nrru.ac.th",
+   "full_name": "nrru-secre",
+   "email": "secretarial@nrru.ac.th",
+   "unit_name": "งานเลขานุการและประชุม",
+   "affiliation": "กองกลาง สำนักงานอธิการบดี"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||siswatgames@nrru.ac.th",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": "siswatgames@nrru.ac.th",
+   "unit_name": "สีสวาด เกมส์",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "ปนัดดา คำจะโปะ||panadda.ka@nrru.ac.th",
+   "full_name": "ปนัดดา คำจะโปะ",
+   "email": "panadda.ka@nrru.ac.th",
+   "unit_name": "ศูนย์ศึกษาและพัฒนาโคราช",
+   "affiliation": "วิจัยและพัฒนา"
+  },
+  {
+   "key": "ปนัดดา คำจะโปะ||",
+   "full_name": "ปนัดดา คำจะโปะ",
+   "email": null,
+   "unit_name": "ศูนย์ศึกษาและพัฒนาโคราช",
+   "affiliation": "วิจัยและพัฒนา"
+  },
+  {
+   "key": "nrru-fit||kornraphat.p@nrru.ac.th",
+   "full_name": "nrru-fit",
+   "email": "kornraphat.p@nrru.ac.th",
+   "unit_name": "เทคโนอุต",
+   "affiliation": "เทคโนอุต"
+  },
+  {
+   "key": "นายเดชชาติ เปียสันเทีย||nurse@nrru.ac.th",
+   "full_name": "นายเดชชาติ เปียสันเทีย",
+   "email": "nurse@nrru.ac.th",
+   "unit_name": "คณะพยาบาล",
+   "affiliation": "คณะพยาบาล"
+  },
+  {
+   "key": "นันทนี ศรีแสงจันทร์||",
+   "full_name": "นันทนี ศรีแสงจันทร์",
+   "email": null,
+   "unit_name": "KM",
+   "affiliation": "มหาวิทยาลัย"
+  },
+  {
+   "key": "อาจารย์สุระ วรรณแสง||jirasak.w@nrru.ac.th",
+   "full_name": "อาจารย์สุระ วรรณแสง",
+   "email": "jirasak.w@nrru.ac.th",
+   "unit_name": "ครุ",
+   "affiliation": "ครุ"
+  },
+  {
+   "key": "นายปริญญา กาจสันเทียะ||parinya.k@nrru.ac.th",
+   "full_name": "นายปริญญา กาจสันเทียะ",
+   "email": "parinya.k@nrru.ac.th",
+   "unit_name": "รายงานค่าไฟ",
+   "affiliation": "สำนักคอม"
+  },
+  {
+   "key": "นายยศพิรัชย์บุญภาเฟื่องฟู||yospirat.b@nrru.ac.th",
+   "full_name": "นายยศพิรัชย์บุญภาเฟื่องฟู",
+   "email": "yospirat.b@nrru.ac.th",
+   "unit_name": "งานพัสดุ",
+   "affiliation": "กองกลาง สำนักงานอธิการบดี"
+  },
+  {
+   "key": "ผศ.จิรศักดิ์ วิพัฒน์โสภากร||jirasak.w@nrru.ac.th",
+   "full_name": "ผศ.จิรศักดิ์ วิพัฒน์โสภากร",
+   "email": "jirasak.w@nrru.ac.th",
+   "unit_name": "ครุ",
+   "affiliation": "ครุ"
+  },
+  {
+   "key": "Administrator, NRRU||",
+   "full_name": "Administrator, NRRU",
+   "email": null,
+   "unit_name": "สมาคมศิษย์เก่ามหาวิทยาลัยราชภัฏนครราชสีมา",
+   "affiliation": "-"
+  },
+  {
+   "key": "นายสุภพ โก่งกระโทก||",
+   "full_name": "นายสุภพ โก่งกระโทก",
+   "email": null,
+   "unit_name": "Korat Location Gallery 2024",
+   "affiliation": "-"
+  }
+ ],
+ "accounts": [
+  {
+   "username": "adminweb_cbe",
+   "customer_name": "web develop",
+   "applicant_key": "นายทัศนชัย ภิญโญทรัพย์||thotsaphon.saiking@gmail.com",
+   "domains": [
+    {
+     "domain_name": "cbe-edu.nrru.ac.th",
+     "department_code": "-edu",
+     "department_other": null,
+     "date": "2022-04-18"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-04-18"
+   ],
+   "status": "active",
+   "earliest_date": "2022-04-18"
+  },
+  {
+   "username": "adEDU_eduroom",
+   "customer_name": "edu-eduroom",
+   "applicant_key": "นายทัศนชัย ภิญโญทรัพย์||eduapp@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "edu.nrru.ac.th",
+     "department_code": "-edu",
+     "department_other": null,
+     "date": "2026-02-10"
+    },
+    {
+     "domain_name": "krsm.nrru.ac.th",
+     "department_code": "-edu",
+     "department_other": null,
+     "date": "2023-01-12"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2026-02-10",
+    "2023-01-12"
+   ],
+   "status": "active",
+   "earliest_date": "2023-01-12"
+  },
+  {
+   "username": "human",
+   "customer_name": "human",
+   "applicant_key": "นายธนบุตร ศรีเกื้อกลิ่น||human@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "artcultureDB.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2025-08-25"
+    },
+    {
+     "domain_name": "atd.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-27"
+    },
+    {
+     "domain_name": "coop.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2026-05-15"
+    },
+    {
+     "domain_name": "e-forms.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2024-11-15"
+    },
+    {
+     "domain_name": "eport.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2023-02-17"
+    },
+    {
+     "domain_name": "grade.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2025-03-19"
+    },
+    {
+     "domain_name": "human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-26"
+    },
+    {
+     "domain_name": "js.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-28"
+    },
+    {
+     "domain_name": "khok.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-28"
+    },
+    {
+     "domain_name": "khoratgeoparkguide.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-27"
+    },
+    {
+     "domain_name": "meeting.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-12-08"
+    },
+    {
+     "domain_name": "mis.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-28"
+    },
+    {
+     "domain_name": "ojstest.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2023-05-26"
+    },
+    {
+     "domain_name": "plan.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": null
+    },
+    {
+     "domain_name": "test.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2026-06-01"
+    },
+    {
+     "domain_name": "workload.human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": null
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-08-25",
+    "2022-08-27",
+    "2026-05-15",
+    "2024-11-15",
+    "2023-02-17",
+    "2025-03-19",
+    "2022-08-26",
+    "2022-08-28",
+    "2022-08-28",
+    "2022-08-27",
+    "2022-12-08",
+    "2022-08-28",
+    "2023-05-26",
+    "2026-06-01"
+   ],
+   "status": "active",
+   "earliest_date": "2022-08-26"
+  },
+  {
+   "username": "admin_nichuman",
+   "customer_name": "human",
+   "applicant_key": "นายธนบุตร ศรีเกื้อกลิ่น||anusarasutho1@gmail.com",
+   "domains": [
+    {
+     "domain_name": "nic-human.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2024-03-08"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-03-08"
+   ],
+   "status": "active",
+   "earliest_date": "2024-03-08"
+  },
+  {
+   "username": "admin_jppj-hum",
+   "customer_name": "jppj-hum",
+   "applicant_key": "ผศ.ดร.มานิตย์ อรรคชาติ||manit.a@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "jppj-hum.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2023-04-03"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-04-03"
+   ],
+   "status": "active",
+   "earliest_date": "2023-04-03"
+  },
+  {
+   "username": "adminweb_bdhum",
+   "customer_name": "bd-hum",
+   "applicant_key": "ผศ.ดร.มานิตย์ อรรคชาติ||manit.a@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "bd-hum.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2022-08-29"
+    },
+    {
+     "domain_name": "manit.bd-hum.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2025-10-15"
+    },
+    {
+     "domain_name": "staging.bd-hum.nrru.ac.th",
+     "department_code": "-human",
+     "department_other": null,
+     "date": "2025-10-15"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2022-08-29",
+    "2025-10-15",
+    "2025-10-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-08-29"
+  },
+  {
+   "username": "adweb_ph",
+   "customer_name": "ph",
+   "applicant_key": "นายณฐกร บุญประดิษฐ||ph@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "booking-ph.nrru.ac.th",
+     "department_code": "-ph",
+     "department_other": null,
+     "date": "2025-12-01"
+    },
+    {
+     "domain_name": "ph.nrru.ac.th",
+     "department_code": "-ph",
+     "department_other": null,
+     "date": "2022-10-27"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-12-01",
+    "2022-10-27"
+   ],
+   "status": "active",
+   "earliest_date": "2022-10-27"
+  },
+  {
+   "username": "dev_phweb26",
+   "customer_name": "nrru-ph",
+   "applicant_key": "นายณฐกร บุญประดิษฐ||ph@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "ph2.nrru.ac.th",
+     "department_code": "-ph",
+     "department_other": null,
+     "date": "2026-02-10"
+    },
+    {
+     "domain_name": "ph2.nrru.ac.th",
+     "department_code": "-ph",
+     "department_other": null,
+     "date": "2026-02-10"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2026-02-10",
+    "2026-02-10"
+   ],
+   "status": "active",
+   "earliest_date": "2026-02-10"
+  },
+  {
+   "username": "fmsmis",
+   "customer_name": "fmsmis",
+   "applicant_key": "นายเรืองเดช กุลชูศักดิ์||fms@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "fmsmis.nrru.ac.th",
+     "department_code": "-fms",
+     "department_other": null,
+     "date": "2023-02-09"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-02-09"
+   ],
+   "status": "active",
+   "earliest_date": "2023-02-09"
+  },
+  {
+   "username": "nursecenter_server",
+   "customer_name": "nurse",
+   "applicant_key": "นายสุวิจักษณ์ ปรึกกระโทก||suwichak.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "nursecenter.nrru.ac.th",
+     "department_code": "-nurse",
+     "department_other": null,
+     "date": "2024-02-09"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-02-09"
+   ],
+   "status": "active",
+   "earliest_date": "2024-02-09"
+  },
+  {
+   "username": "admis_sci2",
+   "customer_name": "mis-sci",
+   "applicant_key": "อาจารย์สุระ วรรณแสง||sura.w@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "adoring-visvesvaraya.192-168-16-82.plesk.page",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2025-10-16"
+    },
+    {
+     "domain_name": "agri.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "bio.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "cds.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2025-01-17"
+    },
+    {
+     "domain_name": "ced.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "chem.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "dmt.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2025-01-17"
+    },
+    {
+     "domain_name": "envi.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "fitnesstest.ses.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2025-06-24"
+    },
+    {
+     "domain_name": "foodtech.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "gensci.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "geogi.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "home.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "internship-edu.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2023-02-28"
+    },
+    {
+     "domain_name": "mathStat.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "mis-sci.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-01"
+    },
+    {
+     "domain_name": "physics.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "scienceed.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": null
+    },
+    {
+     "domain_name": "sportsci.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "staging.web.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": null
+    },
+    {
+     "domain_name": "vt.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-11"
+    },
+    {
+     "domain_name": "web.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2024-07-12"
+    },
+    {
+     "domain_name": "web.sciencetech.nrru.ac.th.web.sciencetech.nrru.ac.th",
+     "department_code": "-sci",
+     "department_other": null,
+     "date": "2025-04-23"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-10-16",
+    "2024-07-11",
+    "2024-07-11",
+    "2025-01-17",
+    "2024-07-11",
+    "2024-07-11",
+    "2025-01-17",
+    "2024-07-11",
+    "2025-06-24",
+    "2024-07-11",
+    "2024-07-11",
+    "2024-07-11",
+    "2024-07-11",
+    "2023-02-28",
+    "2024-07-11",
+    "2024-07-01",
+    "2024-07-11",
+    "2024-07-11",
+    "2024-07-11",
+    "2024-07-12",
+    "2025-04-23"
+   ],
+   "status": "active",
+   "earliest_date": "2023-02-28"
+  },
+  {
+   "username": "adminweb_fit",
+   "customer_name": "nrru-fit",
+   "applicant_key": "นายศราวุธ พิสุตปัญญาทร||sarawut.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "fit.nrru.ac.th",
+     "department_code": "-fit",
+     "department_other": null,
+     "date": null
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [],
+   "status": "active",
+   "earliest_date": null
+  },
+  {
+   "username": "admin_nannee",
+   "customer_name": "admin_nannee",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||nantanee.s@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "comcenter.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์สำนักคอม",
+     "date": "2025-12-22"
+    },
+    {
+     "domain_name": "comcenter68.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์สำนักคอม (เก่า)",
+     "date": "2025-12-22"
+    },
+    {
+     "domain_name": "congrats.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์รับปริญญา",
+     "date": "2024-06-18"
+    },
+    {
+     "domain_name": "demonrru25.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ต้นแบบเว็บไซต์ v.2",
+     "date": "2025-04-01"
+    },
+    {
+     "domain_name": "larWeb.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์มหาลัย 3 ภาษา",
+     "date": "2026-03-09"
+    },
+    {
+     "domain_name": "larWeb0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์มหาลัย (เก่า)",
+     "date": "2023-07-26"
+    },
+    {
+     "domain_name": "nrru2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์รวม เทลมเพลสเว็บ CMS",
+     "date": "2025-03-04"
+    },
+    {
+     "domain_name": "phone.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ลิ้งค์เว็บไซต์ สมุดโทรศัพท์",
+     "date": "2022-05-19"
+    },
+    {
+     "domain_name": "themeweb.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ต้นแบบเว็บไซต์ v.1",
+     "date": "2022-11-22"
+    },
+    {
+     "domain_name": "webthem1.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เทลมเพลสเว็บ CMS 1",
+     "date": "2025-03-07"
+    },
+    {
+     "domain_name": "webthem2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เทลมเพลสเว็บ CMS 2",
+     "date": "2025-03-07"
+    },
+    {
+     "domain_name": "webthem3.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เทลมเพลสเว็บ CMS 3",
+     "date": "2025-03-07"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active",
+    "disable",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-12-22",
+    "2025-12-22",
+    "2024-06-18",
+    "2025-04-01",
+    "2026-03-09",
+    "2023-07-26",
+    "2025-03-04",
+    "2022-05-19",
+    "2022-11-22",
+    "2025-03-07",
+    "2025-03-07",
+    "2025-03-07"
+   ],
+   "status": "active",
+   "earliest_date": "2022-05-19"
+  },
+  {
+   "username": "devops",
+   "customer_name": "devops",
+   "applicant_key": "devops||ntw3840@gmail.com",
+   "domains": [
+    {
+     "domain_name": "devops.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2025-02-25"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-02-25"
+   ],
+   "status": "active",
+   "earliest_date": "2025-02-25"
+  },
+  {
+   "username": "chaitawat",
+   "customer_name": "chaitawat",
+   "applicant_key": "เกียงไกร จอมเกาะ||chaitawat.no@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "iotnetwork.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2023-08-07"
+    },
+    {
+     "domain_name": "sstadmin.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2023-02-07"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2023-08-07",
+    "2023-02-07"
+   ],
+   "status": "active",
+   "earliest_date": "2023-02-07"
+  },
+  {
+   "username": "admino",
+   "customer_name": "839348581.0",
+   "applicant_key": "เกียงไกร จอมเกาะ||chaitawat71530v2@gmail.com",
+   "domains": [
+    {
+     "domain_name": "coslab.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2025-06-13"
+    },
+    {
+     "domain_name": "iaKMB.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2023-12-18"
+    },
+    {
+     "domain_name": "nia.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": null
+    },
+    {
+     "domain_name": "niaASM.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2025-02-10"
+    },
+    {
+     "domain_name": "niaassessmentb.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2025-02-10"
+    },
+    {
+     "domain_name": "niaIT.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2024-05-24"
+    },
+    {
+     "domain_name": "niaKM.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2023-12-15"
+    },
+    {
+     "domain_name": "niatest.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2024-05-25"
+    },
+    {
+     "domain_name": "smartlab.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2025-06-13"
+    }
+   ],
+   "statuses": [
+    "disable",
+    "disable",
+    "active",
+    "active",
+    "active",
+    "active",
+    "disable",
+    "disable",
+    "disable"
+   ],
+   "dates": [
+    "2025-06-13",
+    "2023-12-18",
+    "2025-02-10",
+    "2025-02-10",
+    "2024-05-24",
+    "2023-12-15",
+    "2024-05-25",
+    "2025-06-13"
+   ],
+   "status": "active",
+   "earliest_date": "2023-12-15"
+  },
+  {
+   "username": "dev_iscNrru69",
+   "customer_name": "nrru-network",
+   "applicant_key": "เกียงไกร จอมเกาะ||kriangkai.j@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "isc.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2026-02-19"
+    },
+    {
+     "domain_name": "tablesystem.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักคอม",
+     "date": "2026-02-25"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2026-02-19",
+    "2026-02-25"
+   ],
+   "status": "active",
+   "earliest_date": "2026-02-19"
+  },
+  {
+   "username": "adNRRU_audit",
+   "customer_name": "nrru-audit",
+   "applicant_key": "นางวราภรณ์ ศรีโพธิ์วัง||audit.nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "audit.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ตรวจสอบภายใน",
+     "date": "2022-11-10"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-10"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-10"
+  },
+  {
+   "username": null,
+   "customer_name": "nrru-audit",
+   "applicant_key": "นางวราภรณ์ ศรีโพธิ์วัง||",
+   "domains": [
+    {
+     "domain_name": "audit0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ตรวจสอบภายใน",
+     "date": null
+    },
+    {
+     "domain_name": "ppai2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ทรัพย์สินและรายได้",
+     "date": null
+    }
+   ],
+   "statuses": [
+    "",
+    ""
+   ],
+   "dates": [],
+   "status": "",
+   "earliest_date": null
+  },
+  {
+   "username": "ppai.nrru.ac.th",
+   "customer_name": "nrru-ppai",
+   "applicant_key": "นางแอนนา พรหมเมืองคุก||ppai@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "ppai.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ทรัพย์สินและรายได้",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_bgm",
+   "customer_name": "nrru-bgm",
+   "applicant_key": "นางสาวฐิติรัตน์ จริยธนาวัฒน์||bgm@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "bgm.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองอาคารสถานที่และบริการ",
+     "date": "2025-12-22"
+    },
+    {
+     "domain_name": "bgm0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองอาคาร",
+     "date": "2025-11-10"
+    },
+    {
+     "domain_name": "bm.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองอาคาร",
+     "date": "2025-11-10"
+    }
+   ],
+   "statuses": [
+    "active",
+    "disable",
+    "disable"
+   ],
+   "dates": [
+    "2025-12-22",
+    "2025-11-10",
+    "2025-11-10"
+   ],
+   "status": "active",
+   "earliest_date": "2025-11-10"
+  },
+  {
+   "username": "adNRRU_abgm",
+   "customer_name": "nrru-abgm",
+   "applicant_key": "นางสาวฐิติรัตน์ จริยธนาวัฒน์||abgm@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "abgm.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองอาคาร",
+     "date": "2025-08-06"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-08-06"
+   ],
+   "status": "active",
+   "earliest_date": "2025-08-06"
+  },
+  {
+   "username": "adNRRu_cc",
+   "customer_name": "nrru-cc",
+   "applicant_key": "นางศรัญญา ชูสกุล||cc@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "cc.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักงานสภา",
+     "date": "2022-11-10"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-10"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-10"
+  },
+  {
+   "username": "adNRRU_finance",
+   "customer_name": "nrru-finance",
+   "applicant_key": "นางสาวกัญญาวีร์ จิรทันตศิลป์||finance@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "finance.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองคลัง",
+     "date": "2022-11-14"
+    },
+    {
+     "domain_name": "finance2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองคลัง",
+     "date": "2025-07-02"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2022-11-14",
+    "2025-07-02"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-14"
+  },
+  {
+   "username": "adNRRU_dsp",
+   "customer_name": "nrru-dsp",
+   "applicant_key": "นางสาวทรัพย์มณี บุญญโก||dsp@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "dsg.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองกิจการพิเศษ",
+     "date": "2022-11-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-14"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-14"
+  },
+  {
+   "username": "adNRRU_qa",
+   "customer_name": "nrru-qa",
+   "applicant_key": "นางสาวสุภาพร คำภา||qa@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "qa.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองประกันคุณภาพการศึกษา",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "dev_qaweb2569",
+   "customer_name": null,
+   "applicant_key": "นางสาวสุภาพร คำภา||qa@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "qa2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองประกัน",
+     "date": "2026-02-10"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2026-02-10"
+   ],
+   "status": "active",
+   "earliest_date": "2026-02-10"
+  },
+  {
+   "username": null,
+   "customer_name": "nrru-qa",
+   "applicant_key": "นางสาวสุภาพร คำภา||",
+   "domains": [
+    {
+     "domain_name": "qa2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองประกัน",
+     "date": null
+    },
+    {
+     "domain_name": "clinique.nrru.ac.th",
+     "department_code": null,
+     "department_other": null,
+     "date": null
+    },
+    {
+     "domain_name": "finance2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองคลัง",
+     "date": null
+    }
+   ],
+   "statuses": [
+    "",
+    "",
+    ""
+   ],
+   "dates": [],
+   "status": "",
+   "earliest_date": null
+  },
+  {
+   "username": "adminweb_hr",
+   "customer_name": "web develop",
+   "applicant_key": "นายมานัต รัตนเนนย||manat.rattananen@hotmail.com",
+   "domains": [
+    {
+     "domain_name": "hr.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กบค",
+     "date": "2022-05-17"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-05-17"
+   ],
+   "status": "active",
+   "earliest_date": "2022-05-17"
+  },
+  {
+   "username": "rdi",
+   "customer_name": "RDI",
+   "applicant_key": "นายวิศวมาศ ภักดีกุล||rdi@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "rdi.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สถาบันวิจัยและพัฒนา",
+     "date": "2022-08-17"
+    }
+   ],
+   "statuses": [
+    "disable"
+   ],
+   "dates": [
+    "2022-08-17"
+   ],
+   "status": "disable",
+   "earliest_date": "2022-08-17"
+  },
+  {
+   "username": "adnrru_rdi23",
+   "customer_name": "nrru-rdi",
+   "applicant_key": "นายวิศวมาศ ภักดีกุล||wijaikorat@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "isanresearchexpo2025.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สถาบันวิจัยและพัฒนา",
+     "date": "2025-11-27"
+    },
+    {
+     "domain_name": "rdi2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สถาบันวิจัยและพัฒนา",
+     "date": "2023-04-19"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-11-27",
+    "2023-04-19"
+   ],
+   "status": "active",
+   "earliest_date": "2023-04-19"
+  },
+  {
+   "username": "adNRRU_sec",
+   "customer_name": "nrru-sec",
+   "applicant_key": "นางสาวอรวรรณ ชอบสระน้อย||sec@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "sec.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์การศึกษาพิเศษ",
+     "date": "2025-12-22"
+    },
+    {
+     "domain_name": "sec0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "งานเลขานุการ",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active",
+    "disable"
+   ],
+   "dates": [
+    "2025-12-22",
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_tlo",
+   "customer_name": "nrru-tlo",
+   "applicant_key": "นางสาวศุภัคชญา เชื่อมชิต||tlo@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "tlo.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ubi",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_ubi",
+   "customer_name": "nrru-ubi",
+   "applicant_key": "นางสาวทรัพย์มณี บุญญโก||ubi@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "ubi.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์บ่มเพาะวิสาหกิจ",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "disable"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "disable",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "dev_ubitlo69",
+   "customer_name": "nrru-ubitlo",
+   "applicant_key": "นางสาวทรัพย์มณี บุญญโก||ubitlo@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "ubitlo.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ubi+ทรัพย์สินทางปัญญา",
+     "date": "2026-01-19"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2026-01-19"
+   ],
+   "status": "active",
+   "earliest_date": "2026-01-19"
+  },
+  {
+   "username": "dev_liNRRU69",
+   "customer_name": null,
+   "applicant_key": "นางสาวศุภาวีร์ แก้วกูร||li@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "li2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สถาบันภาษา",
+     "date": "2026-01-19"
+    },
+    {
+     "domain_name": "li2.nrru.ac.th",
+     "department_code": null,
+     "department_other": null,
+     "date": "2026-01-19"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2026-01-19",
+    "2026-01-19"
+   ],
+   "status": "active",
+   "earliest_date": "2026-01-19"
+  },
+  {
+   "username": "itanrru",
+   "customer_name": "nrru-ita",
+   "applicant_key": "นางสาวศุภาวีร์ แก้วกูร||ita@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "li.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สถาบันภาษา",
+     "date": "2022-11-15"
+    },
+    {
+     "domain_name": "ita.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ประเมินความโปร่งใส",
+     "date": "2024-07-30"
+    },
+    {
+     "domain_name": "rajabhatpoll.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ราชภัฏโพล",
+     "date": "2025-12-18"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2022-11-15",
+    "2024-07-30",
+    "2025-12-18"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_work",
+   "customer_name": "nrru-work",
+   "applicant_key": "นางสาวณัฏฐิกา แจ่มสว่าง||work@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "work.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองพัฒ",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_std",
+   "customer_name": "nrru-std",
+   "applicant_key": "นางสาวณัฏฐิกา แจ่มสว่าง||std@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "std.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองพัฒนานักศึกษา",
+     "date": "2022-11-15"
+    },
+    {
+     "domain_name": "std2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองพัฒ",
+     "date": "2023-10-04"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2022-11-15",
+    "2023-10-04"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_rspg",
+   "customer_name": "nrru-rspg",
+   "applicant_key": "น.ส.ธมนวรรณพร ค้าคุ้ม||rspg@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "rspg.nrru.ac.th",
+     "department_code": null,
+     "department_other": "โครงการอนุรักษ์พันธุกรรมพืช",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_clinique",
+   "customer_name": "nrru-clinique",
+   "applicant_key": "นายธีระวัฒน์ เรืองมะเริง||clinique@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "clinique0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คลีนิคเทคโนโลยี",
+     "date": "2022-11-16"
+    },
+    {
+     "domain_name": "sc-sci.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์วิทยาศาสตร์",
+     "date": "2025-12-22"
+    }
+   ],
+   "statuses": [
+    "disable",
+    "active"
+   ],
+   "dates": [
+    "2022-11-16",
+    "2025-12-22"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-16"
+  },
+  {
+   "username": "adSCI-sct",
+   "customer_name": "sct-sci",
+   "applicant_key": "นายจตุรงค์ เชือนไธสง||chaturong.c@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "sc-sci0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์วิทย์",
+     "date": "2023-01-20"
+    }
+   ],
+   "statuses": [
+    "disable"
+   ],
+   "dates": [
+    "2023-01-20"
+   ],
+   "status": "disable",
+   "earliest_date": "2023-01-20"
+  },
+  {
+   "username": "digi_sci_serv",
+   "customer_name": "nrru-sci",
+   "applicant_key": "nrru-sci||sawitree.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "host-sci.nrru.ac.th",
+     "department_code": null,
+     "department_other": null,
+     "date": "2022-07-20"
+    },
+    {
+     "domain_name": "mis-informatics.nrru.ac.th",
+     "department_code": null,
+     "department_other": null,
+     "date": "2022-07-04"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2022-07-20",
+    "2022-07-04"
+   ],
+   "status": "active",
+   "earliest_date": "2022-07-04"
+  },
+  {
+   "username": "adNRRU_saving",
+   "customer_name": "nrru-saving",
+   "applicant_key": "นางสาวนันทิชาพร คิดเห็น||saving@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "saving.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สวัสดิการออมทรัพย์",
+     "date": "2022-11-16"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-16"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-16"
+  },
+  {
+   "username": "admin_op",
+   "customer_name": "nrru-op",
+   "applicant_key": "นายชัยวัฒน์ธนา รัตนศิริกรณ์||jejogream@hotmail.com",
+   "domains": [
+    {
+     "domain_name": "dbplan.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักงานอธิการบดี",
+     "date": "2023-08-07"
+    },
+    {
+     "domain_name": "graduation.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักงานอธิการบดี",
+     "date": "2025-08-18"
+    },
+    {
+     "domain_name": "op.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักงานอธิการบดี",
+     "date": "2023-03-31"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2023-08-07",
+    "2025-08-18",
+    "2023-03-31"
+   ],
+   "status": "active",
+   "earliest_date": "2023-03-31"
+  },
+  {
+   "username": "admin_iao",
+   "customer_name": "nrru-iao,2568",
+   "applicant_key": "นายจักรพงศ์ สุคนธพงศ์||jakkrapong.s@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "iao2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองวิเทศน์",
+     "date": "2025-07-04"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-07-04"
+   ],
+   "status": "active",
+   "earliest_date": "2025-07-04"
+  },
+  {
+   "username": "satit_nrru",
+   "customer_name": "satit_nrru",
+   "applicant_key": "satit_nrru||kittichai.m@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "satitmattayom.nrru.ac.th",
+     "department_code": null,
+     "department_other": null,
+     "date": "2025-07-22"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-07-22"
+   ],
+   "status": "active",
+   "earliest_date": "2025-07-22"
+  },
+  {
+   "username": "dev_lifelong68",
+   "customer_name": "nrru-lifelong",
+   "applicant_key": "นางสาวนภาพร  ช้างสาร||lifelong@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "lifelonglearning.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สำนักการเรียนรู้ตลอดชีวิต",
+     "date": "2025-08-05"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-08-05"
+   ],
+   "status": "active",
+   "earliest_date": "2025-08-05"
+  },
+  {
+   "username": "admin_sci_inf",
+   "customer_name": "sci-it",
+   "applicant_key": "sci-it||informatics@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "informatics.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ภายใต้คณะวิทย์",
+     "date": "2025-08-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-08-14"
+   ],
+   "status": "active",
+   "earliest_date": "2025-08-14"
+  },
+  {
+   "username": "adSCI_inv",
+   "customer_name": "inv-sci",
+   "applicant_key": "inv-sci||thamonwannapohn.k@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "inv-sci.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ภายใต้คณะวิทย์",
+     "date": "2023-02-03"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-02-03"
+   ],
+   "status": "active",
+   "earliest_date": "2023-02-03"
+  },
+  {
+   "username": "adminweb_kkj",
+   "customer_name": "web_admin",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||thitikan.i@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "konkangjai.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คนข้างใจ",
+     "date": "2022-05-26"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-05-26"
+   ],
+   "status": "active",
+   "earliest_date": "2022-05-26"
+  },
+  {
+   "username": "adNRRU_dtd",
+   "customer_name": "nrru-dtd",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||dtd@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "dtd.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ครุ",
+     "date": "2022-11-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-14"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-14"
+  },
+  {
+   "username": "adNRRU_kam",
+   "customer_name": "nrru-kam",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||kam@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "kam.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คณะกรรมการอุททธรณ์และร้องทุกข์",
+     "date": "2022-11-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-14"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-14"
+  },
+  {
+   "username": "adNRRU_laws",
+   "customer_name": "nrru-laws",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||laws@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "laws.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คลินิกกฎหมายและศูนย์ไกล่เกลี่ย",
+     "date": "2022-11-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-14"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-14"
+  },
+  {
+   "username": "adNRRU_youth",
+   "customer_name": "nrru-youth",
+   "applicant_key": "ปนัดดา คำจะโปะ||youth@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "youth.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_sdg",
+   "customer_name": "nrru-sdg",
+   "applicant_key": "นายสุภพ โก่งกระโทก||sdg@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "sdg.nrru.ac.th",
+     "department_code": null,
+     "department_other": "SDG",
+     "date": "2022-11-21"
+    },
+    {
+     "domain_name": "sdg2024.nrru.ac.th",
+     "department_code": null,
+     "department_other": "SDG",
+     "date": "2024-08-28"
+    },
+    {
+     "domain_name": "sdg2026.nrru.ac.th",
+     "department_code": null,
+     "department_other": "SDG",
+     "date": "2025-10-14"
+    },
+    {
+     "domain_name": "sdgnrru.nrru.ac.th",
+     "department_code": null,
+     "department_other": "SDG",
+     "date": "2023-10-27"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active",
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2022-11-21",
+    "2024-08-28",
+    "2025-10-14",
+    "2023-10-27"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-21"
+  },
+  {
+   "username": "adNRRU_talk",
+   "customer_name": "nrru-talk",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||talk@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "talk.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ร้องเรียนจากภายนอก",
+     "date": "2022-11-16"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-16"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-16"
+  },
+  {
+   "username": "adNRRU_president",
+   "customer_name": "nrru-president",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||president@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "president.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ร้องเรียนอธิการ",
+     "date": "2022-11-15"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-15"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-15"
+  },
+  {
+   "username": "adNRRU_tender",
+   "customer_name": "nrru-tender",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||tender@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "tender.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ประกาศจัดซื้อจัดจ้าง",
+     "date": "2022-11-17"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-17"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-17"
+  },
+  {
+   "username": "adweb_ia",
+   "customer_name": "ia",
+   "applicant_key": "อ.ฐิติวัสส์||ia@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "ia.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สาขาวิชาอุตสาหกรรมศิลป์",
+     "date": "2022-11-21"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2022-11-21"
+   ],
+   "status": "active",
+   "earliest_date": "2022-11-21"
+  },
+  {
+   "username": "rungrote",
+   "customer_name": "rungrote",
+   "applicant_key": "ผศ.ดร.รุ่งโรจน์||rungrote.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "rungrote-edu.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สาขาเทคโนโลยีและสื่อสารการศึกษา",
+     "date": "2023-03-05"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-03-05"
+   ],
+   "status": "active",
+   "earliest_date": "2023-03-05"
+  },
+  {
+   "username": "lmsnrru",
+   "customer_name": "lmsnrru",
+   "applicant_key": "lmsnrru||admin@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "lmsnrru.rodriy.com",
+     "department_code": null,
+     "department_other": "lms",
+     "date": "2023-03-20"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-03-20"
+   ],
+   "status": "active",
+   "earliest_date": "2023-03-20"
+  },
+  {
+   "username": "admin_opar",
+   "customer_name": "nrru-opar",
+   "applicant_key": "มิลินธร||milintorn.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "opar.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ระบบลาไปต่างประเทศ",
+     "date": "2023-03-24"
+    },
+    {
+     "domain_name": "chang222.opar.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กบค",
+     "date": "2026-01-16"
+    }
+   ],
+   "statuses": [
+    "active",
+    "disable"
+   ],
+   "dates": [
+    "2023-03-24",
+    "2026-01-16"
+   ],
+   "status": "active",
+   "earliest_date": "2023-03-24"
+  },
+  {
+   "username": "adfms_chng",
+   "customer_name": "fms-chng",
+   "applicant_key": "อ.เอกชัย ปานมาก||akekachai.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "chng-fms.nrru.ac.th",
+     "department_code": null,
+     "department_other": "การจัดการ",
+     "date": "2023-04-07"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-04-07"
+   ],
+   "status": "active",
+   "earliest_date": "2023-04-07"
+  },
+  {
+   "username": "adnrru_100",
+   "customer_name": "nrru-100",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||nrru100@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "nrru100.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บไซต์ 100 ปี NRRU",
+     "date": "2023-04-10"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-04-10"
+   ],
+   "status": "active",
+   "earliest_date": "2023-04-10"
+  },
+  {
+   "username": "chutrapee",
+   "customer_name": "chutrapee",
+   "applicant_key": "ดร.ฉัฐระพี โพธิ์ปิติกุล||chutrapee.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "gvh.learningcity.nrru.ac.th",
+     "department_code": null,
+     "department_other": null,
+     "date": "2025-04-18"
+    },
+    {
+     "domain_name": "learningcity.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ระบบจัดการความช่วยเหลือ",
+     "date": "2023-04-19"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-04-18",
+    "2023-04-19"
+   ],
+   "status": "active",
+   "earliest_date": "2023-04-19"
+  },
+  {
+   "username": "adnrru_psf",
+   "customer_name": "nrru-psf",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||psf@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "psf.nrru.ac.th",
+     "department_code": null,
+     "department_other": "พัฒนาอาจารย์สู่มาตรฐานอาจารย์มืออาชีพ",
+     "date": "2023-05-30"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-05-30"
+   ],
+   "status": "active",
+   "earliest_date": "2023-05-30"
+  },
+  {
+   "username": "admin_centoff",
+   "customer_name": "nrru-centoff",
+   "applicant_key": "นายอติชาต วิชิตะกุล||saraban@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "centraloffice.nrru.ac.th",
+     "department_code": null,
+     "department_other": "งานบริหารทั่วไป",
+     "date": "2023-07-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2023-07-14"
+   ],
+   "status": "active",
+   "earliest_date": "2023-07-14"
+  },
+  {
+   "username": "admin_senate",
+   "customer_name": "nrru-senate",
+   "applicant_key": "ชัยวัฒน์ธนา รัตนศิริกรณ์||chaiwatthana.r@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "senate.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สภาคณาจารย์และข้าราชการ",
+     "date": "2024-03-26"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-03-26"
+   ],
+   "status": "active",
+   "earliest_date": "2024-03-26"
+  },
+  {
+   "username": "admin_bigdata",
+   "customer_name": "nrru-bigdata",
+   "applicant_key": "ปนัดดา คำจะโปะ||kanokporn.c@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "bigdata.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": "2024-03-28"
+    },
+    {
+     "domain_name": "drm-api.bigdata.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": "2025-05-26"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2024-03-28",
+    "2025-05-26"
+   ],
+   "status": "active",
+   "earliest_date": "2024-03-28"
+  },
+  {
+   "username": "admin_caad",
+   "customer_name": "nrru-caad",
+   "applicant_key": "นายคณพศ พงศ์วรรัศม์||sunthon.c@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "caad.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองกลาง",
+     "date": "2024-05-28"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-05-28"
+   ],
+   "status": "active",
+   "earliest_date": "2024-05-28"
+  },
+  {
+   "username": "admin_nurse",
+   "customer_name": "nrru-nurse",
+   "applicant_key": "สุวิจักษณ์ ปรึกกระโทก||saengwan.tung@gmail.com",
+   "domains": [
+    {
+     "domain_name": "nurseskill.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คณะพยาบาล",
+     "date": "2024-10-08"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-10-08"
+   ],
+   "status": "active",
+   "earliest_date": "2024-10-08"
+  },
+  {
+   "username": "dev_green",
+   "customer_name": "sub_nrru68,green",
+   "applicant_key": "ชัยวัฒน์ธนา รัตนศิริกรณ์||chaiwatthana.r@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "green.nrru.ac.th",
+     "department_code": null,
+     "department_other": "NRRU Green University",
+     "date": "2024-12-20"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-12-20"
+   ],
+   "status": "active",
+   "earliest_date": "2024-12-20"
+  },
+  {
+   "username": "dev_traininghuman",
+   "customer_name": "sub_nrru68,traininghuman",
+   "applicant_key": "ชัยวัฒน์ธนา รัตนศิริกรณ์||chaiwatthana.r@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "as-huso.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์นวัตกรรมทางสังคม",
+     "date": "2024-12-20"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-12-20"
+   ],
+   "status": "active",
+   "earliest_date": "2024-12-20"
+  },
+  {
+   "username": "dev_plannrru",
+   "customer_name": "sub_nrru68,plannrru",
+   "applicant_key": "ชัยวัฒน์ธนา รัตนศิริกรณ์||chaiwatthana.r@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "plan.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองนโยบายและแผน",
+     "date": "2024-12-20"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2024-12-20"
+   ],
+   "status": "active",
+   "earliest_date": "2024-12-20"
+  },
+  {
+   "username": "dev_prnrru",
+   "customer_name": "sub_nrru68,prnrru",
+   "applicant_key": "นายคณพศ พงศ์วรรัศม์||pr@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "pr.nrru.ac.th",
+     "department_code": null,
+     "department_other": "งานประชาสัมพันธ์",
+     "date": "2025-01-06"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-01-06"
+   ],
+   "status": "active",
+   "earliest_date": "2025-01-06"
+  },
+  {
+   "username": "dev_husonrru",
+   "customer_name": "sub_nrru68,husonrru",
+   "applicant_key": "สถิต จำเริญ||bennett114@gmail.com",
+   "domains": [
+    {
+     "domain_name": "huso.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์นวัตกรรมทางสังคม",
+     "date": "2025-02-11"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-02-11"
+   ],
+   "status": "active",
+   "earliest_date": "2025-02-11"
+  },
+  {
+   "username": "dev_Kmnrru",
+   "customer_name": "sub_nrru68,Kmnrru",
+   "applicant_key": "sub_nrru68,Kmnrru||saimarn.s@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "km0.nrru.ac.th",
+     "department_code": null,
+     "department_other": "KM",
+     "date": "2025-02-14"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-02-14"
+   ],
+   "status": "active",
+   "earliest_date": "2025-02-14"
+  },
+  {
+   "username": "dev_changratchasee68",
+   "customer_name": "nrru-changratch",
+   "applicant_key": "ผศ.ดร.กนกมน รุจิรกุล||chutrapee.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "changratchasee.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ระบบบริการ",
+     "date": "2025-08-05"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-08-05"
+   ],
+   "status": "active",
+   "earliest_date": "2025-08-05"
+  },
+  {
+   "username": "admin_secre",
+   "customer_name": "nrru-secre",
+   "applicant_key": "nrru-secre||secretarial@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "secretarial.nrru.ac.th",
+     "department_code": null,
+     "department_other": "งานเลขานุการและประชุม",
+     "date": "2025-08-05"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-08-05"
+   ],
+   "status": "active",
+   "earliest_date": "2025-08-05"
+  },
+  {
+   "username": "dev_siswat",
+   "customer_name": "nrru-siswat",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||siswatgames@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "sisawat.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สีสวาด เกมส์",
+     "date": "2025-08-07"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-08-07"
+   ],
+   "status": "active",
+   "earliest_date": "2025-08-07"
+  },
+  {
+   "username": "dev_simclub",
+   "customer_name": "simclub-nurse",
+   "applicant_key": "นายคณพศ พงศ์วรรัศม์||sunthon.c@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "simclub-nurse.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คณะพยาบาล",
+     "date": null
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [],
+   "status": "active",
+   "earliest_date": null
+  },
+  {
+   "username": "dev_Ainurse",
+   "customer_name": "ai-nurse",
+   "applicant_key": "นายคณพศ พงศ์วรรัศม์||sunthon.c@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "ai4health-nurse.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คณะพยาบาล",
+     "date": null
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [],
+   "status": "active",
+   "earliest_date": null
+  },
+  {
+   "username": "dev_korathandy",
+   "customer_name": "nrru-korathandy",
+   "applicant_key": "ปนัดดา คำจะโปะ||panadda.ka@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "korathandycare.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": "2025-10-14"
+    },
+    {
+     "domain_name": "koratnopoor.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": "2025-10-14"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2025-10-14",
+    "2025-10-14"
+   ],
+   "status": "active",
+   "earliest_date": "2025-10-14"
+  },
+  {
+   "username": null,
+   "customer_name": "nrru-koratnopoor",
+   "applicant_key": "ปนัดดา คำจะโปะ||",
+   "domains": [
+    {
+     "domain_name": "households-korat.koratnopoor.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": null
+    },
+    {
+     "domain_name": "households-koratnopoor.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": null
+    },
+    {
+     "domain_name": "koratnopoor-sm-survey.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": null
+    },
+    {
+     "domain_name": "tpmap.koratnopoor.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ศูนย์ศึกษาและพัฒนาโคราช",
+     "date": null
+    }
+   ],
+   "statuses": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "dates": [],
+   "status": "",
+   "earliest_date": null
+  },
+  {
+   "username": "devbudget-fit",
+   "customer_name": "nrru-fit",
+   "applicant_key": "nrru-fit||kornraphat.p@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "budget-fit.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เทคโนอุต",
+     "date": "2025-11-06"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2025-11-06"
+   ],
+   "status": "active",
+   "earliest_date": "2025-11-06"
+  },
+  {
+   "username": "dev_nurseweb2569",
+   "customer_name": "nurse69",
+   "applicant_key": "นายเดชชาติ เปียสันเทีย||nurse@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "nurse2.nrru.ac.th",
+     "department_code": null,
+     "department_other": "คณะพยาบาล",
+     "date": "2026-02-10"
+    },
+    {
+     "domain_name": "km.nrru.ac.th",
+     "department_code": null,
+     "department_other": "KM",
+     "date": "2026-04-01"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2026-02-10",
+    "2026-04-01"
+   ],
+   "status": "active",
+   "earliest_date": "2026-02-10"
+  },
+  {
+   "username": "dev_miseduNrru69",
+   "customer_name": "mis-edu",
+   "applicant_key": "อาจารย์สุระ วรรณแสง||jirasak.w@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "mis-edu.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ครุ",
+     "date": "2026-03-17"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2026-03-17"
+   ],
+   "status": "active",
+   "earliest_date": "2026-03-17"
+  },
+  {
+   "username": "dev_comoffice69",
+   "customer_name": "comcen-office",
+   "applicant_key": "นายปริญญา กาจสันเทียะ||parinya.k@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "power27-comcenter.nrru.ac.th",
+     "department_code": null,
+     "department_other": "รายงานค่าไฟ",
+     "date": "2026-03-24"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2026-03-24"
+   ],
+   "status": "active",
+   "earliest_date": "2026-03-24"
+  },
+  {
+   "username": null,
+   "customer_name": "nrru-khoratfossil",
+   "applicant_key": "นันทนี ศรีแสงจันทร์||",
+   "domains": [
+    {
+     "domain_name": "khoratfossil.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ไม้กลายเป็นหิน",
+     "date": "2026-04-01"
+    },
+    {
+     "domain_name": "dpa.nrru.ac.th",
+     "department_code": null,
+     "department_other": "กองกิจการพิเศษ",
+     "date": "2026-04-01"
+    }
+   ],
+   "statuses": [
+    "",
+    ""
+   ],
+   "dates": [
+    "2026-04-01",
+    "2026-04-01"
+   ],
+   "status": "",
+   "earliest_date": "2026-04-01"
+  },
+  {
+   "username": "dev_supplies",
+   "customer_name": "nrru-supp",
+   "applicant_key": "นายยศพิรัชย์บุญภาเฟื่องฟู||yospirat.b@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "supplies.nrru.ac.th",
+     "department_code": null,
+     "department_other": "งานพัสดุ",
+     "date": "2026-05-27"
+    }
+   ],
+   "statuses": [
+    "active"
+   ],
+   "dates": [
+    "2026-05-27"
+   ],
+   "status": "active",
+   "earliest_date": "2026-05-27"
+  },
+  {
+   "username": "dev_dckc-edu",
+   "customer_name": "dckc-edu",
+   "applicant_key": "ผศ.จิรศักดิ์ วิพัฒน์โสภากร||jirasak.w@nrru.ac.th",
+   "domains": [
+    {
+     "domain_name": "dckc-edu.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ครุ",
+     "date": "2026-05-27"
+    },
+    {
+     "domain_name": "sard-edu.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ครุ",
+     "date": "2026-05-27"
+    }
+   ],
+   "statuses": [
+    "active",
+    "active"
+   ],
+   "dates": [
+    "2026-05-27",
+    "2026-05-27"
+   ],
+   "status": "active",
+   "earliest_date": "2026-05-27"
+  },
+  {
+   "username": null,
+   "customer_name": "Administrator, NRRU",
+   "applicant_key": "Administrator, NRRU||",
+   "domains": [
+    {
+     "domain_name": "alumni.nrru.ac.th",
+     "department_code": null,
+     "department_other": "สมาคมศิษย์เก่ามหาวิทยาลัยราชภัฏนครราชสีมา",
+     "date": null
+    },
+    {
+     "domain_name": "digital-ced-sci.nrru.ac.th",
+     "department_code": null,
+     "department_other": "เว็บเพื่อสืบค้นความหมายของเทคโนโลยีดิจิทัลและการเรียนรู้แห่งศตวรรษที่ 21",
+     "date": null
+    },
+    {
+     "domain_name": "koratlocation.nrru.ac.th",
+     "department_code": null,
+     "department_other": "Korat Location Gallery 2024",
+     "date": null
+    },
+    {
+     "domain_name": "pakchongwellness.nrru.ac.th",
+     "department_code": null,
+     "department_other": "error 403",
+     "date": null
+    },
+    {
+     "domain_name": "povertykorat.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ระบบแบบสำรวจความสุขมวลรวมชุมชน",
+     "date": null
+    },
+    {
+     "domain_name": "tr.nrru.ac.th",
+     "department_code": null,
+     "department_other": "ไม่ถูกใช้งาน",
+     "date": null
+    }
+   ],
+   "statuses": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "dates": [],
+   "status": "",
+   "earliest_date": null
+  }
+ ]
+}

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -8,12 +7,8 @@ use Illuminate\Support\Facades\Route;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
+| ระบบนี้ทั้งหมด login ด้วย session (ไม่มี mobile app/external client เรียก API)
+| จึงไม่มีการออก Sanctum token ให้ใครเลย — เอา route /api/user (ที่ไม่มีใครเรียก) ออก
+| ถ้าจะเปิด API ในอนาคต ค่อยเพิ่มกลับพร้อมเขียน controller ที่ createToken() ให้จริง
+|--------------------------------------------------------------------------
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});

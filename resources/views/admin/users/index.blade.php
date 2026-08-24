@@ -5,7 +5,7 @@
 @section('page-title', 'จัดการผู้ใช้เจ้าหน้าที่')
 
 @section('topbar-action')
-    <a href="{{ route('admin.users.create') }}" class="btn btn-amber btn-sm">
+    <a href="{{ url('admin/users/create') }}" class="btn btn-amber btn-sm">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
         เพิ่มผู้ใช้
     </a>
@@ -56,16 +56,16 @@
                             <td style="font-size:13px;">{{ $user->created_at ? $user->created_at->format('d/m/Y') : '-' }}</td>
                             <td class="text-end">
                                 <div class="d-flex gap-2 justify-content-end">
-                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-outline-soft btn-sm">
+                                    <a href="{{ url('admin/users/' . $user->id . '/edit') }}" class="btn btn-outline-soft btn-sm">
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                                         แก้ไข
                                     </a>
                                     @if ($user->id === auth()->id())
                                         <span class="btn btn-outline-soft btn-sm" style="opacity:.6;cursor:not-allowed;">บัญชีนี้</span>
                                     @else
-                                        <form action="{{ route('admin.users.toggle-active', $user->id) }}" method="POST">
+                                        <form action="{{ url('admin/users/' . $user->id) }}" method="POST">
                                             @csrf
-                                            @method('PATCH')
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-outline-danger-soft btn-sm" title="{{ $user->is_active ? 'ปิดการใช้งาน' : 'เปิดการใช้งาน' }}">
                                                 @if ($user->is_active)
                                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.6 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L14.7 3.6a2 2 0 0 0-3.4 0Z"/></svg>
