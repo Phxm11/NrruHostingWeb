@@ -178,7 +178,7 @@
                             $initial = mb_substr($req->applicant->full_name, 0, 1);
                             $domains = $req->domains->pluck('domain_name');
                         @endphp
-                        <tr class="request-row" style="animation-delay: {{ min($loop->index, 12) * 35 }}ms;" data-href="{{ route('admin.requests.show', $req->request_id) }}">
+                        <tr class="request-row" data-href="{{ route('admin.requests.show', $req->request_id) }}">
                             <td>
                                 <a href="{{ route('admin.requests.show', $req->request_id) }}" class="form-no-link" title="ดูรายละเอียดคำขอ">
                                     <code>{{ $req->form_no }}</code>

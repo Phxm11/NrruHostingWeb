@@ -269,7 +269,7 @@
 
                             $typeTagIndex = crc32($acc->account_type) % 6;
                         @endphp
-                        <tr style="animation-delay: {{ min($loop->index, 12) * 35 }}ms;">
+                        <tr @style(['animation-delay' => (min($loop->index, 12) * 35) . 'ms'])>
                             <td data-label="Username"><code>{{ $acc->username }}</code></td>
                             <td data-label="ผู้ขอใช้บริการ">
                                 <div class="d-flex align-items-center">

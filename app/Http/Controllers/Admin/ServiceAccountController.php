@@ -34,7 +34,8 @@ class ServiceAccountController extends Controller
             $query->where('status', $request->input('status'));
         }
 
-        $serviceRequests = $query->paginate(15)->withQueryString();
+        $serviceRequests = $query->paginate(15);
+        $serviceRequests->appends($request->query());
 
         return view('admin.requests.index', compact('serviceRequests'));
     }
@@ -168,7 +169,8 @@ class ServiceAccountController extends Controller
             $query->where('status', $request->input('status'));
         }
 
-        $accounts = $query->paginate(15)->withQueryString();
+        $accounts = $query->paginate(15);
+        $accounts->appends($request->query());
 
         return view('admin.accounts.index', compact('accounts'));
     }

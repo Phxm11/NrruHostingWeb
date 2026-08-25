@@ -504,7 +504,7 @@
                     <h2>ชื่อโดเมนที่ขอเปิดใช้งาน</h2>
                 </div>
                 @forelse ($serviceRequest->domains as $domain)
-                    <div class="info-grid {{ !$loop->last ? 'mb-3 pb-3' : '' }}" style="{{ !$loop->last ? 'border-bottom:1px solid var(--line);' : '' }}">
+                    <div class="info-grid @unless ($loop->last) mb-3 pb-3 @endunless" @unless ($loop->last) style="border-bottom:1px solid var(--line);" @endunless>
                         <div class="info-item span-2">
                             <div class="info-item__label">ชื่อโดเมน</div>
                             <div class="info-item__value"><code>{{ $domain->domain_name }}</code></div>
@@ -642,7 +642,7 @@
 
                 @if ($serviceRequest->signature_image_path)
                     <div class="sub-divider">ลายเซ็นผู้ขอใช้บริการ</div>
-                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('storage/' . $serviceRequest->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
+                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('/Storage/' . $serviceRequest->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
                         <img src="{{ asset('storage/' . $serviceRequest->signature_image_path) }}" alt="ลายเซ็นผู้ขอใช้บริการ" loading="lazy">
                     </div>
                 @else
