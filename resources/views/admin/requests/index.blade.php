@@ -166,7 +166,6 @@
                         <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>โดเมน</span></th>
                         <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>ระยะเวลาโครงการ</span></th>
                         <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-5"/></svg>สถานะ</span></th>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>บัญชีที่สร้างแล้ว</span></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -225,14 +224,6 @@
                                     {{ $req->status }}
                                 </span>
                             </td>
-                            <td>
-                                <span class="account-count {{ $req->service_accounts_count == 0 ? 'zero' : '' }}">
-                                    <span class="count-icon">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                    </span>
-                                    {{ $req->service_accounts_count }} บัญชี
-                                </span>
-                            </td>
                             <td class="text-end">
                                 <div class="d-flex gap-2 justify-content-end flex-wrap">
                                     <a href="{{ route('admin.requests.show', $req->request_id) }}" class="btn-view" title="ดูรายละเอียดคำขอ">
@@ -267,12 +258,12 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8">
+                            <td colspan="7">
                                 <div class="empty-state">
                                     <span class="empty-icon-wrap">
                                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 2h6l1 3h4v17H4V5h4l1-3Z"/><path d="M9 12h6M9 16h6"/></svg>
                                     </span>
-                                    <p>ยังไม่มีคำขอในระบบ{{ (request('search') || request('status')) ? 'ที่ตรงกับตัวกรอง' : '' }}</p>
+                                    <p>ยังไม่มีคำขอที่รอสร้างบัญชี{{ (request('search') || request('status')) ? 'ที่ตรงกับตัวกรอง' : '' }}</p>
                                 </div>
                             </td>
                         </tr>

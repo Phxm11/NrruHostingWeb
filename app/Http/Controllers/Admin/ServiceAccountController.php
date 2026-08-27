@@ -14,12 +14,14 @@ use Illuminate\Validation\Rule;
 class ServiceAccountController extends Controller
 {
     /**
-     * รายการคำขอใช้บริการทั้งหมด พร้อมจำนวนบัญชีที่สร้างให้แล้ว
+     * รายการคำขอใช้บริการที่ "ยังไม่ได้สร้างบัญชี" เท่านั้น — คำขอที่สร้างบัญชีให้แล้ว
+     * จะถูกตัดออกจากรายการนี้ (ดูรายละเอียด/บัญชีของคำขอเหล่านั้นได้จากหน้า "บัญชีผู้ใช้บริการ" แทน)
      */
     public function requestsIndex(Request $request)
     {
         $query = ServiceRequest::with(['applicant', 'domains', 'serviceAccounts'])
             ->withCount('serviceAccounts')
+            ->whereDoesntHave('serviceAccounts')
             ->latest('request_id');
 
         if ($request->filled('search')) {

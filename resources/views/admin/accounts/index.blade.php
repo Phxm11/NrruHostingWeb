@@ -280,7 +280,12 @@
                                     </div>
                                 </div>
                             </td>
-                            <td data-label="โดเมน/คำขอ">{{ $acc->serviceRequest->form_no }} — {{ $acc->serviceRequest->domains->pluck('domain_name')->join(', ') ?: '-' }}</td>
+                            <td data-label="โดเมน/คำขอ">
+                                <a href="{{ route('admin.requests.show', $acc->request_id) }}" title="ดูรายละเอียดคำขอ">
+                                    <code>{{ $acc->serviceRequest->form_no }}</code>
+                                </a>
+                                — {{ $acc->serviceRequest->domains->pluck('domain_name')->join(', ') ?: '-' }}
+                            </td>
                             <td data-label="ประเภทบัญชี"><span class="type-tag type-tag-{{ $typeTagIndex }}">{{ $acc->account_type }}</span></td>
                             <td data-label="สถานะ">
                                 <span class="pill pill-{{ $acc->status }}">
@@ -304,6 +309,10 @@
                             </td>
                             <td class="text-end">
                                 <div class="row-actions-inline">
+                                    <a href="{{ route('admin.requests.show', $acc->request_id) }}" class="row-btn row-btn--edit" title="ดูรายละเอียดคำขอ">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        ดูคำขอ
+                                    </a>
                                     <a href="{{ route('admin.accounts.edit', $acc->account_id) }}" class="row-btn row-btn--edit" title="แก้ไข">
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                                         แก้ไข
