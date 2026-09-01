@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +36,6 @@ class UserController extends Controller
             'name'     => ['required', 'string', 'max:150'],
             'email'    => ['required', 'string', 'email', 'max:150', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role_id'  => ['nullable', 'exists:roles,role_id'],
         ]);
 
         $user = User::create([
@@ -46,10 +44,6 @@ class UserController extends Controller
             'password'  => $data['password'], // ผ่าน cast 'hashed' อัตโนมัติ
             'is_active' => true,
         ]);
-
-        if (! empty($data['role_id'])) {
-            $user->roles()->sync($data['role_id']);
-        }
 
         return redirect()
             ->route('admin.users.index')
@@ -61,9 +55,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::orderBy('label')->get();
-
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -77,7 +69,6 @@ class UserController extends Controller
             'name'     => ['required', 'string', 'max:150'],
             'email'    => ['required', 'string', 'email', 'max:150', 'unique:users,email,' . $user->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'role_id'  => ['nullable', 'exists:roles,role_id'],
         ]);
 
         $user->name = $data['name'];
@@ -87,8 +78,6 @@ class UserController extends Controller
         }
         $user->is_active = $request->boolean('is_active');
         $user->save();
-
-        $user->roles()->sync($data['role_id'] ?? []);
 
         return redirect()
             ->route('admin.users.index')

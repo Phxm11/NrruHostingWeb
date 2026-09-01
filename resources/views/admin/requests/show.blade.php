@@ -45,7 +45,9 @@
         $imageAttachments = $attachments->filter(function ($f) use ($imageExts) {
             return in_array(strtolower(pathinfo($f->file_path, PATHINFO_EXTENSION)), $imageExts);
         });
-        $fileAttachments = $attachments->diff($imageAttachments);
+        $fileAttachments = $attachments->reject(function ($f) use ($imageExts) {
+            return in_array(strtolower(pathinfo($f->file_path, PATHINFO_EXTENSION)), $imageExts);
+        });
     @endphp
 
     <style>

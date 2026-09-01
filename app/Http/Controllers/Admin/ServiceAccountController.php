@@ -227,14 +227,26 @@ class ServiceAccountController extends Controller
 
     /**
      * ลบบัญชี
+     * แก้ไข: ลบบัญชีแล้วให้ลบโดเมนของคำขอ (request) ที่ผูกกับบัญชีนี้ไปด้วย
+     * หมายเหตุ: ถ้าคำขอเดียวกันยังมีบัญชีอื่นเหลืออยู่ (เช่น ssh + database ของ request เดียวกัน)
+     * จะไม่ลบโดเมนทิ้ง เพื่อไม่ให้กระทบบัญชีอื่นที่ยังใช้โดเมนเดิมอยู่
      */
     public function destroyAccount(ServiceAccount $account)
     {
         $username = $account->username;
+        $requestId = $account->request_id;
+
         $account->delete();
+
+        // ลบโดเมนของคำขอนี้ เฉพาะกรณีที่ไม่มีบัญชีอื่นเหลืออยู่ในคำขอเดียวกันแล้ว
+        $remainingAccounts = ServiceAccount::where('request_id', $requestId)->exists();
+
+        if (! $remainingAccounts) {
+            \App\Models\Domain::where('request_id', $requestId)->delete();
+        }
 
         return redirect()
             ->route('admin.accounts.index')
-            ->with('success', "ลบบัญชี {$username} เรียบร้อยแล้ว");
+            ->with('success', "ลบบัญชี {$username} และโดเมนที่เกี่ยวข้องเรียบร้อยแล้ว");
     }
 }
