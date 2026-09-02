@@ -7,6 +7,8 @@ use App\Models\Applicant;
 use App\Models\DepartmentCode;
 use App\Models\ResourcePlan;
 use App\Models\ServiceRequest;
+use App\Models\Developer;
+use App\Models\Domain;
 use Illuminate\Support\Facades\DB;
 
 class ServiceRequestController extends Controller
@@ -30,10 +32,15 @@ class ServiceRequestController extends Controller
                 : null;
             $signaturePath = $request->file('signature_image')->store('signatures', 'public');
 
-            $applicant = Applicant::firstOrCreate(
+            // แก้ไข: เดิมใช้ firstOrCreate ซึ่งเช็คแค่ staff_or_student_id — ถ้ารหัสนี้เคยมีในระบบแล้ว
+            // จะดึงข้อมูลเก่ามาใช้ทันทีโดยไม่อัปเดตชื่อ/หน่วยงานที่เพิ่งกรอกใหม่เลย ทำให้ผู้ใช้กรอกชื่อหนึ่ง
+            // แต่ระบบไปแสดงอีกชื่อหนึ่ง (ชื่อเก่าที่เคยผูกกับรหัสนี้) เปลี่ยนเป็น updateOrCreate เพื่อให้
+            // ข้อมูล applicant อัปเดตเป็นค่าล่าสุดที่กรอกมาทุกครั้ง
+            $applicant = Applicant::updateOrCreate(
                 ['staff_or_student_id' => $data['staff_or_student_id']],
                 [
                     'full_name' => $data['full_name'],
+                    'customer_name' => $data['customer_name'] ?? null,
                     'unit_name' => $data['unit_name'],
                     'affiliation' => $data['affiliation'],
                     'position_title' => $data['position_title'] ?? null,
