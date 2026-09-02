@@ -232,6 +232,10 @@
                             <input type="text" name="full_name" class="form-control" value="{{ old('full_name') }}" required>
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Customer Name</label>
+                            <input type="text" name="customer_name" class="form-control" value="{{ old('customer_name') }}" placeholder="ชื่อบัญชีที่ใช้ในระบบ Plesk (ถ้ามี)">
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label required">รหัสบุคลากร/รหัสนักศึกษา</label>
                             <input type="text" name="staff_or_student_id" class="form-control" value="{{ old('staff_or_student_id') }}" required>
                         </div>

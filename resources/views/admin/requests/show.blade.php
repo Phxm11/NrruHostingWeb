@@ -278,10 +278,16 @@
                             </button>
                         </form>
                     @endif
-                    <a href="{{ route('admin.accounts.create', $serviceRequest->request_id) }}" class="btn btn-amber btn-sm">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
-                        สร้างบัญชีให้ผู้ขอใช้บริการ
+                    <a href="{{ route('admin.requests.edit', $serviceRequest->request_id) }}" class="btn btn-header-outline btn-sm">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                        แก้ไขคำขอ
                     </a>
+                    @if ($serviceRequest->serviceAccounts->isEmpty())
+                        <a href="{{ route('admin.accounts.create', $serviceRequest->request_id) }}" class="btn btn-amber btn-sm">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                            สร้างบัญชีให้ผู้ขอใช้บริการ
+                        </a>
+                    @endif
                     <form action="{{ route('admin.requests.destroy', $serviceRequest->request_id) }}" method="POST"
                           data-confirm="ยืนยันลบคำขอ {{ $serviceRequest->form_no }}?{{ $serviceRequest->serviceAccounts->count() > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $serviceRequest->serviceAccounts->count() . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้">
                         @csrf
@@ -644,7 +650,7 @@
 
                 @if ($serviceRequest->signature_image_path)
                     <div class="sub-divider">ลายเซ็นผู้ขอใช้บริการ</div>
-                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('/Storage/' . $serviceRequest->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
+                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('storage/' . $serviceRequest->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
                         <img src="{{ asset('storage/' . $serviceRequest->signature_image_path) }}" alt="ลายเซ็นผู้ขอใช้บริการ" loading="lazy">
                     </div>
                 @else

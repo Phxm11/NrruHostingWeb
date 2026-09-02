@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Approval;
+use App\Models\ResourcePlan;
 use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
@@ -62,6 +63,103 @@ class ServiceAccountController extends Controller
     }
 
     /**
+     * ฟอร์มแก้ไขรายละเอียดคำขอ — แก้ได้ทั้งข้อมูลผู้ขอใช้บริการ, วัตถุประสงค์/ระยะเวลา,
+     * ทรัพยากรที่ขอ, บริการที่เปิดใช้ และรายละเอียดทางเทคนิค
+     * (ไม่รวมโดเมน — มีหน้าแก้ไขโดเมนแยกต่างหากที่ /admin/domains/{domain}/edit อยู่แล้ว,
+     *  ไม่รวมสถานะ/การอนุมัติ — จัดการผ่านปุ่ม "อนุมัติคำขอ" เพื่อไม่ให้ตัดขั้นตอนออกเลขที่ใบเสร็จ)
+     */
+    public function editRequest(ServiceRequest $serviceRequest)
+    {
+        $serviceRequest->load(['applicant', 'plan']);
+        $plans = ResourcePlan::orderBy('service_type')->orderBy('fee_per_year')->get();
+
+        return view('admin.requests.edit', compact('serviceRequest', 'plans'));
+    }
+
+    /**
+     * บันทึกการแก้ไขคำขอ — อัปเดตทั้งตาราง service_requests และ applicants ที่ผูกกัน
+     * หมายเหตุ: applicant_id เดียวกันอาจถูกใช้ร่วมกันหลายคำขอ การแก้ข้อมูลผู้ขอตรงนี้
+     * จะมีผลกับคำขออื่นของผู้ขอคนเดียวกันด้วย (ต้องการให้ข้อมูลล่าสุดตรงกันทุกคำขอ)
+     */
+    public function updateRequest(Request $request, ServiceRequest $serviceRequest)
+    {
+        $data = $request->validate([
+            // ผู้ขอใช้บริการ
+            'full_name' => ['required', 'string', 'max:150'],
+            'customer_name' => ['nullable', 'string', 'max:150'],
+            'unit_name' => ['required', 'string', 'max:150'],
+            'affiliation' => ['required', 'string', 'max:150'],
+            'position_title' => ['nullable', 'string', 'max:150'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'email' => ['nullable', 'email', 'max:150'],
+
+            // วัตถุประสงค์และระยะเวลา
+            'purpose_type' => ['required', 'in:1.1_teaching,1.2_academic_research_community,1.3_internal_admin,1.4_other'],
+            'purpose_other_detail' => ['required_if:purpose_type,1.4_other', 'nullable', 'string'],
+            'project_start_date' => ['required', 'date'],
+            'project_end_date' => ['required', 'date', 'after_or_equal:project_start_date'],
+
+            // ทรัพยากรและบริการ
+            'service_type' => ['required', 'in:virtual_server,web_hosting'],
+            'plan_id' => ['nullable', 'exists:resource_plans,plan_id'],
+            'custom_cpu_vcpu' => ['nullable', 'integer', 'min:1'],
+            'custom_ram_gb' => ['nullable', 'integer', 'min:1'],
+            'custom_storage_gb' => ['nullable', 'integer', 'min:1'],
+            'custom_fee' => ['nullable', 'numeric', 'min:0'],
+
+            'enabled_services' => ['required', 'array', 'min:1'],
+            'enabled_services.*' => ['in:ssh,http_https,database_access,other'],
+            'enabled_services_other_detail' => ['nullable', 'string', 'max:255'],
+
+            'language_framework' => ['nullable', 'string', 'max:100'],
+            'database_used' => ['nullable', 'string', 'max:100'],
+            'port_service_needed' => ['nullable', 'string', 'max:255'],
+            'needs_external_connection' => ['nullable', 'boolean'],
+        ]);
+
+        // ถ้าเลือกแพ็กเกจสำเร็จรูป ล้างค่าสเปกที่กำหนดเองทิ้ง กันข้อมูลค้างขัดแย้งกัน
+        if (! empty($data['plan_id'])) {
+            $data['custom_cpu_vcpu'] = null;
+            $data['custom_ram_gb'] = null;
+            $data['custom_storage_gb'] = null;
+            $data['custom_fee'] = null;
+        }
+
+        $serviceRequest->applicant->update([
+            'full_name' => $data['full_name'],
+            'customer_name' => $data['customer_name'] ?? null,
+            'unit_name' => $data['unit_name'],
+            'affiliation' => $data['affiliation'],
+            'position_title' => $data['position_title'] ?? null,
+            'phone' => $data['phone'] ?? null,
+            'email' => $data['email'] ?? null,
+        ]);
+
+        $serviceRequest->update([
+            'purpose_type' => $data['purpose_type'],
+            'purpose_other_detail' => $data['purpose_other_detail'] ?? null,
+            'project_start_date' => $data['project_start_date'],
+            'project_end_date' => $data['project_end_date'],
+            'service_type' => $data['service_type'],
+            'plan_id' => $data['plan_id'] ?? null,
+            'custom_cpu_vcpu' => $data['custom_cpu_vcpu'] ?? null,
+            'custom_ram_gb' => $data['custom_ram_gb'] ?? null,
+            'custom_storage_gb' => $data['custom_storage_gb'] ?? null,
+            'custom_fee' => $data['custom_fee'] ?? null,
+            'enabled_services' => $data['enabled_services'],
+            'enabled_services_other_detail' => $data['enabled_services_other_detail'] ?? null,
+            'language_framework' => $data['language_framework'] ?? null,
+            'database_used' => $data['database_used'] ?? null,
+            'port_service_needed' => $data['port_service_needed'] ?? null,
+            'needs_external_connection' => $request->boolean('needs_external_connection'),
+        ]);
+
+        return redirect()
+            ->route('admin.requests.show', $serviceRequest->request_id)
+            ->with('success', "แก้ไขคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
+    }
+
+    /**
      * ลบคำขอใช้บริการ (ลบทิ้งทั้งคำขอ รวมถึงบัญชี/โดเมน/เอกสารที่ผูกไว้ เนื่องจากมี cascadeOnDelete)
      */
     public function destroyRequest(ServiceRequest $serviceRequest)
@@ -117,9 +215,16 @@ class ServiceAccountController extends Controller
 
     /**
      * ฟอร์มสร้างบัญชี Username/Password ให้ผู้ขอใช้บริการของคำขอนี้
+     * กันไว้ไม่ให้เข้าฟอร์มนี้ซ้ำถ้าคำขอนี้มีบัญชีอยู่แล้ว (เช่น กดปุ่มย้อนกลับ/เปิดลิงก์เก่าซ้ำ)
      */
     public function createAccount(ServiceRequest $serviceRequest)
     {
+        if ($serviceRequest->serviceAccounts()->exists()) {
+            return redirect()
+                ->route('admin.requests.show', $serviceRequest->request_id)
+                ->with('success', 'คำขอนี้มีบัญชีที่สร้างไว้แล้ว');
+        }
+
         $serviceRequest->load(['applicant', 'domains', 'serviceAccounts']);
 
         $suggestedUsername = Str::slug($serviceRequest->applicant->staff_or_student_id, '');

@@ -16,6 +16,7 @@ class StoreServiceRequestRequest extends FormRequest
         return [
             // ส่วนที่ 1 ผู้ขอใช้บริการ
             'full_name' => ['required', 'string', 'max:150'],
+            'customer_name' => ['nullable', 'string', 'max:150'],
             'staff_or_student_id' => ['required', 'string', 'max:30'],
             'unit_name' => ['required', 'string', 'max:150'],
             'affiliation' => ['required', 'string', 'max:150'],

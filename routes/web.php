@@ -55,6 +55,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/requests/{serviceRequest}', [ServiceAccountController::class, 'show'])
         ->name('requests.show');
 
+    Route::get('/requests/{serviceRequest}/edit', [ServiceAccountController::class, 'editRequest'])
+        ->name('requests.edit');
+
+    Route::put('/requests/{serviceRequest}', [ServiceAccountController::class, 'updateRequest'])
+        ->name('requests.update');
+
     Route::get('/requests/{serviceRequest}/accounts/create', [ServiceAccountController::class, 'createAccount'])
         ->name('accounts.create');
 
