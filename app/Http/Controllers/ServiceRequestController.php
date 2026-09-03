@@ -7,6 +7,8 @@ use App\Models\Applicant;
 use App\Models\DepartmentCode;
 use App\Models\ResourcePlan;
 use App\Models\ServiceRequest;
+use App\Models\Developer;
+use App\Models\Domain;
 use Illuminate\Support\Facades\DB;
 
 class ServiceRequestController extends Controller
