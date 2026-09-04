@@ -18,6 +18,13 @@
     @endphp
 
     <style>
+        /* ---------- Back link ---------- */
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px;
+            color: var(--ink-soft, #837c6c); margin-bottom: 14px; transition: color .15s ease;
+        }
+        .back-link:hover { color: var(--forest, #1a3323); }
+
         /* ---------- Layout ---------- */
         .edit-layout { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: start; }
         @media (max-width: 960px) { .edit-layout { grid-template-columns: 1fr; } .summary-card { position: static !important; } }
@@ -111,10 +118,14 @@
                     <div class="s-icon">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6l1 3h4v17H4V5h4l1-3Z"/><path d="M9 12h6M9 16h6"/></svg>
                     </div>
-                    <div>
+                    <div style="flex:1; min-width:0;">
                         <div class="s-title">{{ $serviceRequest->form_no }}</div>
                         <div class="s-sub">อัปเดตสดตามที่แก้ไข</div>
                     </div>
+                    <a href="{{ route('admin.requests.show', $serviceRequest->request_id) }}" target="_blank" rel="noopener" class="btn btn-outline-soft btn-sm" style="flex-shrink:0;" title="เปิดรายละเอียดคำขอในแท็บใหม่">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                        ดูรายละเอียด
+                    </a>
                 </div>
 
                 <div class="sum-group">

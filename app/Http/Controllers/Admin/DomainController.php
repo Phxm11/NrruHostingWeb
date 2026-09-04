@@ -54,7 +54,7 @@ class DomainController extends Controller
             $query->reorder('domain_id', 'desc');
         }
 
-        $domains = $query->paginate(15)->appends($request->query());
+        $domains = $query->paginate(50)->appends($request->query());
 
         return view('admin.domains.index', compact('domains'));
     }

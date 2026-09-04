@@ -172,11 +172,7 @@
                                 @endforelse
                             </td>
                             <td data-label="คำขอ">
-                                @if ($domain->serviceRequest->source === 'legacy_import')
-                                    <span class="dm-badge dm-badge--disabled">นำเข้าจากระบบเดิม</span>
-                                @else
-                                    {{ $domain->serviceRequest->form_no }}
-                                @endif
+                                {{ $domain->serviceRequest->form_no }}
                             </td>
                             <td data-label="">
                                 <div class="dm-actions">

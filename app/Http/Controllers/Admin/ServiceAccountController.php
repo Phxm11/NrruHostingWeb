@@ -37,7 +37,7 @@ class ServiceAccountController extends Controller
             $query->where('status', $request->input('status'));
         }
 
-        $serviceRequests = $query->paginate(15);
+        $serviceRequests = $query->paginate(50);
         $serviceRequests->appends($request->query());
 
         return view('admin.requests.index', compact('serviceRequests'));
@@ -272,11 +272,21 @@ class ServiceAccountController extends Controller
         $query = ServiceAccount::with(['applicant', 'serviceRequest.domains'])
             ->latest('account_id');
 
+        if ($request->filled('q')) {
+            $search = $request->input('q');
+            $query->where(function ($q) use ($search) {
+                $q->where('username', 'like', "%{$search}%")
+                  ->orWhereHas('applicant', function ($q2) use ($search) {
+                      $q2->where('full_name', 'like', "%{$search}%");
+                  });
+            });
+        }
+
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
         }
 
-        $accounts = $query->paginate(15);
+        $accounts = $query->paginate(50);
         $accounts->appends($request->query());
 
         return view('admin.accounts.index', compact('accounts'));
