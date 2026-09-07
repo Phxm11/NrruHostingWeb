@@ -269,12 +269,11 @@ class ServiceAccountController extends Controller
      */
     public function accountsIndex(Request $request)
     {
-        $query = ServiceAccount::with(['applicant', 'serviceRequest.domains'])
-            ->latest('account_id');
+        $baseQuery = ServiceAccount::query();
 
         if ($request->filled('q')) {
             $search = $request->input('q');
-            $query->where(function ($q) use ($search) {
+            $baseQuery->where(function ($q) use ($search) {
                 $q->where('username', 'like', "%{$search}%")
                   ->orWhereHas('applicant', function ($q2) use ($search) {
                       $q2->where('full_name', 'like', "%{$search}%");
@@ -282,14 +281,38 @@ class ServiceAccountController extends Controller
             });
         }
 
+        // นับจำนวนต่อสถานะ (สำหรับปุ่มตัวกรองด้านบนตาราง) — ใช้ตัวกรองค้นหาเดียวกัน
+        // แต่ไม่ผูกกับสถานะที่เลือกอยู่ เพื่อให้เห็นภาพรวมทุกสถานะพร้อมกัน
+        $statusCounts = [
+            'all' => (clone $baseQuery)->count(),
+            'active' => (clone $baseQuery)->where('status', 'active')->count(),
+            'disabled' => (clone $baseQuery)->where('status', 'disabled')->count(),
+            'expired' => (clone $baseQuery)->where('status', 'expired')->count(),
+        ];
+
+        $query = (clone $baseQuery)->with(['applicant', 'serviceRequest.domains']);
+
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
         }
 
-        $accounts = $query->paginate(50);
+        switch ($request->input('sort')) {
+            case 'expire_soon':
+                $query->orderByRaw('expire_date IS NULL')->orderBy('expire_date', 'asc');
+                break;
+            case 'name':
+                $query->join('applicants', 'applicants.applicant_id', '=', 'service_accounts.applicant_id')
+                    ->orderBy('applicants.full_name')
+                    ->select('service_accounts.*');
+                break;
+            default:
+                $query->latest('account_id');
+        }
+
+        $accounts = $query->paginate(20);
         $accounts->appends($request->query());
 
-        return view('admin.accounts.index', compact('accounts'));
+        return view('admin.accounts.index', compact('accounts', 'statusCounts'));
     }
 
     /**
