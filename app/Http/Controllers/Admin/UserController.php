@@ -12,11 +12,35 @@ class UserController extends Controller
     /**
      * รายการผู้ใช้เจ้าหน้าที่
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('name')->paginate(15);
+        $baseQuery = User::query();
 
-        return view('admin.users.index', compact('users'));
+        if ($request->filled('q')) {
+            $search = $request->input('q');
+            $baseQuery->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        // นับจำนวนผู้ใช้ต่อสถานะ (สำหรับ stat card / ตัวกรองแบบ segmented ด้านบนตาราง) — ใช้ตัวกรอง
+        // ค้นหาเดียวกัน แต่ไม่ผูกกับสถานะที่เลือกอยู่ เพื่อให้เห็นภาพรวมทุกสถานะพร้อมกัน
+        $statusCounts = [
+            'all' => (clone $baseQuery)->count(),
+            'active' => (clone $baseQuery)->where('is_active', true)->count(),
+            'disabled' => (clone $baseQuery)->where('is_active', false)->count(),
+        ];
+
+        $query = (clone $baseQuery)->orderBy('name');
+
+        if ($request->filled('status')) {
+            $query->where('is_active', $request->input('status') === 'active');
+        }
+
+        $users = $query->paginate(15)->appends($request->query());
+
+        return view('admin.users.index', compact('users', 'statusCounts'));
     }
 
     /**

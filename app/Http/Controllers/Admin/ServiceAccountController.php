@@ -20,18 +20,29 @@ class ServiceAccountController extends Controller
      */
     public function requestsIndex(Request $request)
     {
-        $query = ServiceRequest::with(['applicant', 'domains', 'serviceAccounts'])
+        $baseQuery = ServiceRequest::with(['applicant', 'domains', 'serviceAccounts'])
             ->withCount('serviceAccounts')
-            ->whereDoesntHave('serviceAccounts')
-            ->latest('request_id');
+            ->whereDoesntHave('serviceAccounts');
 
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $query->whereHas('applicant', function ($q) use ($search) {
+            $baseQuery->whereHas('applicant', function ($q) use ($search) {
                 $q->where('full_name', 'like', "%{$search}%")
                   ->orWhere('staff_or_student_id', 'like', "%{$search}%");
             });
         }
+
+        // นับจำนวนต่อสถานะ (สำหรับตัวกรองแบบ segmented ด้านบนตาราง) — ใช้ตัวกรองค้นหาเดียวกัน
+        // แต่ไม่ผูกกับสถานะที่เลือกอยู่ เพื่อให้เห็นภาพรวมทุกสถานะพร้อมกัน
+        $statusCounts = [
+            'all' => (clone $baseQuery)->count(),
+            'submitted' => (clone $baseQuery)->where('status', 'submitted')->count(),
+            'approved' => (clone $baseQuery)->where('status', 'approved')->count(),
+            'rejected' => (clone $baseQuery)->where('status', 'rejected')->count(),
+            'expired' => (clone $baseQuery)->where('status', 'expired')->count(),
+        ];
+
+        $query = (clone $baseQuery)->latest('request_id');
 
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
@@ -40,7 +51,7 @@ class ServiceAccountController extends Controller
         $serviceRequests = $query->paginate(50);
         $serviceRequests->appends($request->query());
 
-        return view('admin.requests.index', compact('serviceRequests'));
+        return view('admin.requests.index', compact('serviceRequests', 'statusCounts'));
     }
 
     /**

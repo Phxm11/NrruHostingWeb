@@ -19,25 +19,40 @@
         .stat-card--approved .stat-number { color: var(--forest); }
         .stat-card--pending .stat-icon { animation: bob 2.4s ease-in-out infinite; }
 
-        /* ---------- toolbar ---------- */
-        .requests-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 18px; }
-        .requests-toolbar .search-field { position: relative; flex: 1 1 240px; min-width: 200px; }
-        .requests-toolbar .search-field svg {
-            position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-            opacity: .45; pointer-events: none; transition: opacity .15s, color .15s;
+        /* ---------- filters: segmented status + search ---------- */
+        .filter-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+        .segmented { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+        .seg-btn {
+            display: flex; align-items: center; gap: 7px; text-decoration: none;
+            padding: 8px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500;
+            color: var(--ink-soft); white-space: nowrap; transition: background .15s, color .15s;
         }
-        .requests-toolbar .search-field input { padding-left: 36px; }
-        .requests-toolbar .search-field:focus-within svg { opacity: 1; color: var(--moss); }
-        .requests-toolbar .search-field:focus-within { box-shadow: 0 0 0 3px var(--moss-light); border-radius: 9px; }
-        .requests-toolbar select { min-width: 160px; }
-        .requests-toolbar button[type="submit"] { display: inline-flex; align-items: center; gap: 6px; }
-        .requests-toolbar .filter-clear { font-size: 13px; color: #888; }
-        .requests-toolbar .filter-clear:hover { color: var(--rust); }
+        .seg-btn .count {
+            font-family: 'Kanit', sans-serif; font-size: 12px; font-weight: 600; padding: 1px 7px;
+            border-radius: 999px; background: var(--moss-light); color: var(--ink-soft);
+        }
+        .seg-btn.is-active { background: var(--forest); color: #fff; }
+        .seg-btn.is-active .count { background: rgba(255,255,255,.18); color: #fff; }
+        .seg-btn:not(.is-active):hover { background: var(--moss-light); color: var(--ink); }
+
+        .search-wrap { position: relative; flex: 1 1 220px; max-width: 320px; }
+        .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); opacity: .6; pointer-events: none; }
+        .search-wrap input {
+            width: 100%; padding: 9px 12px 9px 36px; border-radius: 10px; border: 1px solid var(--line); font-size: 13.5px;
+        }
+        .search-wrap input:focus { outline: none; border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-light); }
+
+        .filter-clear { font-size: 13px; color: #888; text-decoration: none; }
+        .filter-clear:hover { color: var(--rust); }
 
         /* ---------- table polish ---------- */
-        table.modern-table thead th .th-flex { display: inline-flex; align-items: center; gap: 6px; }
-        table.modern-table thead th svg { opacity: .5; }
         table.modern-table tbody tr { animation: rowIn .3s ease both; }
+        /* rowIn's end-state keeps transform:translateY(0), which creates a stacking
+           context per <tr> (transform != none, even at 0). Without this, an open
+           dropdown menu paints *underneath* the next row instead of above it,
+           because z-index only resolves within a row's own stacking context.
+           Bump the whole row above its siblings while its menu is open. */
+        table.modern-table tbody tr.row-menu-open { position: relative; z-index: 30; }
 
         .pill svg { width: 11px; height: 11px; }
 
@@ -73,15 +88,6 @@
         code.form-no-link { transition: color .15s ease; }
         a.form-no-link:hover code { color: var(--forest); text-decoration: underline; }
 
-        /* danger / delete button */
-        .btn-outline-danger-soft {
-            display: inline-flex; align-items: center; gap: 6px;
-            border: 1px solid var(--rust-light); background: #fff; color: var(--rust);
-            border-radius: 9px; font-size: 13.5px; padding: 8px 14px;
-            transition: background .15s ease, border-color .15s ease, color .15s ease;
-        }
-        .btn-outline-danger-soft:hover { background: var(--rust-light); border-color: var(--rust); color: var(--rust); }
-
         /* approve button */
         .btn-approve {
             display: inline-flex; align-items: center; gap: 6px;
@@ -90,6 +96,32 @@
             padding: 8px 14px; transition: filter .15s ease, transform .15s ease, box-shadow .15s ease;
         }
         .btn-approve:hover { filter: brightness(1.06); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+        /* ---------- row actions: main buttons + "···" dropdown ---------- */
+        .row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 6px; flex-wrap: nowrap; }
+        .row-actions form { margin: 0; }
+        .icon-btn {
+            width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--line); background: #fff;
+            display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft);
+            transition: background .12s, color .12s; text-decoration: none;
+        }
+        .icon-btn:hover, .icon-btn.menu-open { background: var(--moss-light); color: var(--forest); }
+
+        .menu-wrap { position: relative; }
+        .dropdown {
+            position: absolute; right: 0; top: calc(100% + 4px); background: #fff; border: 1px solid var(--line);
+            border-radius: 10px; box-shadow: var(--shadow-md); min-width: 172px; padding: 6px; z-index: 10; display: none;
+        }
+        .dropdown.is-open { display: block; }
+        .dropdown button, .dropdown a {
+            width: 100%; text-align: left; background: none; border: none; padding: 9px 10px; border-radius: 7px;
+            font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 9px; cursor: pointer;
+            font-family: 'Sarabun', sans-serif; text-decoration: none;
+        }
+        .dropdown button:hover, .dropdown a:hover { background: var(--moss-light); }
+        .dropdown button.danger { color: var(--rust); }
+        .dropdown button.danger:hover { background: var(--rust-light); }
+        .dropdown hr { border: none; border-top: 1px solid #f0eee7; margin: 5px 2px; }
 
         /* ---------- empty state ---------- */
         .empty-state { text-align: center; padding: 56px 16px; color: var(--ink-soft); }
@@ -132,40 +164,56 @@
     </div>
 
     <div class="panel">
-        <form method="GET" class="requests-toolbar">
-            <div class="search-field">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" name="search" class="form-control" placeholder="ค้นหาชื่อ หรือรหัสบุคลากร"
-                       value="{{ request('search') }}">
+
+        {{-- ============================================================
+             Filters: status as segmented links (real GET navigation,
+             counts computed server-side in the controller) + search.
+        ============================================================ --}}
+        <div class="filter-row">
+            <div class="segmented">
+                @php
+                    $currentStatus = request('status');
+                    // base query params (search) preserved across every filter link below.
+                    $qp = ['search' => request('search')];
+                @endphp
+                <a href="{{ route('admin.requests.index', array_filter($qp)) }}" class="seg-btn {{ ! $currentStatus ? 'is-active' : '' }}">
+                    ทั้งหมด <span class="count">{{ $statusCounts['all'] }}</span>
+                </a>
+                <a href="{{ route('admin.requests.index', array_filter(array_merge($qp, ['status' => 'submitted']))) }}" class="seg-btn {{ $currentStatus === 'submitted' ? 'is-active' : '' }}">
+                    รอพิจารณา <span class="count">{{ $statusCounts['submitted'] }}</span>
+                </a>
+                <a href="{{ route('admin.requests.index', array_filter(array_merge($qp, ['status' => 'approved']))) }}" class="seg-btn {{ $currentStatus === 'approved' ? 'is-active' : '' }}">
+                    อนุมัติแล้ว <span class="count">{{ $statusCounts['approved'] }}</span>
+                </a>
+                <a href="{{ route('admin.requests.index', array_filter(array_merge($qp, ['status' => 'rejected']))) }}" class="seg-btn {{ $currentStatus === 'rejected' ? 'is-active' : '' }}">
+                    ไม่อนุมัติ <span class="count">{{ $statusCounts['rejected'] }}</span>
+                </a>
+                <a href="{{ route('admin.requests.index', array_filter(array_merge($qp, ['status' => 'expired']))) }}" class="seg-btn {{ $currentStatus === 'expired' ? 'is-active' : '' }}">
+                    หมดอายุ <span class="count">{{ $statusCounts['expired'] }}</span>
+                </a>
             </div>
 
-            <select name="status" class="form-select">
-                <option value="">สถานะทั้งหมด</option>
-                @foreach (['submitted' => 'รอพิจารณา', 'approved' => 'อนุมัติแล้ว', 'rejected' => 'ไม่อนุมัติ', 'expired' => 'หมดอายุ'] as $val => $label)
-                    <option value="{{ $val }}" {{ request('status') == $val ? 'selected' : '' }}>{{ $label }}</option>
-                @endforeach
-            </select>
+            <form method="GET" class="search-wrap">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" name="search" placeholder="ค้นหาชื่อ หรือรหัสบุคลากร" value="{{ request('search') }}">
+                @if ($currentStatus) <input type="hidden" name="status" value="{{ $currentStatus }}"> @endif
+            </form>
 
-            <button class="btn btn-outline-soft" type="submit">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                ค้นหา
-            </button>
-
-            @if (request('search') || request('status'))
+            @if (request('search') || $currentStatus)
                 <a href="{{ route('admin.requests.index') }}" class="filter-clear">ล้างตัวกรอง ✕</a>
             @endif
-        </form>
+        </div>
 
         <div class="table-responsive">
             <table class="modern-table">
                 <thead>
                     <tr>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 2v4M16 2v4"/></svg>เลขที่คำขอ</span></th>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>ผู้ขอใช้บริการ</span></th>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21v-6h6v6"/></svg>หน่วยงาน</span></th>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>โดเมน</span></th>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>ระยะเวลาโครงการ</span></th>
-                        <th><span class="th-flex"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-5"/></svg>สถานะ</span></th>
+                        <th>เลขที่คำขอ</th>
+                        <th>ผู้ขอใช้บริการ</th>
+                        <th>หน่วยงาน</th>
+                        <th>โดเมน</th>
+                        <th>ระยะเวลาโครงการ</th>
+                        <th>สถานะ</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -225,7 +273,7 @@
                                 </span>
                             </td>
                             <td class="text-end">
-                                <div class="d-flex gap-2 justify-content-end flex-wrap">
+                                <div class="row-actions">
                                     <a href="{{ route('admin.requests.show', $req->request_id) }}" class="btn-view" title="ดูรายละเอียดคำขอ">
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                         ดูรายละเอียด
@@ -234,25 +282,33 @@
                                         <form action="{{ route('admin.requests.approve', $req->request_id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-approve btn-sm" title="อนุมัติคำขอ">
+                                            <button type="submit" class="btn-approve" title="อนุมัติคำขอ">
                                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>
                                                 อนุมัติ
                                             </button>
                                         </form>
                                     @endif
-                                    <a href="{{ route('admin.accounts.create', $req->request_id) }}" class="btn btn-brand btn-sm">
-                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
-                                        สร้างบัญชี
-                                    </a>
-                                    <form action="{{ route('admin.requests.destroy', $req->request_id) }}" method="POST"
-                                          data-confirm="ยืนยันลบคำขอ {{ $req->form_no }}?{{ $req->service_accounts_count > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $req->service_accounts_count . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger-soft btn-sm" title="ลบคำขอ">
-                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                                            ลบ
+                                    <div class="menu-wrap">
+                                        <button type="button" class="icon-btn menu-btn" title="เพิ่มเติม">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
                                         </button>
-                                    </form>
+                                        <div class="dropdown">
+                                            <a href="{{ route('admin.accounts.create', $req->request_id) }}">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+                                                สร้างบัญชี
+                                            </a>
+                                            <hr>
+                                            <form action="{{ route('admin.requests.destroy', $req->request_id) }}" method="POST"
+                                                  data-confirm="ยืนยันลบคำขอ {{ $req->form_no }}?{{ $req->service_accounts_count > 0 ? ' คำขอนี้มีบัญชีที่สร้างแล้ว ' . $req->service_accounts_count . ' บัญชี ซึ่งจะถูกลบด้วย' : '' }} การลบไม่สามารถย้อนกลับได้">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="danger">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                                                    ลบคำขอ
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -276,7 +332,7 @@
     </div>
 
     <script>
-        // ทำให้คลิกที่แถวไหนก็ได้ (ยกเว้นปุ่ม/ลิงก์/ฟอร์มด้านใน) เพื่อเปิดหน้ารายละเอียดคำขอ — ใช้งานง่ายขึ้นบนมือถือและเดสก์ท็อป
+        // ทำให้คลิกที่แถวไหนก็ได้ (ยกเว้นปุ่ม/ลิงก์/ฟอร์ม/เมนู "···" ด้านใน) เพื่อเปิดหน้ารายละเอียดคำขอ
         document.querySelectorAll('tr.request-row[data-href]').forEach(function (row) {
             row.addEventListener('click', function (e) {
                 if (e.target.closest('a, button, form, input, select, textarea')) {
@@ -284,6 +340,26 @@
                 }
                 window.location = row.dataset.href;
             });
+        });
+
+        // เมนู "···" ต่อแถว — เปิด/ปิดแบบเดียวกับหน้าบัญชี
+        document.addEventListener('click', function (e) {
+            const menuBtn = e.target.closest('.menu-btn');
+            document.querySelectorAll('.dropdown.is-open').forEach(function (dd) {
+                if (!menuBtn || dd !== menuBtn.nextElementSibling) {
+                    dd.classList.remove('is-open');
+                    dd.previousElementSibling.classList.remove('menu-open');
+                    const openRow = dd.closest('tr');
+                    if (openRow) openRow.classList.remove('row-menu-open');
+                }
+            });
+            if (menuBtn) {
+                const dd = menuBtn.nextElementSibling;
+                const isOpen = dd.classList.toggle('is-open');
+                menuBtn.classList.toggle('menu-open', isOpen);
+                const row = menuBtn.closest('tr');
+                if (row) row.classList.toggle('row-menu-open', isOpen);
+            }
         });
     </script>
 

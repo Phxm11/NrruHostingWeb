@@ -100,8 +100,8 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
             </span>
             <div>
-                <div class="dm-stat__num">{{ $domains->filter(fn($d) => $d->serviceRequest->serviceAccounts->isNotEmpty())->count() }}</div>
-                <div class="dm-stat__label">มีบัญชีแล้ว (หน้านี้)</div>
+                <div class="dm-stat__num">{{ $domainCounts['linked'] }}</div>
+                <div class="dm-stat__label">มีบัญชีแล้ว</div>
             </div>
         </div>
         <div class="dm-stat dm-stat--pending">
@@ -109,8 +109,8 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
             </span>
             <div>
-                <div class="dm-stat__num">{{ $domains->filter(fn($d) => $d->serviceRequest->serviceAccounts->isEmpty())->count() }}</div>
-                <div class="dm-stat__label">รอสร้างบัญชี (หน้านี้)</div>
+                <div class="dm-stat__num">{{ $domainCounts['pending'] }}</div>
+                <div class="dm-stat__label">รอสร้างบัญชี</div>
             </div>
         </div>
     </div>
@@ -176,12 +176,21 @@
                             </td>
                             <td data-label="">
                                 <div class="dm-actions">
-                                    <a href="{{ route('admin.domains.show', $domain->domain_id) }}" class="dm-btn">ดู</a>
-                                    <a href="{{ route('admin.domains.edit', $domain->domain_id) }}" class="dm-btn">แก้ไข</a>
+                                    <a href="{{ route('admin.domains.show', $domain->domain_id) }}" class="dm-btn">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        ดู
+                                    </a>
+                                    <a href="{{ route('admin.domains.edit', $domain->domain_id) }}" class="dm-btn">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                                        แก้ไข
+                                    </a>
                                     <form action="{{ route('admin.domains.destroy', $domain->domain_id) }}" method="POST"
                                           data-confirm="ยืนยันลบโดเมน {{ $domain->domain_name }}? การลบไม่สามารถย้อนกลับได้">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="dm-btn dm-btn--danger">ลบ</button>
+                                        <button type="submit" class="dm-btn dm-btn--danger">
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                                            ลบ
+                                        </button>
                                     </form>
                                 </div>
                             </td>

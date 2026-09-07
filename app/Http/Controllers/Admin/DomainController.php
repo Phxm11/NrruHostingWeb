@@ -15,16 +15,11 @@ class DomainController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Domain::with([
-                'departmentCode',
-                'serviceRequest.applicant',
-                'serviceRequest.serviceAccounts',
-            ])
-            ->latest('domain_id');
+        $baseQuery = Domain::query();
 
         if ($request->filled('q')) {
             $search = $request->input('q');
-            $query->where(function ($q) use ($search) {
+            $baseQuery->where(function ($q) use ($search) {
                 $q->where('domain_name', 'like', "%{$search}%")
                   ->orWhereHas('serviceRequest.applicant', function ($q2) use ($search) {
                       $q2->where('full_name', 'like', "%{$search}%")
@@ -35,6 +30,19 @@ class DomainController extends Controller
                   });
             });
         }
+
+        // นับจำนวนโดเมนทั้งระบบที่มี/ยังไม่มีบัญชี (สำหรับ stat card ด้านบนตาราง) — ใช้ตัวกรองค้นหา
+        // เดียวกัน แต่ไม่ผูกกับตัวกรอง has_account ที่เลือกอยู่ เพื่อให้เห็นภาพรวมทั้งสองฝั่งพร้อมกัน
+        $domainCounts = [
+            'linked' => (clone $baseQuery)->whereHas('serviceRequest.serviceAccounts')->count(),
+            'pending' => (clone $baseQuery)->whereDoesntHave('serviceRequest.serviceAccounts')->count(),
+        ];
+
+        $query = (clone $baseQuery)->with([
+            'departmentCode',
+            'serviceRequest.applicant',
+            'serviceRequest.serviceAccounts',
+        ]);
 
         if ($request->filled('has_account')) {
             if ($request->input('has_account') === 'yes') {
@@ -56,7 +64,7 @@ class DomainController extends Controller
 
         $domains = $query->paginate(50)->appends($request->query());
 
-        return view('admin.domains.index', compact('domains'));
+        return view('admin.domains.index', compact('domains', 'domainCounts'));
     }
 
     /**
