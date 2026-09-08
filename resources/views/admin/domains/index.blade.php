@@ -43,12 +43,22 @@
         .dm-table tbody tr:hover { background: var(--moss-light); }
         .dm-table tbody tr:last-child td { border-bottom: none; }
 
-        .dm-domain { display: flex; align-items: center; gap: 10px; }
         .dm-domain__icon {
             width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
             background: #e3efe7; color: #2f6b4a;
         }
+
+        .dm-domain__link {
+            display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;
+        }
+        .dm-domain__link code { transition: color .15s ease; }
+        .dm-domain__link:hover code { color: var(--forest); text-decoration: underline; }
+        .dm-domain__link:hover .dm-domain__icon { background: var(--moss-light); }
+        .dm-domain__external {
+            color: var(--ink-soft); opacity: 0; transition: opacity .15s ease; flex-shrink: 0;
+        }
+        .dm-domain__link:hover .dm-domain__external { opacity: .7; }
 
         .dm-badge {
             display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 9px;
@@ -150,12 +160,13 @@
                         @php $accounts = $domain->serviceRequest->serviceAccounts; @endphp
                         <tr>
                             <td data-label="ชื่อโดเมน">
-                                <div class="dm-domain">
+                                <a href="https://{{ $domain->domain_name }}" target="_blank" rel="noopener noreferrer" class="dm-domain__link" title="เปิดเว็บไซต์ {{ $domain->domain_name }} ในแท็บใหม่">
                                     <span class="dm-domain__icon">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
                                     </span>
                                     <code>{{ $domain->domain_name }}</code>
-                                </div>
+                                    <svg class="dm-domain__external" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                                </a>
                             </td>
                             <td data-label="หน่วยงาน">{{ $domain->departmentCode?->department_name ?? $domain->department_other ?? '-' }}</td>
                             <td data-label="ผู้ขอใช้บริการ">
