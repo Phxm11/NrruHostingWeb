@@ -85,9 +85,13 @@ return new class extends Migration
         }
 
         // applicant_id is derivable through service_accounts.request_id -> service_requests.
-        Schema::table('service_accounts', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('applicant_id');
-        });
+        // SQLite cannot remove this column without rebuilding its foreign keys.
+        // Keep it there: the next migration restores the very same relationship.
+        if (DB::getDriverName() !== 'sqlite') {
+            Schema::table('service_accounts', function (Blueprint $table) {
+                $table->dropConstrainedForeignId('applicant_id');
+            });
+        }
 
         Schema::dropIfExists('policy_acceptances');
         Schema::dropIfExists('fee_certifications');

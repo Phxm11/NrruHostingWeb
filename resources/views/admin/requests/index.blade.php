@@ -278,7 +278,7 @@
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                         ดูรายละเอียด
                                     </a>
-                                    @if ($req->status !== 'approved')
+                                    @if ($req->status === 'submitted')
                                         <form action="{{ route('admin.requests.approve', $req->request_id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')

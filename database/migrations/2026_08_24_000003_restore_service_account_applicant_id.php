@@ -10,15 +10,15 @@ return new class extends Migration
     public function up(): void
     {
         // Account administration queries this relationship directly.
-        Schema::table('service_accounts', function (Blueprint $table) {
-            $table->foreignId('applicant_id')->nullable()->after('request_id')->constrained('applicants', 'applicant_id');
-        });
+        if (! Schema::hasColumn('service_accounts', 'applicant_id')) {
+            Schema::table('service_accounts', function (Blueprint $table) {
+                $table->foreignId('applicant_id')->nullable()->after('request_id')->constrained('applicants', 'applicant_id');
+            });
+        }
 
-        DB::statement(
-            'UPDATE service_accounts AS account '
-            . 'INNER JOIN service_requests AS request ON request.request_id = account.request_id '
-            . 'SET account.applicant_id = request.applicant_id'
-        );
+        DB::table('service_accounts')->update([
+            'applicant_id' => DB::raw('(SELECT applicant_id FROM service_requests WHERE service_requests.request_id = service_accounts.request_id)'),
+        ]);
     }
 
     public function down(): void

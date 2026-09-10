@@ -270,7 +270,7 @@
                             </span>
                             ผู้สร้างบัญชี (เจ้าหน้าที่)
                         </label>
-                        <input type="text" name="created_by" class="form-control" value="{{ old('created_by') }}" required>
+                        <input type="text" readonly class="form-control" value="{{ auth()->user()->name }}">
                     </div>
 
                     <div class="d-flex justify-content-between">

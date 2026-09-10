@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -15,6 +16,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (! Schema::hasTable('roles') || ! Schema::hasTable('role_user')) {
+            return;
+        }
+
         $adminRoleId = DB::table('roles')->where('name', 'admin')->value('role_id');
         if (! $adminRoleId) {
             return;

@@ -6,7 +6,6 @@
 /storage/*.key
 /vendor
 .env
-.env.example
 .env.backup
 .env.production
 .phpunit.result.cache
@@ -18,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/storage/app/handover-backups/
+/dist/

@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Approval;
+use App\Models\Domain;
 use App\Models\ResourcePlan;
 use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
+use App\Support\RequestFiles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class ServiceAccountController extends Controller
 {
@@ -28,7 +32,7 @@ class ServiceAccountController extends Controller
             $search = $request->input('search');
             $baseQuery->whereHas('applicant', function ($q) use ($search) {
                 $q->where('full_name', 'like', "%{$search}%")
-                  ->orWhere('staff_or_student_id', 'like', "%{$search}%");
+                    ->orWhere('staff_or_student_id', 'like', "%{$search}%");
             });
         }
 
@@ -77,7 +81,7 @@ class ServiceAccountController extends Controller
      * ฟอร์มแก้ไขรายละเอียดคำขอ — แก้ได้ทั้งข้อมูลผู้ขอใช้บริการ, วัตถุประสงค์/ระยะเวลา,
      * ทรัพยากรที่ขอ, บริการที่เปิดใช้ และรายละเอียดทางเทคนิค
      * (ไม่รวมโดเมน — มีหน้าแก้ไขโดเมนแยกต่างหากที่ /admin/domains/{domain}/edit อยู่แล้ว,
-     *  ไม่รวมสถานะ/การอนุมัติ — จัดการผ่านปุ่ม "อนุมัติคำขอ" เพื่อไม่ให้ตัดขั้นตอนออกเลขที่ใบเสร็จ)
+     *  ไม่รวมสถานะ/การอนุมัติ — จัดการผ่านปุ่ม "อนุมัติคำขอ")
      */
     public function editRequest(ServiceRequest $serviceRequest)
     {
@@ -89,8 +93,7 @@ class ServiceAccountController extends Controller
 
     /**
      * บันทึกการแก้ไขคำขอ — อัปเดตทั้งตาราง service_requests และ applicants ที่ผูกกัน
-     * หมายเหตุ: applicant_id เดียวกันอาจถูกใช้ร่วมกันหลายคำขอ การแก้ข้อมูลผู้ขอตรงนี้
-     * จะมีผลกับคำขออื่นของผู้ขอคนเดียวกันด้วย (ต้องการให้ข้อมูลล่าสุดตรงกันทุกคำขอ)
+     * ข้อมูลนำเข้าเก่าที่ใช้ผู้ขอร่วมกันจะถูกแยกก่อนแก้ไข เพื่อคงข้อมูลคำขออื่นไว้
      */
     public function updateRequest(Request $request, ServiceRequest $serviceRequest)
     {
@@ -112,7 +115,7 @@ class ServiceAccountController extends Controller
 
             // ทรัพยากรและบริการ
             'service_type' => ['required', 'in:virtual_server,web_hosting'],
-            'plan_id' => ['nullable', 'exists:resource_plans,plan_id'],
+            'plan_id' => ['nullable', Rule::exists('resource_plans', 'plan_id')->where('service_type', $request->input('service_type'))],
             'custom_cpu_vcpu' => ['nullable', 'integer', 'min:1'],
             'custom_ram_gb' => ['nullable', 'integer', 'min:1'],
             'custom_storage_gb' => ['nullable', 'integer', 'min:1'],
@@ -136,34 +139,44 @@ class ServiceAccountController extends Controller
             $data['custom_fee'] = null;
         }
 
-        $serviceRequest->applicant->update([
-            'full_name' => $data['full_name'],
-            'customer_name' => $data['customer_name'] ?? null,
-            'unit_name' => $data['unit_name'],
-            'affiliation' => $data['affiliation'],
-            'position_title' => $data['position_title'] ?? null,
-            'phone' => $data['phone'] ?? null,
-            'email' => $data['email'] ?? null,
-        ]);
+        DB::transaction(function () use ($serviceRequest, $request, $data) {
+            $serviceRequest = ServiceRequest::whereKey($serviceRequest->request_id)->lockForUpdate()->firstOrFail();
+            $applicant = $serviceRequest->applicant;
+            if ($applicant->serviceRequests()->where('request_id', '!=', $serviceRequest->request_id)->exists()) {
+                $applicant = $applicant->replicate();
+                $applicant->save();
+                $serviceRequest->applicant_id = $applicant->applicant_id;
+                $serviceRequest->serviceAccounts()->update(['applicant_id' => $applicant->applicant_id]);
+            }
+            $applicant->update([
+                'full_name' => $data['full_name'],
+                'customer_name' => $data['customer_name'] ?? null,
+                'unit_name' => $data['unit_name'],
+                'affiliation' => $data['affiliation'],
+                'position_title' => $data['position_title'] ?? null,
+                'phone' => $data['phone'] ?? null,
+                'email' => $data['email'] ?? null,
+            ]);
 
-        $serviceRequest->update([
-            'purpose_type' => $data['purpose_type'],
-            'purpose_other_detail' => $data['purpose_other_detail'] ?? null,
-            'project_start_date' => $data['project_start_date'],
-            'project_end_date' => $data['project_end_date'],
-            'service_type' => $data['service_type'],
-            'plan_id' => $data['plan_id'] ?? null,
-            'custom_cpu_vcpu' => $data['custom_cpu_vcpu'] ?? null,
-            'custom_ram_gb' => $data['custom_ram_gb'] ?? null,
-            'custom_storage_gb' => $data['custom_storage_gb'] ?? null,
-            'custom_fee' => $data['custom_fee'] ?? null,
-            'enabled_services' => $data['enabled_services'],
-            'enabled_services_other_detail' => $data['enabled_services_other_detail'] ?? null,
-            'language_framework' => $data['language_framework'] ?? null,
-            'database_used' => $data['database_used'] ?? null,
-            'port_service_needed' => $data['port_service_needed'] ?? null,
-            'needs_external_connection' => $request->boolean('needs_external_connection'),
-        ]);
+            $serviceRequest->update([
+                'purpose_type' => $data['purpose_type'],
+                'purpose_other_detail' => $data['purpose_other_detail'] ?? null,
+                'project_start_date' => $data['project_start_date'],
+                'project_end_date' => $data['project_end_date'],
+                'service_type' => $data['service_type'],
+                'plan_id' => $data['plan_id'] ?? null,
+                'custom_cpu_vcpu' => $data['custom_cpu_vcpu'] ?? null,
+                'custom_ram_gb' => $data['custom_ram_gb'] ?? null,
+                'custom_storage_gb' => $data['custom_storage_gb'] ?? null,
+                'custom_fee' => $data['custom_fee'] ?? null,
+                'enabled_services' => $data['enabled_services'],
+                'enabled_services_other_detail' => $data['enabled_services_other_detail'] ?? null,
+                'language_framework' => $data['language_framework'] ?? null,
+                'database_used' => $data['database_used'] ?? null,
+                'port_service_needed' => $data['port_service_needed'] ?? null,
+                'needs_external_connection' => $request->boolean('needs_external_connection'),
+            ]);
+        });
 
         return redirect()
             ->route('admin.requests.show', $serviceRequest->request_id)
@@ -177,14 +190,20 @@ class ServiceAccountController extends Controller
     {
         $formNo = $serviceRequest->form_no;
 
-        // ลบไฟล์แนบและลายเซ็นออกจาก disk ป้องกันไฟล์ค้าง
-        foreach (['system_detail_doc_path', 'screenshot_evidence_path', 'signature_image_path'] as $column) {
-            if ($serviceRequest->{$column}) {
-                Storage::disk('public')->delete($serviceRequest->{$column});
+        $paths = collect(RequestFiles::COLUMNS)->map(fn ($column) => $serviceRequest->{$column})
+            ->filter(fn ($path) => $path && RequestFiles::isSafePath($path));
+        $serviceRequest->delete();
+        foreach ($paths as $path) {
+            $stillUsed = ServiceRequest::where(function ($query) use ($path) {
+                foreach (RequestFiles::COLUMNS as $column) {
+                    $query->orWhere($column, $path);
+                }
+            })->exists();
+            if (! $stillUsed) {
+                Storage::disk('private')->delete($path);
+                Storage::disk('public')->delete($path);
             }
         }
-
-        $serviceRequest->delete();
 
         return redirect()
             ->route('admin.requests.index')
@@ -193,35 +212,31 @@ class ServiceAccountController extends Controller
 
     /**
      * อนุมัติคำขอใช้บริการ (เปลี่ยนสถานะเป็น approved)
-     * แก้ไข: เดิมแค่เปลี่ยน status ตรงๆ ไม่เคยบันทึกลง approvals เลย ทำให้ประวัติการอนุมัติว่างเปล่าตลอด
-     * และไม่เคยออกเลขที่ใบเสร็จ (receipt_no/date/time) เลยสักครั้ง
+     * Approval is a service decision; it does not confirm payment or issue a receipt.
      */
     public function approveRequest(ServiceRequest $serviceRequest)
     {
-        $serviceRequest->status = 'approved';
-        $serviceRequest->receipt_no = $serviceRequest->receipt_no ?? $this->generateReceiptNo();
-        $serviceRequest->receipt_date = $serviceRequest->receipt_date ?? now()->toDateString();
-        $serviceRequest->receipt_time = $serviceRequest->receipt_time ?? now()->format('H:i:s');
-        $serviceRequest->save();
+        DB::transaction(function () use ($serviceRequest) {
+            $serviceRequest = ServiceRequest::whereKey($serviceRequest->request_id)->lockForUpdate()->firstOrFail();
+            if ($serviceRequest->status === 'approved') {
+                return;
+            }
+            if ($serviceRequest->status !== 'submitted') {
+                throw ValidationException::withMessages(['status' => 'อนุมัติได้เฉพาะคำขอที่รอพิจารณา']);
+            }
+            $serviceRequest->update(['status' => 'approved']);
 
-        // บันทึกประวัติการอนุมัติจริง แทนที่จะแค่เปลี่ยนสถานะเฉยๆ
-        Approval::create([
-            'request_id' => $serviceRequest->request_id,
-            'approver_level' => 'computer_center_director',
-            'approver_name' => auth()->user()->name,
-            'decision' => 'certify_info_only',
-            'decision_date' => now()->toDateString(),
-        ]);
+            // บันทึกประวัติการอนุมัติจริง แทนที่จะแค่เปลี่ยนสถานะเฉยๆ
+            Approval::create([
+                'request_id' => $serviceRequest->request_id,
+                'approver_level' => 'staff',
+                'approver_name' => auth()->user()->name,
+                'decision' => 'certify_info_only',
+                'decision_date' => now()->toDateString(),
+            ]);
+        });
 
         return back()->with('success', "อนุมัติคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
-    }
-
-    private function generateReceiptNo(): string
-    {
-        $year = now()->year + 543; // พ.ศ.
-        $runningNo = ServiceRequest::whereYear('receipt_date', now()->year)->count() + 1;
-
-        return sprintf('RC-%03d/%d', $runningNo, $year);
     }
 
     /**
@@ -230,6 +245,10 @@ class ServiceAccountController extends Controller
      */
     public function createAccount(ServiceRequest $serviceRequest)
     {
+        if ($serviceRequest->status !== 'approved') {
+            return redirect()->route('admin.requests.show', $serviceRequest)
+                ->with('error', 'กรุณาอนุมัติคำขอก่อนสร้างบัญชี');
+        }
         if ($serviceRequest->serviceAccounts()->exists()) {
             return redirect()
                 ->route('admin.requests.show', $serviceRequest->request_id)
@@ -253,20 +272,33 @@ class ServiceAccountController extends Controller
             'username' => ['required', 'string', 'max:100', 'alpha_dash', Rule::unique('service_accounts', 'username')],
             'password' => ['required', 'string', 'min:8', 'max:100'],
             'account_type' => ['required', 'in:ssh,database,control_panel,ftp'],
-            'created_by' => ['required', 'string', 'max:150'],
             'expire_date' => ['nullable', 'date'],
         ]);
 
-        $account = new ServiceAccount();
-        $account->request_id = $serviceRequest->request_id;
-        $account->applicant_id = $serviceRequest->applicant_id;
-        $account->username = $data['username'];
-        $account->password = $data['password']; // ผ่าน mutator -> hash อัตโนมัติ
-        $account->account_type = $data['account_type'];
-        $account->status = 'active';
-        $account->created_by = $data['created_by'];
-        $account->expire_date = $data['expire_date'] ?? $serviceRequest->project_end_date;
-        $account->save();
+        $account = DB::transaction(function () use ($serviceRequest, $data, $request) {
+            $serviceRequest = ServiceRequest::whereKey($serviceRequest->request_id)->lockForUpdate()->firstOrFail();
+            if ($serviceRequest->status !== 'approved') {
+                throw ValidationException::withMessages(['status' => 'กรุณาอนุมัติคำขอก่อนสร้างบัญชี']);
+            }
+            if ($serviceRequest->serviceAccounts()->exists()) {
+                throw ValidationException::withMessages(['username' => 'คำขอนี้มีบัญชีแล้ว กรุณาเปิดรายการบัญชีเดิม']);
+            }
+            $account = new ServiceAccount;
+            $account->request_id = $serviceRequest->request_id;
+            $account->applicant_id = $serviceRequest->applicant_id;
+            $account->username = $data['username'];
+            $account->password = $data['password']; // ผ่าน mutator -> hash อัตโนมัติ
+            $account->account_type = $data['account_type'];
+            $account->status = 'active';
+            $account->created_by = $request->user()->name;
+            $account->expire_date = $data['expire_date'] ?? $serviceRequest->project_end_date->toDateString();
+            if ($account->expire_date < today()->toDateString()) {
+                $account->status = 'expired';
+            }
+            $account->save();
+
+            return $account;
+        });
 
         return redirect()
             ->route('admin.accounts.index')
@@ -286,9 +318,9 @@ class ServiceAccountController extends Controller
             $search = $request->input('q');
             $baseQuery->where(function ($q) use ($search) {
                 $q->where('username', 'like', "%{$search}%")
-                  ->orWhereHas('applicant', function ($q2) use ($search) {
-                      $q2->where('full_name', 'like', "%{$search}%");
-                  });
+                    ->orWhereHas('applicant', function ($q2) use ($search) {
+                        $q2->where('full_name', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -361,7 +393,7 @@ class ServiceAccountController extends Controller
         ]);
 
         $account->username = $data['username'];
-        if (!empty($data['password'])) {
+        if (! empty($data['password'])) {
             $account->password = $data['password']; // ผ่าน mutator -> hash อัตโนมัติ
         }
         $account->account_type = $data['account_type'];
@@ -391,7 +423,7 @@ class ServiceAccountController extends Controller
         $remainingAccounts = ServiceAccount::where('request_id', $requestId)->exists();
 
         if (! $remainingAccounts) {
-            \App\Models\Domain::where('request_id', $requestId)->delete();
+            Domain::where('request_id', $requestId)->delete();
         }
 
         return redirect()

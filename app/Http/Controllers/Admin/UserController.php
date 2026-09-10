@@ -20,7 +20,7 @@ class UserController extends Controller
             $search = $request->input('q');
             $baseQuery->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%");
             });
         }
 
@@ -57,15 +57,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'     => ['required', 'string', 'max:150'],
-            'email'    => ['required', 'string', 'email', 'max:150', 'unique:users,email'],
+            'name' => ['required', 'string', 'max:150'],
+            'email' => ['required', 'string', 'email', 'max:150', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $user = User::create([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'password'  => $data['password'], // ผ่าน cast 'hashed' อัตโนมัติ
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'], // ผ่าน cast 'hashed' อัตโนมัติ
             'is_active' => true,
         ]);
 
@@ -90,10 +90,14 @@ class UserController extends Controller
         $request->merge(['password' => $request->password ?: null]);
 
         $data = $request->validate([
-            'name'     => ['required', 'string', 'max:150'],
-            'email'    => ['required', 'string', 'email', 'max:150', 'unique:users,email,' . $user->id],
+            'name' => ['required', 'string', 'max:150'],
+            'email' => ['required', 'string', 'email', 'max:150', 'unique:users,email,'.$user->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
+
+        if ($user->id === Auth::id() && ! $request->boolean('is_active')) {
+            return back()->withErrors(['is_active' => 'ไม่สามารถปิดการใช้งานบัญชีของตนเองได้'])->withInput($request->except(['password', 'password_confirmation']));
+        }
 
         $user->name = $data['name'];
         $user->email = $data['email'];

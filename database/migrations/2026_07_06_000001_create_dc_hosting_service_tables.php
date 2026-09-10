@@ -151,6 +151,7 @@ return new class extends Migration
             $table->id('approval_id');
             $table->foreignId('request_id')->constrained('service_requests', 'request_id')->cascadeOnDelete();
             $table->enum('approver_level', [
+                'staff',
                 'unit_head',
                 'computer_center_deputy_director',
                 'computer_center_director',

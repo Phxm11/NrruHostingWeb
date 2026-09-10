@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('service_accounts', function (Blueprint $table) {
-            $table->dropColumn('last_login');
-        });
+        if (Schema::hasColumn('service_accounts', 'last_login')) {
+            Schema::table('service_accounts', function (Blueprint $table) {
+                $table->dropColumn('last_login');
+            });
+        }
     }
 
     public function down(): void

@@ -268,7 +268,7 @@
                 </div>
 
                 <div class="detail-actions">
-                    @if ($serviceRequest->status !== 'approved')
+                    @if ($serviceRequest->status === 'submitted')
                         <form action="{{ route('admin.requests.approve', $serviceRequest->request_id) }}" method="POST">
                             @csrf
                             @method('PATCH')
@@ -282,7 +282,7 @@
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                         แก้ไขคำขอ
                     </a>
-                    @if ($serviceRequest->serviceAccounts->isEmpty())
+                    @if ($serviceRequest->status === 'approved' && $serviceRequest->serviceAccounts->isEmpty())
                         <a href="{{ route('admin.accounts.create', $serviceRequest->request_id) }}" class="btn btn-amber btn-sm">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
                             สร้างบัญชีให้ผู้ขอใช้บริการ
@@ -548,7 +548,7 @@
                     <div class="sub-divider">รูปภาพที่แนบมา ({{ $imageAttachments->count() }})</div>
                     <div class="img-gallery">
                         @foreach ($imageAttachments as $file)
-                            @php $url = asset('storage/' . $file->file_path); @endphp
+                            @php $url = route('admin.requests.files.show', [$serviceRequest->request_id, $file->file_type]); @endphp
                             <div class="img-gallery-item" onclick="openLightbox('{{ $url }}', '{{ addslashes($fileTypeLabels[$file->file_type] ?? $file->file_type) }}')">
                                 <img src="{{ $url }}" loading="lazy" alt="{{ $fileTypeLabels[$file->file_type] ?? $file->file_type }}">
                                 <span class="img-zoom-hint">
@@ -568,7 +568,7 @@
                     @foreach ($fileAttachments as $file)
                         @php
                             $ext = strtolower(pathinfo($file->file_path, PATHINFO_EXTENSION));
-                            $url = asset('storage/' . $file->file_path);
+                            $url = route('admin.requests.files.show', [$serviceRequest->request_id, $file->file_type]);
                         @endphp
                         <div class="doc-card">
                             <span class="doc-icon">
@@ -650,8 +650,8 @@
 
                 @if ($serviceRequest->signature_image_path)
                     <div class="sub-divider">ลายเซ็นผู้ขอใช้บริการ</div>
-                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ asset('storage/' . $serviceRequest->signature_image_path) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
-                        <img src="{{ asset('storage/' . $serviceRequest->signature_image_path) }}" alt="ลายเซ็นผู้ขอใช้บริการ" loading="lazy">
+                    <div class="sig-box" style="cursor:zoom-in;" onclick="openLightbox('{{ route('admin.requests.files.show', [$serviceRequest->request_id, 'signature_image']) }}', 'ลายเซ็นผู้ขอใช้บริการ')">
+                        <img src="{{ route('admin.requests.files.show', [$serviceRequest->request_id, 'signature_image']) }}" alt="ลายเซ็นผู้ขอใช้บริการ" loading="lazy">
                     </div>
                 @else
                     <p class="empty-note">ไม่มีไฟล์ลายเซ็นแนบมา</p>
@@ -680,11 +680,11 @@
                 @endif
                 @forelse ($serviceRequest->approvals as $approval)
                     <div class="approval-row">
-                        <span class="pill pill-{{ $approval->decision === 'approved' ? 'approved' : ($approval->decision === 'rejected' ? 'rejected' : 'submitted') }}">
-                            {{ $approval->decision }}
+                        <span class="pill pill-{{ $approval->decision === 'rejected' ? 'rejected' : 'approved' }}">
+                            {{ ['certify_info_only' => '???????????? / ?????????????', 'certify_and_waive_fee' => '???????????????????????????', 'acknowledge_assign_web_team' => '????????????????????', 'rejected' => '??????????'][$approval->decision] ?? $approval->decision }}
                         </span>
                         <div>
-                            <div style="font-weight:600;font-size:13.5px;">{{ $approval->approver_name }} <span class="text-muted" style="font-weight:400;">({{ $approval->approver_level }})</span></div>
+                            <div style="font-weight:600;font-size:13.5px;">{{ $approval->approver_name }} <span class="text-muted" style="font-weight:400;">({{ ['staff' => 'เจ้าหน้าที่', 'unit_head' => 'หัวหน้าหน่วยงาน', 'computer_center_deputy_director' => 'รองผู้อำนวยการ', 'computer_center_director' => 'ผู้อำนวยการ'][$approval->approver_level] ?? $approval->approver_level }})</span></div>
                             <div class="doc-sub">{{ $approval->decision_date ? \Carbon\Carbon::parse($approval->decision_date)->format('d/m/Y') : '-' }}</div>
                         </div>
                     </div>

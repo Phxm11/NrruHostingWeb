@@ -340,6 +340,10 @@
                                             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
                                         </button>
                                         <div class="dropdown">
+                                            <a href="{{ route('admin.accounts.renew', $acc->account_id) }}">
+                                                @include('admin.accounts.partials.renew-icon', ['name' => 'renew', 'size' => 14])
+                                                ต่ออายุบริการ / ประวัติ
+                                            </a>
                                             <a href="{{ route('admin.accounts.edit', $acc->account_id) }}">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                                                 แก้ไขบัญชี

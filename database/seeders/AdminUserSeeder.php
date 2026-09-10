@@ -8,8 +8,7 @@ use Illuminate\Database\Seeder;
 class AdminUserSeeder extends Seeder
 {
     /**
-     * สร้างบัญชีผู้ดูแลระบบเริ่มต้น (หากยังไม่มีผู้ใช้ในระบบ)
-     * คำเตือน: ให้เปลี่ยนรหัสผ่านหลังจากเข้าสู่ระบบครั้งแรก
+     * แจ้งวิธีสร้างเจ้าหน้าที่โดยไม่กำหนดบัญชีหรือรหัสผ่านตายตัว
      */
     public function run(): void
     {
@@ -17,12 +16,6 @@ class AdminUserSeeder extends Seeder
             return;
         }
 
-        User::create([
-            'name'              => 'Administrator',
-            'email'             => 'admin@nrru.ac.th',
-            'password'          => 'password',
-            'is_active'         => true,
-            'email_verified_at' => now(),
-        ]);
+        $this->command?->info('สร้างบัญชีเจ้าหน้าที่ด้วย php artisan staff:create (ไม่มีรหัสผ่านเริ่มต้น)');
     }
 }

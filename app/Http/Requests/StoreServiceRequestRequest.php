@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreServiceRequestRequest extends FormRequest
 {
@@ -37,7 +38,7 @@ class StoreServiceRequestRequest extends FormRequest
 
             // ส่วนที่ 2 ทรัพยากรและบริการ
             'service_type' => ['required', 'in:virtual_server,web_hosting'],
-            'plan_id' => ['nullable', 'exists:resource_plans,plan_id'],
+            'plan_id' => ['nullable', Rule::exists('resource_plans', 'plan_id')->where('service_type', $this->input('service_type'))],
             'custom_cpu_vcpu' => ['nullable', 'integer', 'min:1'],
             'custom_ram_gb' => ['nullable', 'integer', 'min:1'],
             'custom_storage_gb' => ['nullable', 'integer', 'min:1'],
@@ -69,6 +70,15 @@ class StoreServiceRequestRequest extends FormRequest
             'accepted' => ['required', 'accepted'],
             'signature_image' => ['required', 'image', 'max:2048'],
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            if (! $this->boolean('agree_to_pay') && ! $this->boolean('request_fee_waiver')) {
+                $validator->errors()->add('agree_to_pay', 'กรุณายินยอมชำระค่าบริการหรือขอยกเว้นค่าธรรมเนียม');
+            }
+        });
     }
 
     public function messages(): array
