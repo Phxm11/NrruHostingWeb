@@ -668,7 +668,7 @@
                 </div>
                 @if ($serviceRequest->receipt_no)
                     <div class="info-item" style="margin-bottom:12px;">
-                        <div class="info-item__label">เลขที่ใบเสร็จ</div>
+                        <div class="info-item__label">เลขที่ใบเสร็จจากข้อมูลเดิม (ยังไม่ได้ตรวจสอบการชำระ)</div>
                         <div class="info-item__value">
                             {{ $serviceRequest->receipt_no }}
                             @if ($serviceRequest->receipt_date)
@@ -681,7 +681,7 @@
                 @forelse ($serviceRequest->approvals as $approval)
                     <div class="approval-row">
                         <span class="pill pill-{{ $approval->decision === 'rejected' ? 'rejected' : 'approved' }}">
-                            {{ ['certify_info_only' => '???????????? / ?????????????', 'certify_and_waive_fee' => '???????????????????????????', 'acknowledge_assign_web_team' => '????????????????????', 'rejected' => '??????????'][$approval->decision] ?? $approval->decision }}
+                            {{ ['certify_info_only' => 'รับรองข้อมูล / อนุมัติบริการ', 'certify_and_waive_fee' => 'รับรองและยกเว้นค่าธรรมเนียม', 'acknowledge_assign_web_team' => 'รับทราบและมอบหมายงาน', 'rejected' => 'ไม่อนุมัติ'][$approval->decision] ?? $approval->decision }}
                         </span>
                         <div>
                             <div style="font-weight:600;font-size:13.5px;">{{ $approval->approver_name }} <span class="text-muted" style="font-weight:400;">({{ ['staff' => 'เจ้าหน้าที่', 'unit_head' => 'หัวหน้าหน่วยงาน', 'computer_center_deputy_director' => 'รองผู้อำนวยการ', 'computer_center_director' => 'ผู้อำนวยการ'][$approval->approver_level] ?? $approval->approver_level }})</span></div>

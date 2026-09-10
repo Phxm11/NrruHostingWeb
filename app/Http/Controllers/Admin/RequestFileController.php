@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceRequest;
 use App\Support\RequestFiles;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 
 class RequestFileController extends Controller
@@ -19,10 +20,18 @@ class RequestFileController extends Controller
         $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
         $inline = in_array($extension, ['png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf'], true);
 
-        return Storage::disk($disk)->response($path, basename($path), [
+        $headers = [
             'Cache-Control' => 'private, no-store',
             'X-Content-Type-Options' => 'nosniff',
             'Content-Security-Policy' => "default-src 'none'; sandbox",
-        ], $inline ? 'inline' : 'attachment');
+        ];
+
+        /** @var FilesystemAdapter $filesystem */
+        $filesystem = Storage::disk($disk);
+        $absolutePath = $filesystem->path($path);
+
+        return $inline
+            ? response()->file($absolutePath, $headers)
+            : response()->download($absolutePath, basename($path), $headers);
     }
 }

@@ -2,10 +2,12 @@
 from pathlib import Path
 import hashlib
 import json
+import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / 'dist' / 'NRRU-Hosting-Handover.zip'
+TEMP_OUTPUT = OUTPUT.with_suffix('.zip.tmp')
 OUTPUT.parent.mkdir(exist_ok=True)
 files = set()
 for directory in ('app', 'config', 'resources', 'routes', 'tests', 'docs', 'scripts'):
@@ -27,22 +29,27 @@ for name in ('artisan', 'bootstrap/app.php', '.env.example', '.gitignore', '.edi
     files.add(ROOT / name)
 
 manifest = {}
-with zipfile.ZipFile(OUTPUT, 'w', zipfile.ZIP_DEFLATED) as archive:
+with zipfile.ZipFile(TEMP_OUTPUT, 'w', zipfile.ZIP_DEFLATED) as archive:
     for path in sorted(files):
         relative = path.relative_to(ROOT).as_posix()
         assert relative != '.env' and not relative.startswith(('storage/', 'vendor/', 'node_modules/'))
         assert not path.is_symlink()
         content = path.read_bytes()
+        if path.suffix.lower() not in ('.png', '.ico'):
+            decoded = content.decode('utf-8')
+            if re.search(r'\?{3,}|\uFFFD', decoded):
+                raise ValueError(f'Possible damaged text in {relative}; repair it before packaging.')
         archive.writestr(relative, content)
         manifest[relative] = hashlib.sha256(content).hexdigest()
     for directory in ('bootstrap/cache', 'storage/app/private', 'storage/app/public', 'storage/framework/cache/data',
                       'storage/framework/sessions', 'storage/framework/views', 'storage/logs'):
         archive.writestr(directory + '/.gitignore', '*\n!.gitignore\n')
     archive.writestr('HANDOVER-MANIFEST.json', json.dumps(manifest, ensure_ascii=False, indent=2))
-with zipfile.ZipFile(OUTPUT) as archive:
+with zipfile.ZipFile(TEMP_OUTPUT) as archive:
     assert archive.testzip() is None
     for name, digest in manifest.items():
         assert hashlib.sha256(archive.read(name)).hexdigest() == digest
+TEMP_OUTPUT.replace(OUTPUT)
 checksum = hashlib.sha256(OUTPUT.read_bytes()).hexdigest()
 OUTPUT.with_suffix('.zip.sha256').write_text(checksum + '  ' + OUTPUT.name + '\n', encoding='ascii')
 print(f'Built {OUTPUT.name}: {len(files)} source files, {OUTPUT.stat().st_size:,} bytes. Contents verified.')
