@@ -13,39 +13,6 @@
 
 @section('content')
 
-    <style>
-        /* ---------- distinct color per stat card ---------- */
-        .stat-card--total    .stat-icon { background: linear-gradient(135deg, #e3efe7, #d3e6d8); color: var(--forest); }
-        .stat-card--active   .stat-icon { background: linear-gradient(135deg, var(--moss-light), #cfe3b7); color: var(--forest); }
-        .stat-card--active   .stat-number { color: var(--forest); }
-        .stat-card--disabled .stat-icon { background: #eeeadc; color: var(--ink-soft); }
-
-        /* ---------- filters: segmented status + search ---------- */
-        .filter-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
-        .segmented { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 2px; }
-        .seg-btn {
-            display: flex; align-items: center; gap: 7px; text-decoration: none;
-            padding: 8px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500;
-            color: var(--ink-soft); white-space: nowrap; transition: background .15s, color .15s;
-        }
-        .seg-btn .count {
-            font-family: 'Kanit', sans-serif; font-size: 12px; font-weight: 600; padding: 1px 7px;
-            border-radius: 999px; background: var(--moss-light); color: var(--ink-soft);
-        }
-        .seg-btn.is-active { background: var(--forest); color: #fff; }
-        .seg-btn.is-active .count { background: rgba(255,255,255,.18); color: #fff; }
-        .seg-btn:not(.is-active):hover { background: var(--moss-light); color: var(--ink); }
-
-        .search-wrap { position: relative; flex: 1 1 220px; max-width: 320px; }
-        .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); opacity: .6; pointer-events: none; }
-        .search-wrap input {
-            width: 100%; padding: 9px 12px 9px 36px; border-radius: 10px; border: 1px solid var(--line); font-size: 13.5px;
-        }
-        .search-wrap input:focus { outline: none; border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-light); }
-
-        .filter-clear { font-size: 13px; color: #888; text-decoration: none; }
-        .filter-clear:hover { color: var(--rust); }
-    </style>
 
     <div class="stat-row">
         <div class="stat-card stat-card--total">
@@ -78,6 +45,7 @@
     </div>
 
     <div class="panel">
+        <div class="list-heading"><div><h2>รายชื่อเจ้าหน้าที่</h2><p>บัญชีเจ้าหน้าที่ที่เข้าใช้งานระบบ ADMIN</p></div><span class="list-total">{{ number_format($users->total()) }} รายการ</span></div>
 
         {{-- ============================================================
              Filters: status as segmented links (real GET navigation,
@@ -102,8 +70,9 @@
 
             <form method="GET" class="search-wrap">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" name="q" placeholder="ค้นหาชื่อ หรืออีเมล..." value="{{ request('q') }}">
+                <input aria-label="ค้นหาข้อมูล" type="text" name="q" placeholder="ค้นหาชื่อ หรืออีเมล..." value="{{ request('q') }}">
                 @if ($currentStatus) <input type="hidden" name="status" value="{{ $currentStatus }}"> @endif
+            <button type="submit" class="btn btn-outline-soft">ค้นหา</button>
             </form>
 
             @if (request('q') || $currentStatus)
@@ -111,15 +80,16 @@
             @endif
         </div>
 
+        <p class="table-hint"><x-admin.icon name="list" size="15" /> เลื่อนตารางในแนวนอนเพื่อดูข้อมูลครบทุกคอลัมน์</p>
         <div class="table-responsive">
             <table class="modern-table">
                 <thead>
                     <tr>
-                        <th>ชื่อผู้ใช้</th>
-                        <th>อีเมล</th>
-                        <th>สถานะ</th>
-                        <th>สร้างเมื่อ</th>
-                        <th></th>
+                        <th scope="col">ชื่อผู้ใช้</th>
+                        <th scope="col">อีเมล</th>
+                        <th scope="col">สถานะ</th>
+                        <th scope="col">สร้างเมื่อ</th>
+                        <th scope="col" class="text-end">จัดการ</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -5,37 +5,10 @@
 @section('page-title', 'ต่ออายุบริการ')
 
 @section('content')
-<style>
-    .renew-page .renew-summary { background: linear-gradient(120deg, var(--moss-light), #fff); }
-    .renew-page .renew-heading { display: flex; align-items: center; gap: 11px; margin-bottom: 18px; }
-    .renew-page .renew-heading h2 { font-size: 15px; font-weight: 600; margin: 0; }
-    .renew-page .renew-icon { width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; background: var(--moss-light); color: var(--moss); }
-    .renew-page .renew-summary .renew-heading > .renew-icon { background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
-    .renew-page .renew-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px; }
-    .renew-page .renew-item { display: flex; align-items: flex-start; gap: 10px; min-width: 0; }
-    .renew-page .renew-item .renew-icon { width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,.7); }
-    .renew-page .renew-label { font-size: 12px; color: var(--ink-soft); margin-bottom: 3px; }
-    .renew-page .renew-value { font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
-    .renew-page .renew-field { margin-bottom: 22px; }
-    .renew-page .renew-field label { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-    .renew-page .renew-field .renew-icon { width: 22px; height: 22px; border-radius: 6px; background: #e3efe7; color: #2f6b4a; }
-    .renew-page .renew-field--note .renew-icon { background: var(--amber-light); color: var(--amber-deep); }
-    .renew-page .renew-help { font-size: 12.5px; color: var(--ink-soft); margin-top: 7px; }
-    .renew-page .renew-notice { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; }
-    .renew-page .renew-notice svg { flex-shrink: 0; margin-top: 2px; }
-    .renew-page .renew-actions { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .renew-page .renew-actions .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
-    .renew-page .renew-count { margin-left: auto; white-space: nowrap; }
-    .renew-page .renew-date { white-space: nowrap; }
-    .renew-page .renew-note { min-width: 140px; max-width: 300px; white-space: pre-wrap; overflow-wrap: anywhere; }
-    .renew-page .renew-empty { text-align: center; padding: 32px 14px; color: var(--ink-soft); }
-    .renew-page .renew-empty .renew-icon { margin-bottom: 10px; }
-    .renew-page .renew-empty p { margin: 0; font-size: 13px; }
-    @media (max-width: 640px) {
-        .renew-page .renew-grid { grid-template-columns: 1fr; }
-        .renew-page .renew-actions .btn { width: 100%; }
-    }
-</style>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/admin/pages/accounts-renew.css') }}?v={{ filemtime(public_path('css/admin/pages/accounts-renew.css')) }}">
+    @endpush
+
 <div class="row justify-content-center renew-page">
     <div class="col-lg-8">
         <div class="panel mb-3 renew-summary">

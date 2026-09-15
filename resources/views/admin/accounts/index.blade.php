@@ -4,9 +4,7 @@
 @section('eyebrow', 'แดชบอร์ดเจ้าหน้าที่')
 @section('page-title', 'บัญชีผู้ใช้บริการ')
 
-@push('styles')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endpush
+
 
 @section('content')
 
@@ -16,173 +14,7 @@
          with the global .pill / .avatar-circle / table.modern-table
          rules already defined in admin.layout.
     ============================================================ --}}
-    <style>
-        .acc2-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
-        .acc2-head p { margin: 2px 0 0; color: var(--ink-soft); font-size: 13.5px; }
 
-        @keyframes rowIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ---------- segmented status filter ---------- */
-        .filter-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
-        .segmented { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 2px; }
-        .seg-btn {
-            display: flex; align-items: center; gap: 7px; text-decoration: none;
-            padding: 8px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500;
-            color: var(--ink-soft); white-space: nowrap; transition: background .15s, color .15s;
-        }
-        .seg-btn .count {
-            font-family: 'Kanit', sans-serif; font-size: 12px; font-weight: 600; padding: 1px 7px;
-            border-radius: 999px; background: var(--moss-light); color: var(--ink-soft);
-        }
-        .seg-btn.is-active { background: var(--forest); color: #fff; }
-        .seg-btn.is-active .count { background: rgba(255,255,255,.18); color: #fff; }
-        .seg-btn:not(.is-active):hover { background: var(--moss-light); color: var(--ink); }
-
-        .search-wrap { position: relative; flex: 1 1 220px; max-width: 320px; }
-        .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-soft); opacity: .6; pointer-events: none; }
-        .search-wrap input {
-            width: 100%; padding: 9px 12px 9px 36px; border-radius: 10px; border: 1px solid var(--line); font-size: 13.5px;
-        }
-        .search-wrap input:focus { outline: none; border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-light); }
-
-        .sort-wrap { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
-        .sort-wrap select { border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; font-size: 13.5px; background: #fff; color: var(--ink); }
-
-        .filter-clear { font-size: 13px; color: #888; text-decoration: none; }
-        .filter-clear:hover { color: var(--rust); }
-
-        /* ---------- bulk action bar ---------- */
-        .bulk-bar {
-            display: none; align-items: center; gap: 14px; background: var(--forest); color: #fff;
-            padding: 11px 16px; border-radius: 10px; margin-bottom: 14px; font-size: 13.5px;
-        }
-        .bulk-bar.is-visible { display: flex; }
-        .bulk-bar strong { font-family: 'Kanit', sans-serif; font-weight: 600; }
-        .bulk-actions { display: flex; gap: 8px; margin-left: auto; }
-        .bulk-btn {
-            border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); color: #fff;
-            padding: 7px 13px; border-radius: 8px; font-size: 13px; cursor: pointer; font-family: 'Sarabun', sans-serif;
-        }
-        .bulk-btn:hover { background: rgba(255,255,255,.18); }
-        .bulk-btn.danger { border-color: rgba(214,120,95,.6); background: rgba(174,72,48,.35); }
-        .bulk-close { background: none; border: none; color: rgba(255,255,255,.7); cursor: pointer; font-size: 18px; line-height: 1; }
-
-        /* ---------- table ---------- */
-        .acc-table-wrap { overflow-x: auto; }
-        table.acc-table { border-collapse: separate; border-spacing: 0; width: 100%; }
-        table.acc-table thead th {
-            text-align: left; font-size: 12.5px; font-weight: 600; color: var(--ink-soft);
-            padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap;
-        }
-        table.acc-table thead th.sortable { cursor: pointer; }
-        table.acc-table thead th.sortable a { color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
-        table.acc-table thead th.sortable.is-sorted { color: var(--forest); }
-        table.acc-table thead th.col-check { width: 34px; }
-        table.acc-table tbody td { padding: 12px 14px; font-size: 14px; border-bottom: 1px solid #f0eee7; vertical-align: middle; }
-        table.acc-table tbody tr { animation: rowIn .25s ease both; transition: background .12s; }
-        table.acc-table tbody tr:hover { background: #fbfaf7; }
-        table.acc-table tbody tr:last-child td { border-bottom: none; }
-        table.acc-table tbody tr.is-selected { background: var(--moss-light); }
-        /* rowIn's end-state keeps transform:translateY(0), which creates a stacking
-           context per <tr> (transform != none, even at 0). Without this, an open
-           dropdown menu paints *underneath* the next row instead of above it,
-           because z-index only resolves within a row's own stacking context.
-           Bump the whole row above its siblings while its menu is open. */
-        table.acc-table tbody tr.row-menu-open { position: relative; z-index: 30; }
-
-        .row-check { width: 17px; height: 17px; accent-color: var(--forest); cursor: pointer; }
-
-        .identity { display: flex; align-items: center; gap: 11px; }
-        .avatar {
-            width: 36px; height: 36px; min-width: 36px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14px; color: #fff;
-            box-shadow: 0 2px 6px rgba(0,0,0,.12);
-        }
-        .av-1 { background: linear-gradient(135deg, var(--forest), var(--forest-2)); }
-        .av-2 { background: linear-gradient(135deg, var(--moss), #82a862); }
-        .av-3 { background: linear-gradient(135deg, var(--amber-deep), var(--amber)); }
-        .id-name { font-weight: 600; color: var(--ink); font-size: 14px; }
-        .id-sub { font-size: 12px; color: var(--ink-soft); margin-top: 1px; }
-        .id-sub code { background: none; padding: 0; color: inherit; }
-
-        .org-line1 { color: var(--ink); font-size: 13.5px; }
-        .org-line2 { color: var(--ink-soft); font-size: 12px; margin-top: 1px; }
-
-        code.uname { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--moss-light); padding: 3px 7px; border-radius: 6px; font-size: 12.5px; color: var(--forest); }
-
-        .domain-cell { max-width: 220px; }
-        .domain-chip { display: inline-flex; align-items: center; font-size: 12px; background: #ece9dc; color: var(--ink-soft); padding: 3px 8px; border-radius: 7px; margin: 1px 4px 1px 0; }
-        .req-link { font-size: 12px; color: var(--moss); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; }
-        .req-link:hover { text-decoration: underline; }
-
-        .type-tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 7px; }
-        .type-ssh { background: #e3efe7; color: #2f6b4a; }
-        .type-database { background: var(--amber-light); color: var(--amber-deep); }
-        .type-control_panel { background: #eef1da; color: #6a7a2c; }
-        .type-ftp { background: #f4e8dd; color: #a1592f; }
-
-        .status-cell { display: flex; align-items: center; gap: 8px; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-        .dot-active { background: var(--moss); }
-        .dot-disabled { background: var(--ink-soft); }
-        .dot-expired { background: var(--rust); }
-        .status-label { font-weight: 600; font-size: 13px; }
-        .status-active { color: var(--forest); }
-        .status-disabled { color: var(--ink-soft); }
-        .status-expired { color: var(--rust); }
-
-        .expiry-main { font-size: 13.5px; color: var(--ink); }
-        .expiry-soon { color: var(--rust); font-weight: 600; }
-        .expiry-track { width: 64px; height: 4px; border-radius: 99px; background: #ece9dc; margin-top: 6px; overflow: hidden; }
-        .expiry-fill { height: 100%; border-radius: 99px; background: var(--rust); }
-
-        .row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
-        .row-actions form { margin: 0; }
-        .icon-btn {
-            width: 30px; height: 30px; border-radius: 8px; border: 1px solid transparent; background: none;
-            display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft);
-            transition: background .12s, color .12s; text-decoration: none;
-        }
-        .icon-btn:hover, .icon-btn.menu-open { background: var(--moss-light); color: var(--forest); }
-
-        .menu-wrap { position: relative; }
-        .dropdown {
-            position: absolute; right: 0; top: calc(100% + 4px); background: #fff; border: 1px solid var(--line);
-            border-radius: 10px; box-shadow: var(--shadow-md); min-width: 172px; padding: 6px; z-index: 10; display: none;
-        }
-        .dropdown.is-open { display: block; }
-        .dropdown button, .dropdown a {
-            width: 100%; text-align: left; background: none; border: none; padding: 9px 10px; border-radius: 7px;
-            font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 9px; cursor: pointer;
-            font-family: 'Sarabun', sans-serif; text-decoration: none;
-        }
-        .dropdown button:hover, .dropdown a:hover { background: var(--moss-light); }
-        .dropdown button.danger { color: var(--rust); }
-        .dropdown button.danger:hover { background: var(--rust-light); }
-        .dropdown hr { border: none; border-top: 1px solid #f0eee7; margin: 5px 2px; }
-
-        /* ---------- empty state ---------- */
-        .empty-state { text-align: center; padding: 56px 16px; color: var(--ink-soft); }
-        .empty-state .empty-icon-wrap {
-            display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px;
-            border-radius: 50%; background: var(--moss-light); color: var(--forest); margin-bottom: 14px;
-        }
-        .empty-state p { margin: 0; font-size: 14px; }
-
-        /* ---------- responsive: collapse table to cards ---------- */
-        @media (max-width: 760px) {
-            table.acc-table thead { display: none; }
-            table.acc-table, table.acc-table tbody, table.acc-table tr, table.acc-table td { display: block; width: 100%; }
-            table.acc-table tbody tr { border: 1px solid #eee; border-radius: 12px; margin-bottom: 10px; padding: 10px 12px; }
-            table.acc-table tbody td { padding: 6px 0; border: none; }
-            table.acc-table tbody td[data-label]::before {
-                content: attr(data-label); display: block; font-size: 11px; text-transform: uppercase;
-                letter-spacing: .03em; color: var(--ink-soft); margin-bottom: 2px;
-            }
-            table.acc-table td.text-end { text-align: left !important; }
-            table.acc-table .row-actions { justify-content: flex-start; }
-        }
-    </style>
 
     <div class="acc2-head">
         <div>
@@ -195,6 +27,7 @@
     </div>
 
     <div class="panel">
+        <div class="list-heading"><div><h2>ทะเบียนบัญชีบริการ</h2><p>ตรวจสอบสถานะและวันหมดอายุก่อนจัดการบัญชี</p></div><span class="list-total">{{ number_format($accounts->total()) }} รายการ</span></div>
 
         {{-- ============================================================
              Filters: status as segmented links (real GET navigation,
@@ -224,16 +57,17 @@
 
             <form method="GET" class="search-wrap" style="margin:0;">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" name="q" value="{{ request('q') }}" placeholder="ค้นหาชื่อผู้ใช้ หรือ username...">
+                <input aria-label="ค้นหาข้อมูล" type="text" name="q" value="{{ request('q') }}" placeholder="ค้นหาชื่อผู้ใช้ หรือ username...">
                 @if ($currentStatus) <input type="hidden" name="status" value="{{ $currentStatus }}"> @endif
                 @if (request('sort')) <input type="hidden" name="sort" value="{{ request('sort') }}"> @endif
+            <button type="submit" class="btn btn-outline-soft">ค้นหา</button>
             </form>
 
             <form method="GET" class="sort-wrap">
                 เรียงตาม
                 @if ($currentStatus) <input type="hidden" name="status" value="{{ $currentStatus }}"> @endif
                 @if (request('q')) <input type="hidden" name="q" value="{{ request('q') }}"> @endif
-                <select name="sort" onchange="this.form.submit()">
+                <select aria-label="เรียงลำดับบัญชี" name="sort" onchange="this.form.submit()">
                     <option value="" {{ ! request('sort') ? 'selected' : '' }}>สร้างล่าสุด</option>
                     <option value="expire_soon" {{ request('sort') === 'expire_soon' ? 'selected' : '' }}>วันหมดอายุ (ใกล้สุดก่อน)</option>
                     <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>ชื่อผู้ใช้บริการ (ก-ฮ)</option>
@@ -253,23 +87,24 @@
                 <button type="button" class="bulk-btn" data-act="disable">ระงับ</button>
                 <button type="button" class="bulk-btn danger" data-act="delete">ลบ</button>
             </div>
-            <button type="button" class="bulk-close" id="bulkClose">✕</button>
+            <button type="button" class="bulk-close" id="bulkClose" aria-label="ยกเลิกการเลือกทั้งหมด">✕</button>
         </div>
 
+        <p class="table-hint"><x-admin.icon name="list" size="15" /> เลื่อนตารางในแนวนอนเพื่อดูข้อมูลครบทุกคอลัมน์</p>
         <div class="acc-table-wrap">
             <table class="acc-table">
                 <thead>
                     <tr>
-                        <th class="col-check"><input type="checkbox" id="checkAll" class="row-check"></th>
-                        <th>ผู้ขอใช้บริการ</th>
-                        <th>สังกัด / หน่วยงาน</th>
-                        <th>โดเมน / คำขอ</th>
-                        <th>ประเภทบัญชี</th>
-                        <th class="sortable {{ ! request('sort') ? 'is-sorted' : '' }}">สถานะ</th>
+                        <th class="col-check"><input type="checkbox" id="checkAll" class="row-check" aria-label="เลือกบัญชีทั้งหมดในหน้านี้"></th>
+                        <th scope="col">ผู้ขอใช้บริการ</th>
+                        <th scope="col">สังกัด / หน่วยงาน</th>
+                        <th scope="col">โดเมน / คำขอ</th>
+                        <th scope="col">ประเภทบัญชี</th>
+                        <th scope="col">สถานะ</th>
                         <th class="sortable {{ request('sort') === 'expire_soon' ? 'is-sorted' : '' }}">
                             <a href="{{ route('admin.accounts.index', array_filter(array_merge($qp, ['status' => $currentStatus, 'sort' => 'expire_soon']))) }}">วันหมดอายุ</a>
                         </th>
-                        <th></th>
+                        <th scope="col" class="text-end">จัดการ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -286,7 +121,7 @@
                             $statusLabels = ['active' => 'ใช้งานอยู่', 'disabled' => 'ระงับ', 'expired' => 'หมดอายุ'];
                         @endphp
                         <tr>
-                            <td><input type="checkbox" class="row-check"
+                            <td><input type="checkbox" class="row-check" aria-label="เลือกบัญชี {{ $acc->username }}"
                                 data-status="{{ $acc->status }}"
                                 data-toggle-url="{{ route('admin.accounts.toggle-status', $acc->account_id) }}"
                                 data-destroy-url="{{ route('admin.accounts.destroy', $acc->account_id) }}"></td>
@@ -407,6 +242,8 @@
             function updateBulkBar() {
                 const checked = rowChecks().filter(cb => cb.checked);
                 bulkCount.textContent = checked.length;
+                checkAll.checked = checked.length > 0 && checked.length === rowChecks().length;
+                checkAll.indeterminate = checked.length > 0 && checked.length < rowChecks().length;
                 bulkBar.classList.toggle('is-visible', checked.length > 0);
                 rowChecks().forEach(cb => cb.closest('tr').classList.toggle('is-selected', cb.checked));
             }
@@ -430,25 +267,6 @@
                 updateBulkBar();
             });
 
-            // dropdown open/close per row
-            document.addEventListener('click', function (e) {
-                const menuBtn = e.target.closest('.menu-btn');
-                document.querySelectorAll('.dropdown.is-open').forEach(dd => {
-                    if (!menuBtn || dd !== menuBtn.nextElementSibling) {
-                        dd.classList.remove('is-open');
-                        dd.previousElementSibling.classList.remove('menu-open');
-                        const openRow = dd.closest('tr');
-                        if (openRow) openRow.classList.remove('row-menu-open');
-                    }
-                });
-                if (menuBtn) {
-                    const dd = menuBtn.nextElementSibling;
-                    const isOpen = dd.classList.toggle('is-open');
-                    menuBtn.classList.toggle('menu-open', isOpen);
-                    const row = menuBtn.closest('tr');
-                    if (row) row.classList.toggle('row-menu-open', isOpen);
-                }
-            });
 
             // bulk actions — reuse the existing single-account routes (toggle-status / destroy)
             document.querySelectorAll('.bulk-btn').forEach(btn => {

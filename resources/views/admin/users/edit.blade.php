@@ -14,24 +14,24 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">ชื่อ-สกุลผู้ใช้</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
+                        <label for="name" class="form-label fw-medium">ชื่อ-สกุลผู้ใช้</label>
+                        <input id="name" type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">อีเมล</label>
-                        <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                        <label for="email" class="form-label fw-medium">อีเมล</label>
+                        <input id="email" type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">รหัสผ่านใหม่</label>
-                        <input type="password" name="password" class="form-control" autocomplete="new-password" minlength="8">
+                        <label for="password" class="form-label fw-medium">รหัสผ่านใหม่</label>
+                        <input id="password" type="password" name="password" class="form-control" autocomplete="new-password" minlength="8">
                         <div class="form-text" style="font-size:12.5px;">ปล่อยว่างไว้หากไม่ต้องการเปลี่ยนรหัสผ่าน (อย่างน้อย 8 ตัวอักษรหากกรอก)</div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">ยืนยันรหัสผ่านใหม่</label>
-                        <input type="password" name="password_confirmation" class="form-control" autocomplete="new-password">
+                        <label for="password_confirmation" class="form-label fw-medium">ยืนยันรหัสผ่านใหม่</label>
+                        <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" autocomplete="new-password">
                     </div>
 
                     <div class="form-check mb-4">
@@ -40,8 +40,8 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-outline-soft">ย้อนกลับ</a>
-                        <button type="submit" class="btn btn-amber">บันทึกการแก้ไข</button>
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-outline-soft"><x-admin.icon name="back" size="17" /> ย้อนกลับ</a>
+                        <button type="submit" class="btn btn-amber"><x-admin.icon name="save" size="17" /> บันทึกการแก้ไข</button>
                     </div>
                 </form>
             </div>

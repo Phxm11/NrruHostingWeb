@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DomainController;
+use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\RequestFileController;
 use App\Http\Controllers\Admin\ServiceAccountController;
 use App\Http\Controllers\Admin\ServiceRenewalController;
@@ -52,6 +53,9 @@ Route::post('/logout', [AuthController::class, 'logout'])
    จะเข้าถึงทุกหน้าใน /admin ได้ทั้งหมด
 ============================================================ */
 Route::prefix('admin')->name('admin.')->middleware(['auth', EnsureStaffIsActive::class])->group(function () {
+
+    Route::get('/reports', [ReportsController::class, 'index'])->name('reports.index');
+    Route::get('/reports/print', [ReportsController::class, 'print'])->name('reports.print');
 
     Route::get('/requests/{serviceRequest}/files/{file}', [RequestFileController::class, 'show'])
         ->whereIn('file', ['system_detail_doc', 'screenshot_evidence', 'signature_image'])

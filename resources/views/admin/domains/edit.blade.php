@@ -24,8 +24,8 @@
                     @csrf @method('PUT')
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">ชื่อโดเมน <span style="color:var(--rust);">*</span></label>
-                        <input type="text" name="domain_name" class="form-control"
+                        <label for="domain_name" class="form-label fw-medium">ชื่อโดเมน <span style="color:var(--rust);">*</span></label>
+                        <input id="domain_name" type="text" name="domain_name" class="form-control"
                                value="{{ old('domain_name', $domain->domain_name) }}" required autofocus>
                         @error('domain_name')
                             <div class="form-text text-danger">{{ $message }}</div>
@@ -33,8 +33,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">รูปแบบโดเมน (ถ้ามี)</label>
-                        <input type="text" name="domain_format" class="form-control"
+                        <label for="domain_format" class="form-label fw-medium">รูปแบบโดเมน (ถ้ามี)</label>
+                        <input id="domain_format" type="text" name="domain_format" class="form-control"
                                value="{{ old('domain_format', $domain->domain_format) }}"
                                placeholder="เช่น test.nrru.ac.th">
                         @error('domain_format')
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-medium">หน่วยงาน (เลือกจากรายการ)</label>
+                        <label for="departmentCodeSelect" class="form-label fw-medium">หน่วยงาน (เลือกจากรายการ)</label>
                         <select name="department_code" class="form-select" id="departmentCodeSelect">
                             <option value="">— ไม่ระบุ / พิมพ์ชื่อหน่วยงานเอง —</option>
                             @foreach ($departmentCodes as $dc)
@@ -59,8 +59,8 @@
                     </div>
 
                     <div class="mb-3" id="departmentOtherWrap">
-                        <label class="form-label fw-medium">หรือระบุชื่อหน่วยงานเอง</label>
-                        <input type="text" name="department_other" class="form-control"
+                        <label for="department_other" class="form-label fw-medium">หรือระบุชื่อหน่วยงานเอง</label>
+                        <input id="department_other" type="text" name="department_other" class="form-control"
                                value="{{ old('department_other', $domain->department_other) }}"
                                placeholder="กรอกเมื่อไม่พบหน่วยงานในรายการด้านบน">
                         @error('department_other')
@@ -69,8 +69,8 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('admin.domains.index') }}" class="btn btn-outline-soft">ย้อนกลับ</a>
-                        <button type="submit" class="btn btn-amber">บันทึกการแก้ไข</button>
+                        <a href="{{ route('admin.domains.index') }}" class="btn btn-outline-soft"><x-admin.icon name="back" size="17" /> ย้อนกลับ</a>
+                        <button type="submit" class="btn btn-amber"><x-admin.icon name="save" size="17" /> บันทึกการแก้ไข</button>
                     </div>
                 </form>
             </div>

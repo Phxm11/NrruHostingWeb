@@ -5,65 +5,10 @@
 @section('page-title', 'แก้ไขบัญชี Username / Password')
 
 @section('content')
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/admin/pages/accounts-edit.css') }}?v={{ filemtime(public_path('css/admin/pages/accounts-edit.css')) }}">
+    @endpush
 
-    <style>
-        :root {
-            --acc-blue-bg: #e3efe7;   --acc-blue-fg: #2f6b4a;
-            --acc-violet-bg: #f4e8dd; --acc-violet-fg: #a1592f;
-            --acc-teal-bg: #eef1da;   --acc-teal-fg: #6a7a2c;
-        }
-        @keyframes popIn { from { opacity:0; transform: scale(.92); } to { opacity:1; transform: scale(1); } }
-        @keyframes bob   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-
-        /* ---------- account summary card ---------- */
-        .acc-summary {
-            position: relative; overflow: hidden;
-            background: linear-gradient(120deg, var(--moss-light), #fff);
-        }
-        .acc-summary__head { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
-        .acc-summary__icon {
-            width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
-            display: inline-flex; align-items: center; justify-content: center;
-            background: #fff; color: var(--moss); box-shadow: 0 2px 6px rgba(0,0,0,.08);
-        }
-        .acc-summary__head strong { font-size: 15px; }
-        .acc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 20px; }
-        @media (max-width: 640px) { .acc-grid { grid-template-columns: 1fr; } }
-        .acc-item { display: flex; align-items: flex-start; gap: 10px; animation: bob 4s ease-in-out infinite; }
-        .acc-item__icon {
-            width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; margin-top: 1px;
-            display: inline-flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,.7); color: var(--moss);
-        }
-        .acc-item__label { font-size: 12px; color: var(--ink-soft); margin-bottom: 1px; }
-        .acc-item__value { font-size: 14px; font-weight: 500; }
-        .acc-item.span-2 { grid-column: 1 / -1; }
-
-        /* ---------- form polish ---------- */
-        .field-group { margin-bottom: 22px; }
-        .field-label {
-            display: flex; align-items: center; gap: 7px; font-weight: 600; margin-bottom: 6px; font-size: 14px;
-        }
-        .field-label .field-icon {
-            width: 22px; height: 22px; border-radius: 6px; display: inline-flex;
-            align-items: center; justify-content: center; flex-shrink: 0;
-        }
-        .field-label--username .field-icon { background: var(--acc-blue-bg);   color: var(--acc-blue-fg); }
-        .field-label--password .field-icon { background: var(--amber-light, #faf0d3); color: var(--amber-deep, #a6740e); }
-        .field-label--type     .field-icon { background: var(--acc-violet-bg); color: var(--acc-violet-fg); }
-        .field-label--status   .field-icon { background: var(--acc-teal-bg);   color: var(--acc-teal-fg); }
-        .field-label--expire   .field-icon { background: var(--acc-blue-bg);   color: var(--acc-blue-fg); }
-
-        .form-control, .form-select { transition: box-shadow .15s, border-color .15s; }
-        .form-control:focus, .form-select:focus {
-            box-shadow: 0 0 0 3px var(--moss-light); border-color: var(--moss);
-        }
-
-        #copyPwBtn { display: inline-flex; align-items: center; gap: 6px; }
-        #copyPwBtn.copied { color: var(--acc-teal-fg); }
-
-        .btn-amber { display: inline-flex; align-items: center; gap: 7px; }
-    </style>
 
     <div class="row justify-content-center">
         <div class="col-lg-8">

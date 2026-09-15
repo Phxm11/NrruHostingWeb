@@ -18,65 +18,10 @@
 @endsection
 
 @section('content')
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/admin/pages/domains-show.css') }}?v={{ filemtime(public_path('css/admin/pages/domains-show.css')) }}">
+    @endpush
 
-    <style>
-        .dm-header {
-            display: flex; align-items: center; gap: 16px; margin-bottom: 22px;
-        }
-        .dm-header .domain-icon-wrap {
-            width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
-            display: inline-flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, var(--moss-light), var(--amber-light)); color: var(--forest);
-        }
-        .dm-header h2 { margin: 0; font-family: 'Kanit', sans-serif; font-size: 22px; }
-        .dm-header .dm-sub { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
-
-        .info-grid {
-            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px;
-        }
-        .info-grid.span-full { grid-template-columns: 1fr; }
-        .info-item__label { font-size: 12px; color: var(--ink-soft); margin-bottom: 3px; }
-        .info-item__value { font-size: 14.5px; color: var(--ink); }
-        .info-item.span-2 { grid-column: span 2; }
-
-        .section-title {
-            font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600;
-            display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
-            color: var(--forest);
-        }
-
-        .account-card {
-            border: 1px solid var(--line); border-radius: var(--radius-md);
-            padding: 14px 18px; display: flex; align-items: center; justify-content: space-between;
-            gap: 12px; margin-bottom: 10px;
-        }
-        .account-card:last-child { margin-bottom: 0; }
-        .account-card__main { display: flex; align-items: center; gap: 12px; }
-        .account-card__avatar {
-            width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-            display: inline-flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, var(--forest), var(--forest-2)); color: #fff;
-            font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14px;
-        }
-        .account-card__username { font-weight: 600; font-size: 14.5px; }
-        .account-card__meta { font-size: 12.5px; color: var(--ink-soft); }
-
-        .empty-accounts {
-            text-align: center; padding: 32px 16px; color: var(--ink-soft);
-            border: 1px dashed var(--line); border-radius: var(--radius-md);
-        }
-        .empty-accounts p { margin: 8px 0 0; font-size: 14px; }
-
-        .copy-btn {
-            border: none; background: transparent; padding: 3px; cursor: pointer;
-            color: #aaa; display: inline-flex; align-items: center; vertical-align: -3px; margin-left: 4px;
-            border-radius: 5px; transition: color .15s ease, background .15s ease;
-        }
-        .copy-btn:hover { background: var(--moss-light); color: var(--forest); }
-        .copy-btn.copied { color: var(--forest); }
-        .info-item__value a { color: var(--forest); border-bottom: 1px dashed var(--line); }
-        .info-item__value a:hover { border-bottom-color: var(--forest); }
-    </style>
 
     <div class="panel" style="margin-bottom:20px;">
         <div class="dm-header">
@@ -125,7 +70,7 @@
                 <div class="info-item__value">{{ $domain->serviceRequest->applicant->full_name }}</div>
             </div>
             <div class="info-item">
-                <div class="info-item__label">รหัสบุคลากร/นักศึกษา</div>
+                <div class="info-item__label">รหัสบุคลากร</div>
                 <div class="info-item__value">{{ $domain->serviceRequest->applicant->staff_or_student_id ?: '-' }}</div>
             </div>
             <div class="info-item">
