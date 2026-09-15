@@ -1,0 +1,4 @@
+interface:
+  display_name: "NRRU Service Workflow"
+  short_description: "Safely change and verify NRRU Hosting workflows"
+  default_prompt: "Apply the NRRU Hosting service workflow to this repository task."
