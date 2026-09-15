@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
+    },
+    "heuristic-evaluation": {
+      "source": "owl-listener/designer-skills",
+      "sourceType": "github",
+      "skillPath": "prototyping-testing/skills/heuristic-evaluation/SKILL.md",
+      "computedHash": "4650c1fb3081840cad09d8d609c88b424cecf7346a7d5c4ddec2e62ac25ec4a5"
+    }
+  }
+}
