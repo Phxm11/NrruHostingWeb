@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ตรวจสอบโดเมน — สำนักคอมพิวเตอร์ มหาวิทยาลัยราชภัฏนครราชสีมา</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @include('partials.site-icons')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="{{ asset('css/public-site.css') }}?v={{ filemtime(public_path('css/public-site.css')) }}" rel="stylesheet">

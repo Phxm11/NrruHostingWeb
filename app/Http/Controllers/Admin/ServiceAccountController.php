@@ -100,6 +100,7 @@ class ServiceAccountController extends Controller
         $data = $request->validate([
             // ผู้ขอใช้บริการ
             'full_name' => ['required', 'string', 'max:150'],
+            'staff_or_student_id' => ['required', 'string', 'max:30'],
             'customer_name' => ['nullable', 'string', 'max:150'],
             'unit_name' => ['required', 'string', 'max:150'],
             'affiliation' => ['required', 'string', 'max:150'],
@@ -129,6 +130,10 @@ class ServiceAccountController extends Controller
             'database_used' => ['nullable', 'string', 'max:100'],
             'port_service_needed' => ['nullable', 'string', 'max:255'],
             'needs_external_connection' => ['nullable', 'boolean'],
+        ], [
+            'staff_or_student_id.required' => 'กรุณากรอกรหัสบุคลากร/รหัสนักศึกษา',
+            'staff_or_student_id.string' => 'รหัสบุคลากร/รหัสนักศึกษาต้องเป็นข้อความ',
+            'staff_or_student_id.max' => 'รหัสบุคลากร/รหัสนักศึกษาต้องไม่เกิน 30 ตัวอักษร',
         ]);
 
         // ถ้าเลือกแพ็กเกจสำเร็จรูป ล้างค่าสเปกที่กำหนดเองทิ้ง กันข้อมูลค้างขัดแย้งกัน
@@ -150,6 +155,7 @@ class ServiceAccountController extends Controller
             }
             $applicant->update([
                 'full_name' => $data['full_name'],
+                'staff_or_student_id' => $data['staff_or_student_id'],
                 'customer_name' => $data['customer_name'] ?? null,
                 'unit_name' => $data['unit_name'],
                 'affiliation' => $data['affiliation'],

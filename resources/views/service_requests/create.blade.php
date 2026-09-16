@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>แบบฟอร์มขอใช้บริการระบบ Data Center และ Web Hosting</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    @include('partials.site-icons')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -215,7 +212,7 @@
     <div class="container">
         <div class="brand-row">
             <div style="width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.16);padding:5px;">
-                <img src="{{ asset('images/logo.png') }}" alt="โลโก้ระบบ" style="width:100%;height:100%;object-fit:contain;display:block;">
+                <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" alt="โลโก้ระบบ" style="width:100%;height:100%;object-fit:contain;display:block;">
             </div>
             <div>
                 <h1>แบบฟอร์มขอใช้บริการระบบ Data Center และ Web Hosting</h1>

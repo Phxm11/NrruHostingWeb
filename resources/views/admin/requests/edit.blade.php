@@ -83,8 +83,8 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
                         <div class="a-text">
                             กำลังแก้ไขคำขอ <strong>{{ $serviceRequest->form_no }}</strong> —
-                            การแก้ไข<strong>ข้อมูลผู้ขอใช้บริการ</strong>จะมีผลกับคำขออื่นของรหัสประจำตัวเดียวกันนี้ด้วย
-                            (โดเมนและเอกสารแนบแก้ไขแยกที่หน้า
+                            การแก้ไข<strong>ข้อมูลผู้ขอใช้บริการ</strong>มีผลเฉพาะคำขอนี้และบัญชีบริการที่ผูกกับคำขอนี้
+                            (แก้ไขโดเมนได้ที่หน้า
                             <a href="{{ route('admin.domains.index') }}">จัดการโดเมน</a>)
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                     <h3>ข้อมูลผู้ขอใช้บริการ</h3>
                                     <div class="sec-sub">ชื่อ หน่วยงาน และช่องทางติดต่อ</div>
                                 </div>
-                                @if ($errors->hasAny(['full_name', 'unit_name', 'affiliation', 'email']))
+                                @if ($errors->hasAny(['full_name', 'staff_or_student_id', 'unit_name', 'affiliation', 'email']))
                                     <span class="acc-error-dot" title="มีข้อผิดพลาดในหมวดนี้"></span>
                                 @endif
                             </div>
@@ -116,9 +116,10 @@
                                     <input type="text" name="customer_name" class="form-control live-field" data-summary="sumCustomerName" value="{{ old('customer_name', $serviceRequest->applicant->customer_name) }}" placeholder="ชื่อบัญชีที่ใช้ในระบบ Plesk (ถ้ามี)">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">รหัสบุคลากร/รหัสนักศึกษา</label>
-                                    <input type="text" class="form-control locked-field" value="{{ $serviceRequest->applicant->staff_or_student_id }}" disabled>
-                                    <div class="field-hint">🔒 แก้ไขรหัสประจำตัวไม่ได้ที่หน้านี้ เพราะเป็นตัวระบุตัวตนหลักของผู้ขอ</div>
+                                    <label class="form-label required" for="staff_or_student_id">รหัสบุคลากร/รหัสนักศึกษา</label>
+                                    <input type="text" name="staff_or_student_id" id="staff_or_student_id" class="form-control @error('staff_or_student_id') is-invalid @enderror" value="{{ is_string(old('staff_or_student_id', $serviceRequest->applicant->staff_or_student_id)) ? old('staff_or_student_id', $serviceRequest->applicant->staff_or_student_id) : '' }}" maxlength="30" required aria-describedby="staff-id-help @error('staff_or_student_id') staff-id-error @enderror" @error('staff_or_student_id') aria-invalid="true" @enderror>
+                                    <div class="field-hint" id="staff-id-help">แก้ไขรหัสได้ไม่เกิน 30 ตัวอักษร โดยชื่อบัญชีบริการ (Username) จะคงเดิม</div>
+                                    @error('staff_or_student_id') <div class="form-text text-danger" id="staff-id-error">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label required">หน่วยงาน</label>

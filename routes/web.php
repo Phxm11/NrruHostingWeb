@@ -35,16 +35,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])
         ->middleware('throttle:10,2');
 
-    Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])
-        ->name('password.request');
-    Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])
-        ->middleware('throttle:5,2')
-        ->name('password.email');
-    Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])
-        ->name('password.reset');
-    Route::post('/reset-password', [AuthController::class, 'resetPassword'])
-        ->middleware('throttle:5,2')
-        ->name('password.update');
+    // Password recovery is temporarily disabled; no public reset endpoints.
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])

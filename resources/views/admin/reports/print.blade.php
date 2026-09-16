@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @include('partials.site-icons')
     <title>รายงานผู้บริหาร {{ $filters['start_date'] }} ถึง {{ $filters['end_date'] }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     @include('admin.reports.styles')

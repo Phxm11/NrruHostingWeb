@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ตั้งรหัสผ่านใหม่ — สำนักคอมพิวเตอร์ มรภ.นครราชสีมา</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    @include('partials.site-icons')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -43,11 +40,12 @@
         }
         @keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
         .brand-mark {
-            width: 48px; height: 48px; border-radius: 14px; margin: 0 auto 14px;
-            background: linear-gradient(135deg, var(--amber), #f0c25c);
+            width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 14px;
+            background: #fff; padding: 6px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 16px rgba(224,165,38,.4);
+            box-shadow: 0 6px 16px rgba(0,0,0,.16);
         }
+        .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
         h1 { font-family: 'Kanit', sans-serif; font-size: 21px; font-weight: 600; text-align: center; margin: 0 0 4px; color: var(--forest); }
         .sub { text-align: center; color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; }
         .form-label { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
@@ -72,10 +70,7 @@
 <body>
     <div class="login-card">
         <div class="brand-mark">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2C7 2 3 6 3 11c0 5 4.5 9.5 9 11 4.5-1.5 9-6 9-11 0-5-4-9-9-9Z" fill="#24422b"/>
-                <path d="M12 6v10M9 9l3-3 3 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" alt="โลโก้สำนักคอมพิวเตอร์">
         </div>
         <h1>ตั้งรหัสผ่านใหม่</h1>
         <div class="sub">กรอกรหัสผ่านใหม่ของคุณ</div>
