@@ -7,8 +7,8 @@
     @include('partials.site-icons')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/public-site.css') }}?v={{ filemtime(public_path('css/public-site.css')) }}" rel="stylesheet">
-    <link href="{{ asset('css/domain-directory.css') }}?v={{ filemtime(public_path('css/domain-directory.css')) }}" rel="stylesheet">
+    <link href="{{ versioned_asset('css/public-site.css') }}" rel="stylesheet">
+    <link href="{{ versioned_asset('css/domain-directory.css') }}" rel="stylesheet">
 </head>
 <body class="domain-directory-page">
 <a class="skip-link" href="#mainContent">ข้ามไปยังเนื้อหา</a>
@@ -73,6 +73,6 @@
     </div>
 </main>
 @include('partials.public-footer')
-<script src="{{ asset('js/public-navigation.js') }}?v={{ filemtime(public_path('js/public-navigation.js')) }}" defer></script>
+<script src="{{ versioned_asset('js/public-navigation.js') }}" defer></script>
 </body>
 </html>

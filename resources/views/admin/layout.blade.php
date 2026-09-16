@@ -19,7 +19,7 @@
     @include('partials.site-icons')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/admin/admin.css') }}?v={{ filemtime(public_path('css/admin/admin.css')) }}" rel="stylesheet">
+    <link href="{{ versioned_asset('css/admin/admin.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="admin-app" data-admin-section="{{ $adminSection }}">
@@ -28,7 +28,7 @@
 <div class="app-shell">
     <aside class="sidebar" id="sidebar" aria-label="เมนู ADMIN">
         <a href="{{ route('admin.requests.index') }}" class="brand">
-            <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" width="42" height="42" alt="NRRU">
+            <img src="{{ versioned_asset('images/logo.png') }}" width="42" height="42" alt="NRRU">
             <span class="brand-text">NRRU Hosting<small>ระบบจัดการบริการ</small></span>
         </a>
         <button type="button" class="sidebar-close icon-btn" id="sidebarClose" aria-label="ปิดเมนู"><x-admin.icon name="close" /></button>
@@ -80,7 +80,7 @@
 </div>
 @include('partials.alert-popup')
 @include('partials.confirm-modal')
-<script src="{{ asset('js/admin.js') }}?v={{ filemtime(public_path('js/admin.js')) }}" defer></script>
+<script src="{{ versioned_asset('js/admin.js') }}" defer></script>
 @stack('scripts')
 </body>
 </html>

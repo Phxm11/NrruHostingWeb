@@ -12,6 +12,7 @@ class Domain extends Model
     protected $fillable = [
         'request_id', 'domain_name', 'domain_format',
         'department_code', 'department_other',
+        'server_name',
     ];
 
     public function serviceRequest()

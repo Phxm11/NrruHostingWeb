@@ -70,7 +70,7 @@
 <body>
     <div class="login-card">
         <div class="brand-mark">
-            <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" alt="โลโก้สำนักคอมพิวเตอร์">
+            <img src="{{ versioned_asset('images/logo.png') }}" alt="โลโก้สำนักคอมพิวเตอร์">
         </div>
         <h1>ตั้งรหัสผ่านใหม่</h1>
         <div class="sub">กรอกรหัสผ่านใหม่ของคุณ</div>

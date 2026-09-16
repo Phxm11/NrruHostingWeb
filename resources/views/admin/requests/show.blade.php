@@ -50,7 +50,7 @@
         });
     @endphp
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/admin/pages/requests-show.css') }}?v={{ filemtime(public_path('css/admin/pages/requests-show.css')) }}">
+        <link rel="stylesheet" href="{{ versioned_asset('css/admin/pages/requests-show.css') }}">
     @endpush
 
 

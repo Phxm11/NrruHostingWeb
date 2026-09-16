@@ -1,0 +1,22 @@
+table.dm-table--compact { table-layout: fixed; min-width: 900px; }
+.dm-table--compact .dm-col-domain { width: 26%; }
+.dm-table--compact .dm-col-server { width: 14%; }
+.dm-table--compact .dm-col-owner { width: 26%; }
+.dm-table--compact .dm-col-account { width: auto; }
+.dm-table--compact .dm-col-actions { width: 116px; }
+.admin-app .dm-table--compact thead th { padding: 10px 12px; font-size: 12px; }
+.admin-app .dm-table--compact tbody td { padding: 10px 12px; line-height: 1.45; }
+.dm-table--compact .dm-domain__link { display: inline-flex; gap: 5px; max-width: 100%; }
+.dm-table--compact .dm-domain__link code { min-width: 0; overflow-wrap: anywhere; font-size: 13px; }
+.dm-table--compact .dm-domain__external { flex-shrink: 0; }
+.dm-table--compact .dm-secondary { display: block; margin-top: 3px; color: var(--ink-soft); font-size: 11px; line-height: 1.5; }
+.dm-table--compact .dm-owner-meta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dm-table--compact .dm-owner-name, .dm-table--compact .dm-server { overflow-wrap: anywhere; }
+.dm-table--compact .dm-badge { padding: 3px 6px; font-size: 11px; margin: 2px 2px 2px 0; max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+.dm-table--compact .dm-actions { gap: 4px; }
+.dm-table--compact .dm-btn { width: 28px; height: 30px; min-height: 30px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.dm-table--compact .dm-btn svg { width: 14px; height: 14px; }
+@media (pointer: coarse) {
+    .dm-table--compact .dm-col-actions { width: 144px; }
+    .dm-table--compact .dm-btn { width: 36px; height: 40px; }
+}

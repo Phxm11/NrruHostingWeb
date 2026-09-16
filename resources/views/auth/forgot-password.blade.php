@@ -69,7 +69,7 @@
 <body>
     <div class="login-card">
         <div class="brand-mark">
-            <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" alt="โลโก้สำนักคอมพิวเตอร์">
+            <img src="{{ versioned_asset('images/logo.png') }}" alt="โลโก้สำนักคอมพิวเตอร์">
         </div>
         <h1>ลืมรหัสผ่าน</h1>
         <div class="sub">กรอกอีเมลที่ใช้ลงทะเบียน เราจะส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ให้</div>

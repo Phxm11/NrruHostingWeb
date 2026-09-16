@@ -6,7 +6,7 @@
 
 @section('content')
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/admin/pages/accounts-renew.css') }}?v={{ filemtime(public_path('css/admin/pages/accounts-renew.css')) }}">
+        <link rel="stylesheet" href="{{ versioned_asset('css/admin/pages/accounts-renew.css') }}">
     @endpush
 
 <div class="row justify-content-center renew-page">

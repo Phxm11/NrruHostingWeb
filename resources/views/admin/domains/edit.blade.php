@@ -42,6 +42,18 @@
                         @enderror
                     </div>
 
+                    <fieldset class="mb-4 border rounded-3 p-3">
+                        <legend class="float-none w-auto px-2 fs-6 fw-semibold"><x-admin.icon name="server" size="18" /> เครื่อง Server</legend>
+                        <p class="form-text mt-0 mb-3" id="server-help">ระบุเครื่องที่ให้บริการโดเมนนี้ ข้อมูลส่วนนี้แสดงเฉพาะเจ้าหน้าที่ใน ADMIN</p>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="server_name" class="form-label fw-medium">ชื่อเครื่อง Server</label>
+                                <input id="server_name" type="text" name="server_name" class="form-control @error('server_name') is-invalid @enderror" value="{{ is_string(old('server_name', $domain->server_name)) ? old('server_name', $domain->server_name) : '' }}" maxlength="150" placeholder="เช่น hosting-01" aria-describedby="server-help @error('server_name') server-name-error @enderror" @error('server_name') aria-invalid="true" @enderror>
+                                @error('server_name')<div class="invalid-feedback" id="server-name-error">{{ $message }}</div>@enderror
+                            </div>
+                        </div>
+                    </fieldset>
+
                     <div class="mb-3">
                         <label for="departmentCodeSelect" class="form-label fw-medium">หน่วยงาน (เลือกจากรายการ)</label>
                         <select name="department_code" class="form-select" id="departmentCodeSelect">

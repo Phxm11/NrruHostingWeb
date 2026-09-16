@@ -4,7 +4,7 @@
 <nav class="navbar-custom" id="navbar" aria-label="เมนูหลัก">
     <div class="container navbar-inner">
         <a href="{{ route('home') }}" class="brand" aria-label="สำนักคอมพิวเตอร์ หน้าหลัก">
-            <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" class="brand-mark" alt="">
+            <img src="{{ versioned_asset('images/logo.png') }}" class="brand-mark" alt="">
             <div class="brand-name">สำนักคอมพิวเตอร์<small>มหาวิทยาลัยราชภัฏนครราชสีมา</small></div>
         </a>
         <div class="nav-desktop">

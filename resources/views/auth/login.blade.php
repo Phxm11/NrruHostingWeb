@@ -6,13 +6,13 @@
     <title>เข้าสู่ระบบ — สำนักคอมพิวเตอร์ มรภ.นครราชสีมา</title>
     @include('partials.site-icons')
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/login.css') }}?v={{ filemtime(public_path('css/login.css')) }}" rel="stylesheet">
+    <link href="{{ versioned_asset('css/login.css') }}" rel="stylesheet">
 </head>
 <body>
     <a class="skip-link" href="#login-form">ข้ามไปยังแบบฟอร์มเข้าสู่ระบบ</a>
     <header class="login-header">
         <a class="login-brand" href="{{ route('home') }}" aria-label="สำนักคอมพิวเตอร์ หน้าหลัก">
-            <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" width="52" height="52" alt="">
+            <img src="{{ versioned_asset('images/logo.png') }}" width="52" height="52" alt="">
             <span>สำนักคอมพิวเตอร์<small>มหาวิทยาลัยราชภัฏนครราชสีมา</small></span>
         </a>
         <a class="home-link" href="{{ route('home') }}"><x-admin.icon name="back" size="18" /> กลับหน้าเว็บบริการ</a>
@@ -68,6 +68,6 @@
         </section>
     </main>
     <footer class="login-footer">สำนักคอมพิวเตอร์ · มหาวิทยาลัยราชภัฏนครราชสีมา</footer>
-    <script src="{{ asset('js/login.js') }}?v={{ filemtime(public_path('js/login.js')) }}" defer></script>
+    <script src="{{ versioned_asset('js/login.js') }}" defer></script>
 </body>
 </html>

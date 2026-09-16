@@ -212,7 +212,7 @@
     <div class="container">
         <div class="brand-row">
             <div style="width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.16);padding:5px;">
-                <img src="{{ asset('images/logo.png') }}?v={{ filemtime(public_path('images/logo.png')) }}" alt="โลโก้ระบบ" style="width:100%;height:100%;object-fit:contain;display:block;">
+                <img src="{{ versioned_asset('images/logo.png') }}" alt="โลโก้ระบบ" style="width:100%;height:100%;object-fit:contain;display:block;">
             </div>
             <div>
                 <h1>แบบฟอร์มขอใช้บริการระบบ Data Center และ Web Hosting</h1>

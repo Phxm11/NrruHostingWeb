@@ -21,6 +21,7 @@ class DomainController extends Controller
             $search = $request->input('q');
             $baseQuery->where(function ($q) use ($search) {
                 $q->where('domain_name', 'like', "%{$search}%")
+                  ->orWhere('server_name', 'like', "%{$search}%")
                   ->orWhereHas('serviceRequest.applicant', function ($q2) use ($search) {
                       $q2->where('full_name', 'like', "%{$search}%")
                          ->orWhere('staff_or_student_id', 'like', "%{$search}%");
@@ -103,6 +104,10 @@ class DomainController extends Controller
             'domain_format'    => ['nullable', 'string', 'max:255'],
             'department_code'  => ['nullable', 'string', 'exists:department_codes,code'],
             'department_other' => ['nullable', 'string', 'max:150'],
+            'server_name' => ['nullable', 'string', 'max:150'],
+        ], [
+            'server_name.string' => 'ชื่อเครื่อง Server ต้องเป็นข้อความ',
+            'server_name.max' => 'ชื่อเครื่อง Server ต้องไม่เกิน 150 ตัวอักษร',
         ]);
 
         // ถ้าเลือกหน่วยงานจากรายการแล้ว ไม่ต้องเก็บชื่อหน่วยงานอิสระซ้ำ

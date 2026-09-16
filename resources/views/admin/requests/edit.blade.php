@@ -17,7 +17,7 @@
         ];
     @endphp
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/admin/pages/requests-edit.css') }}?v={{ filemtime(public_path('css/admin/pages/requests-edit.css')) }}">
+        <link rel="stylesheet" href="{{ versioned_asset('css/admin/pages/requests-edit.css') }}">
     @endpush
 
 

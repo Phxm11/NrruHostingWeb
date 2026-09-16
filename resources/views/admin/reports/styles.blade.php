@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="{{ asset('css/admin/reports.css') }}?v={{ filemtime(public_path('css/admin/reports.css')) }}">
+<link rel="stylesheet" href="{{ versioned_asset('css/admin/reports.css') }}">

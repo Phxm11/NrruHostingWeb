@@ -19,7 +19,7 @@
 
 @section('content')
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/admin/pages/domains-show.css') }}?v={{ filemtime(public_path('css/admin/pages/domains-show.css')) }}">
+        <link rel="stylesheet" href="{{ versioned_asset('css/admin/pages/domains-show.css') }}">
     @endpush
 
 
@@ -40,6 +40,10 @@
         </div>
 
         <div class="info-grid">
+            <div class="info-item">
+                <div class="info-item__label"><x-admin.icon name="server" size="16" /> ชื่อเครื่อง Server</div>
+                <div class="info-item__value text-break">{{ $domain->server_name ?: 'ยังไม่ระบุ' }}</div>
+            </div>
             @if ($domain->domain_format)
                 <div class="info-item">
                     <div class="info-item__label">รูปแบบโดเมน</div>

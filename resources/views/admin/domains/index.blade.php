@@ -5,7 +5,9 @@
 @section('page-title', 'โดเมนผู้ใช้บริการ')
 
 @section('content')
-
+    @push('styles')
+        <link rel="stylesheet" href="{{ versioned_asset('css/admin/pages/domains-index.css') }}">
+    @endpush
 
     <div class="dm-stats">
         <div class="dm-stat dm-stat--total">
@@ -38,10 +40,10 @@
     </div>
 
     <div class="panel">
-        <div class="list-heading"><div><h2>ทะเบียนโดเมน</h2><p>ชื่อโดเมน หน่วยงาน และบัญชีบริการที่เกี่ยวข้อง</p></div><span class="list-total">{{ number_format($domains->total()) }} รายการ</span></div>
+        <div class="list-heading"><div><h2>ทะเบียนโดเมน</h2><p>ชื่อโดเมน เครื่อง Server หน่วยงาน และบัญชีบริการที่เกี่ยวข้อง</p></div><span class="list-total">{{ number_format($domains->total()) }} รายการ</span></div>
 
         <form method="GET" class="dm-toolbar">
-            <input aria-label="ค้นหาโดเมนหรือผู้ขอใช้บริการ" type="text" name="q" value="{{ request('q') }}" placeholder="ค้นหาชื่อโดเมน, ชื่อผู้ใช้ หรือ username...">
+            <input aria-label="ค้นหาโดเมน ผู้ขอใช้บริการ หรือ Server" type="text" name="q" value="{{ request('q') }}" placeholder="ค้นหาโดเมน, ผู้ใช้ หรือ Server...">
 
             <select aria-label="กรองตามการสร้างบัญชี" name="has_account" onchange="this.form.submit()">
                 <option value="">ทั้งหมด</option>
@@ -63,14 +65,14 @@
 
         <p class="table-hint"><x-admin.icon name="list" size="15" /> เลื่อนตารางในแนวนอนเพื่อดูข้อมูลครบทุกคอลัมน์</p>
         <div class="table-responsive">
-            <table class="dm-table">
+            <table class="dm-table dm-table--compact">
+                <colgroup><col class="dm-col-domain"><col class="dm-col-server"><col class="dm-col-owner"><col class="dm-col-account"><col class="dm-col-actions"></colgroup>
                 <thead>
                     <tr>
-                        <th scope="col">ชื่อโดเมน</th>
-                        <th scope="col">หน่วยงาน</th>
-                        <th scope="col">ผู้ขอใช้บริการ</th>
+                        <th scope="col">โดเมน / คำขอ</th>
+                        <th scope="col"><x-admin.icon name="server" size="16" /> Server</th>
+                        <th scope="col">ผู้ขอใช้บริการ / หน่วยงาน</th>
                         <th scope="col">บัญชี (username)</th>
-                        <th scope="col">คำขอ</th>
                         <th scope="col" class="text-end">จัดการ</th>
                     </tr>
                 </thead>
@@ -80,17 +82,17 @@
                         <tr>
                             <td data-label="ชื่อโดเมน">
                                 <a href="https://{{ $domain->domain_name }}" target="_blank" rel="noopener noreferrer" class="dm-domain__link" title="เปิดเว็บไซต์ {{ $domain->domain_name }} ในแท็บใหม่">
-                                    <span class="dm-domain__icon">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
-                                    </span>
                                     <code>{{ $domain->domain_name }}</code>
                                     <svg class="dm-domain__external" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
                                 </a>
+                                <a class="dm-secondary" href="{{ route('admin.requests.show', $domain->request_id) }}">{{ $domain->serviceRequest->form_no }}</a>
                             </td>
-                            <td data-label="หน่วยงาน">{{ $domain->departmentCode?->department_name ?? $domain->department_other ?? '-' }}</td>
+                            <td data-label="Server">
+                                <span class="dm-server {{ $domain->server_name ? '' : 'text-muted' }}">{{ $domain->server_name ?: '—' }}</span>
+                            </td>
                             <td data-label="ผู้ขอใช้บริการ">
-                                {{ $domain->serviceRequest->applicant->full_name }}<br>
-                                <span class="text-muted" style="font-size:12px;">{{ $domain->serviceRequest->applicant->staff_or_student_id }}</span>
+                                <div class="dm-owner-name">{{ $domain->serviceRequest->applicant->full_name }}</div>
+                                <span class="dm-secondary dm-owner-meta" title="{{ $domain->serviceRequest->applicant->staff_or_student_id }} · {{ $domain->departmentCode?->department_name ?? $domain->department_other ?? '-' }}">{{ $domain->serviceRequest->applicant->staff_or_student_id }} · {{ $domain->departmentCode?->department_name ?? $domain->department_other ?? '-' }}</span>
                             </td>
                             <td data-label="บัญชี (username)">
                                 @forelse ($accounts as $acc)
@@ -101,25 +103,19 @@
                                     <span class="dm-badge dm-badge--none">ยังไม่มีบัญชี</span>
                                 @endforelse
                             </td>
-                            <td data-label="คำขอ">
-                                {{ $domain->serviceRequest->form_no }}
-                            </td>
                             <td data-label="">
                                 <div class="dm-actions">
-                                    <a href="{{ route('admin.domains.show', $domain->domain_id) }}" class="dm-btn">
+                                    <a href="{{ route('admin.domains.show', $domain->domain_id) }}" class="dm-btn" title="ดูรายละเอียด" aria-label="ดูรายละเอียด {{ $domain->domain_name }}">
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                                        ดู
                                     </a>
-                                    <a href="{{ route('admin.domains.edit', $domain->domain_id) }}" class="dm-btn">
+                                    <a href="{{ route('admin.domains.edit', $domain->domain_id) }}" class="dm-btn" title="แก้ไขโดเมน" aria-label="แก้ไข {{ $domain->domain_name }}">
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-                                        แก้ไข
                                     </a>
                                     <form action="{{ route('admin.domains.destroy', $domain->domain_id) }}" method="POST"
                                           data-confirm="ยืนยันลบโดเมน {{ $domain->domain_name }}? การลบไม่สามารถย้อนกลับได้">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="dm-btn dm-btn--danger">
+                                        <button type="submit" class="dm-btn dm-btn--danger" title="ลบโดเมน" aria-label="ลบ {{ $domain->domain_name }}">
                                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                                            ลบ
                                         </button>
                                     </form>
                                 </div>
@@ -127,7 +123,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6">
+                            <td colspan="5">
                                 <div class="dm-empty">
                                     ยังไม่มีโดเมนในระบบ{{ (request('q') || request('has_account')) ? 'ที่ตรงกับตัวกรอง' : '' }}
                                 </div>
