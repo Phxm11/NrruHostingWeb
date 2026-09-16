@@ -21,13 +21,13 @@
         </div>
     </header>
     <div class="container domain-content">
-        <form method="GET" action="{{ route('domains.index') }}" class="domain-search" role="search" aria-label="ค้นหาโดเมน">
-            <label for="domain-query">ชื่อโดเมนที่ต้องการตรวจสอบ</label>
+        <form method="GET" action="{{ route('domains.index') }}" class="domain-search" role="search" aria-label="ค้นหาโดเมนหรือชื่อผู้ดูแล">
+            <label for="domain-query">ชื่อโดเมนหรือชื่อผู้ดูแลที่ต้องการค้นหา</label>
             <div class="domain-search-row">
-                <div class="domain-search-input"><x-admin.icon name="search" size="21" /><input id="domain-query" type="search" name="q" value="{{ is_string(old('q', $search)) ? old('q', $search) : '' }}" maxlength="255" placeholder="เช่น department.nrru.ac.th" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="domain-search-help @error('q') domain-search-error @enderror" @error('q') aria-invalid="true" @enderror></div>
+                <div class="domain-search-input"><x-admin.icon name="search" size="21" /><input id="domain-query" type="search" name="q" value="{{ is_string(old('q', $search)) ? old('q', $search) : '' }}" maxlength="255" placeholder="เช่น department.nrru.ac.th หรือ สมชาย" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="domain-search-help @error('q') domain-search-error @enderror" @error('q') aria-invalid="true" @enderror></div>
                 <button class="btn-amber" type="submit"><x-admin.icon name="search" size="18" /> ค้นหาโดเมน</button>
             </div>
-            <p class="domain-search-help" id="domain-search-help">ค้นหาได้ด้วยชื่อโดเมนทั้งหมดหรือบางส่วน หรือวาง URL ของเว็บไซต์</p>
+            <p class="domain-search-help" id="domain-search-help">ค้นหาได้ด้วยชื่อโดเมนหรือชื่อผู้ดูแลทั้งหมดหรือบางส่วน หรือวาง URL ของเว็บไซต์</p>
             @error('q')<p class="domain-error" id="domain-search-error" role="alert">{{ $message }}</p>@enderror
             @error('page')<p class="domain-error" role="alert">{{ $message }}</p>@enderror
         </form>
@@ -64,7 +64,7 @@
                 <div class="domain-empty">
                     <span class="domain-empty-icon"><x-admin.icon name="search" size="30" /></span>
                     <h3>{{ $search !== '' ? 'ไม่พบโดเมนที่มีบัญชีเปิดใช้งานตรงกับคำค้น' : 'ยังไม่มีโดเมนที่มีบัญชีเปิดใช้งานในขณะนี้' }}</h3>
-                    <p>ลองตรวจสอบการสะกดหรือค้นหาด้วยชื่อโดเมนบางส่วน<br>หากยื่นคำขอแล้วและยังไม่พบโดเมน กรุณาติดต่อเจ้าหน้าที่สำนักคอมพิวเตอร์</p>
+                    <p>ลองตรวจสอบการสะกดหรือค้นหาด้วยชื่อโดเมนหรือชื่อผู้ดูแลบางส่วน<br>หากยื่นคำขอแล้วและยังไม่พบโดเมน กรุณาติดต่อเจ้าหน้าที่สำนักคอมพิวเตอร์</p>
                     @if($search !== '')<a href="{{ route('domains.index') }}" class="domain-reset">ล้างคำค้นและดูโดเมนทั้งหมด <x-admin.icon name="arrow" size="16" /></a>@endif
                 </div>
             @endif

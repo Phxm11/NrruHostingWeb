@@ -14,6 +14,8 @@ class PublicDomainsController extends Controller
         $search = $request->validated('q') ?? '';
         $literal = str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $search);
         $pattern = "%{$literal}%";
+        $matchingSql = "(domain_name LIKE ? ESCAPE '!' OR owner_key LIKE ? ESCAPE '!')";
+        $matchingBindings = [$pattern, $pattern];
 
         // Group request snapshots by the same caretaker name.
         $activeDomains = DB::table('domains')
@@ -31,16 +33,16 @@ class PublicDomainsController extends Controller
 
         $directory = DB::query()->fromSub($activeDomains, 'directory');
         $totalDomains = (clone $directory)
-            ->whereRaw("domain_name LIKE ? ESCAPE '!'", [$pattern])
+            ->whereRaw($matchingSql, $matchingBindings)
             ->distinct()->count('domain_name');
 
         $groups = (clone $directory)
             ->select('owner_key')
             ->selectRaw("COALESCE(NULLIF(MAX(owner_name), ''), 'ไม่ระบุชื่อผู้ดูแล') as owner_name")
             ->selectRaw('COUNT(DISTINCT domain_name) as domain_count')
-            ->selectRaw("COUNT(DISTINCT CASE WHEN domain_name LIKE ? ESCAPE '!' THEN domain_name END) as matching_count", [$pattern])
+            ->selectRaw("COUNT(DISTINCT CASE WHEN {$matchingSql} THEN domain_name END) as matching_count", $matchingBindings)
             ->groupBy('owner_key')
-            ->havingRaw("COUNT(DISTINCT CASE WHEN domain_name LIKE ? ESCAPE '!' THEN domain_name END) > 0", [$pattern])
+            ->havingRaw("COUNT(DISTINCT CASE WHEN {$matchingSql} THEN domain_name END) > 0", $matchingBindings)
             ->orderBy('owner_name')
             ->orderBy('owner_key')
             ->paginate(10)
@@ -49,7 +51,7 @@ class PublicDomainsController extends Controller
         $rows = collect();
         if ($groups->isNotEmpty()) {
             $rows = (clone $directory)
-                ->whereRaw("domain_name LIKE ? ESCAPE '!'", [$pattern])
+                ->whereRaw($matchingSql, $matchingBindings)
                 ->whereIn('owner_key', $groups->pluck('owner_key'))
                 ->orderBy('domain_name')
                 ->get();

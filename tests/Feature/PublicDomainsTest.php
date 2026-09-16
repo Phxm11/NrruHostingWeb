@@ -94,6 +94,52 @@ class PublicDomainsTest extends DatabaseTestCase
         }
     }
 
+    public function test_search_by_owner_returns_all_their_active_domains_and_correct_counts(): void
+    {
+        foreach (['สมชาย ใจดี', 'Alice Smith'] as $ownerName) {
+            $first = $this->domain('first.example.test');
+            $first->applicant->update(['full_name' => $ownerName]);
+            $second = $this->domain('second.example.test');
+            $second->applicant->update(['full_name' => $ownerName]);
+            $duplicate = $this->domain('first.example.test');
+            $duplicate->applicant->update(['full_name' => $ownerName]);
+            $disabled = $this->domain('disabled.example.test', 'disabled');
+            $disabled->applicant->update(['full_name' => $ownerName]);
+            $expired = $this->domain('expired.example.test', 'active', '2026-09-15');
+            $expired->applicant->update(['full_name' => $ownerName]);
+        }
+        $this->domain('unrelated.example.test');
+
+        foreach (['สมชาย ใจดี', 'สมชาย', 'ใจดี', ' ALICE SMITH ', 'smith'] as $query) {
+            $this->get(route('domains.index', ['q' => $query]))
+                ->assertOk()
+                ->assertViewHas('totalDomains', 2)
+                ->assertViewHas('groups', fn ($groups) => $groups->total() === 1
+                    && $groups->first()->domain_count === 2
+                    && $groups->first()->matching_count === 2
+                    && $groups->first()->domains->all() === ['first.example.test', 'second.example.test'])
+                ->assertDontSee('disabled.example.test')
+                ->assertDontSee('expired.example.test')
+                ->assertDontSee('unrelated.example.test');
+        }
+    }
+
+    public function test_owner_search_treats_wildcards_as_literal_characters(): void
+    {
+        $account = $this->domain('literal.example.test');
+        $account->applicant->update(['full_name' => 'Owner 100%_!']);
+        $this->domain('unrelated.example.test');
+
+        foreach (['%', '_', '!', '100%_!'] as $query) {
+            $this->get(route('domains.index', ['q' => $query]))
+                ->assertOk()
+                ->assertViewHas('totalDomains', 1)
+                ->assertViewHas('groups', fn ($groups) => $groups->total() === 1
+                    && $groups->first()->matching_count === 1
+                    && $groups->first()->domains->all() === ['literal.example.test']);
+        }
+    }
+
     public function test_results_show_owner_names_without_exposing_accounts_or_private_fields(): void
     {
         $account = $this->domain('public.example.test');
