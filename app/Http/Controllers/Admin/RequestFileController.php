@@ -15,8 +15,8 @@ class RequestFileController extends Controller
         abort_unless(in_array($file.'_path', RequestFiles::COLUMNS, true), 404);
         $path = $serviceRequest->{$file.'_path'};
         abort_unless($path && RequestFiles::isSafePath($path), 404);
-        $disk = Storage::disk('private')->exists($path) ? 'private' : 'public';
-        abort_unless(Storage::disk($disk)->exists($path), 404);
+        $filesystem = Storage::disk('private');
+        abort_unless($filesystem->exists($path), 404);
         $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
         $inline = in_array($extension, ['png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf'], true);
 
@@ -27,7 +27,6 @@ class RequestFileController extends Controller
         ];
 
         /** @var FilesystemAdapter $filesystem */
-        $filesystem = Storage::disk($disk);
         $absolutePath = $filesystem->path($path);
 
         return $inline

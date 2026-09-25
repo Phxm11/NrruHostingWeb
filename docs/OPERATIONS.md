@@ -55,7 +55,7 @@ php artisan serve --host=127.0.0.1 --port=8000
 
 บนเซิร์ฟเวอร์จริงให้ชี้ DocumentRoot ที่ `public` เช่นเดียวกัน ใช้ HTTPS พร้อม APP_ENV=production, APP_DEBUG=false และ SESSION_SECURE_COOKIE=true โดยค่า secure cookie ใช้กับ HTTPS เท่านั้น ห้ามเปิดโฟลเดอร์โปรเจกต์ทั้งหมดเป็น web root เพราะมี .env, backup และซอร์สภายใน
 
-ไฟล์ผู้ขอใหม่อยู่ที่ `storage/app/private` จึงไม่ต้องสร้าง storage symlink เพื่อแสดงเอกสาร เปิดผ่าน `/admin/requests/{id}/files/{file}` ซึ่งตรวจล็อกอินและสถานะเจ้าหน้าที่
+ไฟล์ผู้ขอใหม่อยู่ที่ `storage/app/private` จึงไม่ต้องสร้าง storage symlink เพื่อแสดงเอกสาร เปิดผ่าน `/admin/requests/{id}/files/{file}` ซึ่งตรวจล็อกอินและสถานะเจ้าหน้าที่ ก่อนเปิดระบบหลังอัปเกรดต้องย้ายไฟล์คำขอเดิมด้วย `files:privatize` ตามขั้นตอนด้านล่าง เพราะ route นี้อ่านจาก private storage เท่านั้น หลังย้ายแล้วตรวจว่า `storage/app/public/attachments` และ `storage/app/public/signatures` ไม่มีไฟล์ค้าง หากเคยสร้าง `public/storage` symlink ให้ตรวจว่าระบบอื่นไม่ได้ใช้ แล้วนำ link เดิมออกเพื่อไม่ให้ไฟล์ใน public storage เข้าถึงตรงจากเว็บ
 
 ## 4. การตั้งค่าอีเมล
 

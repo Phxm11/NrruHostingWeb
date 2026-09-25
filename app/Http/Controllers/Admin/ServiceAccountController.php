@@ -10,6 +10,7 @@ use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
 use App\Support\RequestFiles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -310,7 +311,7 @@ class ServiceAccountController extends Controller
             ->route('admin.accounts.index')
             ->with('success', "สร้างบัญชีให้ {$serviceRequest->applicant->full_name} เรียบร้อยแล้ว")
             ->with('new_username', $account->username)
-            ->with('new_password', $data['password']); // แสดงให้เห็นครั้งเดียวตอนสร้างเสร็จ
+            ->with('encrypted_new_password', Crypt::encryptString($data['password'])); // แสดงให้เห็นครั้งเดียวตอนสร้างเสร็จ
     }
 
     /**

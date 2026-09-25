@@ -5,10 +5,33 @@ namespace Tests\Feature;
 use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Tests\DatabaseTestCase;
 
 class ServiceWorkflowTest extends DatabaseTestCase
 {
+    public function test_new_account_password_is_encrypted_in_flash_storage(): void
+    {
+        $this->actingAs(User::factory()->create(['is_active' => true]));
+        $serviceRequest = $this->makeServiceRequest(['status' => 'approved']);
+        $password = 'temporary-secret-123';
+
+        $this->post(route('admin.accounts.store', $serviceRequest), [
+            'username' => 'new-service-account',
+            'password' => $password,
+            'account_type' => 'ssh',
+        ])->assertRedirect(route('admin.accounts.index'))
+            ->assertSessionMissing('new_password')
+            ->assertSessionHas('encrypted_new_password');
+
+        $encrypted = session('encrypted_new_password');
+        $this->assertNotSame($password, $encrypted);
+        $this->assertSame($password, Crypt::decryptString($encrypted));
+        $this->get(route('admin.accounts.index'))
+            ->assertOk()
+            ->assertSee($password);
+    }
+
     private function requestData(): array
     {
         return [

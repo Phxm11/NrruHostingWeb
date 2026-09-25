@@ -10,7 +10,7 @@
     $__popupMessage = null;
     $__popupList    = [];
 
-    if (session('new_username')) {
+    if (session('new_username') && session('encrypted_new_password')) {
         $__popupType  = 'credential';
         $__popupTitle = 'สร้างบัญชีสำเร็จ';
     } elseif (session('success')) {
@@ -53,7 +53,7 @@
                 <p class="site-popup-text">คัดลอกและส่งข้อมูลนี้ให้ผู้ใช้บริการทันที ระบบจะไม่แสดงรหัสผ่านนี้อีก</p>
                 <div class="site-popup-credentials">
                     <div class="site-popup-cred-row"><span>Username</span><code id="popupCredUsername">{{ session('new_username') }}</code></div>
-                    <div class="site-popup-cred-row"><span>Password</span><code id="popupCredPassword">{{ session('new_password') }}</code></div>
+                    <div class="site-popup-cred-row"><span>Password</span><code id="popupCredPassword">{{ \Illuminate\Support\Facades\Crypt::decryptString(session('encrypted_new_password')) }}</code></div>
                 </div>
                 <button type="button" class="site-popup-btn" id="sitePopupCopyBtn">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
