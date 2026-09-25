@@ -66,6 +66,7 @@
         .back-link:hover { color: var(--forest); }
         .hint { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
     </style>
+    <link href="{{ versioned_asset('css/motion.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="login-card">

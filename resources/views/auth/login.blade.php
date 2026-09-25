@@ -7,6 +7,7 @@
     @include('partials.site-icons')
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="{{ versioned_asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ versioned_asset('css/motion.css') }}" rel="stylesheet">
 </head>
 <body>
     <a class="skip-link" href="#login-form">ข้ามไปยังแบบฟอร์มเข้าสู่ระบบ</a>
@@ -23,7 +24,7 @@
             <span class="intro-rule" aria-hidden="true"></span>
             <p class="intro-label">ระบบสำหรับเจ้าหน้าที่</p>
             <h1 id="service-heading">จัดการบริการ<br> Data Center และ<br> Web Hosting</h1>
-            <p class="intro-description">ดูแลคำขอใช้บริการ บัญชีผู้ใช้งาน และโดเมน<br class="desktop-break">ของมหาวิทยาลัยได้ในที่เดียว</p>
+
             <ul class="service-list" aria-label="งานที่จัดการได้ในระบบ">
                 <li><x-admin.icon name="requests" size="21" /><span>ตรวจสอบและจัดการคำขอใช้บริการ</span></li>
                 <li><x-admin.icon name="domains" size="21" /><span>ดูแลบัญชีบริการและโดเมน</span></li>

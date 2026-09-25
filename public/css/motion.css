@@ -1,0 +1,160 @@
+/* A short arrival sequence gives each screen one clear point of focus. */
+@keyframes ui-arrive {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes ui-menu-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes ui-hero-orbit {
+    50% { transform: translate(-18px, 14px) scale(1.04); }
+}
+
+@keyframes ui-backdrop-open {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero::after { animation: ui-hero-orbit 11s ease-in-out infinite; }
+    .hero .hero-context { animation: ui-arrive .42s ease-out both; }
+    .hero-layout > div:first-child > h2 { animation: ui-arrive .48s .07s ease-out both; }
+    .hero .lead { animation: ui-arrive .48s .14s ease-out both; }
+    .hero-cta, .hero-note { animation: ui-arrive .48s .21s ease-out both; }
+    .service-directory { animation: ui-arrive .55s .18s ease-out both; }
+
+    .domain-hero-title { animation: ui-arrive .42s ease-out both; }
+    .domain-search { animation: ui-arrive .48s .08s ease-out both; }
+    .domain-results-heading { animation: ui-arrive .48s .15s ease-out both; }
+
+    .page-header .brand-row { animation: ui-arrive .42s ease-out both; }
+    .form-intro { animation: ui-arrive .48s .08s ease-out both; }
+    .request-container .form-layout { animation: ui-arrive .5s .14s ease-out both; }
+
+    .login-intro { animation: ui-arrive .48s ease-out both; }
+    .login-panel { animation: ui-arrive .52s .1s ease-out both; }
+    .login-card { animation: ui-arrive .42s ease-out both; }
+
+    .admin-app .topbar-heading { animation: ui-arrive .38s ease-out both; }
+    .admin-app .content-area { animation: ui-backdrop-open .4s .06s ease-out backwards; }
+
+    .navbar-custom { transition: box-shadow .2s ease; }
+    .nav-link-custom, .staff-link, .mobile-toggle { transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+    .mobile-menu:not([hidden]), .admin-app .menu-wrap .dropdown.is-open { animation: ui-menu-open .18s ease-out both; }
+    .admin-app .sidebar-backdrop:not([hidden]) { animation: ui-backdrop-open .2s ease-out both; }
+
+    .btn-request, .btn-amber, .btn-outline-brand, .login-submit,
+    .request-container .btn-brand, .admin-app .btn, .btn-view, .btn-approve,
+    .dm-btn, .btn-header-outline {
+        transition: background-color .18s ease, border-color .18s ease, color .18s ease,
+            box-shadow .18s ease, transform .18s ease;
+    }
+    .btn-request:hover, .btn-amber:hover, .btn-outline-brand:hover, .login-submit:hover,
+    .request-container .btn-brand:hover, .admin-app .btn:not(:disabled):hover,
+    .btn-view:hover, .btn-approve:hover, .dm-btn:hover, .btn-header-outline:hover {
+        transform: translateY(-2px);
+    }
+    .btn-request:active, .btn-amber:active, .btn-outline-brand:active, .login-submit:active,
+    .request-container .btn-brand:active, .admin-app .btn:active,
+    .btn-view:active, .btn-approve:active, .dm-btn:active, .btn-header-outline:active {
+        transform: translateY(0);
+    }
+
+    .service-type-card, .plan-option {
+        transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .service-type-card:has(input:checked), .plan-choice:has(input:checked) .plan-option {
+        box-shadow: 0 0 0 2px rgba(108, 151, 82, .18);
+    }
+
+    .service-row .service-icon, .step-item .step-num, .step-item .step-top > .ui-icon,
+    .directory-link > .ui-icon, .section-link > .ui-icon,
+    .btn-request > .ui-icon, .login-submit > svg, .nav-item > svg {
+        transition: transform .24s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .step-item, .domain-owner-heading, .stat-card, .dm-stat, .form-card, .domain-search {
+        transition: background-color .24s ease, border-color .24s ease, box-shadow .24s ease;
+    }
+
+    .form-card:focus-within { border-color: #b7cba9; box-shadow: 0 8px 28px rgba(21, 35, 26, .08); }
+    .domain-search:focus-within { border-color: #d3b978; box-shadow: 0 10px 28px rgba(21, 35, 26, .09); }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .service-row:hover .service-icon { transform: translateY(-3px) rotate(-5deg); }
+    .step-item:hover { background: #fafbf7; }
+    .step-item:hover .step-num { transform: scale(1.12); }
+    .step-item:hover .step-top > .ui-icon { transform: rotate(-8deg); }
+    .directory-link:hover > .ui-icon, .section-link:hover > .ui-icon,
+    .btn-request:hover > .ui-icon, .login-submit:hover > svg { transform: translateX(5px); }
+    .admin-app .nav-item:hover > svg { transform: translateX(3px); }
+    .domain-owner-group:hover .domain-owner-heading { background: #e2edda; }
+    .admin-app .stat-card:hover, .admin-app .dm-stat:hover { border-color: #bed0b5; box-shadow: 0 6px 18px rgba(21, 35, 26, .07); }
+    .service-type-card:hover, .plan-choice:hover .plan-option { box-shadow: 0 5px 16px rgba(21, 35, 26, .08); }
+}
+
+/* Admin surfaces and controls share a gentler rhythm. */
+.admin-app .panel, .admin-app .stat-card, .admin-app .dm-stat {
+    border-radius: 16px;
+    box-shadow: 0 4px 22px rgba(21, 35, 26, .045);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .admin-app { --admin-ease: cubic-bezier(.22, 1, .36, 1); }
+    .admin-app .stat-card, .admin-app .dm-stat {
+        animation: ui-arrive .6s .08s var(--admin-ease) backwards;
+        transition: transform .3s var(--admin-ease), box-shadow .3s ease, border-color .3s ease;
+    }
+    .admin-app :is(.stat-card, .dm-stat):nth-child(2) { animation-delay: .16s; }
+    .admin-app :is(.stat-card, .dm-stat):nth-child(3) { animation-delay: .24s; }
+    .admin-app :is(.stat-card, .dm-stat):nth-child(n+4) { animation-delay: .3s; }
+    .admin-app :is(.stat-icon, .dm-stat__icon, .page-icon) {
+        transition: transform .35s var(--admin-ease), box-shadow .3s ease;
+    }
+    .admin-app :is(.nav-item, .seg-btn, .icon-btn, .copy-btn, .bulk-btn, .acc-head),
+    .admin-app .dropdown :is(a, button) {
+        transition: background-color .22s ease, color .22s ease, box-shadow .22s ease,
+            transform .28s var(--admin-ease);
+    }
+    .admin-app :is(.form-control, .form-select, .search-wrap input, .dm-toolbar input, .dm-toolbar select, .sort-wrap select) {
+        transition: border-color .22s ease, box-shadow .22s ease, background-color .22s ease;
+    }
+    .admin-app table tbody tr { transition: background-color .2s ease; }
+    .admin-app .panel { transition: border-color .25s ease, box-shadow .25s ease; }
+    .admin-app .panel:focus-within { border-color: #b9c9af; box-shadow: 0 6px 26px rgba(21, 35, 26, .075); }
+    .admin-app .acc.open .acc-body { animation: ui-arrive .32s var(--admin-ease); }
+    .admin-app .acc-chev { transition: transform .32s var(--admin-ease); }
+    .admin-app .bulk-bar.is-visible { animation: ui-menu-open .28s var(--admin-ease); }
+    .admin-app .menu-wrap .dropdown.is-open { animation: ui-menu-open .24s var(--admin-ease); }
+    .admin-app :is(.icon-btn, .copy-btn, .bulk-btn):active { transform: scale(.94); }
+    .admin-app .seg-btn:active { transform: scale(.97); }
+}
+
+@media (max-width: 991px) and (prefers-reduced-motion: no-preference) {
+    .admin-app .sidebar {
+        transition: transform .32s var(--admin-ease), visibility 0s linear .32s;
+    }
+    .admin-app .sidebar.open { transition-delay: 0s; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .admin-app :is(.stat-card, .dm-stat):hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(21, 35, 26, .1);
+    }
+    .admin-app :is(.stat-card, .dm-stat):hover :is(.stat-icon, .dm-stat__icon) {
+        transform: rotate(-6deg) scale(1.07);
+    }
+    .admin-app .seg-btn:hover { box-shadow: 0 3px 10px rgba(21, 35, 26, .06); }
+    .admin-app .dropdown :is(a, button):hover { transform: translateX(2px); }
+    .admin-app .acc-head:hover { background-color: #f5f8f1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}

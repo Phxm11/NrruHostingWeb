@@ -3,14 +3,17 @@
     const toggle = document.getElementById('menuBtn');
     const backdrop = document.getElementById('sidebarBackdrop');
     const mobile = window.matchMedia('(max-width: 991px)');
+    sidebar.inert = mobile.matches;
     function closeSidebar(restoreFocus = false) {
         sidebar.classList.remove('open');
+        sidebar.inert = mobile.matches;
         document.body.classList.remove('sidebar-is-open');
         backdrop.hidden = true;
         toggle.setAttribute('aria-expanded', 'false');
         if (restoreFocus) toggle.focus();
     }
     toggle.addEventListener('click', () => {
+        sidebar.inert = false;
         sidebar.classList.add('open');
         document.body.classList.add('sidebar-is-open');
         backdrop.hidden = false;

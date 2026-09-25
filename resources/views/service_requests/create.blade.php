@@ -180,6 +180,7 @@
             *, *::before, *::after { transition: none !important; }
         }
     </style>
+    <link href="{{ versioned_asset('css/motion.css') }}" rel="stylesheet">
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;overflow:hidden">
@@ -620,6 +621,7 @@
 @include('partials.alert-popup')
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ versioned_asset('js/motion.js') }}" defer></script>
 <script>
     // เพิ่ม/ลบแถวผู้รับผิดชอบพัฒนาระบบ
     let devIndex = 1;

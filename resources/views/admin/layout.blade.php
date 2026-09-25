@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="{{ versioned_asset('css/admin/admin.css') }}" rel="stylesheet">
     @stack('styles')
+    <link href="{{ versioned_asset('css/motion.css') }}" rel="stylesheet">
 </head>
 <body class="admin-app" data-admin-section="{{ $adminSection }}">
 <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหา</a>
@@ -81,6 +82,7 @@
 @include('partials.alert-popup')
 @include('partials.confirm-modal')
 <script src="{{ versioned_asset('js/admin.js') }}" defer></script>
+<script src="{{ versioned_asset('js/motion.js') }}" defer></script>
 @stack('scripts')
 </body>
 </html>
