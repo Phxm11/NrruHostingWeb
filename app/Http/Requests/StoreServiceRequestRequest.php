@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class StoreServiceRequestRequest extends FormRequest
 {
@@ -72,11 +74,20 @@ class StoreServiceRequestRequest extends FormRequest
         ];
     }
 
-    public function withValidator($validator): void
+    public function withValidator(Validator $validator): void
     {
-        $validator->after(function ($validator) {
+        $validator->after(function (Validator $validator) {
             if (! $this->boolean('agree_to_pay') && ! $this->boolean('request_fee_waiver')) {
                 $validator->errors()->add('agree_to_pay', 'กรุณายินยอมชำระค่าบริการหรือขอยกเว้นค่าธรรมเนียม');
+            }
+
+            if ($validator->errors()->hasAny(['project_start_date', 'project_end_date'])) {
+                return;
+            }
+
+            $maximumDate = CarbonImmutable::parse($this->input('project_start_date'))->addYearNoOverflow();
+            if (CarbonImmutable::parse($this->input('project_end_date'))->greaterThan($maximumDate)) {
+                $validator->errors()->add('project_end_date', 'ระยะเวลาโครงการต้องไม่เกิน 1 ปีนับจากวันเริ่มต้น');
             }
         });
     }

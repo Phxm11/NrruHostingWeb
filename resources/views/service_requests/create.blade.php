@@ -127,6 +127,8 @@
         .plan-price span { font-family: 'Sarabun', sans-serif; font-size: 12px; color: var(--ink-soft); }
         .custom-card { height: 100%; border: 1px dashed #aeb99e; border-radius: 11px; padding: 16px; background: #fafbf8; }
         .custom-card .fw-semibold { color: var(--forest); font-size: 14px; }
+        .custom-card .plan-radio { position: static; margin-right: 8px; }
+        .custom-card:has(.plan-radio:checked) { border-color: var(--forest); background: #f2f6ed; }
         .dev-row { border: 1px solid var(--line); border-radius: 11px; padding: 16px; margin-bottom: 12px; background: #fafbf8; }
         .dev-row .form-label { font-size: 13px; }
         .btn-outline-secondary { color: var(--forest); border-color: #bec8b1; border-radius: 8px; padding: 9px 14px; font-size: 13px; }
@@ -376,30 +378,39 @@
                     </div>
 
                     <div class="sub-title"><svg class="form-icon" aria-hidden="true" focusable="false"><use href="#form-icon-users"></use></svg>รายชื่อและช่องทางติดต่อผู้รับผิดชอบในการพัฒนาระบบ</div>
+                    @php
+                        $developers = collect(old('developers', [[]]))
+                            ->filter(fn ($developer) => is_array($developer))
+                            ->map(fn ($developer) => array_filter($developer, 'is_scalar'))
+                            ->values()
+                            ->all() ?: [[]];
+                    @endphp
                     <div id="developersWrapper">
-                        <div class="dev-row">
-                            <div class="row g-2">
-                                <div class="col-md-6">
-                                    <label class="form-label required" for="developer-0-full_name">ชื่อ-นามสกุล</label>
-                                    <input id="developer-0-full_name" type="text" name="developers[0][full_name]" class="form-control" placeholder="ชื่อ-นามสกุล *" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="developer-0-role_desc">บทบาท/หน้าที่</label>
-                                    <input id="developer-0-role_desc" type="text" name="developers[0][role_desc]" class="form-control" placeholder="บทบาท/หน้าที่">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="developer-0-phone">เบอร์โทร</label>
-                                    <input id="developer-0-phone" type="text" name="developers[0][phone]" class="form-control" placeholder="เบอร์โทร">
-                                </div>
-                                <div class="col-10 col-md-5">
-                                    <label class="form-label" for="developer-0-email">อีเมล</label>
-                                    <input id="developer-0-email" type="email" name="developers[0][email]" class="form-control" placeholder="อีเมล">
-                                </div>
-                                <div class="col-2 col-md-1 d-flex align-items-end">
-                                    <button type="button" class="btn btn-sm btn-outline-danger remove-dev" title="ลบผู้รับผิดชอบ" aria-label="ลบผู้รับผิดชอบ"><svg class="form-icon" aria-hidden="true" focusable="false"><use href="#form-icon-trash"></use></svg></button>
+                        @foreach($developers as $index => $developer)
+                            <div class="dev-row">
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label required" for="developer-{{ $index }}-full_name">ชื่อ-นามสกุล</label>
+                                        <input id="developer-{{ $index }}-full_name" type="text" name="developers[{{ $index }}][full_name]" class="form-control" placeholder="ชื่อ-นามสกุล *" value="{{ $developer['full_name'] ?? '' }}" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="developer-{{ $index }}-role_desc">บทบาท/หน้าที่</label>
+                                        <input id="developer-{{ $index }}-role_desc" type="text" name="developers[{{ $index }}][role_desc]" class="form-control" placeholder="บทบาท/หน้าที่" value="{{ $developer['role_desc'] ?? '' }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="developer-{{ $index }}-phone">เบอร์โทร</label>
+                                        <input id="developer-{{ $index }}-phone" type="text" name="developers[{{ $index }}][phone]" class="form-control" placeholder="เบอร์โทร" value="{{ $developer['phone'] ?? '' }}">
+                                    </div>
+                                    <div class="col-10 col-md-5">
+                                        <label class="form-label" for="developer-{{ $index }}-email">อีเมล</label>
+                                        <input id="developer-{{ $index }}-email" type="email" name="developers[{{ $index }}][email]" class="form-control" placeholder="อีเมล" value="{{ $developer['email'] ?? '' }}">
+                                    </div>
+                                    <div class="col-2 col-md-1 d-flex align-items-end">
+                                        <button type="button" class="btn btn-sm btn-outline-danger remove-dev" title="ลบผู้รับผิดชอบ" aria-label="ลบผู้รับผิดชอบ"><svg class="form-icon" aria-hidden="true" focusable="false"><use href="#form-icon-trash"></use></svg></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary" id="addDeveloper"><svg class="form-icon" aria-hidden="true" focusable="false"><use href="#form-icon-plus"></use></svg> เพิ่มผู้รับผิดชอบ</button>
                 </div>
@@ -453,23 +464,26 @@
                         @endforeach
                         <div class="col-12">
                             <div class="custom-card">
-                                <div class="fw-semibold mb-2"><svg class="form-icon" aria-hidden="true" focusable="false"><use href="#form-icon-settings"></use></svg> กำหนดทรัพยากรเอง</div>
+                                <label class="fw-semibold mb-2" for="customPlanRadio">
+                                    <input type="radio" name="plan_id" value="" id="customPlanRadio" class="form-check-input plan-radio" {{ old('plan_id') ? '' : 'checked' }}>
+                                    <svg class="form-icon" aria-hidden="true" focusable="false"><use href="#form-icon-settings"></use></svg> กำหนดทรัพยากรเอง
+                                </label>
                                 <div class="row g-2">
                                     <div class="col-6 col-lg-3">
                                         <label class="form-label" for="custom_cpu_vcpu">vCPU</label>
-                                        <input id="custom_cpu_vcpu" type="number" name="custom_cpu_vcpu" aria-label="จำนวน vCPU ที่ต้องการ" class="form-control form-control-sm" placeholder="vCPU">
+                                        <input id="custom_cpu_vcpu" type="number" name="custom_cpu_vcpu" aria-label="จำนวน vCPU ที่ต้องการ" class="form-control form-control-sm" placeholder="vCPU" value="{{ old('custom_cpu_vcpu') }}">
                                     </div>
                                     <div class="col-6 col-lg-3">
                                         <label class="form-label" for="custom_ram_gb">RAM (GB)</label>
-                                        <input id="custom_ram_gb" type="number" name="custom_ram_gb" aria-label="RAM ที่ต้องการ (GB)" class="form-control form-control-sm" placeholder="RAM (GB)">
+                                        <input id="custom_ram_gb" type="number" name="custom_ram_gb" aria-label="RAM ที่ต้องการ (GB)" class="form-control form-control-sm" placeholder="RAM (GB)" value="{{ old('custom_ram_gb') }}">
                                     </div>
                                     <div class="col-6 col-lg-3">
                                         <label class="form-label" for="custom_storage_gb">Storage (GB)</label>
-                                        <input id="custom_storage_gb" type="number" name="custom_storage_gb" aria-label="พื้นที่จัดเก็บที่ต้องการ (GB)" class="form-control form-control-sm" placeholder="Storage (GB)">
+                                        <input id="custom_storage_gb" type="number" name="custom_storage_gb" aria-label="พื้นที่จัดเก็บที่ต้องการ (GB)" class="form-control form-control-sm" placeholder="Storage (GB)" value="{{ old('custom_storage_gb') }}">
                                     </div>
                                     <div class="col-6 col-lg-3">
                                         <label class="form-label" for="custom_fee">ค่าบริการ (บาท/ปี)</label>
-                                        <input id="custom_fee" type="number" step="0.01" name="custom_fee" aria-label="ค่าบริการ (บาทต่อปี)" class="form-control form-control-sm" placeholder="ค่าบริการ (บาท/ปี)">
+                                        <input id="custom_fee" type="number" step="0.01" name="custom_fee" aria-label="ค่าบริการ (บาทต่อปี)" class="form-control form-control-sm" placeholder="ค่าบริการ (บาท/ปี)" value="{{ old('custom_fee') }}">
                                     </div>
                                 </div>
                             </div>
@@ -624,7 +638,7 @@
 <script src="{{ versioned_asset('js/motion.js') }}" defer></script>
 <script>
     // เพิ่ม/ลบแถวผู้รับผิดชอบพัฒนาระบบ
-    let devIndex = 1;
+    let devIndex = {{ count($developers) }};
     document.getElementById('addDeveloper').addEventListener('click', function () {
         const wrapper = document.getElementById('developersWrapper');
         const row = document.createElement('div');
@@ -665,12 +679,19 @@
     });
 
     // แสดงเฉพาะแพ็กเกจทรัพยากรที่ตรงกับประเภทบริการที่เลือก
+    const customPlanRadio = document.getElementById('customPlanRadio');
     function filterPlans() {
         const selected = document.querySelector('.service-type-radio:checked');
         const type = selected ? selected.value : null;
         document.querySelectorAll('.plan-group').forEach(function (group) {
-            group.style.display = (!type || group.dataset.serviceType === type) ? '' : 'none';
+            const visible = !type || group.dataset.serviceType === type;
+            group.style.display = visible ? '' : 'none';
+            const radio = group.querySelector('.plan-radio');
+            radio.disabled = !visible;
+            if (!visible) radio.checked = false;
         });
+        if (!document.querySelector('.plan-radio:checked')) customPlanRadio.checked = true;
+        highlightPlan(document.querySelector('.plan-radio:checked'));
     }
     document.querySelectorAll('.service-type-radio').forEach(function (radio) {
         radio.addEventListener('change', filterPlans);
@@ -680,14 +701,35 @@
     // ไฮไลต์การ์ดแพ็กเกจที่เลือก
     function highlightPlan(radio) {
         document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
-        if (radio && radio.closest('label')) {
-            radio.closest('label').querySelector('.plan-option').classList.add('selected');
-        }
+        radio?.closest('label')?.querySelector('.plan-option')?.classList.add('selected');
     }
     document.querySelectorAll('.plan-radio').forEach(function (radio) {
         radio.addEventListener('change', function () { highlightPlan(this); });
         if (radio.checked) highlightPlan(radio);
     });
+    document.querySelectorAll('.custom-card input[type="number"]').forEach(function (input) {
+        input.addEventListener('input', function () {
+            customPlanRadio.checked = true;
+            highlightPlan(customPlanRadio);
+        });
+    });
+
+    const startDate = document.getElementById('project_start_date');
+    const endDate = document.getElementById('project_end_date');
+    function limitProjectDates() {
+        endDate.min = startDate.value;
+        if (!startDate.value) {
+            endDate.removeAttribute('max');
+            return;
+        }
+        const maximum = new Date(`${startDate.value}T00:00:00Z`);
+        const month = maximum.getUTCMonth();
+        maximum.setUTCFullYear(maximum.getUTCFullYear() + 1);
+        if (maximum.getUTCMonth() !== month) maximum.setUTCDate(0);
+        endDate.max = maximum.toISOString().slice(0, 10);
+    }
+    startDate.addEventListener('input', limitProjectDates);
+    limitProjectDates();
 
     // Scroll-spy: ไฮไลต์ส่วนที่กำลังดูใน nav และ mobile stepper
     const sections = ['sec1','sec2','sec3','sec4','sec5'].map(id => document.getElementById(id));

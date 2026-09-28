@@ -149,8 +149,8 @@
                             <td data-label="ประเภทบัญชี"><span class="type-tag type-{{ $acc->account_type }}">{{ $typeLabels[$acc->account_type] ?? $acc->account_type }}</span></td>
                             <td data-label="สถานะ">
                                 <div class="status-cell">
-                                    <span class="status-dot dot-{{ $acc->status }}"></span>
-                                    <span class="status-label status-{{ $acc->status }}">{{ $statusLabels[$acc->status] ?? $acc->status }}</span>
+                                    <span class="status-dot dot-{{ $acc->effective_status }}"></span>
+                                    <span class="status-label status-{{ $acc->effective_status }}">{{ $statusLabels[$acc->effective_status] ?? $acc->effective_status }}</span>
                                 </div>
                             </td>
                             <td data-label="วันหมดอายุ">

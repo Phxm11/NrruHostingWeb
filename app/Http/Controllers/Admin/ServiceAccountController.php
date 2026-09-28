@@ -336,15 +336,15 @@ class ServiceAccountController extends Controller
         // แต่ไม่ผูกกับสถานะที่เลือกอยู่ เพื่อให้เห็นภาพรวมทุกสถานะพร้อมกัน
         $statusCounts = [
             'all' => (clone $baseQuery)->count(),
-            'active' => (clone $baseQuery)->where('status', 'active')->count(),
-            'disabled' => (clone $baseQuery)->where('status', 'disabled')->count(),
-            'expired' => (clone $baseQuery)->where('status', 'expired')->count(),
+            'active' => (clone $baseQuery)->whereEffectiveStatus('active')->count(),
+            'disabled' => (clone $baseQuery)->whereEffectiveStatus('disabled')->count(),
+            'expired' => (clone $baseQuery)->whereEffectiveStatus('expired')->count(),
         ];
 
         $query = (clone $baseQuery)->with(['applicant', 'serviceRequest.domains']);
 
         if ($request->filled('status')) {
-            $query->where('status', $request->input('status'));
+            $query->whereEffectiveStatus($request->input('status'));
         }
 
         switch ($request->input('sort')) {
