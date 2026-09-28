@@ -6,10 +6,54 @@ use App\Models\ServiceAccount;
 use App\Models\ServiceRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Tests\DatabaseTestCase;
 
 class ServiceWorkflowTest extends DatabaseTestCase
 {
+    public function test_approval_returns_to_request_details_after_an_attachment_loads_without_a_referrer(): void
+    {
+        Storage::fake('private');
+        $staff = User::factory()->create(['is_active' => true]);
+        $this->actingAs($staff);
+        $path = 'attachments/screenshots/evidence.png';
+        Storage::disk('private')->put($path, 'test evidence');
+        $serviceRequest = $this->makeServiceRequest(['screenshot_evidence_path' => $path]);
+        $detailUrl = route('admin.requests.show', $serviceRequest);
+        $fileUrl = route('admin.requests.files.show', [$serviceRequest, 'screenshot_evidence']);
+
+        $this->get($detailUrl)->assertOk()->assertHeader('Referrer-Policy', 'no-referrer');
+        foreach (range(1, 2) as $attempt) {
+            $this->get($fileUrl)->assertOk();
+            $this->assertSame($fileUrl, session()->previousUrl());
+
+            $this->patch(route('admin.requests.approve', $serviceRequest))
+                ->assertRedirect($detailUrl)
+                ->assertSessionHasNoErrors()
+                ->assertSessionHas('success', "อนุมัติคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
+            $this->assertDatabaseHas('service_requests', ['request_id' => $serviceRequest->request_id, 'status' => 'approved']);
+            $this->assertDatabaseHas('approvals', ['request_id' => $serviceRequest->request_id, 'approver_name' => $staff->name]);
+            $this->assertDatabaseCount('approvals', 1);
+            $this->get($detailUrl)->assertOk()->assertSee('สร้างบัญชีให้ผู้ขอใช้บริการ');
+        }
+    }
+
+    public function test_invalid_approval_returns_errors_to_request_details_instead_of_the_attachment(): void
+    {
+        Storage::fake('private');
+        $this->actingAs(User::factory()->create(['is_active' => true]));
+        $path = 'attachments/screenshots/rejected.png';
+        Storage::disk('private')->put($path, 'test evidence');
+        $serviceRequest = $this->makeServiceRequest(['status' => 'rejected', 'screenshot_evidence_path' => $path]);
+
+        $this->get(route('admin.requests.files.show', [$serviceRequest, 'screenshot_evidence']))->assertOk();
+        $this->patch(route('admin.requests.approve', $serviceRequest))
+            ->assertRedirect(route('admin.requests.show', $serviceRequest))
+            ->assertSessionHasErrors('status');
+        $this->assertDatabaseHas('service_requests', ['request_id' => $serviceRequest->request_id, 'status' => 'rejected']);
+        $this->assertDatabaseCount('approvals', 0);
+    }
+
     public function test_new_account_password_is_encrypted_in_flash_storage(): void
     {
         $this->actingAs(User::factory()->create(['is_active' => true]));

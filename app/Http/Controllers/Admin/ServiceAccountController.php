@@ -230,7 +230,8 @@ class ServiceAccountController extends Controller
                 return;
             }
             if ($serviceRequest->status !== 'submitted') {
-                throw ValidationException::withMessages(['status' => 'อนุมัติได้เฉพาะคำขอที่รอพิจารณา']);
+                throw ValidationException::withMessages(['status' => 'อนุมัติได้เฉพาะคำขอที่รอพิจารณา'])
+                    ->redirectTo(route('admin.requests.show', $serviceRequest));
             }
             $serviceRequest->update(['status' => 'approved']);
 
@@ -244,7 +245,9 @@ class ServiceAccountController extends Controller
             ]);
         });
 
-        return back()->with('success', "อนุมัติคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
+        return redirect()
+            ->route('admin.requests.show', $serviceRequest)
+            ->with('success', "อนุมัติคำขอ {$serviceRequest->form_no} เรียบร้อยแล้ว");
     }
 
     /**
