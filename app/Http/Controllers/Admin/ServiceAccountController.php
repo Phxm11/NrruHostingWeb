@@ -12,6 +12,7 @@ use App\Support\RequestFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -237,7 +238,7 @@ class ServiceAccountController extends Controller
             Approval::create([
                 'request_id' => $serviceRequest->request_id,
                 'approver_level' => 'staff',
-                'approver_name' => auth()->user()->name,
+                'approver_name' => Auth::user()->name,
                 'decision' => 'certify_info_only',
                 'decision_date' => now()->toDateString(),
             ]);
